@@ -115,6 +115,7 @@
 
                 <nav class="hidden md:flex items-center space-x-6">
                     <a href="#" onclick="showHome()" class="font-medium text-primary-600 dark:text-primary-400">首頁</a>
+                    <a href="#" onclick="showLanguage('html')" class="font-medium text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">HTML</a>
                     <a href="#" onclick="showLanguage('python')" class="font-medium text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">Python</a>
                     <a href="#" onclick="showLanguage('javascript')" class="font-medium text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">JavaScript</a>
                     <a href="#" onclick="showLanguage('java')" class="font-medium text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">Java</a>
@@ -153,7 +154,52 @@
                 <h2 class="text-3xl font-bold text-gray-900 dark:text-white text-center mb-12">
                     選擇您想學習的程式語言
                 </h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <!-- HTML Card -->
+                    <div class="card p-6 h-full hover:scale-105 transform transition-all duration-300 cursor-pointer" onclick="showLanguage('html')">
+                        <div class="flex items-center mb-4">
+                            <div class="w-12 h-12 rounded-lg bg-orange-500 flex items-center justify-center text-white text-lg font-bold mr-4">
+                                HTML
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold text-gray-900 dark:text-white">HTML</h3>
+                                <span class="inline-block px-2 py-1 text-xs font-medium rounded-full bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200">入門</span>
+                            </div>
+                        </div>
+                        <p class="text-gray-600 dark:text-gray-300 mb-4 leading-relaxed">
+                            網頁開發的基礎語言，用於創建網頁的結構和內容，是所有前端開發者的必學第一步。
+                        </p>
+                        <div class="space-y-2">
+                            <h4 class="font-semibold text-gray-900 dark:text-white text-sm">主要特色：</h4>
+                            <ul class="space-y-1">
+                                <li class="flex items-center text-sm text-gray-600 dark:text-gray-300">
+                                    <svg class="w-4 h-4 text-green-500 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                                    </svg>
+                                    網頁結構基礎
+                                </li>
+                                <li class="flex items-center text-sm text-gray-600 dark:text-gray-300">
+                                    <svg class="w-4 h-4 text-green-500 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                                    </svg>
+                                    語義化標籤
+                                </li>
+                                <li class="flex items-center text-sm text-gray-600 dark:text-gray-300">
+                                    <svg class="w-4 h-4 text-green-500 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                                    </svg>
+                                    跨瀏覽器支援
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="mt-6 flex items-center text-primary-600 dark:text-primary-400 font-medium">
+                            開始學習
+                            <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                            </svg>
+                        </div>
+                    </div>
+
                     <!-- Python Card -->
                     <div class="card p-6 h-full hover:scale-105 transform transition-all duration-300 cursor-pointer" onclick="showLanguage('python')">
                         <div class="flex items-center mb-4">
@@ -332,6 +378,870 @@
                         </div>
                         <h3 class="font-semibold text-gray-900 dark:text-white mb-2">自主學習</h3>
                         <p class="text-gray-600 dark:text-gray-300 text-sm">按照自己的節奏學習，隨時隨地存取</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- HTML Tutorial Section -->
+        <div id="html" class="max-w-4xl mx-auto hidden">
+            <div class="mb-8">
+                <div class="flex items-center mb-4">
+                    <button onclick="showHome()" class="text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 mr-4">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                        </svg>
+                    </button>
+                    <div class="flex items-center">
+                        <div class="w-12 h-12 bg-orange-500 rounded-lg flex items-center justify-center text-white text-lg font-bold mr-4">
+                            HTML
+                        </div>
+                        <div>
+                            <h1 class="text-3xl font-bold text-gray-900 dark:text-white">HTML 教學</h1>
+                            <p class="text-gray-600 dark:text-gray-300">網頁開發的基礎語言</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-orange-50 dark:bg-orange-900/20 border border-orange-200 dark:border-orange-800 rounded-lg p-4">
+                    <h2 class="font-semibold text-orange-900 dark:text-orange-100 mb-2">完整學習目標</h2>
+                    <ul class="text-orange-800 dark:text-orange-200 text-sm space-y-1">
+                        <li>• 了解 HTML 的基本概念和結構</li>
+                        <li>• 掌握常用的 HTML 標籤和屬性</li>
+                        <li>• 學會創建文字、連結、圖片和清單</li>
+                        <li>• 理解表格和表單的使用方法</li>
+                        <li>• 掌握語義化標籤和網頁結構</li>
+                        <li>• 學會多媒體元素的嵌入</li>
+                        <li>• 了解 HTML5 的新特性</li>
+                        <li>• 能夠創建完整的網頁結構</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- HTML Lessons -->
+            <div class="space-y-6">
+                <div class="card p-6">
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="flex-1">
+                            <div class="flex items-center mb-2">
+                                <h3 class="text-xl font-bold text-gray-900 dark:text-white mr-3">1. HTML 簡介與基本結構</h3>
+                                <span class="px-2 py-1 text-xs font-medium rounded-full bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200">基礎</span>
+                            </div>
+                            <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
+                                了解什麼是 HTML，以及 HTML 文件的基本結構。
+                            </p>
+                        </div>
+                        <button onclick="toggleLesson(this)" class="ml-4 p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+                            <svg class="w-5 h-5 text-gray-500 dark:text-gray-400 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="lesson-content hidden space-y-4 border-t border-gray-200 dark:border-gray-700 pt-4">
+                        <div>
+                            <h4 class="font-semibold text-gray-900 dark:text-white mb-2">程式碼範例：</h4>
+                            <pre class="code-block"><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="zh-TW"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;我的第一個網頁&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;歡迎來到我的網頁！&lt;/h1&gt;
+    &lt;p&gt;這是我的第一個 HTML 文件。&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-900 dark:text-white mb-2">詳細說明：</h4>
+                            <div class="text-gray-600 dark:text-gray-300 leading-relaxed space-y-3">
+                                <p>HTML (HyperText Markup Language) 是網頁的標準標記語言，用於創建網頁的結構和內容。</p>
+                                <ul class="list-disc list-inside space-y-1 ml-4">
+                                    <li><strong>&lt;!DOCTYPE html&gt;：</strong>聲明這是 HTML5 文件</li>
+                                    <li><strong>&lt;html&gt;：</strong>根元素，包含整個網頁</li>
+                                    <li><strong>&lt;head&gt;：</strong>包含網頁的元資訊</li>
+                                    <li><strong>&lt;body&gt;：</strong>包含網頁的可見內容</li>
+                                    <li><strong>&lt;title&gt;：</strong>設定網頁標題（顯示在瀏覽器標籤）</li>
+                                </ul>
+                                <p>每個 HTML 標籤都有開始標籤和結束標籤，內容放在兩者之間。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card p-6">
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="flex-1">
+                            <div class="flex items-center mb-2">
+                                <h3 class="text-xl font-bold text-gray-900 dark:text-white mr-3">2. 文字標籤與格式化</h3>
+                                <span class="px-2 py-1 text-xs font-medium rounded-full bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200">基礎</span>
+                            </div>
+                            <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
+                                學習各種文字標籤，包括標題、段落、強調等格式化元素。
+                            </p>
+                        </div>
+                        <button onclick="toggleLesson(this)" class="ml-4 p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+                            <svg class="w-5 h-5 text-gray-500 dark:text-gray-400 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="lesson-content hidden space-y-4 border-t border-gray-200 dark:border-gray-700 pt-4">
+                        <div>
+                            <h4 class="font-semibold text-gray-900 dark:text-white mb-2">程式碼範例：</h4>
+                            <pre class="code-block"><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="zh-TW"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;文字標籤範例&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;!-- 標題標籤 --&gt;
+    &lt;h1&gt;這是最大的標題 (h1)&lt;/h1&gt;
+    &lt;h2&gt;這是第二級標題 (h2)&lt;/h2&gt;
+    &lt;h3&gt;這是第三級標題 (h3)&lt;/h3&gt;
+    &lt;h4&gt;這是第四級標題 (h4)&lt;/h4&gt;
+    &lt;h5&gt;這是第五級標題 (h5)&lt;/h5&gt;
+    &lt;h6&gt;這是最小的標題 (h6)&lt;/h6&gt;
+
+    &lt;!-- 段落標籤 --&gt;
+    &lt;p&gt;這是一個段落。段落標籤會自動在前後加上空白行。&lt;/p&gt;
+    &lt;p&gt;這是另一個段落。可以包含很長的文字內容。&lt;/p&gt;
+
+    &lt;!-- 文字格式化 --&gt;
+    &lt;p&gt;這段文字包含 &lt;strong&gt;重要內容&lt;/strong&gt; 和 &lt;em&gt;強調文字&lt;/em&gt;。&lt;/p&gt;
+    &lt;p&gt;這裡有 &lt;b&gt;粗體文字&lt;/b&gt; 和 &lt;i&gt;斜體文字&lt;/i&gt;。&lt;/p&gt;
+    &lt;p&gt;這是 &lt;u&gt;底線文字&lt;/u&gt; 和 &lt;s&gt;刪除線文字&lt;/s&gt;。&lt;/p&gt;
+
+    &lt;!-- 特殊文字 --&gt;
+    &lt;p&gt;這是 &lt;mark&gt;螢光標記&lt;/mark&gt; 文字。&lt;/p&gt;
+    &lt;p&gt;這是 &lt;small&gt;小字&lt;/small&gt; 和 &lt;sub&gt;下標&lt;/sub&gt; 以及 &lt;sup&gt;上標&lt;/sup&gt;。&lt;/p&gt;
+
+    &lt;!-- 引用 --&gt;
+    &lt;blockquote&gt;
+        這是一個區塊引用。通常用於引用他人的話語或重要內容。
+    &lt;/blockquote&gt;
+
+    &lt;p&gt;愛因斯坦說過：&lt;q&gt;想像力比知識更重要。&lt;/q&gt;&lt;/p&gt;
+
+    &lt;!-- 程式碼 --&gt;
+    &lt;p&gt;使用 &lt;code&gt;console.log()&lt;/code&gt; 來輸出訊息。&lt;/p&gt;
+
+    &lt;pre&gt;
+        &lt;code&gt;
+function sayHello() {
+    console.log("Hello, World!");
+}
+        &lt;/code&gt;
+    &lt;/pre&gt;
+
+    &lt;!-- 換行 --&gt;
+    &lt;p&gt;這是第一行&lt;br&gt;這是第二行&lt;/p&gt;
+
+    &lt;!-- 水平線 --&gt;
+    &lt;hr&gt;
+
+    &lt;p&gt;水平線上方的內容&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-900 dark:text-white mb-2">詳細說明：</h4>
+                            <div class="text-gray-600 dark:text-gray-300 leading-relaxed space-y-3">
+                                <p>HTML 提供了豐富的文字標籤來組織和格式化內容：</p>
+                                <ul class="list-disc list-inside space-y-1 ml-4">
+                                    <li><strong>標題標籤：</strong>h1 到 h6，用於建立內容層次</li>
+                                    <li><strong>段落標籤：</strong>p 用於組織文字段落</li>
+                                    <li><strong>語義化標籤：</strong>strong（重要）、em（強調）</li>
+                                    <li><strong>視覺化標籤：</strong>b（粗體）、i（斜體）、u（底線）</li>
+                                    <li><strong>特殊標籤：</strong>mark（標記）、code（程式碼）、pre（預格式化）</li>
+                                </ul>
+                                <p>建議優先使用語義化標籤，這對 SEO 和無障礙設計更有幫助。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card p-6">
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="flex-1">
+                            <div class="flex items-center mb-2">
+                                <h3 class="text-xl font-bold text-gray-900 dark:text-white mr-3">3. 連結與圖片</h3>
+                                <span class="px-2 py-1 text-xs font-medium rounded-full bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200">基礎</span>
+                            </div>
+                            <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
+                                學習如何創建超連結和嵌入圖片，讓網頁更豐富有趣。
+                            </p>
+                        </div>
+                        <button onclick="toggleLesson(this)" class="ml-4 p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+                            <svg class="w-5 h-5 text-gray-500 dark:text-gray-400 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="lesson-content hidden space-y-4 border-t border-gray-200 dark:border-gray-700 pt-4">
+                        <div>
+                            <h4 class="font-semibold text-gray-900 dark:text-white mb-2">程式碼範例：</h4>
+                            <pre class="code-block"><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="zh-TW"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;連結與圖片範例&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;連結範例&lt;/h1&gt;
+
+    &lt;!-- 外部連結 --&gt;
+    &lt;p&gt;訪問 &lt;a href="https://www.google.com"&gt;Google&lt;/a&gt; 搜尋引擎。&lt;/p&gt;
+
+    &lt;!-- 在新視窗開啟連結 --&gt;
+    &lt;p&gt;在新視窗開啟 &lt;a href="https://www.youtube.com" target="_blank"&gt;YouTube&lt;/a&gt;。&lt;/p&gt;
+
+    &lt;!-- 內部連結 --&gt;
+    &lt;p&gt;&lt;a href="#section1"&gt;跳到第一節&lt;/a&gt;&lt;/p&gt;
+    &lt;p&gt;&lt;a href="#section2"&gt;跳到第二節&lt;/a&gt;&lt;/p&gt;
+
+    &lt;!-- 電子郵件連結 --&gt;
+    &lt;p&gt;聯絡我們：&lt;a href="mailto:contact@example.com"&gt;contact@example.com&lt;/a&gt;&lt;/p&gt;
+
+    &lt;!-- 電話連結 --&gt;
+    &lt;p&gt;撥打電話：&lt;a href="tel:+886-2-1234-5678"&gt;02-1234-5678&lt;/a&gt;&lt;/p&gt;
+
+    &lt;h1&gt;圖片範例&lt;/h1&gt;
+
+    &lt;!-- 基本圖片 --&gt;
+    &lt;img src="image.jpg" alt="圖片描述"&gt;
+
+    &lt;!-- 設定圖片大小 --&gt;
+    &lt;img src="logo.png" alt="公司標誌" width="200" height="100"&gt;
+
+    &lt;!-- 響應式圖片 --&gt;
+    &lt;img src="photo.jpg" alt="風景照片" style="max-width: 100%; height: auto;"&gt;
+
+    &lt;!-- 圖片連結 --&gt;
+    &lt;a href="https://www.example.com"&gt;
+        &lt;img src="banner.jpg" alt="點擊查看更多"&gt;
+    &lt;/a&gt;
+
+    &lt;!-- 圖片地圖 --&gt;
+    &lt;img src="map.jpg" alt="地圖" usemap="#imagemap"&gt;
+    &lt;map name="imagemap"&gt;
+        &lt;area shape="rect" coords="0,0,100,100" href="page1.html" alt="區域1"&gt;
+        &lt;area shape="circle" coords="200,200,50" href="page2.html" alt="區域2"&gt;
+    &lt;/map&gt;
+
+    &lt;!-- 內容區塊 --&gt;
+    &lt;h2 id="section1"&gt;第一節&lt;/h2&gt;
+    &lt;p&gt;這是第一節的內容...&lt;/p&gt;
+
+    &lt;h2 id="section2"&gt;第二節&lt;/h2&gt;
+    &lt;p&gt;這是第二節的內容...&lt;/p&gt;
+
+    &lt;!-- 回到頂部 --&gt;
+    &lt;p&gt;&lt;a href="#top"&gt;回到頂部&lt;/a&gt;&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-900 dark:text-gray-300 mb-2">詳細說明：</h4>
+                            <div class="text-gray-600 dark:text-gray-300 leading-relaxed space-y-3">
+                                <p>連結和圖片是網頁的重要元素：</p>
+                                <ul class="list-disc list-inside space-y-1 ml-4">
+                                    <li><strong>&lt;a&gt; 標籤：</strong>創建超連結，href 屬性指定目標</li>
+                                    <li><strong>target="_blank"：</strong>在新視窗開啟連結</li>
+                                    <li><strong>&lt;img&gt; 標籤：</strong>嵌入圖片，src 指定圖片路徑</li>
+                                    <li><strong>alt 屬性：</strong>圖片的替代文字，重要的無障礙功能</li>
+                                    <li><strong>錨點連結：</strong>使用 # 和 id 在頁面內跳轉</li>
+                                </ul>
+                                <p>記得總是為圖片提供有意義的 alt 文字，這對 SEO 和無障礙設計很重要。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card p-6">
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="flex-1">
+                            <div class="flex items-center mb-2">
+                                <h3 class="text-xl font-bold text-gray-900 dark:text-white mr-3">4. 清單與導航</h3>
+                                <span class="px-2 py-1 text-xs font-medium rounded-full bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200">進階</span>
+                            </div>
+                            <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
+                                學習如何創建有序和無序清單，以及導航選單。
+                            </p>
+                        </div>
+                        <button onclick="toggleLesson(this)" class="ml-4 p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+                            <svg class="w-5 h-5 text-gray-500 dark:text-gray-400 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="lesson-content hidden space-y-4 border-t border-gray-200 dark:border-gray-700 pt-4">
+                        <div>
+                            <h4 class="font-semibold text-gray-900 dark:text-white mb-2">程式碼範例：</h4>
+                            <pre class="code-block"><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="zh-TW"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;清單與導航範例&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;清單範例&lt;/h1&gt;
+
+    &lt;!-- 無序清單 --&gt;
+    &lt;h2&gt;購物清單（無序清單）&lt;/h2&gt;
+    &lt;ul&gt;
+        &lt;li&gt;蘋果&lt;/li&gt;
+        &lt;li&gt;香蕉&lt;/li&gt;
+        &lt;li&gt;牛奶&lt;/li&gt;
+        &lt;li&gt;麵包&lt;/li&gt;
+    &lt;/ul&gt;
+
+    &lt;!-- 有序清單 --&gt;
+    &lt;h2&gt;學習步驟（有序清單）&lt;/h2&gt;
+    &lt;ol&gt;
+        &lt;li&gt;學習 HTML 基礎&lt;/li&gt;
+        &lt;li&gt;學習 CSS 樣式&lt;/li&gt;
+        &lt;li&gt;學習 JavaScript&lt;/li&gt;
+        &lt;li&gt;建立第一個網站&lt;/li&gt;
+    &lt;/ol&gt;
+
+    &lt;!-- 巢狀清單 --&gt;
+    &lt;h2&gt;課程大綱（巢狀清單）&lt;/h2&gt;
+    &lt;ul&gt;
+        &lt;li&gt;前端開發
+            &lt;ul&gt;
+                &lt;li&gt;HTML&lt;/li&gt;
+                &lt;li&gt;CSS&lt;/li&gt;
+                &lt;li&gt;JavaScript&lt;/li&gt;
+            &lt;/ul&gt;
+        &lt;/li&gt;
+        &lt;li&gt;後端開發
+            &lt;ol&gt;
+                &lt;li&gt;Node.js&lt;/li&gt;
+                &lt;li&gt;Python&lt;/li&gt;
+                &lt;li&gt;Java&lt;/li&gt;
+            &lt;/ol&gt;
+        &lt;/li&gt;
+    &lt;/ul&gt;
+
+    &lt;!-- 描述清單 --&gt;
+    &lt;h2&gt;術語解釋（描述清單）&lt;/h2&gt;
+    &lt;dl&gt;
+        &lt;dt&gt;HTML&lt;/dt&gt;
+        &lt;dd&gt;超文本標記語言，用於創建網頁結構&lt;/dd&gt;
+
+        &lt;dt&gt;CSS&lt;/dt&gt;
+        &lt;dd&gt;層疊樣式表，用於設計網頁外觀&lt;/dd&gt;
+
+        &lt;dt&gt;JavaScript&lt;/dt&gt;
+        &lt;dd&gt;程式語言，用於創建互動式網頁&lt;/dd&gt;
+    &lt;/dl&gt;
+
+    &lt;!-- 導航選單 --&gt;
+    &lt;h1&gt;導航範例&lt;/h1&gt;
+
+    &lt;!-- 基本導航 --&gt;
+    &lt;nav&gt;
+        &lt;ul&gt;
+            &lt;li&gt;&lt;a href="#home"&gt;首頁&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href="#about"&gt;關於我們&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href="#services"&gt;服務項目&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href="#contact"&gt;聯絡我們&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/nav&gt;
+
+    &lt;!-- 下拉式選單 --&gt;
+    &lt;nav&gt;
+        &lt;ul&gt;
+            &lt;li&gt;&lt;a href="#"&gt;首頁&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;
+                &lt;a href="#"&gt;產品&lt;/a&gt;
+                &lt;ul&gt;
+                    &lt;li&gt;&lt;a href="#"&gt;網頁設計&lt;/a&gt;&lt;/li&gt;
+                    &lt;li&gt;&lt;a href="#"&gt;程式開發&lt;/a&gt;&lt;/li&gt;
+                    &lt;li&gt;&lt;a href="#"&gt;數位行銷&lt;/a&gt;&lt;/li&gt;
+                &lt;/ul&gt;
+            &lt;/li&gt;
+            &lt;li&gt;&lt;a href="#"&gt;聯絡我們&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/nav&gt;
+
+    &lt;!-- 麵包屑導航 --&gt;
+    &lt;nav aria-label="麵包屑"&gt;
+        &lt;ol&gt;
+            &lt;li&gt;&lt;a href="#"&gt;首頁&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href="#"&gt;產品&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href="#"&gt;網頁設計&lt;/a&gt;&lt;/li&gt;
+            &lt;li aria-current="page"&gt;響應式設計&lt;/li&gt;
+        &lt;/ol&gt;
+    &lt;/nav&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-900 dark:text-white mb-2">詳細說明：</h4>
+                            <div class="text-gray-600 dark:text-gray-300 leading-relaxed space-y-3">
+                                <p>清單是組織內容的重要工具：</p>
+                                <ul class="list-disc list-inside space-y-1 ml-4">
+                                    <li><strong>&lt;ul&gt;：</strong>無序清單，使用項目符號</li>
+                                    <li><strong>&lt;ol&gt;：</strong>有序清單，使用數字編號</li>
+                                    <li><strong>&lt;li&gt;：</strong>清單項目</li>
+                                    <li><strong>&lt;dl&gt;：</strong>描述清單，用於術語定義</li>
+                                    <li><strong>&lt;nav&gt;：</strong>導航區塊，語義化標籤</li>
+                                </ul>
+                                <p>清單可以巢狀使用，常用於創建導航選單和內容組織。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card p-6">
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="flex-1">
+                            <div class="flex items-center mb-2">
+                                <h3 class="text-xl font-bold text-gray-900 dark:text-white mr-3">5. 表格 (Table)</h3>
+                                <span class="px-2 py-1 text-xs font-medium rounded-full bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200">進階</span>
+                            </div>
+                            <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
+                                學習如何創建和格式化表格來展示結構化資料。
+                            </p>
+                        </div>
+                        <button onclick="toggleLesson(this)" class="ml-4 p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+                            <svg class="w-5 h-5 text-gray-500 dark:text-gray-400 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="lesson-content hidden space-y-4 border-t border-gray-200 dark:border-gray-700 pt-4">
+                        <div>
+                            <h4 class="font-semibold text-gray-900 dark:text-white mb-2">程式碼範例：</h4>
+                            <pre class="code-block"><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="zh-TW"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;表格範例&lt;/title&gt;
+    &lt;style&gt;
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;表格範例&lt;/h1&gt;
+
+    &lt;!-- 基本表格 --&gt;
+    &lt;h2&gt;學生成績表&lt;/h2&gt;
+    &lt;table&gt;
+        &lt;thead&gt;
+            &lt;tr&gt;
+                &lt;th&gt;姓名&lt;/th&gt;
+                &lt;th&gt;數學&lt;/th&gt;
+                &lt;th&gt;英文&lt;/th&gt;
+                &lt;th&gt;總分&lt;/th&gt;
+            &lt;/tr&gt;
+        &lt;/thead&gt;
+        &lt;tbody&gt;
+            &lt;tr&gt;
+                &lt;td&gt;小明&lt;/td&gt;
+                &lt;td&gt;85&lt;/td&gt;
+                &lt;td&gt;92&lt;/td&gt;
+                &lt;td&gt;177&lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;tr&gt;
+                &lt;td&gt;小華&lt;/td&gt;
+                &lt;td&gt;78&lt;/td&gt;
+                &lt;td&gt;88&lt;/td&gt;
+                &lt;td&gt;166&lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;tr&gt;
+                &lt;td&gt;小李&lt;/td&gt;
+                &lt;td&gt;90&lt;/td&gt;
+                &lt;td&gt;85&lt;/td&gt;
+                &lt;td&gt;175&lt;/td&gt;
+            &lt;/tr&gt;
+        &lt;/tbody&gt;
+        &lt;tfoot&gt;
+            &lt;tr&gt;
+                &lt;td&gt;&lt;strong&gt;平均&lt;/strong&gt;&lt;/td&gt;
+                &lt;td&gt;&lt;strong&gt;84.3&lt;/strong&gt;&lt;/td&gt;
+                &lt;td&gt;&lt;strong&gt;88.3&lt;/strong&gt;&lt;/td&gt;
+                &lt;td&gt;&lt;strong&gt;172.7&lt;/strong&gt;&lt;/td&gt;
+            &lt;/tr&gt;
+        &lt;/tfoot&gt;
+    &lt;/table&gt;
+
+    &lt;!-- 合併儲存格的表格 --&gt;
+    &lt;h2&gt;課程時間表&lt;/h2&gt;
+    &lt;table&gt;
+        &lt;thead&gt;
+            &lt;tr&gt;
+                &lt;th&gt;時間&lt;/th&gt;
+                &lt;th&gt;星期一&lt;/th&gt;
+                &lt;th&gt;星期二&lt;/th&gt;
+                &lt;th&gt;星期三&lt;/th&gt;
+                &lt;th&gt;星期四&lt;/th&gt;
+                &lt;th&gt;星期五&lt;/th&gt;
+            &lt;/tr&gt;
+        &lt;/thead&gt;
+        &lt;tbody&gt;
+            &lt;tr&gt;
+                &lt;td&gt;09:00-10:00&lt;/td&gt;
+                &lt;td&gt;數學&lt;/td&gt;
+                &lt;td&gt;英文&lt;/td&gt;
+                &lt;td&gt;物理&lt;/td&gt;
+                &lt;td&gt;化學&lt;/td&gt;
+                &lt;td&gt;體育&lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;tr&gt;
+                &lt;td&gt;10:00-11:00&lt;/td&gt;
+                &lt;td&gt;英文&lt;/td&gt;
+                &lt;td&gt;數學&lt;/td&gt;
+                &lt;td&gt;化學&lt;/td&gt;
+                &lt;td&gt;物理&lt;/td&gt;
+                &lt;td&gt;音樂&lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;tr&gt;
+                &lt;td&gt;11:00-12:00&lt;/td&gt;
+                &lt;td colspan="5"&gt;大會時間&lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;tr&gt;
+                &lt;td&gt;13:00-14:00&lt;/td&gt;
+                &lt;td&gt;歷史&lt;/td&gt;
+                &lt;td&gt;地理&lt;/td&gt;
+                &lt;td&gt;生物&lt;/td&gt;
+                &lt;td&gt;美術&lt;/td&gt;
+                &lt;td rowspan="2"&gt;社團活動&lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;tr&gt;
+                &lt;td&gt;14:00-15:00&lt;/td&gt;
+                &lt;td&gt;地理&lt;/td&gt;
+                &lt;td&gt;歷史&lt;/td&gt;
+                &lt;td&gt;美術&lt;/td&gt;
+                &lt;td&gt;生物&lt;/td&gt;
+            &lt;/tr&gt;
+        &lt;/tbody&gt;
+    &lt;/table&gt;
+
+    &lt;!-- 響應式表格 --&gt;
+    &lt;h2&gt;產品比較表&lt;/h2&gt;
+    &lt;div style="overflow-x: auto;"&gt;
+        &lt;table&gt;
+            &lt;caption&gt;產品功能比較&lt;/caption&gt;
+            &lt;thead&gt;
+                &lt;tr&gt;
+                    &lt;th scope="col"&gt;功能&lt;/th&gt;
+                    &lt;th scope="col"&gt;基本版&lt;/th&gt;
+                    &lt;th scope="col"&gt;專業版&lt;/th&gt;
+                    &lt;th scope="col"&gt;企業版&lt;/th&gt;
+                &lt;/tr&gt;
+            &lt;/thead&gt;
+            &lt;tbody&gt;
+                &lt;tr&gt;
+                    &lt;th scope="row"&gt;儲存空間&lt;/th&gt;
+                    &lt;td&gt;1GB&lt;/td&gt;
+                    &lt;td&gt;10GB&lt;/td&gt;
+                    &lt;td&gt;無限制&lt;/td&gt;
+                &lt;/tr&gt;
+                &lt;tr&gt;
+                    &lt;th scope="row"&gt;使用者數量&lt;/th&gt;
+                    &lt;td&gt;1人&lt;/td&gt;
+                    &lt;td&gt;5人&lt;/td&gt;
+                    &lt;td&gt;無限制&lt;/td&gt;
+                &lt;/tr&gt;
+                &lt;tr&gt;
+                    &lt;th scope="row"&gt;技術支援&lt;/th&gt;
+                    &lt;td&gt;❌&lt;/td&gt;
+                    &lt;td&gt;✅&lt;/td&gt;
+                    &lt;td&gt;✅ 24/7&lt;/td&gt;
+                &lt;/tr&gt;
+            &lt;/tbody&gt;
+        &lt;/table&gt;
+    &lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-900 dark:text-white mb-2">詳細說明：</h4>
+                            <div class="text-gray-600 dark:text-gray-300 leading-relaxed space-y-3">
+                                <p>表格用於展示結構化的資料：</p>
+                                <ul class="list-disc list-inside space-y-1 ml-4">
+                                    <li><strong>&lt;table&gt;：</strong>表格容器</li>
+                                    <li><strong>&lt;thead&gt;, &lt;tbody&gt;, &lt;tfoot&gt;：</strong>表格區段</li>
+                                    <li><strong>&lt;tr&gt;：</strong>表格列</li>
+                                    <li><strong>&lt;th&gt;：</strong>表頭儲存格</li>
+                                    <li><strong>&lt;td&gt;：</strong>資料儲存格</li>
+                                    <li><strong>colspan, rowspan：</strong>合併儲存格</li>
+                                </ul>
+                                <p>使用 scope 屬性和 caption 標籤可以提升表格的無障礙性。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card p-6">
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="flex-1">
+                            <div class="flex items-center mb-2">
+                                <h3 class="text-xl font-bold text-gray-900 dark:text-white mr-3">6. 表單 (Form)</h3>
+                                <span class="px-2 py-1 text-xs font-medium rounded-full bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200">中級</span>
+                            </div>
+                            <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
+                                學習如何創建互動式表單來收集使用者資料。
+                            </p>
+                        </div>
+                        <button onclick="toggleLesson(this)" class="ml-4 p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+                            <svg class="w-5 h-5 text-gray-500 dark:text-gray-400 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="lesson-content hidden space-y-4 border-t border-gray-200 dark:border-gray-700 pt-4">
+                        <div>
+                            <h4 class="font-semibold text-gray-900 dark:text-white mb-2">程式碼範例：</h4>
+                            <pre class="code-block"><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="zh-TW"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;表單範例&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;會員註冊表單&lt;/h1&gt;
+
+    &lt;form action="/submit" method="post"&gt;
+        &lt;!-- 基本輸入欄位 --&gt;
+        &lt;fieldset&gt;
+            &lt;legend&gt;基本資料&lt;/legend&gt;
+
+            &lt;label for="username"&gt;使用者名稱：&lt;/label&gt;
+            &lt;input type="text" id="username" name="username" required&gt;
+            &lt;br&gt;&lt;br&gt;
+
+            &lt;label for="email"&gt;電子郵件：&lt;/label&gt;
+            &lt;input type="email" id="email" name="email" required&gt;
+            &lt;br&gt;&lt;br&gt;
+
+            &lt;label for="password"&gt;密碼：&lt;/label&gt;
+            &lt;input type="password" id="password" name="password" required minlength="8"&gt;
+            &lt;br&gt;&lt;br&gt;
+
+            &lt;label for="phone"&gt;電話號碼：&lt;/label&gt;
+            &lt;input type="tel" id="phone" name="phone" pattern="[0-9]{10}"&gt;
+            &lt;br&gt;&lt;br&gt;
+
+            &lt;label for="birthday"&gt;生日：&lt;/label&gt;
+            &lt;input type="date" id="birthday" name="birthday"&gt;
+            &lt;br&gt;&lt;br&gt;
+
+            &lt;label for="age"&gt;年齡：&lt;/label&gt;
+            &lt;input type="number" id="age" name="age" min="18" max="100"&gt;
+            &lt;br&gt;&lt;br&gt;
+        &lt;/fieldset&gt;
+
+        &lt;!-- 選擇欄位 --&gt;
+        &lt;fieldset&gt;
+            &lt;legend&gt;個人偏好&lt;/legend&gt;
+
+            &lt;label for="gender"&gt;性別：&lt;/label&gt;
+            &lt;select id="gender" name="gender"&gt;
+                &lt;option value=""&gt;請選擇&lt;/option&gt;
+                &lt;option value="male"&gt;男性&lt;/option&gt;
+                &lt;option value="female"&gt;女性&lt;/option&gt;
+                &lt;option value="other"&gt;其他&lt;/option&gt;
+            &lt;/select&gt;
+            &lt;br&gt;&lt;br&gt;
+
+            &lt;label&gt;興趣愛好：&lt;/label&gt;&lt;br&gt;
+            &lt;input type="checkbox" id="reading" name="hobbies" value="reading"&gt;
+            &lt;label for="reading"&gt;閱讀&lt;/label&gt;&lt;br&gt;
+
+            &lt;input type="checkbox" id="music" name="hobbies" value="music"&gt;
+            &lt;label for="music"&gt;音樂&lt;/label&gt;&lt;br&gt;
+
+            &lt;input type="checkbox" id="sports" name="hobbies" value="sports"&gt;
+            &lt;label for="sports"&gt;運動&lt;/label&gt;&lt;br&gt;
+
+            &lt;input type="checkbox" id="travel" name="hobbies" value="travel"&gt;
+            &lt;label for="travel"&gt;旅遊&lt;/label&gt;&lt;br&gt;&lt;br&gt;
+
+            &lt;label&gt;教育程度：&lt;/label&gt;&lt;br&gt;
+            &lt;input type="radio" id="highschool" name="education" value="highschool"&gt;
+            &lt;label for="highschool"&gt;高中&lt;/label&gt;&lt;br&gt;
+
+            &lt;input type="radio" id="college" name="education" value="college"&gt;
+            &lt;label for="college"&gt;大學&lt;/label&gt;&lt;br&gt;
+
+            &lt;input type="radio" id="graduate" name="education" value="graduate"&gt;
+            &lt;label for="graduate"&gt;研究所&lt;/label&gt;&lt;br&gt;&lt;br&gt;
+        &lt;/fieldset&gt;
+
+        &lt;!-- 文字區域 --&gt;
+        &lt;fieldset&gt;
+            &lt;legend&gt;其他資訊&lt;/legend&gt;
+
+            &lt;label for="bio"&gt;自我介紹：&lt;/label&gt;&lt;br&gt;
+            &lt;textarea id="bio" name="bio" rows="4" cols="50" placeholder="請簡單介紹自己..."&gt;&lt;/textarea&gt;
+            &lt;br&gt;&lt;br&gt;
+
+            &lt;label for="website"&gt;個人網站：&lt;/label&gt;
+            &lt;input type="url" id="website" name="website" placeholder="https://example.com"&gt;
+            &lt;br&gt;&lt;br&gt;
+
+            &lt;label for="avatar"&gt;頭像上傳：&lt;/label&gt;
+            &lt;input type="file" id="avatar" name="avatar" accept="image/*"&gt;
+            &lt;br&gt;&lt;br&gt;
+        &lt;/fieldset&gt;
+
+        &lt;!-- 同意條款 --&gt;
+        &lt;input type="checkbox" id="terms" name="terms" required&gt;
+        &lt;label for="terms"&gt;我同意 &lt;a href="#"&gt;服務條款&lt;/a&gt; 和 &lt;a href="#"&gt;隱私政策&lt;/a&gt;&lt;/label&gt;
+        &lt;br&gt;&lt;br&gt;
+
+        &lt;!-- 提交按鈕 --&gt;
+        &lt;input type="submit" value="註冊"&gt;
+        &lt;input type="reset" value="重設"&gt;
+        &lt;button type="button"&gt;取消&lt;/button&gt;
+    &lt;/form&gt;
+
+    &lt;!-- HTML5 新輸入類型 --&gt;
+    &lt;h2&gt;HTML5 新輸入類型&lt;/h2&gt;
+    &lt;form&gt;
+        &lt;label for="color"&gt;選擇顏色：&lt;/label&gt;
+        &lt;input type="color" id="color" name="color"&gt;&lt;br&gt;&lt;br&gt;
+
+        &lt;label for="range"&gt;音量控制：&lt;/label&gt;
+        &lt;input type="range" id="range" name="range" min="0" max="100" value="50"&gt;&lt;br&gt;&lt;br&gt;
+
+        &lt;label for="search"&gt;搜尋：&lt;/label&gt;
+        &lt;input type="search" id="search" name="search" placeholder="輸入搜尋關鍵字"&gt;&lt;br&gt;&lt;br&gt;
+
+        &lt;label for="time"&gt;時間：&lt;/label&gt;
+        &lt;input type="time" id="time" name="time"&gt;&lt;br&gt;&lt;br&gt;
+
+        &lt;label for="week"&gt;週次：&lt;/label&gt;
+        &lt;input type="week" id="week" name="week"&gt;&lt;br&gt;&lt;br&gt;
+
+        &lt;label for="month"&gt;月份：&lt;/label&gt;
+        &lt;input type="month" id="month" name="month"&gt;&lt;br&gt;&lt;br&gt;
+    &lt;/form&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-900 dark:text-white mb-2">詳細說明：</h4>
+                            <div class="text-gray-600 dark:text-gray-300 leading-relaxed space-y-3">
+                                <p>表單是網頁與使用者互動的重要工具：</p>
+                                <ul class="list-disc list-inside space-y-1 ml-4">
+                                    <li><strong>&lt;form&gt;：</strong>表單容器，action 指定提交位置</li>
+                                    <li><strong>&lt;input&gt;：</strong>各種輸入欄位，type 決定輸入類型</li>
+                                    <li><strong>&lt;label&gt;：</strong>欄位標籤，for 屬性連結到輸入欄位</li>
+                                    <li><strong>&lt;select&gt;：</strong>下拉選單</li>
+                                    <li><strong>&lt;textarea&gt;：</strong>多行文字輸入</li>
+                                    <li><strong>&lt;fieldset&gt;：</strong>欄位群組，&lt;legend&gt; 為群組標題</li>
+                                </ul>
+                                <p>HTML5 新增了許多輸入類型，提供更好的使用者體驗和資料驗證。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 學習總結 -->
+                <div class="bg-gradient-to-r from-orange-50 to-red-50 dark:from-orange-900/20 dark:to-red-900/20 border border-orange-200 dark:border-orange-800 rounded-xl p-6">
+                    <h3 class="text-2xl font-bold text-orange-900 dark:text-orange-100 mb-4 flex items-center">
+                        <svg class="w-8 h-8 mr-3" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                        </svg>
+                        🎉 恭喜！您已完成 HTML 完整教學
+                    </h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <h4 class="font-semibold text-orange-800 dark:text-orange-200 mb-3">您已學會的核心技能：</h4>
+                            <ul class="space-y-2 text-orange-700 dark:text-orange-300">
+                                <li class="flex items-center">
+                                    <svg class="w-4 h-4 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                                    </svg>
+                                    HTML 基本結構和語法
+                                </li>
+                                <li class="flex items-center">
+                                    <svg class="w-4 h-4 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                                    </svg>
+                                    文字格式化和標籤使用
+                                </li>
+                                <li class="flex items-center">
+                                    <svg class="w-4 h-4 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                                    </svg>
+                                    連結和圖片嵌入
+                                </li>
+                                <li class="flex items-center">
+                                    <svg class="w-4 h-4 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                                    </svg>
+                                    清單和導航創建
+                                </li>
+                                <li class="flex items-center">
+                                    <svg class="w-4 h-4 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                                    </svg>
+                                    表格設計和資料展示
+                                </li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-orange-800 dark:text-orange-200 mb-3">網頁開發基礎：</h4>
+                            <ul class="space-y-2 text-orange-700 dark:text-orange-300">
+                                <li class="flex items-center">
+                                    <svg class="w-4 h-4 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                                    </svg>
+                                    表單設計和使用者互動
+                                </li>
+                                <li class="flex items-center">
+                                    <svg class="w-4 h-4 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                                    </svg>
+                                    語義化標籤使用
+                                </li>
+                                <li class="flex items-center">
+                                    <svg class="w-4 h-4 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                                    </svg>
+                                    HTML5 新特性應用
+                                </li>
+                                <li class="flex items-center">
+                                    <svg class="w-4 h-4 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                                    </svg>
+                                    無障礙設計概念
+                                </li>
+                                <li class="flex items-center">
+                                    <svg class="w-4 h-4 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                                    </svg>
+                                    網頁結構設計思維
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="mt-6 p-4 bg-white dark:bg-gray-800 rounded-lg border border-orange-200 dark:border-orange-700">
+                        <h4 class="font-semibold text-gray-900 dark:text-white mb-2">🚀 下一步建議：</h4>
+                        <p class="text-gray-600 dark:text-gray-300 text-sm leading-relaxed">
+                            現在您已經掌握了 HTML 的核心概念！建議您接下來學習 CSS 來美化網頁外觀，
+                            然後學習 JavaScript 來增加互動功能。也可以開始實作簡單的網頁專案，
+                            如個人履歷、公司介紹頁面等，來鞏固所學的知識。
+                        </p>
                     </div>
                 </div>
             </div>
@@ -1784,12 +2694,16 @@ file_backup()</code></pre>
                 </div>
 
                 <div class="bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded-lg p-4">
-                    <h2 class="font-semibold text-yellow-900 dark:text-yellow-100 mb-2">學習目標</h2>
+                    <h2 class="font-semibold text-yellow-900 dark:text-yellow-100 mb-2">完整學習目標</h2>
                     <ul class="text-yellow-800 dark:text-yellow-200 text-sm space-y-1">
-                        <li>• 掌握 JavaScript 基本語法</li>
-                        <li>• 了解變數、函數和資料結構</li>
-                        <li>• 學會操作陣列和物件</li>
-                        <li>• 能夠編寫互動式網頁功能</li>
+                        <li>• 掌握 JavaScript 基本語法和概念</li>
+                        <li>• 了解變數、資料型別和運算子</li>
+                        <li>• 學會條件判斷和迴圈控制</li>
+                        <li>• 理解函數定義和進階概念</li>
+                        <li>• 掌握陣列和物件操作</li>
+                        <li>• 學會 DOM 操作和事件處理</li>
+                        <li>• 了解非同步程式設計 (Promise, async/await)</li>
+                        <li>• 能夠編寫完整的互動式網頁應用</li>
                     </ul>
                 </div>
             </div>
@@ -1842,6 +2756,1968 @@ document.getElementById("demo").innerHTML = "Hello JavaScript!";</code></pre>
                         </div>
                     </div>
                 </div>
+
+                <div class="card p-6">
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="flex-1">
+                            <div class="flex items-center mb-2">
+                                <h3 class="text-xl font-bold text-gray-900 dark:text-white mr-3">2. 變數與資料型別</h3>
+                                <span class="px-2 py-1 text-xs font-medium rounded-full bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200">基礎</span>
+                            </div>
+                            <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
+                                學習 JavaScript 中的變數宣告和基本資料型別。
+                            </p>
+                        </div>
+                        <button onclick="toggleLesson(this)" class="ml-4 p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+                            <svg class="w-5 h-5 text-gray-500 dark:text-gray-400 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="lesson-content hidden space-y-4 border-t border-gray-200 dark:border-gray-700 pt-4">
+                        <div>
+                            <h4 class="font-semibold text-gray-900 dark:text-white mb-2">程式碼範例：</h4>
+                            <pre class="code-block"><code>// 變數宣告的三種方式
+var oldWay = "舊的宣告方式";        // 不推薦使用
+let modernWay = "現代宣告方式";     // 推薦使用
+const constant = "常數";           // 不可變的值
+
+// 基本資料型別
+let name = "小明";                 // 字串 (String)
+let age = 25;                     // 數字 (Number)
+let isStudent = true;             // 布林值 (Boolean)
+let nothing = null;               // 空值 (null)
+let notDefined;                   // 未定義 (undefined)
+
+// 顯示變數內容
+console.log("姓名：", name);
+console.log("年齡：", age);
+console.log("是學生：", isStudent);
+console.log("空值：", nothing);
+console.log("未定義：", notDefined);
+
+// 檢查資料型別
+console.log("name 的型別：", typeof name);
+console.log("age 的型別：", typeof age);
+console.log("isStudent 的型別：", typeof isStudent);
+
+// 字串操作
+let firstName = "小";
+let lastName = "明";
+let fullName = firstName + lastName;  // 字串連接
+console.log("全名：", fullName);
+
+// 模板字串 (Template Literals)
+let greeting = `你好，我是${fullName}，今年${age}歲`;
+console.log(greeting);
+
+// 數字操作
+let score1 = 85;
+let score2 = 92;
+let average = (score1 + score2) / 2;
+console.log(`平均分數：${average}`);</code></pre>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-900 dark:text-white mb-2">詳細說明：</h4>
+                            <div class="text-gray-600 dark:text-gray-300 leading-relaxed space-y-3">
+                                <p>JavaScript 中的變數宣告和資料型別：</p>
+                                <ul class="list-disc list-inside space-y-1 ml-4">
+                                    <li><strong>let：</strong>現代的變數宣告，有區塊作用域</li>
+                                    <li><strong>const：</strong>常數宣告，值不可改變</li>
+                                    <li><strong>var：</strong>舊式宣告，避免使用</li>
+                                    <li><strong>基本型別：</strong>string, number, boolean, null, undefined</li>
+                                    <li><strong>模板字串：</strong>使用反引號 ` 和 ${} 語法</li>
+                                </ul>
+                                <p>JavaScript 是動態型別語言，變數可以存放不同型別的值。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card p-6">
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="flex-1">
+                            <div class="flex items-center mb-2">
+                                <h3 class="text-xl font-bold text-gray-900 dark:text-white mr-3">3. 運算子與表達式</h3>
+                                <span class="px-2 py-1 text-xs font-medium rounded-full bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200">基礎</span>
+                            </div>
+                            <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
+                                學習 JavaScript 中的各種運算子和表達式。
+                            </p>
+                        </div>
+                        <button onclick="toggleLesson(this)" class="ml-4 p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+                            <svg class="w-5 h-5 text-gray-500 dark:text-gray-400 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="lesson-content hidden space-y-4 border-t border-gray-200 dark:border-gray-700 pt-4">
+                        <div>
+                            <h4 class="font-semibold text-gray-900 dark:text-white mb-2">程式碼範例：</h4>
+                            <pre class="code-block"><code>// 算術運算子
+let a = 10;
+let b = 3;
+
+console.log("加法：", a + b);      // 13
+console.log("減法：", a - b);      // 7
+console.log("乘法：", a * b);      // 30
+console.log("除法：", a / b);      // 3.333...
+console.log("餘數：", a % b);      // 1
+console.log("次方：", a ** b);     // 1000
+
+// 比較運算子
+let x = 5;
+let y = "5";
+
+console.log("x == y：", x == y);   // true (值相等)
+console.log("x === y：", x === y); // false (值和型別都要相等)
+console.log("x != y：", x != y);   // false
+console.log("x !== y：", x !== y); // true
+console.log("x > 3：", x > 3);     // true
+console.log("x <= 5：", x <= 5);   // true
+
+// 邏輯運算子
+let isAdult = true;
+let hasLicense = false;
+
+console.log("AND：", isAdult && hasLicense);  // false
+console.log("OR：", isAdult || hasLicense);   // true
+console.log("NOT：", !isAdult);               // false
+
+// 賦值運算子
+let count = 10;
+count += 5;    // count = count + 5
+console.log("count += 5：", count);  // 15
+
+count -= 3;    // count = count - 3
+console.log("count -= 3：", count);  // 12
+
+count *= 2;    // count = count * 2
+console.log("count *= 2：", count);  // 24
+
+// 遞增和遞減
+let num = 5;
+console.log("num++：", num++);  // 5 (先回傳再遞增)
+console.log("num：", num);      // 6
+
+console.log("++num：", ++num);  // 7 (先遞增再回傳)
+console.log("num：", num);      // 7
+
+// 三元運算子 (條件運算子)
+let score = 85;
+let grade = score >= 60 ? "及格" : "不及格";
+console.log(`分數 ${score} 是${grade}的`);
+
+// 字串運算子
+let firstName = "小";
+let lastName = "明";
+let fullName = firstName + lastName;
+console.log("姓名：", fullName);
+
+// 型別轉換
+let strNumber = "123";
+let number = Number(strNumber);
+console.log("字串轉數字：", number, typeof number);
+
+let numString = String(456);
+console.log("數字轉字串：", numString, typeof numString);</code></pre>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-900 dark:text-white mb-2">詳細說明：</h4>
+                            <div class="text-gray-600 dark:text-gray-300 leading-relaxed space-y-3">
+                                <p>JavaScript 運算子的重要概念：</p>
+                                <ul class="list-disc list-inside space-y-1 ml-4">
+                                    <li><strong>== vs ===：</strong>== 只比較值，=== 比較值和型別</li>
+                                    <li><strong>邏輯運算：</strong>&&（且）、||（或）、!（非）</li>
+                                    <li><strong>賦值運算：</strong>+=, -=, *=, /= 等簡化寫法</li>
+                                    <li><strong>三元運算子：</strong>條件 ? 真值 : 假值</li>
+                                    <li><strong>型別轉換：</strong>Number(), String(), Boolean()</li>
+                                </ul>
+                                <p>理解運算子優先順序很重要，必要時使用括號明確表達意圖。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card p-6">
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="flex-1">
+                            <div class="flex items-center mb-2">
+                                <h3 class="text-xl font-bold text-gray-900 dark:text-white mr-3">4. 條件判斷 (if/else/switch)</h3>
+                                <span class="px-2 py-1 text-xs font-medium rounded-full bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200">進階</span>
+                            </div>
+                            <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
+                                學習如何使用條件判斷來控制程式的執行流程。
+                            </p>
+                        </div>
+                        <button onclick="toggleLesson(this)" class="ml-4 p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+                            <svg class="w-5 h-5 text-gray-500 dark:text-gray-400 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="lesson-content hidden space-y-4 border-t border-gray-200 dark:border-gray-700 pt-4">
+                        <div>
+                            <h4 class="font-semibold text-gray-900 dark:text-white mb-2">程式碼範例：</h4>
+                            <pre class="code-block"><code>// 基本 if 語句
+let age = 18;
+
+if (age >= 18) {
+    console.log("您已成年，可以投票！");
+} else {
+    console.log("您還未成年，無法投票。");
+}
+
+// 多重條件判斷
+let score = 85;
+let grade;
+
+if (score >= 90) {
+    grade = "A";
+    console.log("優秀！");
+} else if (score >= 80) {
+    grade = "B";
+    console.log("良好！");
+} else if (score >= 70) {
+    grade = "C";
+    console.log("及格！");
+} else if (score >= 60) {
+    grade = "D";
+    console.log("勉強及格。");
+} else {
+    grade = "F";
+    console.log("不及格，需要加油！");
+}
+
+console.log(`您的等級是：${grade}`);
+
+// 巢狀條件判斷
+let weather = "晴天";
+let temperature = 28;
+
+if (weather === "晴天") {
+    if (temperature > 25) {
+        console.log("適合去海邊！");
+    } else {
+        console.log("適合散步！");
+    }
+} else if (weather === "雨天") {
+    console.log("適合在家看書！");
+} else {
+    console.log("看情況決定活動。");
+}
+
+// switch 語句
+let dayOfWeek = 3;
+let dayName;
+
+switch (dayOfWeek) {
+    case 1:
+        dayName = "星期一";
+        break;
+    case 2:
+        dayName = "星期二";
+        break;
+    case 3:
+        dayName = "星期三";
+        break;
+    case 4:
+        dayName = "星期四";
+        break;
+    case 5:
+        dayName = "星期五";
+        break;
+    case 6:
+        dayName = "星期六";
+        break;
+    case 7:
+        dayName = "星期日";
+        break;
+    default:
+        dayName = "無效的日期";
+}
+
+console.log(`今天是${dayName}`);
+
+// switch 的進階用法
+let month = "三月";
+let season;
+
+switch (month) {
+    case "十二月":
+    case "一月":
+    case "二月":
+        season = "冬天";
+        break;
+    case "三月":
+    case "四月":
+    case "五月":
+        season = "春天";
+        break;
+    case "六月":
+    case "七月":
+    case "八月":
+        season = "夏天";
+        break;
+    case "九月":
+    case "十月":
+    case "十一月":
+        season = "秋天";
+        break;
+    default:
+        season = "未知季節";
+}
+
+console.log(`${month}是${season}`);
+
+// 條件運算子的進階用法
+let userAge = 20;
+let status = userAge >= 18 ?
+    (userAge >= 65 ? "長者" : "成人") :
+    (userAge >= 13 ? "青少年" : "兒童");
+
+console.log(`年齡 ${userAge} 歲，身份：${status}`);</code></pre>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-900 dark:text-white mb-2">詳細說明：</h4>
+                            <div class="text-gray-600 dark:text-gray-300 leading-relaxed space-y-3">
+                                <p>JavaScript 條件判斷的重要概念：</p>
+                                <ul class="list-disc list-inside space-y-1 ml-4">
+                                    <li><strong>if/else：</strong>基本的條件判斷結構</li>
+                                    <li><strong>else if：</strong>多重條件判斷</li>
+                                    <li><strong>switch：</strong>多選一的條件判斷</li>
+                                    <li><strong>break：</strong>在 switch 中防止穿透</li>
+                                    <li><strong>巢狀條件：</strong>條件內還有條件</li>
+                                </ul>
+                                <p>選擇適當的條件判斷結構能讓程式碼更清晰易讀。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card p-6">
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="flex-1">
+                            <div class="flex items-center mb-2">
+                                <h3 class="text-xl font-bold text-gray-900 dark:text-white mr-3">5. 迴圈 (for/while/do-while)</h3>
+                                <span class="px-2 py-1 text-xs font-medium rounded-full bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200">進階</span>
+                            </div>
+                            <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
+                                學習如何使用迴圈來重複執行程式碼。
+                            </p>
+                        </div>
+                        <button onclick="toggleLesson(this)" class="ml-4 p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+                            <svg class="w-5 h-5 text-gray-500 dark:text-gray-400 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="lesson-content hidden space-y-4 border-t border-gray-200 dark:border-gray-700 pt-4">
+                        <div>
+                            <h4 class="font-semibold text-gray-900 dark:text-white mb-2">程式碼範例：</h4>
+                            <pre class="code-block"><code>// for 迴圈 - 基本用法
+console.log("數字 1 到 5：");
+for (let i = 1; i <= 5; i++) {
+    console.log(`數字：${i}`);
+}
+
+// for 迴圈 - 遍歷陣列
+let fruits = ["蘋果", "香蕉", "橘子", "葡萄"];
+console.log("\n水果清單：");
+for (let i = 0; i < fruits.length; i++) {
+    console.log(`${i + 1}. ${fruits[i]}`);
+}
+
+// for...of 迴圈 (ES6)
+console.log("\n使用 for...of：");
+for (let fruit of fruits) {
+    console.log(`- ${fruit}`);
+}
+
+// for...in 迴圈 (遍歷物件屬性)
+let person = {
+    name: "小明",
+    age: 25,
+    city: "台北"
+};
+
+console.log("\n個人資料：");
+for (let key in person) {
+    console.log(`${key}: ${person[key]}`);
+}
+
+// while 迴圈
+console.log("\n倒數計時：");
+let count = 5;
+while (count > 0) {
+    console.log(`${count}...`);
+    count--;
+}
+console.log("時間到！");
+
+// do...while 迴圈
+console.log("\n至少執行一次：");
+let num = 0;
+do {
+    console.log(`數字：${num}`);
+    num++;
+} while (num < 3);
+
+// 迴圈控制 - break 和 continue
+console.log("\n尋找第一個偶數：");
+let numbers = [1, 3, 5, 8, 9, 10];
+for (let number of numbers) {
+    if (number % 2 === 0) {
+        console.log(`找到偶數：${number}`);
+        break; // 跳出迴圈
+    }
+    console.log(`${number} 是奇數`);
+}
+
+console.log("\n只印出奇數：");
+for (let i = 1; i <= 10; i++) {
+    if (i % 2 === 0) {
+        continue; // 跳過本次迭代
+    }
+    console.log(`奇數：${i}`);
+}
+
+// 巢狀迴圈
+console.log("\n九九乘法表：");
+for (let i = 1; i <= 3; i++) {
+    let row = "";
+    for (let j = 1; j <= 3; j++) {
+        row += `${i}×${j}=${i*j} `;
+    }
+    console.log(row);
+}
+
+// 實用範例：計算總和
+let scores = [85, 92, 78, 90, 88];
+let total = 0;
+
+for (let score of scores) {
+    total += score;
+}
+
+let average = total / scores.length;
+console.log(`\n成績總和：${total}`);
+console.log(`平均分數：${average.toFixed(2)}`);</code></pre>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-900 dark:text-white mb-2">詳細說明：</h4>
+                            <div class="text-gray-600 dark:text-gray-300 leading-relaxed space-y-3">
+                                <p>JavaScript 迴圈的各種類型：</p>
+                                <ul class="list-disc list-inside space-y-1 ml-4">
+                                    <li><strong>for：</strong>已知迭代次數的迴圈</li>
+                                    <li><strong>for...of：</strong>遍歷可迭代物件（陣列、字串）</li>
+                                    <li><strong>for...in：</strong>遍歷物件屬性</li>
+                                    <li><strong>while：</strong>條件為真時持續執行</li>
+                                    <li><strong>do...while：</strong>至少執行一次的迴圈</li>
+                                </ul>
+                                <p>break 跳出迴圈，continue 跳過當前迭代。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card p-6">
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="flex-1">
+                            <div class="flex items-center mb-2">
+                                <h3 class="text-xl font-bold text-gray-900 dark:text-white mr-3">6. 函數基礎</h3>
+                                <span class="px-2 py-1 text-xs font-medium rounded-full bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200">中級</span>
+                            </div>
+                            <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
+                                學習如何定義和使用函數，讓程式碼更模組化和可重用。
+                            </p>
+                        </div>
+                        <button onclick="toggleLesson(this)" class="ml-4 p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+                            <svg class="w-5 h-5 text-gray-500 dark:text-gray-400 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="lesson-content hidden space-y-4 border-t border-gray-200 dark:border-gray-700 pt-4">
+                        <div>
+                            <h4 class="font-semibold text-gray-900 dark:text-white mb-2">程式碼範例：</h4>
+                            <pre class="code-block"><code>// 基本函數定義
+function greet() {
+    console.log("Hello, World!");
+}
+
+// 呼叫函數
+greet();
+
+// 帶參數的函數
+function greetPerson(name) {
+    console.log(`你好，${name}！`);
+}
+
+greetPerson("小明");
+greetPerson("小華");
+
+// 帶回傳值的函數
+function addNumbers(a, b) {
+    let result = a + b;
+    return result;
+}
+
+let sum = addNumbers(5, 3);
+console.log(`5 + 3 = ${sum}`);
+
+// 預設參數 (ES6)
+function introduce(name, age = 18, city = "台北") {
+    console.log(`我是${name}，今年${age}歲，住在${city}`);
+}
+
+introduce("小明");
+introduce("小華", 25);
+introduce("小李", 30, "高雄");
+
+// 函數表達式
+const multiply = function(x, y) {
+    return x * y;
+};
+
+console.log(`3 × 4 = ${multiply(3, 4)}`);
+
+// 箭頭函數 (ES6)
+const divide = (x, y) => {
+    return x / y;
+};
+
+// 簡化的箭頭函數
+const square = x => x * x;
+const add = (a, b) => a + b;
+
+console.log(`10 ÷ 2 = ${divide(10, 2)}`);
+console.log(`5 的平方 = ${square(5)}`);
+console.log(`7 + 8 = ${add(7, 8)}`);
+
+// 多個回傳值 (使用陣列)
+function getNameAge() {
+    return ["小明", 25];
+}
+
+let [personName, personAge] = getNameAge();
+console.log(`姓名：${personName}, 年齡：${personAge}`);
+
+// 多個回傳值 (使用物件)
+function getPersonInfo() {
+    return {
+        name: "小華",
+        age: 22,
+        city: "台中"
+    };
+}
+
+let person = getPersonInfo();
+console.log(`${person.name}, ${person.age}歲, 來自${person.city}`);
+
+// 實用函數範例
+function calculateBMI(weight, height) {
+    let bmi = weight / (height * height);
+    return Math.round(bmi * 100) / 100; // 保留兩位小數
+}
+
+function getBMICategory(bmi) {
+    if (bmi < 18.5) return "體重過輕";
+    if (bmi < 24) return "正常範圍";
+    if (bmi < 27) return "過重";
+    return "肥胖";
+}
+
+// 使用函數
+let weight = 70; // 公斤
+let height = 1.75; // 公尺
+let bmi = calculateBMI(weight, height);
+let category = getBMICategory(bmi);
+
+console.log(`身高：${height}m, 體重：${weight}kg`);
+console.log(`BMI：${bmi}, 類別：${category}`);</code></pre>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-900 dark:text-white mb-2">詳細說明：</h4>
+                            <div class="text-gray-600 dark:text-gray-300 leading-relaxed space-y-3">
+                                <p>JavaScript 函數的重要概念：</p>
+                                <ul class="list-disc list-inside space-y-1 ml-4">
+                                    <li><strong>function：</strong>傳統的函數定義方式</li>
+                                    <li><strong>箭頭函數：</strong>ES6 的簡潔語法</li>
+                                    <li><strong>預設參數：</strong>參數的預設值</li>
+                                    <li><strong>return：</strong>回傳結果給呼叫者</li>
+                                    <li><strong>解構賦值：</strong>從陣列或物件中提取值</li>
+                                </ul>
+                                <p>函數讓程式碼更容易維護和重複使用。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card p-6">
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="flex-1">
+                            <div class="flex items-center mb-2">
+                                <h3 class="text-xl font-bold text-gray-900 dark:text-white mr-3">7. 進階函數概念</h3>
+                                <span class="px-2 py-1 text-xs font-medium rounded-full bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200">中級</span>
+                            </div>
+                            <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
+                                學習更進階的函數概念，包括作用域、閉包、高階函數等。
+                            </p>
+                        </div>
+                        <button onclick="toggleLesson(this)" class="ml-4 p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+                            <svg class="w-5 h-5 text-gray-500 dark:text-gray-400 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="lesson-content hidden space-y-4 border-t border-gray-200 dark:border-gray-700 pt-4">
+                        <div>
+                            <h4 class="font-semibold text-gray-900 dark:text-white mb-2">程式碼範例：</h4>
+                            <pre class="code-block"><code>// 變數作用域
+let globalVar = "我是全域變數";
+
+function scopeExample() {
+    let localVar = "我是區域變數";
+    console.log("函數內部：", globalVar);
+    console.log("函數內部：", localVar);
+}
+
+scopeExample();
+console.log("函數外部：", globalVar);
+// console.log(localVar); // 這會出錯
+
+// 閉包 (Closure)
+function outerFunction(x) {
+    return function(y) {
+        return x + y;
+    };
+}
+
+let addFive = outerFunction(5);
+console.log("閉包範例：", addFive(3)); // 8
+
+// 實用的閉包範例：計數器
+function createCounter() {
+    let count = 0;
+    return function() {
+        count++;
+        return count;
+    };
+}
+
+let counter1 = createCounter();
+let counter2 = createCounter();
+
+console.log("計數器1：", counter1()); // 1
+console.log("計數器1：", counter1()); // 2
+console.log("計數器2：", counter2()); // 1
+
+// 高階函數：接受函數作為參數
+function applyOperation(numbers, operation) {
+    let result = [];
+    for (let num of numbers) {
+        result.push(operation(num));
+    }
+    return result;
+}
+
+let numbers = [1, 2, 3, 4, 5];
+let doubled = applyOperation(numbers, x => x * 2);
+let squared = applyOperation(numbers, x => x * x);
+
+console.log("原數字：", numbers);
+console.log("乘以2：", doubled);
+console.log("平方：", squared);
+
+// 陣列的高階函數方法
+let scores = [85, 92, 78, 90, 88];
+
+// map：轉換每個元素
+let adjustedScores = scores.map(score => score + 5);
+console.log("調整後分數：", adjustedScores);
+
+// filter：篩選元素
+let highScores = scores.filter(score => score >= 85);
+console.log("高分：", highScores);
+
+// reduce：累積計算
+let total = scores.reduce((sum, score) => sum + score, 0);
+let average = total / scores.length;
+console.log("總分：", total);
+console.log("平均：", average.toFixed(2));
+
+// forEach：遍歷每個元素
+console.log("所有分數：");
+scores.forEach((score, index) => {
+    console.log(`第${index + 1}個分數：${score}`);
+});
+
+// 函數組合
+const addOne = x => x + 1;
+const multiplyByTwo = x => x * 2;
+
+const compose = (f, g) => x => f(g(x));
+const addOneThenDouble = compose(multiplyByTwo, addOne);
+
+console.log("5 加1再乘2：", addOneThenDouble(5)); // 12
+
+// 遞迴函數
+function factorial(n) {
+    if (n <= 1) return 1;
+    return n * factorial(n - 1);
+}
+
+console.log("5! =", factorial(5)); // 120
+
+// 立即執行函數 (IIFE)
+(function() {
+    let privateVar = "這是私有變數";
+    console.log("IIFE 執行：", privateVar);
+})();
+
+// 帶參數的 IIFE
+let result = (function(a, b) {
+    return a + b;
+})(10, 20);
+
+console.log("IIFE 結果：", result);</code></pre>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-900 dark:text-white mb-2">詳細說明：</h4>
+                            <div class="text-gray-600 dark:text-gray-300 leading-relaxed space-y-3">
+                                <p>進階函數概念讓 JavaScript 更強大：</p>
+                                <ul class="list-disc list-inside space-y-1 ml-4">
+                                    <li><strong>作用域：</strong>變數的可見範圍</li>
+                                    <li><strong>閉包：</strong>內部函數可存取外部變數</li>
+                                    <li><strong>高階函數：</strong>接受或回傳函數的函數</li>
+                                    <li><strong>陣列方法：</strong>map, filter, reduce, forEach</li>
+                                    <li><strong>IIFE：</strong>立即執行函數表達式</li>
+                                </ul>
+                                <p>這些概念是現代 JavaScript 開發的基礎。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card p-6">
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="flex-1">
+                            <div class="flex items-center mb-2">
+                                <h3 class="text-xl font-bold text-gray-900 dark:text-white mr-3">8. 陣列 (Array)</h3>
+                                <span class="px-2 py-1 text-xs font-medium rounded-full bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200">進階</span>
+                            </div>
+                            <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
+                                學習 JavaScript 中陣列的創建、操作和常用方法。
+                            </p>
+                        </div>
+                        <button onclick="toggleLesson(this)" class="ml-4 p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+                            <svg class="w-5 h-5 text-gray-500 dark:text-gray-400 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="lesson-content hidden space-y-4 border-t border-gray-200 dark:border-gray-700 pt-4">
+                        <div>
+                            <h4 class="font-semibold text-gray-900 dark:text-white mb-2">程式碼範例：</h4>
+                            <pre class="code-block"><code>// 陣列的創建
+let fruits = ["蘋果", "香蕉", "橘子"];
+let numbers = [1, 2, 3, 4, 5];
+let mixed = ["文字", 123, true, null];
+let empty = [];
+
+console.log("水果陣列：", fruits);
+console.log("數字陣列：", numbers);
+console.log("混合陣列：", mixed);
+
+// 存取陣列元素
+console.log("第一個水果：", fruits[0]);
+console.log("最後一個水果：", fruits[fruits.length - 1]);
+
+// 修改陣列元素
+fruits[1] = "草莓";
+console.log("修改後：", fruits);
+
+// 陣列長度
+console.log("陣列長度：", fruits.length);
+
+// 添加元素
+fruits.push("葡萄");           // 在末尾添加
+console.log("push 後：", fruits);
+
+fruits.unshift("芒果");        // 在開頭添加
+console.log("unshift 後：", fruits);
+
+// 移除元素
+let lastFruit = fruits.pop();  // 移除最後一個
+console.log("移除的水果：", lastFruit);
+console.log("pop 後：", fruits);
+
+let firstFruit = fruits.shift(); // 移除第一個
+console.log("移除的水果：", firstFruit);
+console.log("shift 後：", fruits);
+
+// 在指定位置插入/移除
+fruits.splice(1, 0, "鳳梨");   // 在索引1插入
+console.log("splice 插入後：", fruits);
+
+fruits.splice(2, 1);           // 移除索引2的元素
+console.log("splice 移除後：", fruits);
+
+// 陣列切片
+let someNumbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+let firstThree = someNumbers.slice(0, 3);
+let lastThree = someNumbers.slice(-3);
+let middle = someNumbers.slice(3, 7);
+
+console.log("前三個：", firstThree);
+console.log("後三個：", lastThree);
+console.log("中間部分：", middle);
+
+// 陣列搜尋
+let colors = ["紅", "綠", "藍", "黃", "綠"];
+
+console.log("indexOf 綠：", colors.indexOf("綠"));      // 1
+console.log("lastIndexOf 綠：", colors.lastIndexOf("綠")); // 4
+console.log("includes 藍：", colors.includes("藍"));    // true
+
+// 陣列轉換
+let scores = [85, 92, 78, 90, 88];
+
+// map：轉換每個元素
+let adjustedScores = scores.map(score => score + 5);
+console.log("調整分數：", adjustedScores);
+
+// filter：篩選元素
+let highScores = scores.filter(score => score >= 85);
+console.log("高分：", highScores);
+
+// reduce：累積計算
+let total = scores.reduce((sum, score) => sum + score, 0);
+console.log("總分：", total);
+
+let max = scores.reduce((max, score) => score > max ? score : max);
+console.log("最高分：", max);
+
+// find：找到第一個符合條件的元素
+let firstHighScore = scores.find(score => score >= 90);
+console.log("第一個90分以上：", firstHighScore);
+
+// some 和 every
+let hasHighScore = scores.some(score => score >= 90);
+let allPassed = scores.every(score => score >= 60);
+
+console.log("有高分嗎：", hasHighScore);
+console.log("全部及格嗎：", allPassed);
+
+// 陣列排序
+let unsorted = [3, 1, 4, 1, 5, 9, 2, 6];
+let sorted = [...unsorted].sort((a, b) => a - b); // 升序
+let reversed = [...unsorted].sort((a, b) => b - a); // 降序
+
+console.log("原陣列：", unsorted);
+console.log("升序：", sorted);
+console.log("降序：", reversed);
+
+// 字串陣列排序
+let names = ["小明", "小華", "小李", "小王"];
+let sortedNames = [...names].sort();
+console.log("排序姓名：", sortedNames);
+
+// 陣列合併
+let arr1 = [1, 2, 3];
+let arr2 = [4, 5, 6];
+let combined = [...arr1, ...arr2]; // 展開運算子
+let concat = arr1.concat(arr2);    // concat 方法
+
+console.log("展開合併：", combined);
+console.log("concat 合併：", concat);
+
+// 二維陣列
+let matrix = [
+    [1, 2, 3],
+    [4, 5, 6],
+    [7, 8, 9]
+];
+
+console.log("矩陣：", matrix);
+console.log("第2行第3列：", matrix[1][2]); // 6</code></pre>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-900 dark:text-white mb-2">詳細說明：</h4>
+                            <div class="text-gray-600 dark:text-gray-300 leading-relaxed space-y-3">
+                                <p>JavaScript 陣列的重要特性：</p>
+                                <ul class="list-disc list-inside space-y-1 ml-4">
+                                    <li><strong>動態大小：</strong>可以隨時增減元素</li>
+                                    <li><strong>混合型別：</strong>可存放不同型別的資料</li>
+                                    <li><strong>豐富方法：</strong>push, pop, map, filter, reduce 等</li>
+                                    <li><strong>索引存取：</strong>從 0 開始的索引</li>
+                                    <li><strong>展開運算子：</strong>... 語法用於複製和合併</li>
+                                </ul>
+                                <p>陣列是 JavaScript 中最常用的資料結構之一。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card p-6">
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="flex-1">
+                            <div class="flex items-center mb-2">
+                                <h3 class="text-xl font-bold text-gray-900 dark:text-white mr-3">9. 物件 (Object)</h3>
+                                <span class="px-2 py-1 text-xs font-medium rounded-full bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200">進階</span>
+                            </div>
+                            <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
+                                學習 JavaScript 物件的創建、操作和進階概念。
+                            </p>
+                        </div>
+                        <button onclick="toggleLesson(this)" class="ml-4 p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+                            <svg class="w-5 h-5 text-gray-500 dark:text-gray-400 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="lesson-content hidden space-y-4 border-t border-gray-200 dark:border-gray-700 pt-4">
+                        <div>
+                            <h4 class="font-semibold text-gray-900 dark:text-white mb-2">程式碼範例：</h4>
+                            <pre class="code-block"><code>// 物件的創建
+let person = {
+    name: "小明",
+    age: 25,
+    city: "台北",
+    isStudent: true
+};
+
+console.log("個人資料：", person);
+
+// 存取物件屬性
+console.log("姓名：", person.name);        // 點記法
+console.log("年齡：", person["age"]);      // 括號記法
+
+// 修改物件屬性
+person.age = 26;
+person["city"] = "高雄";
+console.log("修改後：", person);
+
+// 新增屬性
+person.email = "xiaoming@example.com";
+person.hobbies = ["閱讀", "游泳", "電影"];
+console.log("新增屬性後：", person);
+
+// 刪除屬性
+delete person.isStudent;
+console.log("刪除屬性後：", person);
+
+// 物件方法
+let calculator = {
+    result: 0,
+    add: function(num) {
+        this.result += num;
+        return this;
+    },
+    subtract: function(num) {
+        this.result -= num;
+        return this;
+    },
+    multiply: function(num) {
+        this.result *= num;
+        return this;
+    },
+    getValue: function() {
+        return this.result;
+    },
+    reset: function() {
+        this.result = 0;
+        return this;
+    }
+};
+
+// 方法鏈接
+let result = calculator.add(10).multiply(2).subtract(5).getValue();
+console.log("計算結果：", result); // 15
+
+// ES6 簡化語法
+let student = {
+    name: "小華",
+    age: 20,
+    // 方法簡化語法
+    introduce() {
+        return `我是${this.name}，今年${this.age}歲`;
+    },
+    // 計算屬性名稱
+    [`grade_${new Date().getFullYear()}`]: "A"
+};
+
+console.log(student.introduce());
+console.log("今年成績：", student[`grade_${new Date().getFullYear()}`]);
+
+// 物件解構
+let {name, age, city} = person;
+console.log(`解構：${name}, ${age}, ${city}`);
+
+// 解構重命名
+let {name: personName, age: personAge} = person;
+console.log(`重命名：${personName}, ${personAge}`);
+
+// 巢狀物件
+let company = {
+    name: "科技公司",
+    address: {
+        street: "信義路100號",
+        city: "台北",
+        zipCode: "110"
+    },
+    employees: [
+        {name: "小明", position: "工程師"},
+        {name: "小華", position: "設計師"}
+    ]
+};
+
+console.log("公司地址：", company.address.street);
+console.log("第一個員工：", company.employees[0].name);
+
+// 物件的常用方法
+let data = {a: 1, b: 2, c: 3};
+
+// 取得所有鍵
+let keys = Object.keys(data);
+console.log("所有鍵：", keys);
+
+// 取得所有值
+let values = Object.values(data);
+console.log("所有值：", values);
+
+// 取得鍵值對
+let entries = Object.entries(data);
+console.log("鍵值對：", entries);
+
+// 遍歷物件
+console.log("遍歷物件：");
+for (let key in data) {
+    console.log(`${key}: ${data[key]}`);
+}
+
+// 使用 Object.entries 遍歷
+for (let [key, value] of Object.entries(data)) {
+    console.log(`${key} = ${value}`);
+}
+
+// 物件合併
+let obj1 = {a: 1, b: 2};
+let obj2 = {c: 3, d: 4};
+let obj3 = {b: 5, e: 6}; // b 會覆蓋 obj1 的 b
+
+let merged = Object.assign({}, obj1, obj2, obj3);
+let spreadMerged = {...obj1, ...obj2, ...obj3};
+
+console.log("Object.assign：", merged);
+console.log("展開運算子：", spreadMerged);
+
+// 檢查屬性是否存在
+console.log("hasOwnProperty 'name'：", person.hasOwnProperty('name'));
+console.log("'email' in person：", 'email' in person);
+
+// JSON 操作
+let jsonString = JSON.stringify(person);
+console.log("JSON 字串：", jsonString);
+
+let parsedObject = JSON.parse(jsonString);
+console.log("解析物件：", parsedObject);
+
+// 建構函數 (Constructor Function)
+function Person(name, age) {
+    this.name = name;
+    this.age = age;
+    this.introduce = function() {
+        return `我是${this.name}，${this.age}歲`;
+    };
+}
+
+let person1 = new Person("小李", 28);
+let person2 = new Person("小王", 30);
+
+console.log(person1.introduce());
+console.log(person2.introduce());</code></pre>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-900 dark:text-white mb-2">詳細說明：</h4>
+                            <div class="text-gray-600 dark:text-gray-300 leading-relaxed space-y-3">
+                                <p>JavaScript 物件的核心概念：</p>
+                                <ul class="list-disc list-inside space-y-1 ml-4">
+                                    <li><strong>鍵值對：</strong>屬性名稱和值的組合</li>
+                                    <li><strong>this：</strong>指向當前物件</li>
+                                    <li><strong>解構：</strong>從物件中提取屬性</li>
+                                    <li><strong>方法：</strong>物件中的函數</li>
+                                    <li><strong>JSON：</strong>物件和字串之間的轉換</li>
+                                </ul>
+                                <p>物件是 JavaScript 中組織資料的主要方式。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card p-6">
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="flex-1">
+                            <div class="flex items-center mb-2">
+                                <h3 class="text-xl font-bold text-gray-900 dark:text-white mr-3">10. DOM 操作</h3>
+                                <span class="px-2 py-1 text-xs font-medium rounded-full bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200">高級</span>
+                            </div>
+                            <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
+                                學習如何操作網頁的 DOM (Document Object Model)，動態修改網頁內容。
+                            </p>
+                        </div>
+                        <button onclick="toggleLesson(this)" class="ml-4 p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+                            <svg class="w-5 h-5 text-gray-500 dark:text-gray-400 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="lesson-content hidden space-y-4 border-t border-gray-200 dark:border-gray-700 pt-4">
+                        <div>
+                            <h4 class="font-semibold text-gray-900 dark:text-white mb-2">程式碼範例：</h4>
+                            <pre class="code-block"><code>// 選取 DOM 元素
+// 根據 ID 選取
+let titleElement = document.getElementById('title');
+
+// 根據 class 選取
+let buttons = document.getElementsByClassName('btn');
+let firstButton = document.querySelector('.btn');
+let allButtons = document.querySelectorAll('.btn');
+
+// 根據標籤選取
+let paragraphs = document.getElementsByTagName('p');
+let firstParagraph = document.querySelector('p');
+
+// 複雜選擇器
+let specificElement = document.querySelector('#container .item:first-child');
+
+// 修改元素內容
+// innerHTML：可包含 HTML 標籤
+document.getElementById('demo').innerHTML = '<strong>粗體文字</strong>';
+
+// textContent：純文字內容
+document.getElementById('demo').textContent = '純文字內容';
+
+// innerText：考慮樣式的文字內容
+document.getElementById('demo').innerText = '可見文字內容';
+
+// 修改元素屬性
+let image = document.querySelector('img');
+if (image) {
+    image.src = 'new-image.jpg';
+    image.alt = '新圖片';
+    image.setAttribute('title', '這是新圖片');
+}
+
+// 修改元素樣式
+let element = document.getElementById('myElement');
+if (element) {
+    element.style.color = 'red';
+    element.style.fontSize = '20px';
+    element.style.backgroundColor = 'yellow';
+
+    // 使用 CSS 屬性名稱
+    element.style.setProperty('border', '2px solid blue');
+}
+
+// 操作 CSS 類別
+let box = document.querySelector('.box');
+if (box) {
+    box.classList.add('highlight');        // 添加類別
+    box.classList.remove('old-style');     // 移除類別
+    box.classList.toggle('active');        // 切換類別
+
+    // 檢查是否有某個類別
+    if (box.classList.contains('highlight')) {
+        console.log('元素有 highlight 類別');
+    }
+}
+
+// 創建新元素
+let newDiv = document.createElement('div');
+newDiv.textContent = '這是新創建的 div';
+newDiv.className = 'new-element';
+newDiv.id = 'dynamicDiv';
+
+// 添加元素到頁面
+let container = document.getElementById('container');
+if (container) {
+    container.appendChild(newDiv);           // 添加到末尾
+    container.insertBefore(newDiv, container.firstChild); // 添加到開頭
+}
+
+// 創建複雜的元素結構
+function createUserCard(user) {
+    let card = document.createElement('div');
+    card.className = 'user-card';
+
+    card.innerHTML = `
+        <h3>${user.name}</h3>
+        <p>年齡：${user.age}</p>
+        <p>城市：${user.city}</p>
+        <button onclick="editUser('${user.id}')">編輯</button>
+    `;
+
+    return card;
+}
+
+// 使用範例
+let userData = {id: '1', name: '小明', age: 25, city: '台北'};
+let userCard = createUserCard(userData);
+document.body.appendChild(userCard);
+
+// 移除元素
+let elementToRemove = document.getElementById('oldElement');
+if (elementToRemove) {
+    elementToRemove.remove();               // 直接移除
+    // 或者
+    elementToRemove.parentNode.removeChild(elementToRemove);
+}
+
+// 遍歷子元素
+let parentElement = document.getElementById('parent');
+if (parentElement) {
+    // 遍歷所有子元素
+    for (let child of parentElement.children) {
+        console.log('子元素：', child.tagName);
+    }
+
+    // 遍歷所有子節點（包括文字節點）
+    for (let node of parentElement.childNodes) {
+        if (node.nodeType === Node.ELEMENT_NODE) {
+            console.log('元素節點：', node.tagName);
+        }
+    }
+}
+
+// 表單操作
+let form = document.getElementById('myForm');
+let nameInput = document.getElementById('nameInput');
+let emailInput = document.getElementById('emailInput');
+
+if (nameInput && emailInput) {
+    // 取得表單值
+    let name = nameInput.value;
+    let email = emailInput.value;
+
+    // 設定表單值
+    nameInput.value = '預設姓名';
+    emailInput.value = 'default@example.com';
+
+    // 表單驗證
+    if (nameInput.value.trim() === '') {
+        nameInput.style.borderColor = 'red';
+        nameInput.focus(); // 設定焦點
+    }
+}
+
+// 實用的 DOM 操作函數
+function showElement(id) {
+    let element = document.getElementById(id);
+    if (element) element.style.display = 'block';
+}
+
+function hideElement(id) {
+    let element = document.getElementById(id);
+    if (element) element.style.display = 'none';
+}
+
+function toggleElement(id) {
+    let element = document.getElementById(id);
+    if (element) {
+        element.style.display =
+            element.style.display === 'none' ? 'block' : 'none';
+    }
+}
+
+// 動態載入內容
+function loadContent(url, containerId) {
+    fetch(url)
+        .then(response => response.text())
+        .then(html => {
+            document.getElementById(containerId).innerHTML = html;
+        })
+        .catch(error => {
+            console.error('載入失敗：', error);
+        });
+}</code></pre>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-900 dark:text-white mb-2">詳細說明：</h4>
+                            <div class="text-gray-600 dark:text-gray-300 leading-relaxed space-y-3">
+                                <p>DOM 操作是前端開發的核心技能：</p>
+                                <ul class="list-disc list-inside space-y-1 ml-4">
+                                    <li><strong>選取元素：</strong>getElementById, querySelector 等</li>
+                                    <li><strong>修改內容：</strong>innerHTML, textContent</li>
+                                    <li><strong>樣式操作：</strong>style 屬性和 classList</li>
+                                    <li><strong>創建元素：</strong>createElement, appendChild</li>
+                                    <li><strong>表單處理：</strong>value 屬性和驗證</li>
+                                </ul>
+                                <p>DOM 操作讓網頁變得動態和互動。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card p-6">
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="flex-1">
+                            <div class="flex items-center mb-2">
+                                <h3 class="text-xl font-bold text-gray-900 dark:text-white mr-3">11. 事件處理</h3>
+                                <span class="px-2 py-1 text-xs font-medium rounded-full bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200">高級</span>
+                            </div>
+                            <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
+                                學習如何處理使用者互動事件，創建響應式的網頁應用。
+                            </p>
+                        </div>
+                        <button onclick="toggleLesson(this)" class="ml-4 p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+                            <svg class="w-5 h-5 text-gray-500 dark:text-gray-400 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="lesson-content hidden space-y-4 border-t border-gray-200 dark:border-gray-700 pt-4">
+                        <div>
+                            <h4 class="font-semibold text-gray-900 dark:text-white mb-2">程式碼範例：</h4>
+                            <pre class="code-block"><code>// 基本事件處理
+// 方法1：HTML 屬性 (不推薦)
+// <button onclick="handleClick()">點擊我</button>
+
+// 方法2：DOM 屬性
+let button = document.getElementById('myButton');
+if (button) {
+    button.onclick = function() {
+        alert('按鈕被點擊了！');
+    };
+}
+
+// 方法3：addEventListener (推薦)
+let button2 = document.getElementById('myButton2');
+if (button2) {
+    button2.addEventListener('click', function() {
+        console.log('使用 addEventListener');
+    });
+}
+
+// 常見的滑鼠事件
+let mouseArea = document.getElementById('mouseArea');
+if (mouseArea) {
+    mouseArea.addEventListener('click', function(event) {
+        console.log('點擊位置：', event.clientX, event.clientY);
+    });
+
+    mouseArea.addEventListener('mouseover', function() {
+        this.style.backgroundColor = 'lightblue';
+    });
+
+    mouseArea.addEventListener('mouseout', function() {
+        this.style.backgroundColor = '';
+    });
+
+    mouseArea.addEventListener('dblclick', function() {
+        console.log('雙擊事件');
+    });
+}
+
+// 鍵盤事件
+let textInput = document.getElementById('textInput');
+if (textInput) {
+    textInput.addEventListener('keydown', function(event) {
+        console.log('按下鍵：', event.key);
+
+        // 特殊鍵處理
+        if (event.key === 'Enter') {
+            console.log('按下 Enter 鍵');
+        }
+
+        if (event.ctrlKey && event.key === 's') {
+            event.preventDefault(); // 阻止預設行為
+            console.log('Ctrl+S 被按下');
+        }
+    });
+
+    textInput.addEventListener('keyup', function(event) {
+        console.log('輸入內容：', this.value);
+    });
+
+    textInput.addEventListener('input', function() {
+        // 即時輸入事件
+        console.log('即時內容：', this.value);
+    });
+}
+
+// 表單事件
+let form = document.getElementById('myForm');
+if (form) {
+    form.addEventListener('submit', function(event) {
+        event.preventDefault(); // 阻止表單提交
+
+        let formData = new FormData(this);
+        console.log('表單資料：');
+        for (let [key, value] of formData.entries()) {
+            console.log(`${key}: ${value}`);
+        }
+    });
+}
+
+let selectElement = document.getElementById('mySelect');
+if (selectElement) {
+    selectElement.addEventListener('change', function() {
+        console.log('選擇的值：', this.value);
+    });
+}
+
+// 視窗事件
+window.addEventListener('load', function() {
+    console.log('頁面完全載入');
+});
+
+window.addEventListener('resize', function() {
+    console.log('視窗大小改變：', window.innerWidth, window.innerHeight);
+});
+
+window.addEventListener('scroll', function() {
+    console.log('頁面滾動位置：', window.scrollY);
+});
+
+// 事件委派 (Event Delegation)
+let container = document.getElementById('container');
+if (container) {
+    container.addEventListener('click', function(event) {
+        // 檢查點擊的是哪個子元素
+        if (event.target.classList.contains('item')) {
+            console.log('點擊了項目：', event.target.textContent);
+        }
+
+        if (event.target.tagName === 'BUTTON') {
+            console.log('點擊了按鈕：', event.target.textContent);
+        }
+    });
+}
+
+// 移除事件監聽器
+function handleClick() {
+    console.log('這個事件會被移除');
+}
+
+let tempButton = document.getElementById('tempButton');
+if (tempButton) {
+    tempButton.addEventListener('click', handleClick);
+
+    // 5秒後移除事件監聽器
+    setTimeout(() => {
+        tempButton.removeEventListener('click', handleClick);
+        console.log('事件監聽器已移除');
+    }, 5000);
+}
+
+// 自定義事件
+let customElement = document.getElementById('customElement');
+if (customElement) {
+    // 創建自定義事件
+    let customEvent = new CustomEvent('myCustomEvent', {
+        detail: { message: '這是自定義事件' }
+    });
+
+    // 監聽自定義事件
+    customElement.addEventListener('myCustomEvent', function(event) {
+        console.log('自定義事件觸發：', event.detail.message);
+    });
+
+    // 觸發自定義事件
+    customElement.dispatchEvent(customEvent);
+}
+
+// 實用的事件處理函數
+function debounce(func, wait) {
+    let timeout;
+    return function executedFunction(...args) {
+        const later = () => {
+            clearTimeout(timeout);
+            func(...args);
+        };
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+    };
+}
+
+// 使用防抖函數
+let searchInput = document.getElementById('searchInput');
+if (searchInput) {
+    let debouncedSearch = debounce(function(event) {
+        console.log('搜尋：', event.target.value);
+        // 這裡可以發送 API 請求
+    }, 300);
+
+    searchInput.addEventListener('input', debouncedSearch);
+}
+
+// 節流函數
+function throttle(func, limit) {
+    let inThrottle;
+    return function() {
+        const args = arguments;
+        const context = this;
+        if (!inThrottle) {
+            func.apply(context, args);
+            inThrottle = true;
+            setTimeout(() => inThrottle = false, limit);
+        }
+    };
+}
+
+// 使用節流函數
+let throttledScroll = throttle(function() {
+    console.log('滾動事件（節流）');
+}, 100);
+
+window.addEventListener('scroll', throttledScroll);
+
+// 拖拽事件
+let draggableElement = document.getElementById('draggable');
+if (draggableElement) {
+    draggableElement.addEventListener('dragstart', function(event) {
+        event.dataTransfer.setData('text/plain', this.id);
+        console.log('開始拖拽');
+    });
+}
+
+let dropZone = document.getElementById('dropZone');
+if (dropZone) {
+    dropZone.addEventListener('dragover', function(event) {
+        event.preventDefault(); // 允許放置
+    });
+
+    dropZone.addEventListener('drop', function(event) {
+        event.preventDefault();
+        let data = event.dataTransfer.getData('text/plain');
+        console.log('放置元素：', data);
+    });
+}</code></pre>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-900 dark:text-white mb-2">詳細說明：</h4>
+                            <div class="text-gray-600 dark:text-gray-300 leading-relaxed space-y-3">
+                                <p>事件處理讓網頁具有互動性：</p>
+                                <ul class="list-disc list-inside space-y-1 ml-4">
+                                    <li><strong>addEventListener：</strong>推薦的事件綁定方式</li>
+                                    <li><strong>事件物件：</strong>包含事件相關資訊</li>
+                                    <li><strong>preventDefault：</strong>阻止預設行為</li>
+                                    <li><strong>事件委派：</strong>在父元素處理子元素事件</li>
+                                    <li><strong>防抖/節流：</strong>優化事件處理效能</li>
+                                </ul>
+                                <p>掌握事件處理是創建互動式網頁的關鍵。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card p-6">
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="flex-1">
+                            <div class="flex items-center mb-2">
+                                <h3 class="text-xl font-bold text-gray-900 dark:text-white mr-3">12. 非同步程式設計</h3>
+                                <span class="px-2 py-1 text-xs font-medium rounded-full bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200">高級</span>
+                            </div>
+                            <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
+                                學習 JavaScript 的非同步程式設計，包括 Promise、async/await 等現代語法。
+                            </p>
+                        </div>
+                        <button onclick="toggleLesson(this)" class="ml-4 p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+                            <svg class="w-5 h-5 text-gray-500 dark:text-gray-400 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="lesson-content hidden space-y-4 border-t border-gray-200 dark:border-gray-700 pt-4">
+                        <div>
+                            <h4 class="font-semibold text-gray-900 dark:text-white mb-2">程式碼範例：</h4>
+                            <pre class="code-block"><code>// 同步 vs 非同步
+console.log("1. 開始");
+
+// 同步操作
+console.log("2. 同步操作");
+
+// 非同步操作
+setTimeout(() => {
+    console.log("4. 非同步操作（2秒後）");
+}, 2000);
+
+console.log("3. 結束");
+
+// 回調函數 (Callback)
+function fetchData(callback) {
+    setTimeout(() => {
+        let data = {id: 1, name: "小明", age: 25};
+        callback(data);
+    }, 1000);
+}
+
+fetchData(function(result) {
+    console.log("取得資料：", result);
+});
+
+// 回調地獄 (Callback Hell)
+function step1(callback) {
+    setTimeout(() => {
+        console.log("步驟1完成");
+        callback();
+    }, 1000);
+}
+
+function step2(callback) {
+    setTimeout(() => {
+        console.log("步驟2完成");
+        callback();
+    }, 1000);
+}
+
+function step3(callback) {
+    setTimeout(() => {
+        console.log("步驟3完成");
+        callback();
+    }, 1000);
+}
+
+// 巢狀回調（不推薦）
+step1(() => {
+    step2(() => {
+        step3(() => {
+            console.log("所有步驟完成");
+        });
+    });
+});
+
+// Promise 基礎
+let promise = new Promise((resolve, reject) => {
+    let success = true;
+
+    setTimeout(() => {
+        if (success) {
+            resolve("操作成功！");
+        } else {
+            reject("操作失敗！");
+        }
+    }, 1000);
+});
+
+promise
+    .then(result => {
+        console.log("成功：", result);
+    })
+    .catch(error => {
+        console.log("錯誤：", error);
+    });
+
+// Promise 鏈接
+function fetchUser(id) {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            if (id > 0) {
+                resolve({id: id, name: `用戶${id}`});
+            } else {
+                reject("無效的用戶ID");
+            }
+        }, 1000);
+    });
+}
+
+function fetchUserPosts(userId) {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            resolve([
+                {id: 1, title: "第一篇文章", userId: userId},
+                {id: 2, title: "第二篇文章", userId: userId}
+            ]);
+        }, 1000);
+    });
+}
+
+// Promise 鏈接
+fetchUser(1)
+    .then(user => {
+        console.log("用戶：", user);
+        return fetchUserPosts(user.id);
+    })
+    .then(posts => {
+        console.log("文章：", posts);
+    })
+    .catch(error => {
+        console.log("錯誤：", error);
+    });
+
+// Promise.all - 並行執行
+let promise1 = new Promise(resolve => setTimeout(() => resolve("結果1"), 1000));
+let promise2 = new Promise(resolve => setTimeout(() => resolve("結果2"), 2000));
+let promise3 = new Promise(resolve => setTimeout(() => resolve("結果3"), 1500));
+
+Promise.all([promise1, promise2, promise3])
+    .then(results => {
+        console.log("所有結果：", results);
+    })
+    .catch(error => {
+        console.log("有錯誤發生：", error);
+    });
+
+// Promise.race - 競賽
+Promise.race([promise1, promise2, promise3])
+    .then(result => {
+        console.log("最快的結果：", result);
+    });
+
+// async/await (ES2017)
+async function fetchDataAsync() {
+    try {
+        console.log("開始取得資料...");
+
+        let user = await fetchUser(1);
+        console.log("用戶資料：", user);
+
+        let posts = await fetchUserPosts(user.id);
+        console.log("用戶文章：", posts);
+
+        return {user, posts};
+    } catch (error) {
+        console.log("發生錯誤：", error);
+        throw error;
+    }
+}
+
+// 使用 async 函數
+fetchDataAsync()
+    .then(result => {
+        console.log("完整結果：", result);
+    })
+    .catch(error => {
+        console.log("處理錯誤：", error);
+    });
+
+// 並行 async/await
+async function fetchMultipleData() {
+    try {
+        // 並行執行
+        let [user1, user2, user3] = await Promise.all([
+            fetchUser(1),
+            fetchUser(2),
+            fetchUser(3)
+        ]);
+
+        console.log("多個用戶：", {user1, user2, user3});
+    } catch (error) {
+        console.log("錯誤：", error);
+    }
+}
+
+fetchMultipleData();
+
+// Fetch API - 現代的 AJAX
+async function fetchFromAPI() {
+    try {
+        let response = await fetch('https://jsonplaceholder.typicode.com/users/1');
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        let user = await response.json();
+        console.log("API 用戶：", user);
+
+        return user;
+    } catch (error) {
+        console.log("API 錯誤：", error);
+    }
+}
+
+fetchFromAPI();
+
+// POST 請求
+async function createUser(userData) {
+    try {
+        let response = await fetch('https://jsonplaceholder.typicode.com/users', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(userData)
+        });
+
+        let result = await response.json();
+        console.log("創建用戶結果：", result);
+
+        return result;
+    } catch (error) {
+        console.log("創建用戶錯誤：", error);
+    }
+}
+
+createUser({name: "新用戶", email: "new@example.com"});
+
+// 錯誤處理最佳實踐
+async function robustFetch(url, options = {}) {
+    const maxRetries = 3;
+    let retries = 0;
+
+    while (retries < maxRetries) {
+        try {
+            let response = await fetch(url, options);
+
+            if (!response.ok) {
+                throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+            }
+
+            return await response.json();
+        } catch (error) {
+            retries++;
+            console.log(`嘗試 ${retries}/${maxRetries} 失敗：`, error.message);
+
+            if (retries >= maxRetries) {
+                throw new Error(`在 ${maxRetries} 次嘗試後仍然失敗：${error.message}`);
+            }
+
+            // 等待後重試
+            await new Promise(resolve => setTimeout(resolve, 1000 * retries));
+        }
+    }
+}
+
+// 使用強健的 fetch
+robustFetch('https://jsonplaceholder.typicode.com/users/1')
+    .then(data => console.log("強健 fetch 結果：", data))
+    .catch(error => console.log("最終錯誤：", error));
+
+// 實用的非同步工具函數
+function delay(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+function timeout(promise, ms) {
+    return Promise.race([
+        promise,
+        new Promise((_, reject) =>
+            setTimeout(() => reject(new Error('操作超時')), ms)
+        )
+    ]);
+}
+
+// 使用工具函數
+async function example() {
+    await delay(1000);
+    console.log("延遲1秒後執行");
+
+    try {
+        let result = await timeout(fetchUser(1), 500);
+        console.log("在時限內完成：", result);
+    } catch (error) {
+        console.log("超時或其他錯誤：", error.message);
+    }
+}</code></pre>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-900 dark:text-white mb-2">詳細說明：</h4>
+                            <div class="text-gray-600 dark:text-gray-300 leading-relaxed space-y-3">
+                                <p>非同步程式設計是現代 JavaScript 的核心：</p>
+                                <ul class="list-disc list-inside space-y-1 ml-4">
+                                    <li><strong>Promise：</strong>處理非同步操作的現代方式</li>
+                                    <li><strong>async/await：</strong>讓非同步程式碼看起來像同步</li>
+                                    <li><strong>Fetch API：</strong>現代的網路請求方式</li>
+                                    <li><strong>錯誤處理：</strong>try/catch 和 .catch()</li>
+                                    <li><strong>並行處理：</strong>Promise.all 和 Promise.race</li>
+                                </ul>
+                                <p>掌握非同步程式設計對現代網頁開發至關重要。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 學習總結 -->
+                <div class="bg-gradient-to-r from-yellow-50 to-orange-50 dark:from-yellow-900/20 dark:to-orange-900/20 border border-yellow-200 dark:border-yellow-800 rounded-xl p-6">
+                    <h3 class="text-2xl font-bold text-yellow-900 dark:text-yellow-100 mb-4 flex items-center">
+                        <svg class="w-8 h-8 mr-3" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                        </svg>
+                        🎉 恭喜！您已完成 JavaScript 完整教學
+                    </h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <h4 class="font-semibold text-yellow-800 dark:text-yellow-200 mb-3">您已學會的核心技能：</h4>
+                            <ul class="space-y-2 text-yellow-700 dark:text-yellow-300">
+                                <li class="flex items-center">
+                                    <svg class="w-4 h-4 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                                    </svg>
+                                    JavaScript 基本語法和概念
+                                </li>
+                                <li class="flex items-center">
+                                    <svg class="w-4 h-4 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                                    </svg>
+                                    變數、資料型別和運算子
+                                </li>
+                                <li class="flex items-center">
+                                    <svg class="w-4 h-4 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                                    </svg>
+                                    條件判斷和迴圈控制
+                                </li>
+                                <li class="flex items-center">
+                                    <svg class="w-4 h-4 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                                    </svg>
+                                    函數和進階函數概念
+                                </li>
+                                <li class="flex items-center">
+                                    <svg class="w-4 h-4 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                                    </svg>
+                                    陣列和物件操作
+                                </li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-yellow-800 dark:text-yellow-200 mb-3">前端開發技能：</h4>
+                            <ul class="space-y-2 text-yellow-700 dark:text-yellow-300">
+                                <li class="flex items-center">
+                                    <svg class="w-4 h-4 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                                    </svg>
+                                    DOM 操作和元素控制
+                                </li>
+                                <li class="flex items-center">
+                                    <svg class="w-4 h-4 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                                    </svg>
+                                    事件處理和使用者互動
+                                </li>
+                                <li class="flex items-center">
+                                    <svg class="w-4 h-4 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                                    </svg>
+                                    非同步程式設計
+                                </li>
+                                <li class="flex items-center">
+                                    <svg class="w-4 h-4 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                                    </svg>
+                                    API 串接和資料處理
+                                </li>
+                                <li class="flex items-center">
+                                    <svg class="w-4 h-4 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                                    </svg>
+                                    現代 ES6+ 語法
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="mt-6 p-4 bg-white dark:bg-gray-800 rounded-lg border border-yellow-200 dark:border-yellow-700">
+                        <h4 class="font-semibold text-gray-900 dark:text-white mb-2">🚀 下一步建議：</h4>
+                        <p class="text-gray-600 dark:text-gray-300 text-sm leading-relaxed">
+                            現在您已經掌握了 JavaScript 的核心概念！建議您開始實作專案，如待辦事項應用、計算機、或簡單的遊戲。
+                            也可以學習現代框架如 React、Vue.js，或探索 Node.js 進行後端開發。記得多練習 DOM 操作和 API 串接！
+                        </p>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -1866,12 +4742,16 @@ document.getElementById("demo").innerHTML = "Hello JavaScript!";</code></pre>
                 </div>
 
                 <div class="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg p-4">
-                    <h2 class="font-semibold text-red-900 dark:text-red-100 mb-2">學習目標</h2>
+                    <h2 class="font-semibold text-red-900 dark:text-red-100 mb-2">完整學習目標</h2>
                     <ul class="text-red-800 dark:text-red-200 text-sm space-y-1">
-                        <li>• 了解 Java 物件導向概念</li>
-                        <li>• 掌握基本語法和資料結構</li>
-                        <li>• 學會使用陣列和控制結構</li>
-                        <li>• 建立 Java 程式設計基礎</li>
+                        <li>• 掌握 Java 基本語法和概念</li>
+                        <li>• 了解變數、資料型別和運算子</li>
+                        <li>• 學會條件判斷和迴圈控制</li>
+                        <li>• 理解物件導向程式設計核心概念</li>
+                        <li>• 掌握類別、物件、繼承、多型</li>
+                        <li>• 學會陣列和集合框架使用</li>
+                        <li>• 了解例外處理和檔案操作</li>
+                        <li>• 能夠編寫完整的 Java 應用程式</li>
                     </ul>
                 </div>
             </div>
@@ -1920,6 +4800,871 @@ public class HelloWorld {
                                 <p>每個 Java 程式都需要一個 main 方法作為程式的入口點。</p>
                             </div>
                         </div>
+                    </div>
+                </div>
+
+                <div class="card p-6">
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="flex-1">
+                            <div class="flex items-center mb-2">
+                                <h3 class="text-xl font-bold text-gray-900 dark:text-white mr-3">2. 變數與資料型別</h3>
+                                <span class="px-2 py-1 text-xs font-medium rounded-full bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200">基礎</span>
+                            </div>
+                            <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
+                                學習 Java 中的變數宣告和基本資料型別。
+                            </p>
+                        </div>
+                        <button onclick="toggleLesson(this)" class="ml-4 p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+                            <svg class="w-5 h-5 text-gray-500 dark:text-gray-400 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="lesson-content hidden space-y-4 border-t border-gray-200 dark:border-gray-700 pt-4">
+                        <div>
+                            <h4 class="font-semibold text-gray-900 dark:text-white mb-2">程式碼範例：</h4>
+                            <pre class="code-block"><code>public class DataTypes {
+    public static void main(String[] args) {
+        // 基本資料型別 (Primitive Types)
+
+        // 整數型別
+        byte smallNumber = 127;           // 8位元，範圍 -128 到 127
+        short mediumNumber = 32767;       // 16位元，範圍 -32,768 到 32,767
+        int number = 2147483647;          // 32位元，最常用的整數型別
+        long bigNumber = 9223372036854775807L; // 64位元，需要加 L 後綴
+
+        // 浮點數型別
+        float decimal = 3.14f;            // 32位元，需要加 f 後綴
+        double preciseDecimal = 3.141592653589793; // 64位元，預設浮點數型別
+
+        // 字元型別
+        char letter = 'A';                // 16位元 Unicode 字元
+        char chineseChar = '中';          // 支援中文字元
+
+        // 布林型別
+        boolean isTrue = true;            // 只能是 true 或 false
+        boolean isFalse = false;
+
+        // 字串型別 (參考型別)
+        String name = "小明";             // 字串是物件，不是基本型別
+        String greeting = "你好，世界！";
+
+        // 顯示變數內容
+        System.out.println("=== 基本資料型別範例 ===");
+        System.out.println("byte: " + smallNumber);
+        System.out.println("short: " + mediumNumber);
+        System.out.println("int: " + number);
+        System.out.println("long: " + bigNumber);
+        System.out.println("float: " + decimal);
+        System.out.println("double: " + preciseDecimal);
+        System.out.println("char: " + letter);
+        System.out.println("中文字元: " + chineseChar);
+        System.out.println("boolean: " + isTrue);
+        System.out.println("String: " + name);
+        System.out.println("問候語: " + greeting);
+
+        // 型別轉換
+        int intValue = 100;
+        double doubleValue = intValue;    // 自動轉換（小範圍到大範圍）
+        int backToInt = (int) doubleValue; // 強制轉換（大範圍到小範圍）
+
+        System.out.println("\n=== 型別轉換 ===");
+        System.out.println("int 轉 double: " + doubleValue);
+        System.out.println("double 轉 int: " + backToInt);
+
+        // 常數宣告
+        final double PI = 3.14159;        // final 關鍵字表示常數
+        final String COMPANY_NAME = "我的公司";
+
+        System.out.println("\n=== 常數 ===");
+        System.out.println("圓周率: " + PI);
+        System.out.println("公司名稱: " + COMPANY_NAME);
+    }
+}</code></pre>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-900 dark:text-white mb-2">詳細說明：</h4>
+                            <div class="text-gray-600 dark:text-gray-300 leading-relaxed space-y-3">
+                                <p>Java 是強型別語言，變數必須先宣告型別：</p>
+                                <ul class="list-disc list-inside space-y-1 ml-4">
+                                    <li><strong>基本型別：</strong>byte, short, int, long, float, double, char, boolean</li>
+                                    <li><strong>參考型別：</strong>String, 陣列, 物件等</li>
+                                    <li><strong>型別轉換：</strong>自動轉換和強制轉換</li>
+                                    <li><strong>常數：</strong>使用 final 關鍵字</li>
+                                    <li><strong>命名規則：</strong>變數用駝峰式，常數用全大寫</li>
+                                </ul>
+                                <p>選擇適當的資料型別能提升程式效能和記憶體使用效率。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card p-6">
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="flex-1">
+                            <div class="flex items-center mb-2">
+                                <h3 class="text-xl font-bold text-gray-900 dark:text-white mr-3">3. 運算子與表達式</h3>
+                                <span class="px-2 py-1 text-xs font-medium rounded-full bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200">基礎</span>
+                            </div>
+                            <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
+                                學習 Java 中的各種運算子和表達式。
+                            </p>
+                        </div>
+                        <button onclick="toggleLesson(this)" class="ml-4 p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+                            <svg class="w-5 h-5 text-gray-500 dark:text-gray-400 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="lesson-content hidden space-y-4 border-t border-gray-200 dark:border-gray-700 pt-4">
+                        <div>
+                            <h4 class="font-semibold text-gray-900 dark:text-white mb-2">程式碼範例：</h4>
+                            <pre class="code-block"><code>public class Operators {
+    public static void main(String[] args) {
+        // 算術運算子
+        int a = 10;
+        int b = 3;
+
+        System.out.println("=== 算術運算子 ===");
+        System.out.println("a = " + a + ", b = " + b);
+        System.out.println("加法 a + b = " + (a + b));      // 13
+        System.out.println("減法 a - b = " + (a - b));      // 7
+        System.out.println("乘法 a * b = " + (a * b));      // 30
+        System.out.println("除法 a / b = " + (a / b));      // 3 (整數除法)
+        System.out.println("餘數 a % b = " + (a % b));      // 1
+
+        // 浮點數除法
+        double x = 10.0;
+        double y = 3.0;
+        System.out.println("浮點除法 x / y = " + (x / y));  // 3.333...
+
+        // 遞增和遞減運算子
+        int count = 5;
+        System.out.println("\n=== 遞增遞減運算子 ===");
+        System.out.println("原始值: " + count);
+        System.out.println("count++: " + count++);  // 5 (先回傳再遞增)
+        System.out.println("現在值: " + count);      // 6
+        System.out.println("++count: " + ++count);  // 7 (先遞增再回傳)
+        System.out.println("count--: " + count--);  // 7 (先回傳再遞減)
+        System.out.println("最終值: " + count);      // 6
+
+        // 比較運算子
+        int num1 = 5;
+        int num2 = 8;
+
+        System.out.println("\n=== 比較運算子 ===");
+        System.out.println("num1 = " + num1 + ", num2 = " + num2);
+        System.out.println("num1 == num2: " + (num1 == num2));  // false
+        System.out.println("num1 != num2: " + (num1 != num2));  // true
+        System.out.println("num1 < num2: " + (num1 < num2));    // true
+        System.out.println("num1 > num2: " + (num1 > num2));    // false
+        System.out.println("num1 <= num2: " + (num1 <= num2));  // true
+        System.out.println("num1 >= num2: " + (num1 >= num2));  // false
+
+        // 邏輯運算子
+        boolean isAdult = true;
+        boolean hasLicense = false;
+
+        System.out.println("\n=== 邏輯運算子 ===");
+        System.out.println("isAdult = " + isAdult + ", hasLicense = " + hasLicense);
+        System.out.println("AND (&&): " + (isAdult && hasLicense));  // false
+        System.out.println("OR (||): " + (isAdult || hasLicense));   // true
+        System.out.println("NOT (!): " + (!isAdult));                // false
+
+        // 賦值運算子
+        int value = 10;
+        System.out.println("\n=== 賦值運算子 ===");
+        System.out.println("初始值: " + value);
+
+        value += 5;    // value = value + 5
+        System.out.println("value += 5: " + value);  // 15
+
+        value -= 3;    // value = value - 3
+        System.out.println("value -= 3: " + value);  // 12
+
+        value *= 2;    // value = value * 2
+        System.out.println("value *= 2: " + value);  // 24
+
+        value /= 4;    // value = value / 4
+        System.out.println("value /= 4: " + value);  // 6
+
+        value %= 4;    // value = value % 4
+        System.out.println("value %= 4: " + value);  // 2
+
+        // 三元運算子 (條件運算子)
+        int score = 85;
+        String grade = (score >= 60) ? "及格" : "不及格";
+        System.out.println("\n=== 三元運算子 ===");
+        System.out.println("分數 " + score + " 是" + grade + "的");
+
+        // 字串運算子
+        String firstName = "小";
+        String lastName = "明";
+        String fullName = firstName + lastName;  // 字串連接
+
+        System.out.println("\n=== 字串運算子 ===");
+        System.out.println("姓名: " + fullName);
+
+        // 運算子優先順序範例
+        int result = 2 + 3 * 4;        // 先乘除後加減
+        int result2 = (2 + 3) * 4;     // 括號優先
+
+        System.out.println("\n=== 運算子優先順序 ===");
+        System.out.println("2 + 3 * 4 = " + result);    // 14
+        System.out.println("(2 + 3) * 4 = " + result2); // 20
+    }
+}</code></pre>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-900 dark:text-white mb-2">詳細說明：</h4>
+                            <div class="text-gray-600 dark:text-gray-300 leading-relaxed space-y-3">
+                                <p>Java 運算子的重要概念：</p>
+                                <ul class="list-disc list-inside space-y-1 ml-4">
+                                    <li><strong>算術運算子：</strong>+, -, *, /, % 用於數學計算</li>
+                                    <li><strong>比較運算子：</strong>==, !=, <, >, <=, >= 回傳布林值</li>
+                                    <li><strong>邏輯運算子：</strong>&&（且）、||（或）、!（非）</li>
+                                    <li><strong>賦值運算子：</strong>+=, -=, *=, /=, %= 簡化寫法</li>
+                                    <li><strong>三元運算子：</strong>條件 ? 真值 : 假值</li>
+                                </ul>
+                                <p>理解運算子優先順序很重要，必要時使用括號明確表達意圖。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card p-6">
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="flex-1">
+                            <div class="flex items-center mb-2">
+                                <h3 class="text-xl font-bold text-gray-900 dark:text-white mr-3">4. 條件判斷 (if/else/switch)</h3>
+                                <span class="px-2 py-1 text-xs font-medium rounded-full bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200">進階</span>
+                            </div>
+                            <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
+                                學習如何使用條件判斷來控制程式的執行流程。
+                            </p>
+                        </div>
+                        <button onclick="toggleLesson(this)" class="ml-4 p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+                            <svg class="w-5 h-5 text-gray-500 dark:text-gray-400 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="lesson-content hidden space-y-4 border-t border-gray-200 dark:border-gray-700 pt-4">
+                        <div>
+                            <h4 class="font-semibold text-gray-900 dark:text-white mb-2">程式碼範例：</h4>
+                            <pre class="code-block"><code>public class ConditionalStatements {
+    public static void main(String[] args) {
+        // 基本 if 語句
+        int age = 18;
+
+        System.out.println("=== 基本 if 語句 ===");
+        if (age >= 18) {
+            System.out.println("您已成年，可以投票！");
+        } else {
+            System.out.println("您還未成年，無法投票。");
+        }
+
+        // 多重條件判斷 (if-else if-else)
+        int score = 85;
+        String grade;
+
+        System.out.println("\n=== 多重條件判斷 ===");
+        System.out.println("分數：" + score);
+
+        if (score >= 90) {
+            grade = "A";
+            System.out.println("優秀！");
+        } else if (score >= 80) {
+            grade = "B";
+            System.out.println("良好！");
+        } else if (score >= 70) {
+            grade = "C";
+            System.out.println("及格！");
+        } else if (score >= 60) {
+            grade = "D";
+            System.out.println("勉強及格。");
+        } else {
+            grade = "F";
+            System.out.println("不及格，需要加油！");
+        }
+
+        System.out.println("您的等級是：" + grade);
+
+        // 巢狀條件判斷
+        String weather = "晴天";
+        int temperature = 28;
+
+        System.out.println("\n=== 巢狀條件判斷 ===");
+        System.out.println("天氣：" + weather + "，溫度：" + temperature + "度");
+
+        if (weather.equals("晴天")) {
+            if (temperature > 25) {
+                System.out.println("適合去海邊！");
+            } else if (temperature > 15) {
+                System.out.println("適合散步！");
+            } else {
+                System.out.println("有點涼，記得穿外套。");
+            }
+        } else if (weather.equals("雨天")) {
+            System.out.println("適合在家看書！");
+        } else {
+            System.out.println("看情況決定活動。");
+        }
+
+        // switch 語句
+        int dayOfWeek = 3;
+        String dayName;
+
+        System.out.println("\n=== switch 語句 ===");
+
+        switch (dayOfWeek) {
+            case 1:
+                dayName = "星期一";
+                break;
+            case 2:
+                dayName = "星期二";
+                break;
+            case 3:
+                dayName = "星期三";
+                break;
+            case 4:
+                dayName = "星期四";
+                break;
+            case 5:
+                dayName = "星期五";
+                break;
+            case 6:
+                dayName = "星期六";
+                break;
+            case 7:
+                dayName = "星期日";
+                break;
+            default:
+                dayName = "無效的日期";
+        }
+
+        System.out.println("今天是" + dayName);
+
+        // switch 的進階用法（多個 case 共用）
+        String month = "三月";
+        String season;
+
+        System.out.println("\n=== switch 進階用法 ===");
+
+        switch (month) {
+            case "十二月":
+            case "一月":
+            case "二月":
+                season = "冬天";
+                break;
+            case "三月":
+            case "四月":
+            case "五月":
+                season = "春天";
+                break;
+            case "六月":
+            case "七月":
+            case "八月":
+                season = "夏天";
+                break;
+            case "九月":
+            case "十月":
+            case "十一月":
+                season = "秋天";
+                break;
+            default:
+                season = "未知季節";
+        }
+
+        System.out.println(month + "是" + season);
+
+        // 條件運算子的進階用法
+        int userAge = 20;
+        String status = (userAge >= 18) ?
+            ((userAge >= 65) ? "長者" : "成人") :
+            ((userAge >= 13) ? "青少年" : "兒童");
+
+        System.out.println("\n=== 條件運算子 ===");
+        System.out.println("年齡 " + userAge + " 歲，身份：" + status);
+
+        // 邏輯運算子的短路求值
+        boolean a = true;
+        boolean b = false;
+
+        System.out.println("\n=== 短路求值 ===");
+
+        // && 短路：如果第一個條件為 false，不會執行第二個條件
+        if (b && (++userAge > 0)) {
+            System.out.println("這不會執行");
+        }
+        System.out.println("userAge 仍然是：" + userAge); // 20，沒有遞增
+
+        // || 短路：如果第一個條件為 true，不會執行第二個條件
+        if (a || (++userAge > 0)) {
+            System.out.println("這會執行");
+        }
+        System.out.println("userAge 仍然是：" + userAge); // 20，沒有遞增
+    }
+}</code></pre>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-900 dark:text-white mb-2">詳細說明：</h4>
+                            <div class="text-gray-600 dark:text-gray-300 leading-relaxed space-y-3">
+                                <p>Java 條件判斷的重要概念：</p>
+                                <ul class="list-disc list-inside space-y-1 ml-4">
+                                    <li><strong>if/else：</strong>基本的條件判斷結構</li>
+                                    <li><strong>else if：</strong>多重條件判斷</li>
+                                    <li><strong>switch：</strong>多選一的條件判斷，需要 break</li>
+                                    <li><strong>字串比較：</strong>使用 .equals() 方法</li>
+                                    <li><strong>短路求值：</strong>&& 和 || 的效能優化特性</li>
+                                </ul>
+                                <p>選擇適當的條件判斷結構能讓程式碼更清晰易讀。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card p-6">
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="flex-1">
+                            <div class="flex items-center mb-2">
+                                <h3 class="text-xl font-bold text-gray-900 dark:text-white mr-3">5. 迴圈 (for/while/do-while)</h3>
+                                <span class="px-2 py-1 text-xs font-medium rounded-full bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200">進階</span>
+                            </div>
+                            <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
+                                學習如何使用迴圈來重複執行程式碼。
+                            </p>
+                        </div>
+                        <button onclick="toggleLesson(this)" class="ml-4 p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+                            <svg class="w-5 h-5 text-gray-500 dark:text-gray-400 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="lesson-content hidden space-y-4 border-t border-gray-200 dark:border-gray-700 pt-4">
+                        <div>
+                            <h4 class="font-semibold text-gray-900 dark:text-white mb-2">程式碼範例：</h4>
+                            <pre class="code-block"><code>public class Loops {
+    public static void main(String[] args) {
+        // for 迴圈 - 基本用法
+        System.out.println("=== for 迴圈 ===");
+        System.out.println("數字 1 到 5：");
+        for (int i = 1; i <= 5; i++) {
+            System.out.println("數字：" + i);
+        }
+
+        // for 迴圈 - 遍歷陣列
+        String[] fruits = {"蘋果", "香蕉", "橘子", "葡萄"};
+        System.out.println("\n水果清單：");
+        for (int i = 0; i < fruits.length; i++) {
+            System.out.println((i + 1) + ". " + fruits[i]);
+        }
+
+        // 增強型 for 迴圈 (for-each)
+        System.out.println("\n使用 for-each：");
+        for (String fruit : fruits) {
+            System.out.println("- " + fruit);
+        }
+
+        // while 迴圈
+        System.out.println("\n=== while 迴圈 ===");
+        System.out.println("倒數計時：");
+        int count = 5;
+        while (count > 0) {
+            System.out.println(count + "...");
+            count--;
+        }
+        System.out.println("時間到！");
+
+        // do-while 迴圈
+        System.out.println("\n=== do-while 迴圈 ===");
+        System.out.println("至少執行一次：");
+        int num = 0;
+        do {
+            System.out.println("數字：" + num);
+            num++;
+        } while (num < 3);
+
+        // 迴圈控制 - break 和 continue
+        System.out.println("\n=== 迴圈控制 ===");
+        System.out.println("尋找第一個偶數：");
+        int[] numbers = {1, 3, 5, 8, 9, 10};
+
+        for (int number : numbers) {
+            if (number % 2 == 0) {
+                System.out.println("找到偶數：" + number);
+                break; // 跳出迴圈
+            }
+            System.out.println(number + " 是奇數");
+        }
+
+        System.out.println("\n只印出奇數：");
+        for (int i = 1; i <= 10; i++) {
+            if (i % 2 == 0) {
+                continue; // 跳過本次迭代
+            }
+            System.out.println("奇數：" + i);
+        }
+
+        // 巢狀迴圈
+        System.out.println("\n=== 巢狀迴圈 ===");
+        System.out.println("九九乘法表（部分）：");
+        for (int i = 1; i <= 3; i++) {
+            for (int j = 1; j <= 3; j++) {
+                System.out.print(i + "×" + j + "=" + (i * j) + " ");
+            }
+            System.out.println(); // 換行
+        }
+
+        // 實用範例：計算總和和平均
+        int[] scores = {85, 92, 78, 90, 88};
+        int total = 0;
+
+        System.out.println("\n=== 計算總和和平均 ===");
+        System.out.print("成績：");
+        for (int score : scores) {
+            System.out.print(score + " ");
+            total += score;
+        }
+
+        double average = (double) total / scores.length;
+        System.out.println("\n總分：" + total);
+        System.out.printf("平均：%.2f%n", average);
+
+        // 尋找最大值和最小值
+        int max = scores[0];
+        int min = scores[0];
+
+        for (int score : scores) {
+            if (score > max) {
+                max = score;
+            }
+            if (score < min) {
+                min = score;
+            }
+        }
+
+        System.out.println("最高分：" + max);
+        System.out.println("最低分：" + min);
+
+        // 標籤迴圈（用於複雜的迴圈控制）
+        System.out.println("\n=== 標籤迴圈 ===");
+        outer: for (int i = 1; i <= 3; i++) {
+            for (int j = 1; j <= 3; j++) {
+                if (i == 2 && j == 2) {
+                    System.out.println("跳出外層迴圈");
+                    break outer; // 跳出標籤指定的迴圈
+                }
+                System.out.println("i=" + i + ", j=" + j);
+            }
+        }
+
+        // 無限迴圈的安全使用
+        System.out.println("\n=== 受控的無限迴圈 ===");
+        int counter = 0;
+        while (true) {
+            counter++;
+            System.out.println("計數：" + counter);
+
+            if (counter >= 3) {
+                System.out.println("達到條件，跳出迴圈");
+                break;
+            }
+        }
+    }
+}</code></pre>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-900 dark:text-white mb-2">詳細說明：</h4>
+                            <div class="text-gray-600 dark:text-gray-300 leading-relaxed space-y-3">
+                                <p>Java 迴圈的各種類型和用法：</p>
+                                <ul class="list-disc list-inside space-y-1 ml-4">
+                                    <li><strong>for：</strong>已知迭代次數的迴圈</li>
+                                    <li><strong>for-each：</strong>遍歷陣列或集合的簡潔語法</li>
+                                    <li><strong>while：</strong>條件為真時持續執行</li>
+                                    <li><strong>do-while：</strong>至少執行一次的迴圈</li>
+                                    <li><strong>break/continue：</strong>控制迴圈執行流程</li>
+                                </ul>
+                                <p>選擇適當的迴圈類型能讓程式碼更清晰易懂。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card p-6">
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="flex-1">
+                            <div class="flex items-center mb-2">
+                                <h3 class="text-xl font-bold text-gray-900 dark:text-white mr-3">6. 陣列 (Array)</h3>
+                                <span class="px-2 py-1 text-xs font-medium rounded-full bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200">中級</span>
+                            </div>
+                            <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
+                                學習 Java 中陣列的創建、操作和常用方法。
+                            </p>
+                        </div>
+                        <button onclick="toggleLesson(this)" class="ml-4 p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+                            <svg class="w-5 h-5 text-gray-500 dark:text-gray-400 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="lesson-content hidden space-y-4 border-t border-gray-200 dark:border-gray-700 pt-4">
+                        <div>
+                            <h4 class="font-semibold text-gray-900 dark:text-white mb-2">程式碼範例：</h4>
+                            <pre class="code-block"><code>import java.util.Arrays;
+
+public class ArrayExample {
+    public static void main(String[] args) {
+        // 陣列的宣告和初始化
+        System.out.println("=== 陣列的創建 ===");
+
+        // 方法1：宣告後初始化
+        int[] numbers = new int[5];  // 創建長度為5的整數陣列
+        numbers[0] = 10;
+        numbers[1] = 20;
+        numbers[2] = 30;
+        numbers[3] = 40;
+        numbers[4] = 50;
+
+        // 方法2：宣告時直接初始化
+        String[] fruits = {"蘋果", "香蕉", "橘子", "葡萄"};
+
+        // 方法3：使用 new 關鍵字初始化
+        double[] scores = new double[]{85.5, 92.0, 78.5, 90.0, 88.5};
+
+        // 顯示陣列內容
+        System.out.println("數字陣列：" + Arrays.toString(numbers));
+        System.out.println("水果陣列：" + Arrays.toString(fruits));
+        System.out.println("分數陣列：" + Arrays.toString(scores));
+
+        // 陣列長度
+        System.out.println("\n=== 陣列長度 ===");
+        System.out.println("numbers 長度：" + numbers.length);
+        System.out.println("fruits 長度：" + fruits.length);
+        System.out.println("scores 長度：" + scores.length);
+
+        // 存取陣列元素
+        System.out.println("\n=== 存取陣列元素 ===");
+        System.out.println("第一個數字：" + numbers[0]);
+        System.out.println("最後一個水果：" + fruits[fruits.length - 1]);
+        System.out.println("第三個分數：" + scores[2]);
+
+        // 修改陣列元素
+        numbers[2] = 35;
+        fruits[1] = "草莓";
+        System.out.println("修改後的數字陣列：" + Arrays.toString(numbers));
+        System.out.println("修改後的水果陣列：" + Arrays.toString(fruits));
+
+        // 遍歷陣列
+        System.out.println("\n=== 遍歷陣列 ===");
+
+        // 使用傳統 for 迴圈
+        System.out.println("使用索引遍歷：");
+        for (int i = 0; i < fruits.length; i++) {
+            System.out.println("索引 " + i + ": " + fruits[i]);
+        }
+
+        // 使用增強型 for 迴圈
+        System.out.println("使用 for-each 遍歷：");
+        for (String fruit : fruits) {
+            System.out.println("- " + fruit);
+        }
+
+        // 陣列的常用操作
+        System.out.println("\n=== 陣列操作 ===");
+
+        // 計算總和和平均
+        double total = 0;
+        for (double score : scores) {
+            total += score;
+        }
+        double average = total / scores.length;
+        System.out.printf("總分：%.1f，平均：%.2f%n", total, average);
+
+        // 尋找最大值和最小值
+        double max = scores[0];
+        double min = scores[0];
+        for (double score : scores) {
+            if (score > max) max = score;
+            if (score < min) min = score;
+        }
+        System.out.println("最高分：" + max + "，最低分：" + min);
+
+        // 搜尋元素
+        String searchFruit = "橘子";
+        int index = -1;
+        for (int i = 0; i < fruits.length; i++) {
+            if (fruits[i].equals(searchFruit)) {
+                index = i;
+                break;
+            }
+        }
+        if (index != -1) {
+            System.out.println(searchFruit + " 在索引 " + index);
+        } else {
+            System.out.println("找不到 " + searchFruit);
+        }
+
+        // 陣列排序
+        System.out.println("\n=== 陣列排序 ===");
+        int[] unsorted = {64, 34, 25, 12, 22, 11, 90};
+        System.out.println("排序前：" + Arrays.toString(unsorted));
+
+        Arrays.sort(unsorted);  // 使用內建排序
+        System.out.println("排序後：" + Arrays.toString(unsorted));
+
+        // 陣列複製
+        System.out.println("\n=== 陣列複製 ===");
+        int[] original = {1, 2, 3, 4, 5};
+
+        // 方法1：使用 Arrays.copyOf
+        int[] copy1 = Arrays.copyOf(original, original.length);
+
+        // 方法2：使用 System.arraycopy
+        int[] copy2 = new int[original.length];
+        System.arraycopy(original, 0, copy2, 0, original.length);
+
+        // 方法3：使用 clone
+        int[] copy3 = original.clone();
+
+        System.out.println("原始陣列：" + Arrays.toString(original));
+        System.out.println("複製陣列1：" + Arrays.toString(copy1));
+        System.out.println("複製陣列2：" + Arrays.toString(copy2));
+        System.out.println("複製陣列3：" + Arrays.toString(copy3));
+
+        // 二維陣列
+        System.out.println("\n=== 二維陣列 ===");
+        int[][] matrix = {
+            {1, 2, 3},
+            {4, 5, 6},
+            {7, 8, 9}
+        };
+
+        System.out.println("矩陣：");
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix[i].length; j++) {
+                System.out.print(matrix[i][j] + " ");
+            }
+            System.out.println();
+        }
+
+        // 不規則陣列
+        int[][] irregular = new int[3][];
+        irregular[0] = new int[]{1, 2};
+        irregular[1] = new int[]{3, 4, 5};
+        irregular[2] = new int[]{6, 7, 8, 9};
+
+        System.out.println("不規則陣列：");
+        for (int[] row : irregular) {
+            System.out.println(Arrays.toString(row));
+        }
+    }
+}</code></pre>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-900 dark:text-white mb-2">詳細說明：</h4>
+                            <div class="text-gray-600 dark:text-gray-300 leading-relaxed space-y-3">
+                                <p>Java 陣列的重要特性：</p>
+                                <ul class="list-disc list-inside space-y-1 ml-4">
+                                    <li><strong>固定大小：</strong>創建後大小不可改變</li>
+                                    <li><strong>同質性：</strong>只能存放相同型別的資料</li>
+                                    <li><strong>索引存取：</strong>從 0 開始的索引</li>
+                                    <li><strong>Arrays 類別：</strong>提供排序、搜尋、複製等方法</li>
+                                    <li><strong>多維陣列：</strong>支援二維、三維等多維陣列</li>
+                                </ul>
+                                <p>陣列是 Java 中最基本的資料結構，理解其特性很重要。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 學習總結 -->
+                <div class="bg-gradient-to-r from-red-50 to-pink-50 dark:from-red-900/20 dark:to-pink-900/20 border border-red-200 dark:border-red-800 rounded-xl p-6">
+                    <h3 class="text-2xl font-bold text-red-900 dark:text-red-100 mb-4 flex items-center">
+                        <svg class="w-8 h-8 mr-3" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                        </svg>
+                        🎉 恭喜！您已完成 Java 基礎教學
+                    </h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <h4 class="font-semibold text-red-800 dark:text-red-200 mb-3">您已學會的核心技能：</h4>
+                            <ul class="space-y-2 text-red-700 dark:text-red-300">
+                                <li class="flex items-center">
+                                    <svg class="w-4 h-4 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                                    </svg>
+                                    Java 基本語法和概念
+                                </li>
+                                <li class="flex items-center">
+                                    <svg class="w-4 h-4 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                                    </svg>
+                                    變數、資料型別和運算子
+                                </li>
+                                <li class="flex items-center">
+                                    <svg class="w-4 h-4 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                                    </svg>
+                                    條件判斷和迴圈控制
+                                </li>
+                                <li class="flex items-center">
+                                    <svg class="w-4 h-4 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                                    </svg>
+                                    陣列操作和資料處理
+                                </li>
+                                <li class="flex items-center">
+                                    <svg class="w-4 h-4 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                                    </svg>
+                                    強型別系統理解
+                                </li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-red-800 dark:text-red-200 mb-3">Java 程式設計基礎：</h4>
+                            <ul class="space-y-2 text-red-700 dark:text-red-300">
+                                <li class="flex items-center">
+                                    <svg class="w-4 h-4 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                                    </svg>
+                                    類別和物件概念
+                                </li>
+                                <li class="flex items-center">
+                                    <svg class="w-4 h-4 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                                    </svg>
+                                    方法定義和呼叫
+                                </li>
+                                <li class="flex items-center">
+                                    <svg class="w-4 h-4 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                                    </svg>
+                                    陣列和集合操作
+                                </li>
+                                <li class="flex items-center">
+                                    <svg class="w-4 h-4 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                                    </svg>
+                                    程式結構設計
+                                </li>
+                                <li class="flex items-center">
+                                    <svg class="w-4 h-4 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                                    </svg>
+                                    跨平台開發概念
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="mt-6 p-4 bg-white dark:bg-gray-800 rounded-lg border border-red-200 dark:border-red-700">
+                        <h4 class="font-semibold text-gray-900 dark:text-white mb-2">🚀 下一步建議：</h4>
+                        <p class="text-gray-600 dark:text-gray-300 text-sm leading-relaxed">
+                            現在您已經掌握了 Java 的基礎概念！建議您繼續學習物件導向程式設計（類別、繼承、多型）、
+                            集合框架（ArrayList、HashMap）、例外處理，以及 Java 的進階特性。
+                            也可以開始實作小專案，如學生管理系統、計算機等應用程式。
+                        </p>
                     </div>
                 </div>
             </div>
@@ -1976,6 +5721,7 @@ public class HelloWorld {
 
         function showLanguage(language) {
             document.getElementById('home').classList.add('hidden');
+            document.getElementById('html').classList.add('hidden');
             document.getElementById('python').classList.add('hidden');
             document.getElementById('javascript').classList.add('hidden');
             document.getElementById('java').classList.add('hidden');
