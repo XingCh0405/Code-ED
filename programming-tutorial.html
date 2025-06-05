@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>程式語言教學平台</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            200: '#bfdbfe',
+                            300: '#93c5fd',
+                            400: '#60a5fa',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            800: '#1e40af',
+                            900: '#1e3a8a',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', system-ui, sans-serif; }
+        code { font-family: 'Fira Code', Monaco, 'Cascadia Code', 'Roboto Mono', monospace; }
+        .card {
+            background-color: white;
+            border-radius: 0.75rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            border: 1px solid #e5e7eb;
+        }
+        .card:hover {
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        .dark .card {
+            background-color: #1f2937;
+            border-color: #374151;
+        }
+        .code-block {
+            background-color: #f3f4f6;
+            border: 1px solid #e5e7eb;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            font-size: 0.875rem;
+            overflow-x: auto;
+        }
+        .dark .code-block {
+            background-color: #111827;
+            border-color: #374151;
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
+    <!-- Header -->
+    <header class="bg-white dark:bg-gray-800 shadow-sm border-b border-gray-200 dark:border-gray-700">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-2 text-2xl font-bold text-primary-600 dark:text-primary-400 cursor-pointer" onclick="showHome()">
+                    <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M9.4 16.6L4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0L19.2 12l-4.6-4.6L16 6l6 6-6 6-1.4-1.4z"/>
+                    </svg>
+                    <span>程式教學平台</span>
+                </div>
+
+                <nav class="hidden md:flex items-center space-x-6">
+                    <a href="#" onclick="showHome()" class="font-medium text-primary-600 dark:text-primary-400">首頁</a>
+                    <a href="#" onclick="showLanguage('python')" class="font-medium text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">Python</a>
+                    <a href="#" onclick="showLanguage('javascript')" class="font-medium text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">JavaScript</a>
+                    <a href="#" onclick="showLanguage('java')" class="font-medium text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">Java</a>
+                </nav>
+
+                <button id="theme-toggle" class="p-2 rounded-lg bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors duration-200">
+                    <svg id="sun-icon" class="w-5 h-5 text-yellow-500 hidden" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM18.894 6.166a.75.75 0 00-1.06-1.06l-1.591 1.59a.75.75 0 101.06 1.061l1.591-1.59zM21.75 12a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5H21a.75.75 0 01.75.75zM17.834 18.894a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 10-1.061 1.06l1.59 1.591zM12 18a.75.75 0 01.75.75V21a.75.75 0 01-1.5 0v-2.25A.75.75 0 0112 18zM7.758 17.303a.75.75 0 00-1.061-1.06l-1.591 1.59a.75.75 0 001.06 1.061l1.591-1.59zM6 12a.75.75 0 01-.75.75H3a.75.75 0 010-1.5h2.25A.75.75 0 016 12zM6.697 7.757a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 00-1.061 1.06l1.59 1.591z" />
+                    </svg>
+                    <svg id="moon-icon" class="w-5 h-5 text-gray-700" fill="currentColor" viewBox="0 0 24 24">
+                        <path fill-rule="evenodd" d="M9.528 1.718a.75.75 0 01.162.819A8.97 8.97 0 009 6a9 9 0 009 9 8.97 8.97 0 003.463-.69.75.75 0 01.981.98 10.503 10.503 0 01-9.694 6.46c-5.799 0-10.5-4.701-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 01.818.162z" clip-rule="evenodd" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+        <!-- Home Section -->
+        <div id="home" class="max-w-7xl mx-auto">
+            <!-- Hero Section -->
+            <div class="text-center mb-16">
+                <h1 class="text-4xl md:text-6xl font-bold text-gray-900 dark:text-white mb-6">
+                    學習程式設計
+                    <span class="block text-primary-600 dark:text-primary-400">從這裡開始</span>
+                </h1>
+                <p class="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed">
+                    選擇一門程式語言，開始您的程式設計之旅。我們提供從零基礎到進階的完整教學內容，
+                    讓您循序漸進地掌握程式設計技能。
+                </p>
+            </div>
+
+            <!-- Language Selection -->
+            <div class="mb-16">
+                <h2 class="text-3xl font-bold text-gray-900 dark:text-white text-center mb-12">
+                    選擇您想學習的程式語言
+                </h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Python Card -->
+                    <div class="card p-6 h-full hover:scale-105 transform transition-all duration-300 cursor-pointer" onclick="showLanguage('python')">
+                        <div class="flex items-center mb-4">
+                            <div class="w-12 h-12 rounded-lg bg-blue-500 flex items-center justify-center text-white text-2xl font-bold mr-4">
+                                🐍
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold text-gray-900 dark:text-white">Python</h3>
+                                <span class="inline-block px-2 py-1 text-xs font-medium rounded-full bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200">初學者</span>
+                            </div>
+                        </div>
+                        <p class="text-gray-600 dark:text-gray-300 mb-4 leading-relaxed">
+                            最適合初學者的程式語言，語法簡潔易懂，廣泛應用於數據科學、人工智慧、網頁開發等領域。
+                        </p>
+                        <div class="space-y-2">
+                            <h4 class="font-semibold text-gray-900 dark:text-white text-sm">主要特色：</h4>
+                            <ul class="space-y-1">
+                                <li class="flex items-center text-sm text-gray-600 dark:text-gray-300">
+                                    <svg class="w-4 h-4 text-green-500 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                                    </svg>
+                                    語法簡潔易學
+                                </li>
+                                <li class="flex items-center text-sm text-gray-600 dark:text-gray-300">
+                                    <svg class="w-4 h-4 text-green-500 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                                    </svg>
+                                    豐富的函式庫
+                                </li>
+                                <li class="flex items-center text-sm text-gray-600 dark:text-gray-300">
+                                    <svg class="w-4 h-4 text-green-500 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                                    </svg>
+                                    數據科學首選
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="mt-6 flex items-center text-primary-600 dark:text-primary-400 font-medium">
+                            開始學習
+                            <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                            </svg>
+                        </div>
+                    </div>
+
+                    <!-- JavaScript Card -->
+                    <div class="card p-6 h-full hover:scale-105 transform transition-all duration-300 cursor-pointer" onclick="showLanguage('javascript')">
+                        <div class="flex items-center mb-4">
+                            <div class="w-12 h-12 rounded-lg bg-yellow-500 flex items-center justify-center text-white text-lg font-bold mr-4">
+                                JS
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold text-gray-900 dark:text-white">JavaScript</h3>
+                                <span class="inline-block px-2 py-1 text-xs font-medium rounded-full bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200">初學者</span>
+                            </div>
+                        </div>
+                        <p class="text-gray-600 dark:text-gray-300 mb-4 leading-relaxed">
+                            網頁開發的核心語言，可以創建互動式網頁，也能用於後端開發和行動應用程式開發。
+                        </p>
+                        <div class="space-y-2">
+                            <h4 class="font-semibold text-gray-900 dark:text-white text-sm">主要特色：</h4>
+                            <ul class="space-y-1">
+                                <li class="flex items-center text-sm text-gray-600 dark:text-gray-300">
+                                    <svg class="w-4 h-4 text-green-500 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                                    </svg>
+                                    前端開發必備
+                                </li>
+                                <li class="flex items-center text-sm text-gray-600 dark:text-gray-300">
+                                    <svg class="w-4 h-4 text-green-500 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                                    </svg>
+                                    即時互動效果
+                                </li>
+                                <li class="flex items-center text-sm text-gray-600 dark:text-gray-300">
+                                    <svg class="w-4 h-4 text-green-500 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                                    </svg>
+                                    全端開發可能
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="mt-6 flex items-center text-primary-600 dark:text-primary-400 font-medium">
+                            開始學習
+                            <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                            </svg>
+                        </div>
+                    </div>
+
+                    <!-- Java Card -->
+                    <div class="card p-6 h-full hover:scale-105 transform transition-all duration-300 cursor-pointer" onclick="showLanguage('java')">
+                        <div class="flex items-center mb-4">
+                            <div class="w-12 h-12 rounded-lg bg-red-500 flex items-center justify-center text-white text-2xl font-bold mr-4">
+                                ☕
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold text-gray-900 dark:text-white">Java</h3>
+                                <span class="inline-block px-2 py-1 text-xs font-medium rounded-full bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200">中級</span>
+                            </div>
+                        </div>
+                        <p class="text-gray-600 dark:text-gray-300 mb-4 leading-relaxed">
+                            企業級開發的首選語言，具有強大的跨平台能力，廣泛用於大型系統開發和Android應用。
+                        </p>
+                        <div class="space-y-2">
+                            <h4 class="font-semibold text-gray-900 dark:text-white text-sm">主要特色：</h4>
+                            <ul class="space-y-1">
+                                <li class="flex items-center text-sm text-gray-600 dark:text-gray-300">
+                                    <svg class="w-4 h-4 text-green-500 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                                    </svg>
+                                    跨平台執行
+                                </li>
+                                <li class="flex items-center text-sm text-gray-600 dark:text-gray-300">
+                                    <svg class="w-4 h-4 text-green-500 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                                    </svg>
+                                    企業級應用
+                                </li>
+                                <li class="flex items-center text-sm text-gray-600 dark:text-gray-300">
+                                    <svg class="w-4 h-4 text-green-500 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                                    </svg>
+                                    強型別系統
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="mt-6 flex items-center text-primary-600 dark:text-primary-400 font-medium">
+                            開始學習
+                            <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Features Section -->
+            <div class="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-lg border border-gray-200 dark:border-gray-700">
+                <h2 class="text-3xl font-bold text-gray-900 dark:text-white text-center mb-8">
+                    為什麼選擇我們的教學平台？
+                </h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-primary-100 dark:bg-primary-900 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <svg class="w-8 h-8 text-primary-600 dark:text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                            </svg>
+                        </div>
+                        <h3 class="font-semibold text-gray-900 dark:text-white mb-2">零基礎友善</h3>
+                        <p class="text-gray-600 dark:text-gray-300 text-sm">從最基礎的概念開始，循序漸進學習</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-primary-100 dark:bg-primary-900 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <svg class="w-8 h-8 text-primary-600 dark:text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                        </div>
+                        <h3 class="font-semibold text-gray-900 dark:text-white mb-2">實作導向</h3>
+                        <p class="text-gray-600 dark:text-gray-300 text-sm">豐富的程式範例和實作練習</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-primary-100 dark:bg-primary-900 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <svg class="w-8 h-8 text-primary-600 dark:text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                            </svg>
+                        </div>
+                        <h3 class="font-semibold text-gray-900 dark:text-white mb-2">現代化設計</h3>
+                        <p class="text-gray-600 dark:text-gray-300 text-sm">美觀直覺的介面，支援深淺色主題</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-primary-100 dark:bg-primary-900 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <svg class="w-8 h-8 text-primary-600 dark:text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                        </div>
+                        <h3 class="font-semibold text-gray-900 dark:text-white mb-2">自主學習</h3>
+                        <p class="text-gray-600 dark:text-gray-300 text-sm">按照自己的節奏學習，隨時隨地存取</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Python Tutorial Section -->
+        <div id="python" class="max-w-4xl mx-auto hidden">
+            <div class="mb-8">
+                <div class="flex items-center mb-4">
+                    <button onclick="showHome()" class="text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 mr-4">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                        </svg>
+                    </button>
+                    <div class="flex items-center">
+                        <div class="w-12 h-12 bg-blue-500 rounded-lg flex items-center justify-center text-white text-2xl font-bold mr-4">
+                            🐍
+                        </div>
+                        <div>
+                            <h1 class="text-3xl font-bold text-gray-900 dark:text-white">Python 教學</h1>
+                            <p class="text-gray-600 dark:text-gray-300">最適合初學者的程式語言</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-4">
+                    <h2 class="font-semibold text-blue-900 dark:text-blue-100 mb-2">學習目標</h2>
+                    <ul class="text-blue-800 dark:text-blue-200 text-sm space-y-1">
+                        <li>• 了解 Python 基本語法和概念</li>
+                        <li>• 掌握變數、資料型別和運算</li>
+                        <li>• 學會條件判斷和迴圈控制</li>
+                        <li>• 能夠編寫簡單的 Python 程式</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Python Lessons -->
+            <div class="space-y-6">
+                <div class="card p-6">
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="flex-1">
+                            <div class="flex items-center mb-2">
+                                <h3 class="text-xl font-bold text-gray-900 dark:text-white mr-3">1. Python 簡介與安裝</h3>
+                                <span class="px-2 py-1 text-xs font-medium rounded-full bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200">基礎</span>
+                            </div>
+                            <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
+                                了解 Python 是什麼，為什麼選擇 Python，以及如何安裝 Python 開發環境。
+                            </p>
+                        </div>
+                        <button onclick="toggleLesson(this)" class="ml-4 p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+                            <svg class="w-5 h-5 text-gray-500 dark:text-gray-400 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="lesson-content hidden space-y-4 border-t border-gray-200 dark:border-gray-700 pt-4">
+                        <div>
+                            <h4 class="font-semibold text-gray-900 dark:text-white mb-2">程式碼範例：</h4>
+                            <pre class="code-block"><code># 這是你的第一個 Python 程式
+print("Hello, World!")
+print("歡迎來到 Python 的世界！")</code></pre>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-900 dark:text-white mb-2">詳細說明：</h4>
+                            <div class="text-gray-600 dark:text-gray-300 leading-relaxed space-y-3">
+                                <p>Python 是一種高階程式語言，以其簡潔易讀的語法而聞名。它被廣泛應用於：</p>
+                                <ul class="list-disc list-inside space-y-1 ml-4">
+                                    <li>網頁開發</li>
+                                    <li>數據科學與分析</li>
+                                    <li>人工智慧與機器學習</li>
+                                    <li>自動化腳本</li>
+                                    <li>科學計算</li>
+                                </ul>
+                                <p><code>print()</code> 函數用於在螢幕上顯示文字。這是最基本也是最常用的函數之一。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card p-6">
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="flex-1">
+                            <div class="flex items-center mb-2">
+                                <h3 class="text-xl font-bold text-gray-900 dark:text-white mr-3">2. 變數與資料型別</h3>
+                                <span class="px-2 py-1 text-xs font-medium rounded-full bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200">基礎</span>
+                            </div>
+                            <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
+                                學習如何宣告變數，以及 Python 中的基本資料型別。
+                            </p>
+                        </div>
+                        <button onclick="toggleLesson(this)" class="ml-4 p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+                            <svg class="w-5 h-5 text-gray-500 dark:text-gray-400 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="lesson-content hidden space-y-4 border-t border-gray-200 dark:border-gray-700 pt-4">
+                        <div>
+                            <h4 class="font-semibold text-gray-900 dark:text-white mb-2">程式碼範例：</h4>
+                            <pre class="code-block"><code># 變數宣告
+name = "小明"           # 字串 (string)
+age = 25              # 整數 (integer)
+height = 175.5        # 浮點數 (float)
+is_student = True     # 布林值 (boolean)
+
+# 顯示變數內容
+print(f"姓名：{name}")
+print(f"年齡：{age}")
+print(f"身高：{height} 公分")
+print(f"是學生：{is_student}")</code></pre>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-900 dark:text-white mb-2">詳細說明：</h4>
+                            <div class="text-gray-600 dark:text-gray-300 leading-relaxed space-y-3">
+                                <p>Python 中的基本資料型別包括：</p>
+                                <ul class="list-disc list-inside space-y-1 ml-4">
+                                    <li><strong>字串 (str)：</strong>用引號包圍的文字</li>
+                                    <li><strong>整數 (int)：</strong>沒有小數點的數字</li>
+                                    <li><strong>浮點數 (float)：</strong>有小數點的數字</li>
+                                    <li><strong>布林值 (bool)：</strong>True 或 False</li>
+                                </ul>
+                                <p>f-string 是格式化字串的現代方法，使用 <code>f""</code> 並在大括號中放入變數。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- JavaScript Tutorial Section -->
+        <div id="javascript" class="max-w-4xl mx-auto hidden">
+            <div class="mb-8">
+                <div class="flex items-center mb-4">
+                    <button onclick="showHome()" class="text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 mr-4">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                        </svg>
+                    </button>
+                    <div class="flex items-center">
+                        <div class="w-12 h-12 bg-yellow-500 rounded-lg flex items-center justify-center text-white text-lg font-bold mr-4">
+                            JS
+                        </div>
+                        <div>
+                            <h1 class="text-3xl font-bold text-gray-900 dark:text-white">JavaScript 教學</h1>
+                            <p class="text-gray-600 dark:text-gray-300">網頁開發的核心語言</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded-lg p-4">
+                    <h2 class="font-semibold text-yellow-900 dark:text-yellow-100 mb-2">學習目標</h2>
+                    <ul class="text-yellow-800 dark:text-yellow-200 text-sm space-y-1">
+                        <li>• 掌握 JavaScript 基本語法</li>
+                        <li>• 了解變數、函數和資料結構</li>
+                        <li>• 學會操作陣列和物件</li>
+                        <li>• 能夠編寫互動式網頁功能</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- JavaScript Lessons -->
+            <div class="space-y-6">
+                <div class="card p-6">
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="flex-1">
+                            <div class="flex items-center mb-2">
+                                <h3 class="text-xl font-bold text-gray-900 dark:text-white mr-3">1. JavaScript 簡介</h3>
+                                <span class="px-2 py-1 text-xs font-medium rounded-full bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200">基礎</span>
+                            </div>
+                            <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
+                                了解 JavaScript 的用途、特色，以及如何在網頁中使用。
+                            </p>
+                        </div>
+                        <button onclick="toggleLesson(this)" class="ml-4 p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+                            <svg class="w-5 h-5 text-gray-500 dark:text-gray-400 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="lesson-content hidden space-y-4 border-t border-gray-200 dark:border-gray-700 pt-4">
+                        <div>
+                            <h4 class="font-semibold text-gray-900 dark:text-white mb-2">程式碼範例：</h4>
+                            <pre class="code-block"><code>// 這是你的第一個 JavaScript 程式
+console.log("Hello, World!");
+console.log("歡迎來到 JavaScript 的世界！");
+
+// 在網頁中顯示訊息
+alert("歡迎學習 JavaScript！");
+
+// 修改網頁內容
+document.getElementById("demo").innerHTML = "Hello JavaScript!";</code></pre>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-900 dark:text-white mb-2">詳細說明：</h4>
+                            <div class="text-gray-600 dark:text-gray-300 leading-relaxed space-y-3">
+                                <p>JavaScript 是網頁開發的核心語言，主要用於：</p>
+                                <ul class="list-disc list-inside space-y-1 ml-4">
+                                    <li>網頁互動效果</li>
+                                    <li>動態內容更新</li>
+                                    <li>表單驗證</li>
+                                    <li>後端開發 (Node.js)</li>
+                                    <li>行動應用開發</li>
+                                </ul>
+                                <p><code>console.log()</code> 用於在開發者工具中顯示訊息，<code>alert()</code> 會彈出對話框。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Java Tutorial Section -->
+        <div id="java" class="max-w-4xl mx-auto hidden">
+            <div class="mb-8">
+                <div class="flex items-center mb-4">
+                    <button onclick="showHome()" class="text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 mr-4">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                        </svg>
+                    </button>
+                    <div class="flex items-center">
+                        <div class="w-12 h-12 bg-red-500 rounded-lg flex items-center justify-center text-white text-2xl font-bold mr-4">
+                            ☕
+                        </div>
+                        <div>
+                            <h1 class="text-3xl font-bold text-gray-900 dark:text-white">Java 教學</h1>
+                            <p class="text-gray-600 dark:text-gray-300">企業級開發的首選語言</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg p-4">
+                    <h2 class="font-semibold text-red-900 dark:text-red-100 mb-2">學習目標</h2>
+                    <ul class="text-red-800 dark:text-red-200 text-sm space-y-1">
+                        <li>• 了解 Java 物件導向概念</li>
+                        <li>• 掌握基本語法和資料結構</li>
+                        <li>• 學會使用陣列和控制結構</li>
+                        <li>• 建立 Java 程式設計基礎</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Java Lessons -->
+            <div class="space-y-6">
+                <div class="card p-6">
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="flex-1">
+                            <div class="flex items-center mb-2">
+                                <h3 class="text-xl font-bold text-gray-900 dark:text-white mr-3">1. Java 簡介與環境設置</h3>
+                                <span class="px-2 py-1 text-xs font-medium rounded-full bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200">基礎</span>
+                            </div>
+                            <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
+                                了解 Java 的特色、應用領域，以及如何設置開發環境。
+                            </p>
+                        </div>
+                        <button onclick="toggleLesson(this)" class="ml-4 p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+                            <svg class="w-5 h-5 text-gray-500 dark:text-gray-400 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="lesson-content hidden space-y-4 border-t border-gray-200 dark:border-gray-700 pt-4">
+                        <div>
+                            <h4 class="font-semibold text-gray-900 dark:text-white mb-2">程式碼範例：</h4>
+                            <pre class="code-block"><code>// 你的第一個 Java 程式
+public class HelloWorld {
+    public static void main(String[] args) {
+        System.out.println("Hello, World!");
+        System.out.println("歡迎來到 Java 的世界！");
+    }
+}</code></pre>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-900 dark:text-white mb-2">詳細說明：</h4>
+                            <div class="text-gray-600 dark:text-gray-300 leading-relaxed space-y-3">
+                                <p>Java 是一種物件導向的程式語言，具有以下特色：</p>
+                                <ul class="list-disc list-inside space-y-1 ml-4">
+                                    <li>跨平台執行（Write Once, Run Anywhere）</li>
+                                    <li>強型別系統</li>
+                                    <li>自動記憶體管理</li>
+                                    <li>豐富的標準函式庫</li>
+                                    <li>企業級應用開發</li>
+                                </ul>
+                                <p>每個 Java 程式都需要一個 main 方法作為程式的入口點。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // 主題切換功能
+        const themeToggle = document.getElementById('theme-toggle');
+        const sunIcon = document.getElementById('sun-icon');
+        const moonIcon = document.getElementById('moon-icon');
+        const html = document.documentElement;
+
+        // 檢查本地存儲或系統偏好
+        const savedTheme = localStorage.getItem('theme');
+        const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const isDark = savedTheme ? savedTheme === 'dark' : systemDark;
+
+        // 設置初始主題
+        if (isDark) {
+            html.classList.add('dark');
+            sunIcon.classList.remove('hidden');
+            moonIcon.classList.add('hidden');
+        } else {
+            html.classList.remove('dark');
+            sunIcon.classList.add('hidden');
+            moonIcon.classList.remove('hidden');
+        }
+
+        // 主題切換事件
+        themeToggle.addEventListener('click', () => {
+            const isDarkMode = html.classList.contains('dark');
+
+            if (isDarkMode) {
+                html.classList.remove('dark');
+                sunIcon.classList.add('hidden');
+                moonIcon.classList.remove('hidden');
+                localStorage.setItem('theme', 'light');
+            } else {
+                html.classList.add('dark');
+                sunIcon.classList.remove('hidden');
+                moonIcon.classList.add('hidden');
+                localStorage.setItem('theme', 'dark');
+            }
+        });
+
+        // 頁面導航功能
+        function showHome() {
+            document.getElementById('home').classList.remove('hidden');
+            document.getElementById('python').classList.add('hidden');
+            document.getElementById('javascript').classList.add('hidden');
+            document.getElementById('java').classList.add('hidden');
+        }
+
+        function showLanguage(language) {
+            document.getElementById('home').classList.add('hidden');
+            document.getElementById('python').classList.add('hidden');
+            document.getElementById('javascript').classList.add('hidden');
+            document.getElementById('java').classList.add('hidden');
+            document.getElementById(language).classList.remove('hidden');
+        }
+
+        // 課程展開/收起功能
+        function toggleLesson(button) {
+            const content = button.parentElement.nextElementSibling;
+            const icon = button.querySelector('svg');
+
+            if (content.classList.contains('hidden')) {
+                content.classList.remove('hidden');
+                icon.style.transform = 'rotate(180deg)';
+            } else {
+                content.classList.add('hidden');
+                icon.style.transform = 'rotate(0deg)';
+            }
+        }
+    </script>
+</body>
+</html>
