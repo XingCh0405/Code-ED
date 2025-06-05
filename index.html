@@ -48,19 +48,56 @@
             background-color: #1f2937;
             border-color: #374151;
         }
+        .code-container {
+            position: relative;
+            margin: 1rem 0;
+        }
         .code-block {
             background-color: #f3f4f6;
             border: 1px solid #e5e7eb;
             border-radius: 0.5rem;
             padding: 1rem;
+            padding-top: 2.5rem;
             font-size: 0.875rem;
             overflow-x: auto;
             color: #374151;
+            margin: 0;
         }
         .dark .code-block {
             background-color: #111827;
             border-color: #374151;
             color: #e5e7eb;
+        }
+        .copy-button {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            background-color: #6b7280;
+            color: white;
+            border: none;
+            border-radius: 0.375rem;
+            padding: 0.375rem 0.75rem;
+            font-size: 0.75rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+        .copy-button:hover {
+            background-color: #4b5563;
+        }
+        .copy-button.copied {
+            background-color: #10b981;
+        }
+        .dark .copy-button {
+            background-color: #4b5563;
+        }
+        .dark .copy-button:hover {
+            background-color: #374151;
+        }
+        .dark .copy-button.copied {
+            background-color: #059669;
         }
     </style>
 </head>
@@ -321,12 +358,16 @@
                 </div>
 
                 <div class="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-4">
-                    <h2 class="font-semibold text-blue-900 dark:text-blue-100 mb-2">學習目標</h2>
+                    <h2 class="font-semibold text-blue-900 dark:text-blue-100 mb-2">完整學習目標</h2>
                     <ul class="text-blue-800 dark:text-blue-200 text-sm space-y-1">
                         <li>• 了解 Python 基本語法和概念</li>
-                        <li>• 掌握變數、資料型別和運算</li>
+                        <li>• 掌握變數、資料型別和運算子</li>
                         <li>• 學會條件判斷和迴圈控制</li>
-                        <li>• 能夠編寫簡單的 Python 程式</li>
+                        <li>• 理解函數定義和使用</li>
+                        <li>• 掌握資料結構（串列、字典、集合、元組）</li>
+                        <li>• 學會檔案處理和例外處理</li>
+                        <li>• 了解物件導向程式設計基礎</li>
+                        <li>• 能夠編寫完整的 Python 程式</li>
                     </ul>
                 </div>
             </div>
@@ -353,9 +394,17 @@
                     <div class="lesson-content hidden space-y-4 border-t border-gray-200 dark:border-gray-700 pt-4">
                         <div>
                             <h4 class="font-semibold text-gray-900 dark:text-white mb-2">程式碼範例：</h4>
-                            <pre class="code-block"><code># 這是你的第一個 Python 程式
+                            <div class="code-container">
+                                <button class="copy-button" onclick="copyCode(this)">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                                    </svg>
+                                    複製
+                                </button>
+                                <pre class="code-block"><code># 這是你的第一個 Python 程式
 print("Hello, World!")
 print("歡迎來到 Python 的世界！")</code></pre>
+                            </div>
                         </div>
                         <div>
                             <h4 class="font-semibold text-gray-900 dark:text-white mb-2">詳細說明：</h4>
@@ -394,7 +443,14 @@ print("歡迎來到 Python 的世界！")</code></pre>
                     <div class="lesson-content hidden space-y-4 border-t border-gray-200 dark:border-gray-700 pt-4">
                         <div>
                             <h4 class="font-semibold text-gray-900 dark:text-white mb-2">程式碼範例：</h4>
-                            <pre class="code-block"><code># 變數宣告
+                            <div class="code-container">
+                                <button class="copy-button" onclick="copyCode(this)">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                                    </svg>
+                                    複製
+                                </button>
+                                <pre class="code-block"><code># 變數宣告
 name = "小明"           # 字串 (string)
 age = 25              # 整數 (integer)
 height = 175.5        # 浮點數 (float)
@@ -405,6 +461,7 @@ print(f"姓名：{name}")
 print(f"年齡：{age}")
 print(f"身高：{height} 公分")
 print(f"是學生：{is_student}")</code></pre>
+                            </div>
                         </div>
                         <div>
                             <h4 class="font-semibold text-gray-900 dark:text-white mb-2">詳細說明：</h4>
@@ -419,6 +476,1288 @@ print(f"是學生：{is_student}")</code></pre>
                                 <p>f-string 是格式化字串的現代方法，使用 <code>f""</code> 並在大括號中放入變數。</p>
                             </div>
                         </div>
+                    </div>
+                </div>
+
+                <div class="card p-6">
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="flex-1">
+                            <div class="flex items-center mb-2">
+                                <h3 class="text-xl font-bold text-gray-900 dark:text-white mr-3">3. 運算子與表達式</h3>
+                                <span class="px-2 py-1 text-xs font-medium rounded-full bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200">基礎</span>
+                            </div>
+                            <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
+                                學習 Python 中的各種運算子，包括算術、比較、邏輯運算子等。
+                            </p>
+                        </div>
+                        <button onclick="toggleLesson(this)" class="ml-4 p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+                            <svg class="w-5 h-5 text-gray-500 dark:text-gray-400 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="lesson-content hidden space-y-4 border-t border-gray-200 dark:border-gray-700 pt-4">
+                        <div>
+                            <h4 class="font-semibold text-gray-900 dark:text-white mb-2">程式碼範例：</h4>
+                            <pre class="code-block"><code># 算術運算子
+a = 10
+b = 3
+
+print(f"加法：{a} + {b} = {a + b}")      # 13
+print(f"減法：{a} - {b} = {a - b}")      # 7
+print(f"乘法：{a} * {b} = {a * b}")      # 30
+print(f"除法：{a} / {b} = {a / b}")      # 3.333...
+print(f"整數除法：{a} // {b} = {a // b}")  # 3
+print(f"餘數：{a} % {b} = {a % b}")      # 1
+print(f"次方：{a} ** {b} = {a ** b}")    # 1000
+
+# 比較運算子
+x = 5
+y = 8
+print(f"{x} == {y}: {x == y}")  # False
+print(f"{x} != {y}: {x != y}")  # True
+print(f"{x} < {y}: {x < y}")    # True
+print(f"{x} > {y}: {x > y}")    # False
+
+# 邏輯運算子
+print(f"True and False: {True and False}")  # False
+print(f"True or False: {True or False}")    # True
+print(f"not True: {not True}")              # False</code></pre>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-900 dark:text-white mb-2">詳細說明：</h4>
+                            <div class="text-gray-600 dark:text-gray-300 leading-relaxed space-y-3">
+                                <p>Python 中的運算子分為幾個類別：</p>
+                                <ul class="list-disc list-inside space-y-1 ml-4">
+                                    <li><strong>算術運算子：</strong>+, -, *, /, //, %, **</li>
+                                    <li><strong>比較運算子：</strong>==, !=, <, >, <=, >=</li>
+                                    <li><strong>邏輯運算子：</strong>and, or, not</li>
+                                    <li><strong>賦值運算子：</strong>=, +=, -=, *=, /=</li>
+                                </ul>
+                                <p>運算子的優先順序很重要，可以使用括號來改變運算順序。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card p-6">
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="flex-1">
+                            <div class="flex items-center mb-2">
+                                <h3 class="text-xl font-bold text-gray-900 dark:text-white mr-3">4. 輸入與輸出</h3>
+                                <span class="px-2 py-1 text-xs font-medium rounded-full bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200">基礎</span>
+                            </div>
+                            <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
+                                學習如何從使用者獲取輸入，以及如何格式化輸出。
+                            </p>
+                        </div>
+                        <button onclick="toggleLesson(this)" class="ml-4 p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+                            <svg class="w-5 h-5 text-gray-500 dark:text-gray-400 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="lesson-content hidden space-y-4 border-t border-gray-200 dark:border-gray-700 pt-4">
+                        <div>
+                            <h4 class="font-semibold text-gray-900 dark:text-white mb-2">程式碼範例：</h4>
+                            <pre class="code-block"><code># 基本輸入輸出
+name = input("請輸入您的姓名：")
+age = input("請輸入您的年齡：")
+age = int(age)  # 將字串轉換為整數
+
+print(f"您好，{name}！")
+print(f"您今年 {age} 歲")
+
+# 計算明年年齡
+next_year_age = age + 1
+print(f"明年您將 {next_year_age} 歲")
+
+# 不同的輸出格式
+score = 85.6789
+print(f"成績：{score}")           # 85.6789
+print(f"成績：{score:.2f}")       # 85.68 (保留兩位小數)
+print(f"成績：{score:.1f}")       # 85.7 (保留一位小數)
+
+# 字串格式化的其他方法
+print("姓名：{}，年齡：{}".format(name, age))
+print("姓名：%s，年齡：%d" % (name, age))</code></pre>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-900 dark:text-white mb-2">詳細說明：</h4>
+                            <div class="text-gray-600 dark:text-gray-300 leading-relaxed space-y-3">
+                                <p>輸入輸出是程式與使用者互動的基礎：</p>
+                                <ul class="list-disc list-inside space-y-1 ml-4">
+                                    <li><strong>input()：</strong>獲取使用者輸入，回傳字串</li>
+                                    <li><strong>print()：</strong>顯示輸出到螢幕</li>
+                                    <li><strong>型別轉換：</strong>int(), float(), str()</li>
+                                    <li><strong>格式化：</strong>f-string, .format(), % 格式化</li>
+                                </ul>
+                                <p>記住 input() 總是回傳字串，需要時要進行型別轉換。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card p-6">
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="flex-1">
+                            <div class="flex items-center mb-2">
+                                <h3 class="text-xl font-bold text-gray-900 dark:text-white mr-3">5. 條件判斷 (if/elif/else)</h3>
+                                <span class="px-2 py-1 text-xs font-medium rounded-full bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200">進階</span>
+                            </div>
+                            <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
+                                學習如何使用條件判斷來控制程式的執行流程。
+                            </p>
+                        </div>
+                        <button onclick="toggleLesson(this)" class="ml-4 p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+                            <svg class="w-5 h-5 text-gray-500 dark:text-gray-400 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="lesson-content hidden space-y-4 border-t border-gray-200 dark:border-gray-700 pt-4">
+                        <div>
+                            <h4 class="font-semibold text-gray-900 dark:text-white mb-2">程式碼範例：</h4>
+                            <pre class="code-block"><code># 基本 if 語句
+age = int(input("請輸入您的年齡："))
+
+if age >= 18:
+    print("您已成年，可以投票！")
+else:
+    print("您還未成年，無法投票。")
+
+# 多重條件判斷
+score = int(input("請輸入您的成績："))
+
+if score >= 90:
+    grade = "A"
+    print("優秀！")
+elif score >= 80:
+    grade = "B"
+    print("良好！")
+elif score >= 70:
+    grade = "C"
+    print("及格！")
+elif score >= 60:
+    grade = "D"
+    print("勉強及格。")
+else:
+    grade = "F"
+    print("不及格，需要加油！")
+
+print(f"您的等級是：{grade}")
+
+# 巢狀條件判斷
+weather = input("今天天氣如何？(晴天/雨天)：")
+temperature = int(input("今天溫度幾度？："))
+
+if weather == "晴天":
+    if temperature > 25:
+        print("適合去海邊！")
+    else:
+        print("適合散步！")
+else:
+    print("適合在家看書！")</code></pre>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-900 dark:text-white mb-2">詳細說明：</h4>
+                            <div class="text-gray-600 dark:text-gray-300 leading-relaxed space-y-3">
+                                <p>條件判斷是程式設計的核心概念：</p>
+                                <ul class="list-disc list-inside space-y-1 ml-4">
+                                    <li><strong>if：</strong>當條件為真時執行</li>
+                                    <li><strong>elif：</strong>當前面條件為假，此條件為真時執行</li>
+                                    <li><strong>else：</strong>當所有條件都為假時執行</li>
+                                    <li><strong>縮排：</strong>Python 使用縮排來表示程式碼區塊</li>
+                                </ul>
+                                <p>注意 Python 的縮排非常重要，通常使用 4 個空格。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card p-6">
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="flex-1">
+                            <div class="flex items-center mb-2">
+                                <h3 class="text-xl font-bold text-gray-900 dark:text-white mr-3">6. 迴圈 (for/while)</h3>
+                                <span class="px-2 py-1 text-xs font-medium rounded-full bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200">進階</span>
+                            </div>
+                            <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
+                                學習如何使用迴圈來重複執行程式碼。
+                            </p>
+                        </div>
+                        <button onclick="toggleLesson(this)" class="ml-4 p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+                            <svg class="w-5 h-5 text-gray-500 dark:text-gray-400 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="lesson-content hidden space-y-4 border-t border-gray-200 dark:border-gray-700 pt-4">
+                        <div>
+                            <h4 class="font-semibold text-gray-900 dark:text-white mb-2">程式碼範例：</h4>
+                            <pre class="code-block"><code># for 迴圈 - 基本用法
+print("數字 1 到 5：")
+for i in range(1, 6):
+    print(f"數字：{i}")
+
+# for 迴圈 - 遍歷字串
+name = "Python"
+print(f"\n'{name}' 的每個字母：")
+for letter in name:
+    print(f"字母：{letter}")
+
+# for 迴圈 - 遍歷列表
+fruits = ["蘋果", "香蕉", "橘子", "葡萄"]
+print("\n水果清單：")
+for fruit in fruits:
+    print(f"- {fruit}")
+
+# while 迴圈
+print("\n倒數計時：")
+count = 5
+while count > 0:
+    print(f"{count}...")
+    count -= 1
+print("時間到！")
+
+# 迴圈控制 - break 和 continue
+print("\n尋找第一個偶數：")
+numbers = [1, 3, 5, 8, 9, 10]
+for num in numbers:
+    if num % 2 == 0:
+        print(f"找到偶數：{num}")
+        break
+    print(f"{num} 是奇數")
+
+print("\n只印出奇數：")
+for num in range(1, 11):
+    if num % 2 == 0:
+        continue  # 跳過偶數
+    print(f"奇數：{num}")</code></pre>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-900 dark:text-white mb-2">詳細說明：</h4>
+                            <div class="text-gray-600 dark:text-gray-300 leading-relaxed space-y-3">
+                                <p>迴圈讓我們能夠重複執行程式碼：</p>
+                                <ul class="list-disc list-inside space-y-1 ml-4">
+                                    <li><strong>for 迴圈：</strong>用於遍歷序列（字串、列表等）</li>
+                                    <li><strong>while 迴圈：</strong>當條件為真時持續執行</li>
+                                    <li><strong>range()：</strong>產生數字序列</li>
+                                    <li><strong>break：</strong>跳出迴圈</li>
+                                    <li><strong>continue：</strong>跳過本次迭代</li>
+                                </ul>
+                                <p>選擇適當的迴圈類型能讓程式碼更清晰易懂。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card p-6">
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="flex-1">
+                            <div class="flex items-center mb-2">
+                                <h3 class="text-xl font-bold text-gray-900 dark:text-white mr-3">7. 串列 (List) 與元組 (Tuple)</h3>
+                                <span class="px-2 py-1 text-xs font-medium rounded-full bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200">進階</span>
+                            </div>
+                            <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
+                                學習 Python 中最重要的資料結構：串列和元組。
+                            </p>
+                        </div>
+                        <button onclick="toggleLesson(this)" class="ml-4 p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+                            <svg class="w-5 h-5 text-gray-500 dark:text-gray-400 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="lesson-content hidden space-y-4 border-t border-gray-200 dark:border-gray-700 pt-4">
+                        <div>
+                            <h4 class="font-semibold text-gray-900 dark:text-white mb-2">程式碼範例：</h4>
+                            <pre class="code-block"><code># 串列 (List) - 可變的有序集合
+fruits = ["蘋果", "香蕉", "橘子"]
+print(f"水果清單：{fruits}")
+
+# 存取串列元素
+print(f"第一個水果：{fruits[0]}")
+print(f"最後一個水果：{fruits[-1]}")
+
+# 修改串列
+fruits[1] = "草莓"  # 修改第二個元素
+print(f"修改後：{fruits}")
+
+# 串列方法
+fruits.append("葡萄")      # 添加元素
+print(f"添加葡萄：{fruits}")
+
+fruits.insert(1, "芒果")   # 在指定位置插入
+print(f"插入芒果：{fruits}")
+
+removed = fruits.pop()     # 移除最後一個元素
+print(f"移除了：{removed}")
+print(f"現在的清單：{fruits}")
+
+# 串列切片
+numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+print(f"前三個數字：{numbers[:3]}")
+print(f"後三個數字：{numbers[-3:]}")
+print(f"中間部分：{numbers[3:7]}")
+
+# 元組 (Tuple) - 不可變的有序集合
+coordinates = (10, 20)
+print(f"座標：{coordinates}")
+
+# 元組解包
+x, y = coordinates
+print(f"x = {x}, y = {y}")
+
+# 多個變數同時賦值
+name, age, city = ("小明", 25, "台北")
+print(f"姓名：{name}, 年齡：{age}, 城市：{city}")</code></pre>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-900 dark:text-white mb-2">詳細說明：</h4>
+                            <div class="text-gray-600 dark:text-gray-300 leading-relaxed space-y-3">
+                                <p>串列和元組是 Python 中重要的資料結構：</p>
+                                <ul class="list-disc list-inside space-y-1 ml-4">
+                                    <li><strong>串列 (List)：</strong>可變、有序、允許重複元素</li>
+                                    <li><strong>元組 (Tuple)：</strong>不可變、有序、允許重複元素</li>
+                                    <li><strong>索引：</strong>從 0 開始，負數索引從末尾開始</li>
+                                    <li><strong>切片：</strong>使用 [start:end] 語法</li>
+                                </ul>
+                                <p>串列適合需要修改的資料，元組適合固定不變的資料。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card p-6">
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="flex-1">
+                            <div class="flex items-center mb-2">
+                                <h3 class="text-xl font-bold text-gray-900 dark:text-white mr-3">8. 字典 (Dictionary) 與集合 (Set)</h3>
+                                <span class="px-2 py-1 text-xs font-medium rounded-full bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200">進階</span>
+                            </div>
+                            <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
+                                學習字典和集合這兩種重要的資料結構。
+                            </p>
+                        </div>
+                        <button onclick="toggleLesson(this)" class="ml-4 p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+                            <svg class="w-5 h-5 text-gray-500 dark:text-gray-400 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="lesson-content hidden space-y-4 border-t border-gray-200 dark:border-gray-700 pt-4">
+                        <div>
+                            <h4 class="font-semibold text-gray-900 dark:text-white mb-2">程式碼範例：</h4>
+                            <pre class="code-block"><code># 字典 (Dictionary) - 鍵值對的集合
+student = {
+    "姓名": "小明",
+    "年齡": 20,
+    "科系": "資訊工程",
+    "成績": [85, 92, 78, 90]
+}
+
+print(f"學生資料：{student}")
+print(f"姓名：{student['姓名']}")
+print(f"年齡：{student['年齡']}")
+
+# 修改字典
+student["年齡"] = 21
+student["學號"] = "A123456789"
+print(f"更新後：{student}")
+
+# 字典方法
+print(f"所有鍵：{list(student.keys())}")
+print(f"所有值：{list(student.values())}")
+
+# 安全地取得值
+email = student.get("email", "未提供")
+print(f"Email：{email}")
+
+# 遍歷字典
+print("\n學生詳細資料：")
+for key, value in student.items():
+    print(f"{key}：{value}")
+
+# 集合 (Set) - 不重複元素的集合
+numbers = {1, 2, 3, 4, 5}
+print(f"\n數字集合：{numbers}")
+
+# 集合會自動去除重複
+duplicate_numbers = {1, 2, 2, 3, 3, 4, 5}
+print(f"去除重複後：{duplicate_numbers}")
+
+# 集合運算
+set1 = {1, 2, 3, 4}
+set2 = {3, 4, 5, 6}
+
+print(f"聯集：{set1 | set2}")      # {1, 2, 3, 4, 5, 6}
+print(f"交集：{set1 & set2}")      # {3, 4}
+print(f"差集：{set1 - set2}")      # {1, 2}
+
+# 集合方法
+colors = {"紅", "綠", "藍"}
+colors.add("黃")
+print(f"添加顏色後：{colors}")
+
+colors.remove("綠")
+print(f"移除綠色後：{colors}")</code></pre>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-900 dark:text-white mb-2">詳細說明：</h4>
+                            <div class="text-gray-600 dark:text-gray-300 leading-relaxed space-y-3">
+                                <p>字典和集合提供了不同的資料組織方式：</p>
+                                <ul class="list-disc list-inside space-y-1 ml-4">
+                                    <li><strong>字典 (Dict)：</strong>鍵值對映射，快速查找</li>
+                                    <li><strong>集合 (Set)：</strong>不重複元素，支援集合運算</li>
+                                    <li><strong>字典鍵：</strong>必須是不可變類型</li>
+                                    <li><strong>集合運算：</strong>聯集、交集、差集</li>
+                                </ul>
+                                <p>字典適合存儲關聯資料，集合適合去重和集合運算。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card p-6">
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="flex-1">
+                            <div class="flex items-center mb-2">
+                                <h3 class="text-xl font-bold text-gray-900 dark:text-white mr-3">9. 函數基礎</h3>
+                                <span class="px-2 py-1 text-xs font-medium rounded-full bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200">中級</span>
+                            </div>
+                            <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
+                                學習如何定義和使用函數，讓程式碼更模組化和可重用。
+                            </p>
+                        </div>
+                        <button onclick="toggleLesson(this)" class="ml-4 p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+                            <svg class="w-5 h-5 text-gray-500 dark:text-gray-400 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="lesson-content hidden space-y-4 border-t border-gray-200 dark:border-gray-700 pt-4">
+                        <div>
+                            <h4 class="font-semibold text-gray-900 dark:text-white mb-2">程式碼範例：</h4>
+                            <pre class="code-block"><code># 基本函數定義
+def greet():
+    print("Hello, World!")
+
+# 呼叫函數
+greet()
+
+# 帶參數的函數
+def greet_person(name):
+    print(f"你好，{name}！")
+
+greet_person("小明")
+greet_person("小華")
+
+# 帶回傳值的函數
+def add_numbers(a, b):
+    result = a + b
+    return result
+
+sum_result = add_numbers(5, 3)
+print(f"5 + 3 = {sum_result}")
+
+# 預設參數
+def introduce(name, age=18, city="台北"):
+    print(f"我是{name}，今年{age}歲，住在{city}")
+
+introduce("小明")
+introduce("小華", 25)
+introduce("小李", 30, "高雄")
+
+# 多個回傳值
+def get_name_age():
+    name = "小明"
+    age = 25
+    return name, age
+
+person_name, person_age = get_name_age()
+print(f"姓名：{person_name}, 年齡：{person_age}")
+
+# 實用函數範例
+def calculate_bmi(weight, height):
+    """計算BMI值"""
+    bmi = weight / (height ** 2)
+    return round(bmi, 2)
+
+def bmi_category(bmi):
+    """判斷BMI類別"""
+    if bmi < 18.5:
+        return "體重過輕"
+    elif bmi < 24:
+        return "正常範圍"
+    elif bmi < 27:
+        return "過重"
+    else:
+        return "肥胖"
+
+# 使用函數
+weight = 70  # 公斤
+height = 1.75  # 公尺
+bmi = calculate_bmi(weight, height)
+category = bmi_category(bmi)
+print(f"BMI: {bmi}, 類別: {category}")</code></pre>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-900 dark:text-white mb-2">詳細說明：</h4>
+                            <div class="text-gray-600 dark:text-gray-300 leading-relaxed space-y-3">
+                                <p>函數是程式設計中重要的概念：</p>
+                                <ul class="list-disc list-inside space-y-1 ml-4">
+                                    <li><strong>def：</strong>定義函數的關鍵字</li>
+                                    <li><strong>參數：</strong>函數接收的輸入值</li>
+                                    <li><strong>return：</strong>回傳結果給呼叫者</li>
+                                    <li><strong>預設參數：</strong>提供參數的預設值</li>
+                                    <li><strong>文檔字串：</strong>使用三引號描述函數功能</li>
+                                </ul>
+                                <p>函數讓程式碼更容易維護和重複使用。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card p-6">
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="flex-1">
+                            <div class="flex items-center mb-2">
+                                <h3 class="text-xl font-bold text-gray-900 dark:text-white mr-3">10. 進階函數概念</h3>
+                                <span class="px-2 py-1 text-xs font-medium rounded-full bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200">中級</span>
+                            </div>
+                            <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
+                                學習更進階的函數概念，包括作用域、lambda 函數等。
+                            </p>
+                        </div>
+                        <button onclick="toggleLesson(this)" class="ml-4 p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+                            <svg class="w-5 h-5 text-gray-500 dark:text-gray-400 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="lesson-content hidden space-y-4 border-t border-gray-200 dark:border-gray-700 pt-4">
+                        <div>
+                            <h4 class="font-semibold text-gray-900 dark:text-white mb-2">程式碼範例：</h4>
+                            <pre class="code-block"><code># 變數作用域
+global_var = "我是全域變數"
+
+def scope_example():
+    local_var = "我是區域變數"
+    print(f"函數內部：{global_var}")
+    print(f"函數內部：{local_var}")
+
+scope_example()
+print(f"函數外部：{global_var}")
+# print(local_var)  # 這會出錯，因為 local_var 不存在
+
+# *args 和 **kwargs
+def flexible_function(*args, **kwargs):
+    print(f"位置參數：{args}")
+    print(f"關鍵字參數：{kwargs}")
+
+flexible_function(1, 2, 3, name="小明", age=25)
+
+# 實用範例：計算平均值
+def calculate_average(*numbers):
+    if len(numbers) == 0:
+        return 0
+    return sum(numbers) / len(numbers)
+
+avg1 = calculate_average(80, 90, 85)
+avg2 = calculate_average(75, 88, 92, 79, 85)
+print(f"平均分數1：{avg1}")
+print(f"平均分數2：{avg2}")
+
+# Lambda 函數（匿名函數）
+square = lambda x: x ** 2
+print(f"5的平方：{square(5)}")
+
+# Lambda 與內建函數結合
+numbers = [1, 2, 3, 4, 5]
+squared_numbers = list(map(lambda x: x ** 2, numbers))
+print(f"平方後：{squared_numbers}")
+
+even_numbers = list(filter(lambda x: x % 2 == 0, numbers))
+print(f"偶數：{even_numbers}")
+
+# 高階函數範例
+def apply_operation(numbers, operation):
+    return [operation(x) for x in numbers]
+
+numbers = [1, 2, 3, 4, 5]
+doubled = apply_operation(numbers, lambda x: x * 2)
+cubed = apply_operation(numbers, lambda x: x ** 3)
+
+print(f"原數字：{numbers}")
+print(f"乘以2：{doubled}")
+print(f"立方：{cubed}")
+
+# 遞迴函數範例
+def factorial(n):
+    """計算階乘"""
+    if n <= 1:
+        return 1
+    return n * factorial(n - 1)
+
+print(f"5! = {factorial(5)}")  # 120</code></pre>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-900 dark:text-white mb-2">詳細說明：</h4>
+                            <div class="text-gray-600 dark:text-gray-300 leading-relaxed space-y-3">
+                                <p>進階函數概念讓程式更靈活：</p>
+                                <ul class="list-disc list-inside space-y-1 ml-4">
+                                    <li><strong>作用域：</strong>變數的可見範圍</li>
+                                    <li><strong>*args：</strong>接收任意數量的位置參數</li>
+                                    <li><strong>**kwargs：</strong>接收任意數量的關鍵字參數</li>
+                                    <li><strong>Lambda：</strong>簡短的匿名函數</li>
+                                    <li><strong>遞迴：</strong>函數呼叫自己</li>
+                                </ul>
+                                <p>這些概念讓函數更強大和靈活。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card p-6">
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="flex-1">
+                            <div class="flex items-center mb-2">
+                                <h3 class="text-xl font-bold text-gray-900 dark:text-white mr-3">11. 檔案處理</h3>
+                                <span class="px-2 py-1 text-xs font-medium rounded-full bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200">中級</span>
+                            </div>
+                            <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
+                                學習如何讀取和寫入檔案，處理文字資料。
+                            </p>
+                        </div>
+                        <button onclick="toggleLesson(this)" class="ml-4 p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+                            <svg class="w-5 h-5 text-gray-500 dark:text-gray-400 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="lesson-content hidden space-y-4 border-t border-gray-200 dark:border-gray-700 pt-4">
+                        <div>
+                            <h4 class="font-semibold text-gray-900 dark:text-white mb-2">程式碼範例：</h4>
+                            <pre class="code-block"><code># 寫入檔案
+def write_to_file():
+    # 寫入文字檔案
+    with open("example.txt", "w", encoding="utf-8") as file:
+        file.write("Hello, World!\n")
+        file.write("這是第二行\n")
+        file.write("Python 檔案處理範例\n")
+    print("檔案寫入完成")
+
+# 讀取檔案
+def read_from_file():
+    try:
+        with open("example.txt", "r", encoding="utf-8") as file:
+            content = file.read()
+            print("檔案內容：")
+            print(content)
+    except FileNotFoundError:
+        print("檔案不存在")
+
+# 逐行讀取
+def read_lines():
+    try:
+        with open("example.txt", "r", encoding="utf-8") as file:
+            lines = file.readlines()
+            print("逐行讀取：")
+            for i, line in enumerate(lines, 1):
+                print(f"第{i}行：{line.strip()}")
+    except FileNotFoundError:
+        print("檔案不存在")
+
+# 追加內容到檔案
+def append_to_file():
+    with open("example.txt", "a", encoding="utf-8") as file:
+        file.write("這是追加的內容\n")
+    print("內容已追加")
+
+# 處理 CSV 檔案
+def write_csv():
+    students = [
+        ["姓名", "年齡", "成績"],
+        ["小明", "20", "85"],
+        ["小華", "21", "92"],
+        ["小李", "19", "78"]
+    ]
+
+    with open("students.csv", "w", encoding="utf-8") as file:
+        for row in students:
+            file.write(",".join(row) + "\n")
+    print("CSV檔案已建立")
+
+def read_csv():
+    try:
+        with open("students.csv", "r", encoding="utf-8") as file:
+            lines = file.readlines()
+            print("學生資料：")
+            for line in lines:
+                data = line.strip().split(",")
+                print(f"  {data}")
+    except FileNotFoundError:
+        print("CSV檔案不存在")
+
+# 實際使用範例
+write_to_file()
+read_from_file()
+read_lines()
+append_to_file()
+read_from_file()
+
+write_csv()
+read_csv()</code></pre>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-900 dark:text-white mb-2">詳細說明：</h4>
+                            <div class="text-gray-600 dark:text-gray-300 leading-relaxed space-y-3">
+                                <p>檔案處理是程式與外部資料互動的重要方式：</p>
+                                <ul class="list-disc list-inside space-y-1 ml-4">
+                                    <li><strong>open()：</strong>開啟檔案，指定模式（r/w/a）</li>
+                                    <li><strong>with 語句：</strong>自動關閉檔案，推薦使用</li>
+                                    <li><strong>encoding：</strong>指定編碼，避免中文亂碼</li>
+                                    <li><strong>讀取方法：</strong>read(), readline(), readlines()</li>
+                                    <li><strong>寫入方法：</strong>write(), writelines()</li>
+                                </ul>
+                                <p>記得處理檔案不存在的情況，使用適當的例外處理。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card p-6">
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="flex-1">
+                            <div class="flex items-center mb-2">
+                                <h3 class="text-xl font-bold text-gray-900 dark:text-white mr-3">12. 例外處理</h3>
+                                <span class="px-2 py-1 text-xs font-medium rounded-full bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200">中級</span>
+                            </div>
+                            <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
+                                學習如何處理程式執行時可能發生的錯誤。
+                            </p>
+                        </div>
+                        <button onclick="toggleLesson(this)" class="ml-4 p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+                            <svg class="w-5 h-5 text-gray-500 dark:text-gray-400 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="lesson-content hidden space-y-4 border-t border-gray-200 dark:border-gray-700 pt-4">
+                        <div>
+                            <h4 class="font-semibold text-gray-900 dark:text-white mb-2">程式碼範例：</h4>
+                            <pre class="code-block"><code># 基本例外處理
+def safe_division(a, b):
+    try:
+        result = a / b
+        print(f"{a} ÷ {b} = {result}")
+        return result
+    except ZeroDivisionError:
+        print("錯誤：不能除以零！")
+        return None
+
+# 測試除法
+safe_division(10, 2)   # 正常情況
+safe_division(10, 0)   # 除以零的情況
+
+# 多種例外處理
+def safe_input():
+    try:
+        age = int(input("請輸入您的年齡："))
+        if age < 0:
+            raise ValueError("年齡不能是負數")
+        print(f"您的年齡是：{age}")
+        return age
+    except ValueError as e:
+        print(f"輸入錯誤：{e}")
+        return None
+    except KeyboardInterrupt:
+        print("\n程式被使用者中斷")
+        return None
+
+# 檔案處理的例外處理
+def safe_file_read(filename):
+    try:
+        with open(filename, "r", encoding="utf-8") as file:
+            content = file.read()
+            print(f"檔案內容：\n{content}")
+    except FileNotFoundError:
+        print(f"錯誤：找不到檔案 '{filename}'")
+    except PermissionError:
+        print(f"錯誤：沒有權限讀取檔案 '{filename}'")
+    except Exception as e:
+        print(f"未預期的錯誤：{e}")
+
+# 使用 finally
+def file_operation_with_finally():
+    file = None
+    try:
+        file = open("test.txt", "r")
+        content = file.read()
+        print(content)
+    except FileNotFoundError:
+        print("檔案不存在")
+    finally:
+        if file:
+            file.close()
+            print("檔案已關閉")
+
+# 自定義例外
+class CustomError(Exception):
+    def __init__(self, message):
+        self.message = message
+        super().__init__(self.message)
+
+def validate_score(score):
+    try:
+        if score < 0 or score > 100:
+            raise CustomError(f"分數 {score} 超出有效範圍 (0-100)")
+        print(f"有效分數：{score}")
+    except CustomError as e:
+        print(f"自定義錯誤：{e.message}")
+
+# 實用的例外處理範例
+def robust_calculator():
+    while True:
+        try:
+            num1 = float(input("輸入第一個數字："))
+            operator = input("輸入運算子 (+, -, *, /)：")
+            num2 = float(input("輸入第二個數字："))
+
+            if operator == "+":
+                result = num1 + num2
+            elif operator == "-":
+                result = num1 - num2
+            elif operator == "*":
+                result = num1 * num2
+            elif operator == "/":
+                if num2 == 0:
+                    raise ZeroDivisionError("不能除以零")
+                result = num1 / num2
+            else:
+                raise ValueError("無效的運算子")
+
+            print(f"結果：{num1} {operator} {num2} = {result}")
+            break
+
+        except ValueError as e:
+            print(f"輸入錯誤：{e}")
+        except ZeroDivisionError as e:
+            print(f"計算錯誤：{e}")
+        except KeyboardInterrupt:
+            print("\n程式結束")
+            break
+
+# 測試範例
+safe_file_read("example.txt")
+validate_score(85)   # 有效
+validate_score(150)  # 無效</code></pre>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-900 dark:text-white mb-2">詳細說明：</h4>
+                            <div class="text-gray-600 dark:text-gray-300 leading-relaxed space-y-3">
+                                <p>例外處理讓程式更穩定可靠：</p>
+                                <ul class="list-disc list-inside space-y-1 ml-4">
+                                    <li><strong>try/except：</strong>捕捉和處理例外</li>
+                                    <li><strong>finally：</strong>無論是否有例外都會執行</li>
+                                    <li><strong>raise：</strong>主動拋出例外</li>
+                                    <li><strong>常見例外：</strong>ValueError, TypeError, FileNotFoundError</li>
+                                    <li><strong>自定義例外：</strong>繼承 Exception 類別</li>
+                                </ul>
+                                <p>適當的例外處理能提升使用者體驗和程式穩定性。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card p-6">
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="flex-1">
+                            <div class="flex items-center mb-2">
+                                <h3 class="text-xl font-bold text-gray-900 dark:text-white mr-3">13. 物件導向程式設計</h3>
+                                <span class="px-2 py-1 text-xs font-medium rounded-full bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200">高級</span>
+                            </div>
+                            <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
+                                學習類別、物件、繼承等物件導向程式設計的核心概念。
+                            </p>
+                        </div>
+                        <button onclick="toggleLesson(this)" class="ml-4 p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+                            <svg class="w-5 h-5 text-gray-500 dark:text-gray-400 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="lesson-content hidden space-y-4 border-t border-gray-200 dark:border-gray-700 pt-4">
+                        <div>
+                            <h4 class="font-semibold text-gray-900 dark:text-white mb-2">程式碼範例：</h4>
+                            <pre class="code-block"><code># 基本類別定義
+class Student:
+    # 類別變數
+    school = "Python 大學"
+
+    def __init__(self, name, age, student_id):
+        # 實例變數
+        self.name = name
+        self.age = age
+        self.student_id = student_id
+        self.grades = []
+
+    def add_grade(self, grade):
+        """新增成績"""
+        self.grades.append(grade)
+
+    def get_average(self):
+        """計算平均成績"""
+        if not self.grades:
+            return 0
+        return sum(self.grades) / len(self.grades)
+
+    def introduce(self):
+        """自我介紹"""
+        avg = self.get_average()
+        print(f"我是{self.name}，學號{self.student_id}")
+        print(f"年齡{self.age}歲，平均成績{avg:.1f}")
+
+# 建立物件
+student1 = Student("小明", 20, "A001")
+student2 = Student("小華", 21, "A002")
+
+# 使用物件方法
+student1.add_grade(85)
+student1.add_grade(92)
+student1.add_grade(78)
+
+student2.add_grade(88)
+student2.add_grade(95)
+
+student1.introduce()
+student2.introduce()
+
+# 繼承範例
+class GraduateStudent(Student):
+    def __init__(self, name, age, student_id, thesis_topic):
+        super().__init__(name, age, student_id)
+        self.thesis_topic = thesis_topic
+
+    def introduce(self):
+        """重寫父類方法"""
+        super().introduce()
+        print(f"論文主題：{self.thesis_topic}")
+
+# 建立研究生物件
+grad_student = GraduateStudent("小李", 24, "G001", "機器學習應用")
+grad_student.add_grade(95)
+grad_student.add_grade(88)
+grad_student.introduce()
+
+# 實用類別範例：銀行帳戶
+class BankAccount:
+    def __init__(self, account_number, owner, initial_balance=0):
+        self.account_number = account_number
+        self.owner = owner
+        self.__balance = initial_balance  # 私有變數
+
+    def deposit(self, amount):
+        """存款"""
+        if amount > 0:
+            self.__balance += amount
+            print(f"存款 ${amount}，餘額：${self.__balance}")
+        else:
+            print("存款金額必須大於0")
+
+    def withdraw(self, amount):
+        """提款"""
+        if amount > 0 and amount <= self.__balance:
+            self.__balance -= amount
+            print(f"提款 ${amount}，餘額：${self.__balance}")
+        else:
+            print("提款失敗：金額無效或餘額不足")
+
+    def get_balance(self):
+        """查詢餘額"""
+        return self.__balance
+
+    def __str__(self):
+        """字串表示"""
+        return f"帳戶 {self.account_number}，持有人：{self.owner}"
+
+# 使用銀行帳戶
+account = BankAccount("123456", "小明", 1000)
+print(account)
+account.deposit(500)
+account.withdraw(200)
+print(f"目前餘額：${account.get_balance()}")</code></pre>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-900 dark:text-white mb-2">詳細說明：</h4>
+                            <div class="text-gray-600 dark:text-gray-300 leading-relaxed space-y-3">
+                                <p>物件導向程式設計的核心概念：</p>
+                                <ul class="list-disc list-inside space-y-1 ml-4">
+                                    <li><strong>類別 (Class)：</strong>物件的藍圖或模板</li>
+                                    <li><strong>物件 (Object)：</strong>類別的實例</li>
+                                    <li><strong>__init__：</strong>建構函數，初始化物件</li>
+                                    <li><strong>繼承：</strong>子類別繼承父類別的特性</li>
+                                    <li><strong>封裝：</strong>使用 __ 前綴建立私有變數</li>
+                                </ul>
+                                <p>物件導向讓程式碼更模組化、可重用和易維護。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card p-6">
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="flex-1">
+                            <div class="flex items-center mb-2">
+                                <h3 class="text-xl font-bold text-gray-900 dark:text-white mr-3">14. 模組與套件</h3>
+                                <span class="px-2 py-1 text-xs font-medium rounded-full bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200">高級</span>
+                            </div>
+                            <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
+                                學習如何使用和建立模組，以及使用 Python 標準函式庫。
+                            </p>
+                        </div>
+                        <button onclick="toggleLesson(this)" class="ml-4 p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+                            <svg class="w-5 h-5 text-gray-500 dark:text-gray-400 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="lesson-content hidden space-y-4 border-t border-gray-200 dark:border-gray-700 pt-4">
+                        <div>
+                            <h4 class="font-semibold text-gray-900 dark:text-white mb-2">程式碼範例：</h4>
+                            <pre class="code-block"><code># 匯入標準函式庫模組
+import math
+import random
+import datetime
+from collections import Counter
+
+# 使用 math 模組
+print(f"圓周率：{math.pi}")
+print(f"10的平方根：{math.sqrt(10)}")
+print(f"sin(30度)：{math.sin(math.radians(30))}")
+
+# 使用 random 模組
+print(f"隨機數字：{random.randint(1, 100)}")
+print(f"隨機選擇：{random.choice(['蘋果', '香蕉', '橘子'])}")
+
+numbers = [1, 2, 3, 4, 5]
+random.shuffle(numbers)
+print(f"打亂後的數字：{numbers}")
+
+# 使用 datetime 模組
+now = datetime.datetime.now()
+print(f"現在時間：{now}")
+print(f"今天日期：{now.strftime('%Y-%m-%d')}")
+
+birthday = datetime.date(2000, 5, 15)
+today = datetime.date.today()
+age_days = (today - birthday).days
+print(f"出生至今天數：{age_days}")
+
+# 使用 collections 模組
+text = "hello world hello python"
+word_count = Counter(text.split())
+print(f"單字計數：{word_count}")
+
+# 自定義模組範例（通常會放在單獨的 .py 檔案中）
+# 假設這是 my_utils.py 檔案的內容
+def calculate_area_circle(radius):
+    """計算圓形面積"""
+    return math.pi * radius ** 2
+
+def calculate_area_rectangle(width, height):
+    """計算矩形面積"""
+    return width * height
+
+def is_prime(n):
+    """檢查是否為質數"""
+    if n < 2:
+        return False
+    for i in range(2, int(math.sqrt(n)) + 1):
+        if n % i == 0:
+            return False
+    return True
+
+def fibonacci(n):
+    """產生費波那契數列"""
+    if n <= 0:
+        return []
+    elif n == 1:
+        return [0]
+    elif n == 2:
+        return [0, 1]
+
+    fib = [0, 1]
+    for i in range(2, n):
+        fib.append(fib[i-1] + fib[i-2])
+    return fib
+
+# 使用自定義函數
+print(f"\n自定義函數範例：")
+print(f"半徑5的圓面積：{calculate_area_circle(5):.2f}")
+print(f"3x4矩形面積：{calculate_area_rectangle(3, 4)}")
+print(f"17是質數嗎？{is_prime(17)}")
+print(f"前10個費波那契數：{fibonacci(10)}")
+
+# 檔案和路徑處理
+import os
+import pathlib
+
+print(f"\n檔案系統操作：")
+print(f"當前目錄：{os.getcwd()}")
+print(f"目錄內容：{os.listdir('.')}")
+
+# 使用 pathlib（推薦的現代方法）
+current_path = pathlib.Path('.')
+print(f"Python檔案：")
+for py_file in current_path.glob('*.py'):
+    print(f"  {py_file}")
+
+# JSON 處理
+import json
+
+# 建立資料
+student_data = {
+    "name": "小明",
+    "age": 20,
+    "grades": [85, 92, 78, 90],
+    "is_active": True
+}
+
+# 轉換為 JSON 字串
+json_string = json.dumps(student_data, ensure_ascii=False, indent=2)
+print(f"\nJSON 資料：\n{json_string}")
+
+# 從 JSON 字串解析
+parsed_data = json.loads(json_string)
+print(f"解析後的姓名：{parsed_data['name']}")
+
+# 實用的模組使用範例
+def password_generator(length=8):
+    """產生隨機密碼"""
+    import string
+    characters = string.ascii_letters + string.digits + "!@#$%"
+    return ''.join(random.choice(characters) for _ in range(length))
+
+def file_backup():
+    """檔案備份範例"""
+    import shutil
+    source = "example.txt"
+    backup = f"backup_{datetime.datetime.now().strftime('%Y%m%d_%H%M%S')}.txt"
+    try:
+        shutil.copy2(source, backup)
+        print(f"檔案已備份為：{backup}")
+    except FileNotFoundError:
+        print("來源檔案不存在")
+
+print(f"\n實用功能：")
+print(f"隨機密碼：{password_generator(12)}")
+file_backup()</code></pre>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-900 dark:text-white mb-2">詳細說明：</h4>
+                            <div class="text-gray-600 dark:text-gray-300 leading-relaxed space-y-3">
+                                <p>模組讓程式碼更有組織性和可重用性：</p>
+                                <ul class="list-disc list-inside space-y-1 ml-4">
+                                    <li><strong>import：</strong>匯入整個模組</li>
+                                    <li><strong>from...import：</strong>匯入特定函數或類別</li>
+                                    <li><strong>標準函式庫：</strong>Python 內建的豐富模組</li>
+                                    <li><strong>第三方套件：</strong>使用 pip 安裝</li>
+                                    <li><strong>自定義模組：</strong>將程式碼組織成 .py 檔案</li>
+                                </ul>
+                                <p>善用模組能大幅提升開發效率和程式品質。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 學習總結 -->
+                <div class="bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 border border-blue-200 dark:border-blue-800 rounded-xl p-6">
+                    <h3 class="text-2xl font-bold text-blue-900 dark:text-blue-100 mb-4 flex items-center">
+                        <svg class="w-8 h-8 mr-3" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                        </svg>
+                        🎉 恭喜！您已完成 Python 完整教學
+                    </h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <h4 class="font-semibold text-blue-800 dark:text-blue-200 mb-3">您已學會的技能：</h4>
+                            <ul class="space-y-2 text-blue-700 dark:text-blue-300">
+                                <li class="flex items-center">
+                                    <svg class="w-4 h-4 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                                    </svg>
+                                    Python 基本語法和概念
+                                </li>
+                                <li class="flex items-center">
+                                    <svg class="w-4 h-4 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                                    </svg>
+                                    變數、資料型別和運算子
+                                </li>
+                                <li class="flex items-center">
+                                    <svg class="w-4 h-4 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                                    </svg>
+                                    條件判斷和迴圈控制
+                                </li>
+                                <li class="flex items-center">
+                                    <svg class="w-4 h-4 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                                    </svg>
+                                    資料結構（串列、字典、集合、元組）
+                                </li>
+                                <li class="flex items-center">
+                                    <svg class="w-4 h-4 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                                    </svg>
+                                    函數定義和進階概念
+                                </li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-blue-800 dark:text-blue-200 mb-3">進階技能：</h4>
+                            <ul class="space-y-2 text-blue-700 dark:text-blue-300">
+                                <li class="flex items-center">
+                                    <svg class="w-4 h-4 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                                    </svg>
+                                    檔案處理和資料存取
+                                </li>
+                                <li class="flex items-center">
+                                    <svg class="w-4 h-4 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                                    </svg>
+                                    例外處理和錯誤管理
+                                </li>
+                                <li class="flex items-center">
+                                    <svg class="w-4 h-4 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                                    </svg>
+                                    物件導向程式設計
+                                </li>
+                                <li class="flex items-center">
+                                    <svg class="w-4 h-4 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                                    </svg>
+                                    模組和套件使用
+                                </li>
+                                <li class="flex items-center">
+                                    <svg class="w-4 h-4 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                                    </svg>
+                                    標準函式庫應用
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="mt-6 p-4 bg-white dark:bg-gray-800 rounded-lg border border-blue-200 dark:border-blue-700">
+                        <h4 class="font-semibold text-gray-900 dark:text-white mb-2">🚀 下一步建議：</h4>
+                        <p class="text-gray-600 dark:text-gray-300 text-sm leading-relaxed">
+                            現在您已經掌握了 Python 的核心概念！建議您開始實作小專案，如計算機、待辦事項管理器、或簡單的遊戲。
+                            也可以學習 Django/Flask（網頁開發）、NumPy/Pandas（資料科學）、或 Tkinter（桌面應用程式）等進階主題。
+                        </p>
                     </div>
                 </div>
             </div>
@@ -656,6 +1995,93 @@ public class HelloWorld {
                 icon.style.transform = 'rotate(0deg)';
             }
         }
+
+        // 複製程式碼功能
+        function copyCode(button) {
+            const codeContainer = button.parentElement;
+            const codeBlock = codeContainer.querySelector('code');
+            const codeText = codeBlock.textContent;
+
+            // 使用 Clipboard API 複製文字
+            navigator.clipboard.writeText(codeText).then(() => {
+                // 更新按鈕狀態
+                const originalText = button.innerHTML;
+                button.classList.add('copied');
+                button.innerHTML = `
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                    已複製
+                `;
+
+                // 2秒後恢復原狀
+                setTimeout(() => {
+                    button.classList.remove('copied');
+                    button.innerHTML = originalText;
+                }, 2000);
+            }).catch(err => {
+                // 如果 Clipboard API 不支援，使用舊方法
+                const textArea = document.createElement('textarea');
+                textArea.value = codeText;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+
+                // 更新按鈕狀態
+                const originalText = button.innerHTML;
+                button.classList.add('copied');
+                button.innerHTML = `
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                    已複製
+                `;
+
+                setTimeout(() => {
+                    button.classList.remove('copied');
+                    button.innerHTML = originalText;
+                }, 2000);
+            });
+        }
+
+        // 自動為所有程式碼區塊添加複製按鈕
+        function addCopyButtonsToAllCodeBlocks() {
+            const codeBlocks = document.querySelectorAll('pre.code-block');
+
+            codeBlocks.forEach(codeBlock => {
+                // 檢查是否已經有複製按鈕
+                if (codeBlock.parentElement.classList.contains('code-container')) {
+                    return; // 已經有複製按鈕，跳過
+                }
+
+                // 創建容器
+                const container = document.createElement('div');
+                container.className = 'code-container';
+
+                // 創建複製按鈕
+                const copyButton = document.createElement('button');
+                copyButton.className = 'copy-button';
+                copyButton.onclick = () => copyCode(copyButton);
+                copyButton.innerHTML = `
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                    </svg>
+                    複製
+                `;
+
+                // 重新組織 DOM 結構
+                const parent = codeBlock.parentElement;
+                parent.insertBefore(container, codeBlock);
+                container.appendChild(copyButton);
+                container.appendChild(codeBlock);
+            });
+        }
+
+        // 頁面載入完成後執行
+        document.addEventListener('DOMContentLoaded', function() {
+            addCopyButtonsToAllCodeBlocks();
+        });
     </script>
 </body>
 </html>
