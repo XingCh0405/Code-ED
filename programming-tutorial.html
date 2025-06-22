@@ -118,8 +118,21 @@
                     <!-- Python Card -->
                     <div class="card p-6 h-full hover:scale-105 transform transition-all duration-300 cursor-pointer" onclick="showLanguage('python')">
                         <div class="flex items-center mb-4">
-                            <div class="w-12 h-12 rounded-lg bg-blue-500 flex items-center justify-center text-white text-2xl font-bold mr-4">
-                                🐍
+                            <div class="w-12 h-12 rounded-lg bg-gradient-to-br from-blue-500 to-yellow-400 flex items-center justify-center mr-4 p-2">
+                                <svg viewBox="0 0 24 24" class="w-8 h-8">
+                                    <defs>
+                                        <linearGradient id="python-list-gradient-1" x1="0%" y1="0%" x2="100%" y2="100%">
+                                            <stop offset="0%" style="stop-color:#3776ab"/>
+                                            <stop offset="100%" style="stop-color:#4b8bbe"/>
+                                        </linearGradient>
+                                        <linearGradient id="python-list-gradient-2" x1="0%" y1="0%" x2="100%" y2="100%">
+                                            <stop offset="0%" style="stop-color:#ffd43b"/>
+                                            <stop offset="100%" style="stop-color:#ffe873"/>
+                                        </linearGradient>
+                                    </defs>
+                                    <path d="M11.914 0C5.82 0 6.2 2.656 6.2 2.656l.007 2.752h5.814v.826H3.9S0 5.789 0 11.969c0 6.18 3.403 5.96 3.403 5.96h2.03v-2.867s-.109-3.42 3.35-3.42h5.766s3.24.052 3.24-3.148V3.202S18.28 0 11.914 0zM8.708 1.85c.578 0 1.046.47 1.046 1.052 0 .581-.468 1.051-1.046 1.051-.579 0-1.046-.47-1.046-1.051 0-.582.467-1.052 1.046-1.052z" fill="url(#python-list-gradient-1)"/>
+                                    <path d="M12.087 24c6.094 0 5.714-2.656 5.714-2.656l-.007-2.752h-5.814v-.826h8.121s4.1.445 4.1-5.735c0-6.18-3.403-5.96-3.403-5.96h-2.03v2.867s.109 3.42-3.35 3.42H9.652s-3.24-.052-3.24 3.148v5.292S5.921 24 12.087 24zm3.206-1.85c-.578 0-1.046-.47-1.046-1.052 0-.581.468-1.051 1.046-1.051.579 0 1.046.47 1.046 1.051 0 .582-.467 1.052-1.046 1.052z" fill="url(#python-list-gradient-2)"/>
+                                </svg>
                             </div>
                             <div>
                                 <h3 class="text-xl font-bold text-gray-900 dark:text-white">Python</h3>
@@ -163,8 +176,11 @@
                     <!-- JavaScript Card -->
                     <div class="card p-6 h-full hover:scale-105 transform transition-all duration-300 cursor-pointer" onclick="showLanguage('javascript')">
                         <div class="flex items-center mb-4">
-                            <div class="w-12 h-12 rounded-lg bg-yellow-500 flex items-center justify-center text-white text-lg font-bold mr-4">
-                                JS
+                            <div class="w-12 h-12 rounded-lg bg-yellow-400 flex items-center justify-center mr-4 p-2">
+                                <svg viewBox="0 0 24 24" class="w-8 h-8">
+                                    <rect width="24" height="24" fill="#F7DF1E"/>
+                                    <path d="M22.034 18.276c-.175-1.095-.888-2.015-3.003-2.873-.736-.345-1.554-.585-1.797-1.14-.091-.33-.105-.51-.046-.705.15-.646.915-.84 1.515-.66.39.12.75.42.976.9 1.034-.676 1.034-.676 1.755-1.125-.27-.42-.404-.601-.586-.78-.63-.705-1.469-1.065-2.834-1.034l-.705.089c-.676.165-1.32.525-1.71 1.005-1.14 1.291-.811 3.541.569 4.471 1.365 1.02 3.361 1.244 3.616 2.205.24 1.17-.87 1.545-1.966 1.41-.811-.18-1.26-.586-1.755-1.336l-1.83 1.051c.21.48.45.689.81 1.109 1.74 1.756 6.09 1.666 6.871-1.004.029-.09.24-.705.074-1.65l.046.067zm-8.983-7.245h-2.248c0 1.938-.009 3.864-.009 5.805 0 1.232.063 2.363-.138 2.711-.33.689-1.18.601-1.566.48-.396-.196-.597-.466-.83-.855-.063-.105-.11-.196-.127-.196l-1.825 1.125c.305.63.75 1.172 1.324 1.517.855.51 2.004.675 3.207.405.783-.226 1.458-.691 1.811-1.411.51-.93.402-2.07.397-3.346.012-2.054 0-4.109 0-6.179l.004-.056z" fill="#000"/>
+                                </svg>
                             </div>
                             <div>
                                 <h3 class="text-xl font-bold text-gray-900 dark:text-white">JavaScript</h3>
@@ -208,8 +224,27 @@
                     <!-- Java Card -->
                     <div class="card p-6 h-full hover:scale-105 transform transition-all duration-300 cursor-pointer" onclick="showLanguage('java')">
                         <div class="flex items-center mb-4">
-                            <div class="w-12 h-12 rounded-lg bg-red-500 flex items-center justify-center text-white text-2xl font-bold mr-4">
-                                ☕
+                            <div class="w-12 h-12 rounded-lg bg-gradient-to-br from-orange-500 to-blue-600 flex items-center justify-center mr-4 p-2">
+                                <svg viewBox="0 0 24 24" class="w-8 h-8">
+                                    <!-- Simplified Java cup -->
+                                    <defs>
+                                        <linearGradient id="java-list-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                            <stop offset="0%" style="stop-color:#ED8B00"/>
+                                            <stop offset="100%" style="stop-color:#5382A1"/>
+                                        </linearGradient>
+                                    </defs>
+                                    <!-- Coffee cup shape -->
+                                    <path d="M6 8h10c1 0 2 1 2 2v6c0 2-2 4-4 4H10c-2 0-4-2-4-4V10c0-1 1-2 2-2z" fill="url(#java-list-gradient)"/>
+                                    <!-- Cup handle -->
+                                    <path d="M16 10v4c2 0 3-1 3-2s-1-2-3-2z" fill="url(#java-list-gradient)"/>
+                                    <!-- Steam -->
+                                    <g stroke="#ED8B00" stroke-width="1.5" fill="none" stroke-linecap="round">
+                                        <path d="M8 6c0-1 0-2 0-2"/>
+                                        <path d="M10 6c0-1 0-2 0-2"/>
+                                        <path d="M12 6c0-1 0-2 0-2"/>
+                                        <path d="M14 6c0-1 0-2 0-2"/>
+                                    </g>
+                                </svg>
                             </div>
                             <div>
                                 <h3 class="text-xl font-bold text-gray-900 dark:text-white">Java</h3>
@@ -308,8 +343,21 @@
                         </svg>
                     </button>
                     <div class="flex items-center">
-                        <div class="w-12 h-12 bg-blue-500 rounded-lg flex items-center justify-center text-white text-2xl font-bold mr-4">
-                            🐍
+                        <div class="w-12 h-12 rounded-lg bg-gradient-to-br from-blue-500 to-yellow-400 flex items-center justify-center mr-4 p-2">
+                            <svg viewBox="0 0 24 24" class="w-8 h-8">
+                                <defs>
+                                    <linearGradient id="python-tutorial-gradient-1" x1="0%" y1="0%" x2="100%" y2="100%">
+                                        <stop offset="0%" style="stop-color:#3776ab"/>
+                                        <stop offset="100%" style="stop-color:#4b8bbe"/>
+                                    </linearGradient>
+                                    <linearGradient id="python-tutorial-gradient-2" x1="0%" y1="0%" x2="100%" y2="100%">
+                                        <stop offset="0%" style="stop-color:#ffd43b"/>
+                                        <stop offset="100%" style="stop-color:#ffe873"/>
+                                    </linearGradient>
+                                </defs>
+                                <path d="M11.914 0C5.82 0 6.2 2.656 6.2 2.656l.007 2.752h5.814v.826H3.9S0 5.789 0 11.969c0 6.18 3.403 5.96 3.403 5.96h2.03v-2.867s-.109-3.42 3.35-3.42h5.766s3.24.052 3.24-3.148V3.202S18.28 0 11.914 0zM8.708 1.85c.578 0 1.046.47 1.046 1.052 0 .581-.468 1.051-1.046 1.051-.579 0-1.046-.47-1.046-1.051 0-.582.467-1.052 1.046-1.052z" fill="url(#python-tutorial-gradient-1)"/>
+                                <path d="M12.087 24c6.094 0 5.714-2.656 5.714-2.656l-.007-2.752h-5.814v-.826h8.121s4.1.445 4.1-5.735c0-6.18-3.403-5.96-3.403-5.96h-2.03v2.867s.109 3.42-3.35 3.42H9.652s-3.24-.052-3.24 3.148v5.292S5.921 24 12.087 24zm3.206-1.85c-.578 0-1.046-.47-1.046-1.052 0-.581.468-1.051 1.046-1.051.579 0 1.046.47 1.046 1.051 0 .582-.467 1.052-1.046 1.052z" fill="url(#python-tutorial-gradient-2)"/>
+                            </svg>
                         </div>
                         <div>
                             <h1 class="text-3xl font-bold text-gray-900 dark:text-white">Python 教學</h1>
@@ -432,8 +480,11 @@ print(f"是學生：{is_student}")</code></pre>
                         </svg>
                     </button>
                     <div class="flex items-center">
-                        <div class="w-12 h-12 bg-yellow-500 rounded-lg flex items-center justify-center text-white text-lg font-bold mr-4">
-                            JS
+                        <div class="w-12 h-12 rounded-lg bg-yellow-400 flex items-center justify-center mr-4 p-2">
+                            <svg viewBox="0 0 24 24" class="w-8 h-8">
+                                <rect width="24" height="24" fill="#F7DF1E"/>
+                                <path d="M22.034 18.276c-.175-1.095-.888-2.015-3.003-2.873-.736-.345-1.554-.585-1.797-1.14-.091-.33-.105-.51-.046-.705.15-.646.915-.84 1.515-.66.39.12.75.42.976.9 1.034-.676 1.034-.676 1.755-1.125-.27-.42-.404-.601-.586-.78-.63-.705-1.469-1.065-2.834-1.034l-.705.089c-.676.165-1.32.525-1.71 1.005-1.14 1.291-.811 3.541.569 4.471 1.365 1.02 3.361 1.244 3.616 2.205.24 1.17-.87 1.545-1.966 1.41-.811-.18-1.26-.586-1.755-1.336l-1.83 1.051c.21.48.45.689.81 1.109 1.74 1.756 6.09 1.666 6.871-1.004.029-.09.24-.705.074-1.65l.046.067zm-8.983-7.245h-2.248c0 1.938-.009 3.864-.009 5.805 0 1.232.063 2.363-.138 2.711-.33.689-1.18.601-1.566.48-.396-.196-.597-.466-.83-.855-.063-.105-.11-.196-.127-.196l-1.825 1.125c.305.63.75 1.172 1.324 1.517.855.51 2.004.675 3.207.405.783-.226 1.458-.691 1.811-1.411.51-.93.402-2.07.397-3.346.012-2.054 0-4.109 0-6.179l.004-.056z" fill="#000"/>
+                            </svg>
                         </div>
                         <div>
                             <h1 class="text-3xl font-bold text-gray-900 dark:text-white">JavaScript 教學</h1>
@@ -514,8 +565,27 @@ document.getElementById("demo").innerHTML = "Hello JavaScript!";</code></pre>
                         </svg>
                     </button>
                     <div class="flex items-center">
-                        <div class="w-12 h-12 bg-red-500 rounded-lg flex items-center justify-center text-white text-2xl font-bold mr-4">
-                            ☕
+                        <div class="w-12 h-12 rounded-lg bg-gradient-to-br from-orange-500 to-blue-600 flex items-center justify-center mr-4 p-2">
+                            <svg viewBox="0 0 24 24" class="w-8 h-8">
+                                <!-- Simplified Java cup -->
+                                <defs>
+                                    <linearGradient id="java-tutorial-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                        <stop offset="0%" style="stop-color:#ED8B00"/>
+                                        <stop offset="100%" style="stop-color:#5382A1"/>
+                                    </linearGradient>
+                                </defs>
+                                <!-- Coffee cup shape -->
+                                <path d="M6 8h10c1 0 2 1 2 2v6c0 2-2 4-4 4H10c-2 0-4-2-4-4V10c0-1 1-2 2-2z" fill="url(#java-tutorial-gradient)"/>
+                                <!-- Cup handle -->
+                                <path d="M16 10v4c2 0 3-1 3-2s-1-2-3-2z" fill="url(#java-tutorial-gradient)"/>
+                                <!-- Steam -->
+                                <g stroke="#ED8B00" stroke-width="1.5" fill="none" stroke-linecap="round">
+                                    <path d="M8 6c0-1 0-2 0-2"/>
+                                    <path d="M10 6c0-1 0-2 0-2"/>
+                                    <path d="M12 6c0-1 0-2 0-2"/>
+                                    <path d="M14 6c0-1 0-2 0-2"/>
+                                </g>
+                            </svg>
                         </div>
                         <div>
                             <h1 class="text-3xl font-bold text-gray-900 dark:text-white">Java 教學</h1>

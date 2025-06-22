@@ -1,0 +1,2353 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>C 語言教學 - 程式語言教學平台</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cdefs%3E%3ClinearGradient id='bookGrad' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23059669'/%3E%3Cstop offset='50%25' style='stop-color:%2306B6D4'/%3E%3Cstop offset='100%25' style='stop-color:%234F46E5'/%3E%3C/linearGradient%3E%3ClinearGradient id='pageGrad' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23FBBF24'/%3E%3Cstop offset='100%25' style='stop-color:%23F59E0B'/%3E%3C/linearGradient%3E%3C/defs%3E%3C!-- Book cover --%3E%3Cpath d='M3 4c0-1.1.9-2 2-2h14c1.1 0 2 .9 2 2v16c0 1.1-.9 2-2 2H5c-1.1 0-2-.9-2-2V4z' fill='url(%23bookGrad)'/%3E%3C!-- Book spine --%3E%3Cpath d='M3 4v16c0 1.1.9 2 2 2h1V2H5c-1.1 0-2 .9-2 2z' fill='%23047857' opacity='0.8'/%3E%3C!-- Pages --%3E%3Cpath d='M7 3h12c.6 0 1 .4 1 1v16c0 .6-.4 1-1 1H7V3z' fill='url(%23pageGrad)'/%3E%3C!-- Page lines --%3E%3Cg stroke='%23FFFFFF' stroke-width='0.5' opacity='0.8'%3E%3Cline x1='9' y1='6' x2='17' y2='6'/%3E%3Cline x1='9' y1='8' x2='17' y2='8'/%3E%3Cline x1='9' y1='10' x2='17' y2='10'/%3E%3Cline x1='9' y1='12' x2='17' y2='12'/%3E%3Cline x1='9' y1='14' x2='17' y2='14'/%3E%3Cline x1='9' y1='16' x2='17' y2='16'/%3E%3Cline x1='9' y1='18' x2='17' y2='18'/%3E%3C/g%3E%3C!-- Code symbol --%3E%3Ctext x='12' y='11' font-family='monospace' font-size='6' fill='%23FFFFFF' text-anchor='middle' opacity='0.9'%3E%26lt;/%26gt;%3C/text%3E%3C/svg%3E">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            200: '#bfdbfe',
+                            300: '#93c5fd',
+                            400: '#60a5fa',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            800: '#1e40af',
+                            900: '#1e3a8a',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', system-ui, sans-serif; }
+        code { font-family: 'Fira Code', Monaco, 'Cascadia Code', 'Roboto Mono', monospace; }
+        .card {
+            background-color: white;
+            border-radius: 0.75rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            border: 1px solid #e5e7eb;
+        }
+        .card:hover {
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        .dark .card {
+            background-color: #1f2937;
+            border-color: #374151;
+        }
+        .code-block {
+            background-color: #f3f4f6;
+            border: 1px solid #e5e7eb;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            font-size: 0.875rem;
+            overflow-x: auto;
+            position: relative;
+        }
+        .dark .code-block {
+            background-color: #1e293b;
+            border-color: #475569;
+            color: #e2e8f0;
+        }
+        .copy-btn {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            background: rgba(0, 0, 0, 0.1);
+            border: none;
+            border-radius: 0.25rem;
+            padding: 0.25rem;
+            cursor: pointer;
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+        .code-block:hover .copy-btn {
+            opacity: 1;
+        }
+        .copy-btn:hover {
+            background: rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
+    <!-- Header -->
+    <header class="bg-white dark:bg-gray-800 shadow-sm border-b border-gray-200 dark:border-gray-700">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-2 text-2xl font-bold text-primary-600 dark:text-primary-400">
+                    <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M9.4 16.6L4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0L19.2 12l-4.6-4.6L16 6l6 6-6 6-1.4-1.4z"/>
+                    </svg>
+                    <span>程式教學平台</span>
+                </div>
+
+                <nav class="hidden md:flex items-center space-x-6">
+                    <a href="index.html" class="font-medium text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">首頁</a>
+
+                    <!-- 程式設計下拉選單 -->
+                    <div class="relative group">
+                        <button class="font-medium text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors flex items-center">
+                            程式設計
+                            <svg class="w-4 h-4 ml-1 transform group-hover:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </button>
+
+                        <!-- 下拉選單內容 -->
+                        <div class="absolute left-0 mt-2 w-64 bg-white dark:bg-gray-800 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+                            <!-- 初學者 -->
+                            <div class="px-4 py-2 border-b border-gray-200 dark:border-gray-700">
+                                <h3 class="text-sm font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide">初學者</h3>
+                            </div>
+                            <div class="py-2">
+                                <a href="html-tutorial.html" class="flex items-center px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+                                    <div class="w-6 h-6 bg-orange-500 rounded flex items-center justify-center text-white text-xs font-bold mr-3">
+                                        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
+                                            <path d="M1.5 0h21l-1.91 21.563L11.977 24l-8.564-2.438L1.5 0zm7.031 9.75l-.232-2.718 10.059.003.23-2.622L5.412 4.41l.698 8.01h9.126l-.326 3.426-2.91.804-2.955-.81-.188-2.11H6.248l.33 4.171L12 19.351l5.379-1.443.744-8.157H8.531z"/>
+                                        </svg>
+                                    </div>
+                                    HTML
+                                </a>
+                                <a href="python-tutorial.html" class="flex items-center px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+                                    <div class="w-6 h-6 rounded flex items-center justify-center mr-3">
+                                        <svg viewBox="0 0 24 24" class="w-5 h-5">
+                                            <defs>
+                                                <linearGradient id="python-nav-c-gradient-1" x1="0%" y1="0%" x2="100%" y2="100%">
+                                                    <stop offset="0%" style="stop-color:#3776ab"/>
+                                                    <stop offset="100%" style="stop-color:#4b8bbe"/>
+                                                </linearGradient>
+                                                <linearGradient id="python-nav-c-gradient-2" x1="0%" y1="0%" x2="100%" y2="100%">
+                                                    <stop offset="0%" style="stop-color:#ffd43b"/>
+                                                    <stop offset="100%" style="stop-color:#ffe873"/>
+                                                </linearGradient>
+                                            </defs>
+                                            <path d="M11.914 0C5.82 0 6.2 2.656 6.2 2.656l.007 2.752h5.814v.826H3.9S0 5.789 0 11.969c0 6.18 3.403 5.96 3.403 5.96h2.03v-2.867s-.109-3.42 3.35-3.42h5.766s3.24.052 3.24-3.148V3.202S18.28 0 11.914 0zM8.708 1.85c.578 0 1.046.47 1.046 1.052 0 .581-.468 1.051-1.046 1.051-.579 0-1.046-.47-1.046-1.051 0-.582.467-1.052 1.046-1.052z" fill="url(#python-nav-c-gradient-1)"/>
+                                            <path d="M12.087 24c6.094 0 5.714-2.656 5.714-2.656l-.007-2.752h-5.814v-.826h8.121s4.1.445 4.1-5.735c0-6.18-3.403-5.96-3.403-5.96h-2.03v2.867s.109 3.42-3.35 3.42H9.652s-3.24-.052-3.24 3.148v5.292S5.921 24 12.087 24zm3.206-1.85c-.578 0-1.046-.47-1.046-1.052 0-.581.468-1.051 1.046-1.051.579 0 1.046.47 1.046 1.051 0 .582-.467 1.052-1.046 1.052z" fill="url(#python-nav-c-gradient-2)"/>
+                                        </svg>
+                                    </div>
+                                    Python
+                                </a>
+                                <a href="javascript-tutorial.html" class="flex items-center px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+                                    <div class="w-6 h-6 rounded flex items-center justify-center mr-3">
+                                        <svg viewBox="0 0 24 24" class="w-5 h-5">
+                                            <rect width="24" height="24" rx="2" fill="#F7DF1E"/>
+                                            <path d="M22.034 18.276c-.175-1.095-.888-2.015-3.003-2.873-.736-.345-1.554-.585-1.797-1.14-.091-.33-.105-.51-.046-.705.15-.646.915-.84 1.515-.66.39.12.75.42.976.9 1.034-.676 1.034-.676 1.755-1.125-.27-.42-.404-.601-.586-.78-.63-.705-1.469-1.065-2.834-1.034l-.705.089c-.676.165-1.32.525-1.71 1.005-1.14 1.291-.811 3.541.569 4.471 1.365 1.02 3.361 1.244 3.616 2.205.24 1.17-.87 1.545-1.966 1.41-.811-.18-1.26-.586-1.755-1.336l-1.83 1.051c.21.48.45.689.81 1.109 1.74 1.756 6.09 1.666 6.871-1.004.029-.09.24-.705.074-1.65l.046.067zm-8.983-7.245h-2.248c0 1.938-.009 3.864-.009 5.805 0 1.232.063 2.363-.138 2.711-.33.689-1.18.601-1.566.48-.396-.196-.597-.466-.83-.855-.063-.105-.11-.196-.127-.196l-1.825 1.125c.305.63.75 1.172 1.324 1.517.855.51 2.004.675 3.207.405.783-.226 1.458-.691 1.811-1.411.51-.93.402-2.07.397-3.346.012-2.054 0-4.109 0-6.179l.004-.056z" fill="#000"/>
+                                        </svg>
+                                    </div>
+                                    JavaScript
+                                </a>
+                            </div>
+
+                            <!-- 中級 -->
+                            <div class="px-4 py-2 border-b border-gray-200 dark:border-gray-700 border-t">
+                                <h3 class="text-sm font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide">中級</h3>
+                            </div>
+                            <div class="py-2">
+                                <a href="csharp-tutorial.html" class="flex items-center px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+                                    <div class="w-6 h-6 rounded flex items-center justify-center mr-3">
+                                        <svg viewBox="0 0 24 24" class="w-5 h-5">
+                                            <defs>
+                                                <linearGradient id="csharp-nav-c-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                                    <stop offset="0%" style="stop-color:#A855F7"/>
+                                                    <stop offset="50%" style="stop-color:#9333EA"/>
+                                                    <stop offset="100%" style="stop-color:#7C3AED"/>
+                                                </linearGradient>
+                                            </defs>
+                                            <rect x="2" y="2" width="20" height="20" rx="3" fill="url(#csharp-nav-c-gradient)"/>
+                                            <path d="M14 8.5C13.5 8 12.8 7.5 11 7.5C9 7.5 7.5 9 7.5 12C7.5 15 9 16.5 11 16.5C12.8 16.5 13.5 16 14 15.5" stroke="white" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+                                            <g fill="white">
+                                                <rect x="16.5" y="8.5" width="0.6" height="3"/>
+                                                <rect x="17.4" y="8.5" width="0.6" height="3"/>
+                                                <rect x="16" y="9.2" width="2.5" height="0.6"/>
+                                                <rect x="16" y="10.2" width="2.5" height="0.6"/>
+                                            </g>
+                                        </svg>
+                                    </div>
+                                    C#
+                                </a>
+                                <a href="java-tutorial.html" class="flex items-center px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+                                    <div class="w-6 h-6 rounded flex items-center justify-center mr-3">
+                                        <svg viewBox="0 0 24 24" class="w-5 h-5">
+                                            <defs>
+                                                <linearGradient id="java-nav-c-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                                    <stop offset="0%" style="stop-color:#ED8B00"/>
+                                                    <stop offset="100%" style="stop-color:#5382A1"/>
+                                                </linearGradient>
+                                            </defs>
+                                            <path d="M6 8h10c1 0 2 1 2 2v6c0 2-2 4-4 4H10c-2 0-4-2-4-4V10c0-1 1-2 2-2z" fill="url(#java-nav-c-gradient)"/>
+                                            <path d="M16 10v4c2 0 3-1 3-2s-1-2-3-2z" fill="url(#java-nav-c-gradient)"/>
+                                            <g stroke="#ED8B00" stroke-width="1.5" fill="none" stroke-linecap="round">
+                                                <path d="M8 6c0-1 0-2 0-2"/>
+                                                <path d="M10 6c0-1 0-2 0-2"/>
+                                                <path d="M12 6c0-1 0-2 0-2"/>
+                                                <path d="M14 6c0-1 0-2 0-2"/>
+                                            </g>
+                                        </svg>
+                                    </div>
+                                    Java
+                                </a>
+                                <a href="c-tutorial.html" class="flex items-center px-4 py-2 text-sm text-primary-600 dark:text-primary-400 bg-primary-50 dark:bg-primary-900/20 transition-colors">
+                                    <div class="w-6 h-6 rounded flex items-center justify-center mr-3">
+                                        <svg viewBox="0 0 24 24" class="w-5 h-5">
+                                            <defs>
+                                                <linearGradient id="c-nav-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                                    <stop offset="0%" style="stop-color:#659AD2"/>
+                                                    <stop offset="50%" style="stop-color:#4F81BD"/>
+                                                    <stop offset="100%" style="stop-color:#2E5C8A"/>
+                                                </linearGradient>
+                                            </defs>
+                                            <!-- Hexagon shape -->
+                                            <path d="M12 2L20.5 7V17L12 22L3.5 17V7L12 2Z" fill="url(#c-nav-gradient)"/>
+                                            <!-- Simple white C letter -->
+                                            <path d="M15 8.5C14.5 8 13.8 7.5 12 7.5C10 7.5 8.5 9 8.5 12C8.5 15 10 16.5 12 16.5C13.8 16.5 14.5 16 15 15.5" stroke="white" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+                                        </svg>
+                                    </div>
+                                    C 語言
+                                </a>
+                            </div>
+
+                            <!-- 進階 -->
+                            <div class="px-4 py-2 border-b border-gray-200 dark:border-gray-700 border-t">
+                                <h3 class="text-sm font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide">進階</h3>
+                            </div>
+                            <div class="py-2">
+                                <a href="cpp-tutorial.html" class="flex items-center px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+                                    <div class="w-6 h-6 rounded flex items-center justify-center mr-3">
+                                        <svg viewBox="0 0 24 24" class="w-5 h-5">
+                                            <defs>
+                                                <linearGradient id="cpp-nav-c-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                                    <stop offset="0%" style="stop-color:#6BA3D6"/>
+                                                    <stop offset="50%" style="stop-color:#4A90E2"/>
+                                                    <stop offset="100%" style="stop-color:#2E5C8A"/>
+                                                </linearGradient>
+                                            </defs>
+                                            <path d="M12 2L20.5 7V17L12 22L3.5 17V7L12 2Z" fill="url(#cpp-nav-c-gradient)"/>
+                                            <path d="M13 8.5C12.5 8 11.8 7.5 10 7.5C8 7.5 6.5 9 6.5 12C6.5 15 8 16.5 10 16.5C11.8 16.5 12.5 16 13 15.5" stroke="white" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+                                            <g fill="white">
+                                                <rect x="15.5" y="9" width="0.8" height="2.5"/>
+                                                <rect x="14.75" y="9.75" width="2.3" height="0.8"/>
+                                                <rect x="17.2" y="11.5" width="0.8" height="2.5"/>
+                                                <rect x="16.45" y="12.25" width="2.3" height="0.8"/>
+                                            </g>
+                                        </svg>
+                                    </div>
+                                    C++
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </nav>
+
+                <button id="theme-toggle" class="p-2 rounded-lg bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors duration-200">
+                    <svg id="sun-icon" class="w-5 h-5 text-yellow-500 hidden" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM18.894 6.166a.75.75 0 00-1.06-1.06l-1.591 1.59a.75.75 0 101.06 1.061l1.591-1.59zM21.75 12a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5H21a.75.75 0 01.75.75zM17.834 18.894a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 10-1.061 1.06l1.59 1.591zM12 18a.75.75 0 01.75.75V21a.75.75 0 01-1.5 0v-2.25A.75.75 0 0112 18zM7.758 17.303a.75.75 0 00-1.061-1.06l-1.591 1.59a.75.75 0 001.06 1.061l1.591-1.59zM6 12a.75.75 0 01-.75.75H3a.75.75 0 010-1.5h2.25A.75.75 0 016 12zM6.697 7.757a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 00-1.061 1.06l1.59 1.591z" />
+                    </svg>
+                    <svg id="moon-icon" class="w-5 h-5 text-gray-700" fill="currentColor" viewBox="0 0 24 24">
+                        <path fill-rule="evenodd" d="M9.528 1.718a.75.75 0 01.162.819A8.97 8.97 0 009 6a9 9 0 009 9 8.97 8.97 0 003.463-.69.75.75 0 01.981.98 10.503 10.503 0 01-9.694 6.46c-5.799 0-10.5-4.701-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 01.818.162z" clip-rule="evenodd" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+        <div class="max-w-4xl mx-auto">
+            <div class="mb-8">
+                <div class="flex items-center mb-4">
+                    <a href="index.html" class="text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 mr-4">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                        </svg>
+                    </a>
+                    <div class="flex items-center">
+                        <div class="w-12 h-12 bg-gradient-to-br from-blue-400 to-blue-700 rounded-lg flex items-center justify-center mr-4 p-2">
+                            <svg viewBox="0 0 24 24" class="w-8 h-8">
+                                <defs>
+                                    <linearGradient id="c-header-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                        <stop offset="0%" style="stop-color:#659AD2"/>
+                                        <stop offset="50%" style="stop-color:#4F81BD"/>
+                                        <stop offset="100%" style="stop-color:#2E5C8A"/>
+                                    </linearGradient>
+                                </defs>
+                                <!-- Hexagon shape -->
+                                <path d="M12 2L20.5 7V17L12 22L3.5 17V7L12 2Z" fill="url(#c-header-gradient)"/>
+                                <!-- Simple white C letter -->
+                                <path d="M15 8.5C14.5 8 13.8 7.5 12 7.5C10 7.5 8.5 9 8.5 12C8.5 15 10 16.5 12 16.5C13.8 16.5 14.5 16 15 15.5" stroke="white" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <h1 class="text-3xl font-bold text-gray-900 dark:text-white">C 語言教學</h1>
+                            <p class="text-gray-600 dark:text-gray-300">系統程式設計的基礎語言</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-gray-50 dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700 rounded-lg p-4">
+                    <h2 class="font-semibold text-gray-900 dark:text-gray-100 mb-2">學習目標</h2>
+                    <ul class="text-gray-700 dark:text-gray-300 text-sm space-y-1">
+                        <li>• 了解 C 語言的歷史和特色</li>
+                        <li>• 掌握基本語法和資料型別</li>
+                        <li>• 學會指標和記憶體管理</li>
+                        <li>• 掌握陣列、字串和結構體</li>
+                        <li>• 學會函數和檔案處理</li>
+                        <li>• 能夠編寫系統層級程式</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- C Lessons -->
+            <div class="space-y-6">
+                <!-- 第1課：C 語言簡介與第一個程式 -->
+                <div class="card p-6">
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="flex-1">
+                            <div class="flex items-center mb-2">
+                                <h3 class="text-xl font-bold text-gray-900 dark:text-white mr-3">第1課：C 語言簡介與第一個程式</h3>
+                                <span class="px-2 py-1 text-xs font-medium rounded-full bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200">中級</span>
+                            </div>
+                            <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
+                                了解什麼是 C 語言，它的歷史和特色，並編寫你的第一個 C 程式。
+                            </p>
+                        </div>
+                        <button onclick="toggleLesson(this)" class="ml-4 p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+                            <svg class="w-5 h-5 text-gray-500 dark:text-gray-400 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="lesson-content hidden space-y-4 border-t border-gray-200 dark:border-gray-700 pt-4">
+                        <div>
+                            <h4 class="font-semibold text-gray-900 dark:text-white mb-2">什麼是 C 語言？</h4>
+                            <div class="text-gray-600 dark:text-gray-300 leading-relaxed space-y-3">
+                                <p>C 語言是由 Dennis Ritchie 在 1972 年於貝爾實驗室開發的程式語言。它是一種通用的、程序式的程式語言，被譽為「程式語言之母」。</p>
+                                <p><strong>C 語言的核心特色：</strong></p>
+                                <ul class="list-disc list-inside space-y-1 ml-4">
+                                    <li><strong>低階控制：</strong>可以直接操作記憶體和硬體</li>
+                                    <li><strong>高效能：</strong>編譯後的程式執行速度非常快</li>
+                                    <li><strong>可移植性：</strong>程式碼可以在不同平台上編譯執行</li>
+                                    <li><strong>簡潔語法：</strong>語言核心功能精簡，易於學習</li>
+                                    <li><strong>系統程式：</strong>作業系統和嵌入式系統開發的首選</li>
+                                    <li><strong>影響深遠：</strong>許多現代語言都受到 C 語言影響</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-900 dark:text-white mb-2">你的第一個 C 程式：</h4>
+                            <pre class="code-block"><button class="copy-btn" onclick="copyCode(this)">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                                </svg>
+                            </button><code>// hello.c
+// 這是你的第一個 C 程式
+
+#include <stdio.h>  // 引入標準輸入輸出函式庫
+
+// main 函數是程式的進入點
+int main() {
+    // 在螢幕上輸出文字
+    printf("Hello, World!\n");
+    printf("歡迎來到 C 語言的世界！\n");
+    printf("C 語言是系統程式設計的基礎\n");
+
+    // 宣告和使用變數
+    int year = 1972;           // 整數
+    float version = 11.0;      // 浮點數
+    char grade = 'A';          // 字元
+
+    // 使用格式化輸出
+    printf("C 語言發明年份：%d\n", year);
+    printf("目前版本：%.1f\n", version);
+    printf("重要性等級：%c\n", grade);
+
+    // 程式正常結束
+    return 0;
+}</code></pre>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-900 dark:text-white mb-2">程式碼解釋：</h4>
+                            <div class="text-gray-600 dark:text-gray-300 leading-relaxed space-y-3">
+                                <ul class="list-disc list-inside space-y-2 ml-4">
+                                    <li><strong>#include &lt;stdio.h&gt;：</strong>引入標準輸入輸出函式庫</li>
+                                    <li><strong>int main()：</strong>主函數，程式從這裡開始執行</li>
+                                    <li><strong>printf()：</strong>格式化輸出函數，用於顯示文字</li>
+                                    <li><strong>\n：</strong>換行字元</li>
+                                    <li><strong>%d, %f, %c：</strong>格式化輸出的佔位符</li>
+                                    <li><strong>return 0：</strong>表示程式正常結束</li>
+                                    <li><strong>// 註解：</strong>單行註解，編譯器會忽略</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-900 dark:text-white mb-2">編譯和執行：</h4>
+                            <div class="text-gray-600 dark:text-gray-300 leading-relaxed space-y-3">
+                                <p>C 語言是編譯式語言，需要先編譯再執行：</p>
+                                <div class="bg-gray-50 dark:bg-gray-800 p-4 rounded-lg">
+                                    <p><strong>1. 編寫程式碼：</strong>建立 .c 檔案</p>
+                                    <p><strong>2. 編譯：</strong>使用編譯器（如 gcc）編譯成執行檔</p>
+                                    <p><strong>3. 執行：</strong>執行編譯後的程式</p>
+                                </div>
+                                <pre class="bg-gray-100 dark:bg-gray-800 p-3 rounded text-sm"><code># 使用 gcc 編譯器
+gcc hello.c -o hello
+
+# 執行程式
+./hello</code></pre>
+                            </div>
+                        </div>
+                        <div class="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-4">
+                            <h5 class="font-semibold text-blue-900 dark:text-blue-100 mb-2">💡 實作練習</h5>
+                            <p class="text-blue-800 dark:text-blue-200 text-sm">
+                                修改程式碼，讓它顯示你的姓名、年齡和興趣，體驗 C 語言變數和格式化輸出的使用！
+                            </p>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-900 dark:text-white mb-2">C 語言的應用領域：</h4>
+                            <div class="text-gray-600 dark:text-gray-300 leading-relaxed">
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div>
+                                        <p><strong>🖥️ 作業系統</strong></p>
+                                        <p class="text-sm">Linux、Windows 核心</p>
+                                    </div>
+                                    <div>
+                                        <p><strong>🔧 嵌入式系統</strong></p>
+                                        <p class="text-sm">微控制器、IoT 設備</p>
+                                    </div>
+                                    <div>
+                                        <p><strong>🗄️ 資料庫系統</strong></p>
+                                        <p class="text-sm">MySQL、PostgreSQL</p>
+                                    </div>
+                                    <div>
+                                        <p><strong>🎮 遊戲引擎</strong></p>
+                                        <p class="text-sm">高效能遊戲開發</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 第2課：基本資料型別與變數 -->
+                <div class="card p-6">
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="flex-1">
+                            <div class="flex items-center mb-2">
+                                <h3 class="text-xl font-bold text-gray-900 dark:text-white mr-3">第2課：基本資料型別與變數</h3>
+                                <span class="px-2 py-1 text-xs font-medium rounded-full bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200">中級</span>
+                            </div>
+                            <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
+                                學習 C 語言的基本資料型別、變數宣告和使用方法。
+                            </p>
+                        </div>
+                        <button onclick="toggleLesson(this)" class="ml-4 p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+                            <svg class="w-5 h-5 text-gray-500 dark:text-gray-400 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="lesson-content hidden space-y-4 border-t border-gray-200 dark:border-gray-700 pt-4">
+                        <div>
+                            <h4 class="font-semibold text-gray-900 dark:text-white mb-2">基本資料型別：</h4>
+                            <pre class="code-block"><button class="copy-btn" onclick="copyCode(this)">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                                </svg>
+                            </button><code>#include <stdio.h>
+
+int main() {
+    // 整數型別
+    char smallNumber = 127;        // 8位元，-128 到 127
+    short mediumNumber = 32767;    // 16位元，-32,768 到 32,767
+    int number = 2147483647;       // 32位元，最常用的整數型別
+    long bigNumber = 2147483647L;  // 32位元或64位元，加 L 後綴
+
+    // 無符號整數型別
+    unsigned char uChar = 255;     // 0 到 255
+    unsigned int uInt = 4294967295U; // 0 到 4,294,967,295
+
+    // 浮點數型別
+    float decimal1 = 3.14f;        // 32位元，6-7位有效數字
+    double decimal2 = 3.14159265359; // 64位元，15-17位有效數字
+
+    // 字元型別
+    char letter = 'A';             // 單一字元
+    char newline = '\n';           // 特殊字元
+
+    // 輸出所有變數
+    printf("=== 整數型別 ===\n");
+    printf("char: %d (大小: %zu bytes)\n", smallNumber, sizeof(char));
+    printf("short: %d (大小: %zu bytes)\n", mediumNumber, sizeof(short));
+    printf("int: %d (大小: %zu bytes)\n", number, sizeof(int));
+    printf("long: %ld (大小: %zu bytes)\n", bigNumber, sizeof(long));
+
+    printf("\n=== 無符號整數 ===\n");
+    printf("unsigned char: %u\n", uChar);
+    printf("unsigned int: %u\n", uInt);
+
+    printf("\n=== 浮點數 ===\n");
+    printf("float: %.6f (大小: %zu bytes)\n", decimal1, sizeof(float));
+    printf("double: %.15f (大小: %zu bytes)\n", decimal2, sizeof(double));
+
+    printf("\n=== 字元 ===\n");
+    printf("字元: %c (ASCII: %d)\n", letter, letter);
+
+    return 0;
+}</code></pre>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-900 dark:text-white mb-2">變數宣告和初始化：</h4>
+                            <pre class="code-block"><button class="copy-btn" onclick="copyCode(this)">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                                </svg>
+                            </button><code>#include <stdio.h>
+
+int main() {
+    // 變數宣告
+    int age;              // 宣告但未初始化
+    float height;         // 宣告但未初始化
+
+    // 變數初始化
+    age = 25;            // 賦值
+    height = 175.5;      // 賦值
+
+    // 宣告並初始化
+    int score = 95;
+    char grade = 'A';
+    double weight = 70.5;
+
+    // 常數宣告（使用 const 或 #define）
+    const double PI = 3.14159;
+    const int MAX_STUDENTS = 100;
+
+    // 多個變數同時宣告
+    int x = 10, y = 20, z = 30;
+
+    // 變數命名規則示例
+    int student_age = 20;        // 使用底線
+    int studentAge = 20;         // 駝峰命名法（較少用）
+    int _private_var = 5;        // 可以用底線開頭
+
+    // 輸出變數值
+    printf("=== 個人資訊 ===\n");
+    printf("年齡: %d 歲\n", age);
+    printf("身高: %.1f 公分\n", height);
+    printf("體重: %.1f 公斤\n", weight);
+    printf("分數: %d 分\n", score);
+    printf("等級: %c\n", grade);
+
+    printf("\n=== 常數 ===\n");
+    printf("圓周率: %.5f\n", PI);
+    printf("最大學生數: %d\n", MAX_STUDENTS);
+
+    printf("\n=== 座標 ===\n");
+    printf("座標: (%d, %d, %d)\n", x, y, z);
+
+    // 計算 BMI
+    double bmi = weight / ((height/100) * (height/100));
+    printf("\nBMI: %.2f\n", bmi);
+
+    return 0;
+}</code></pre>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-900 dark:text-white mb-2">格式化輸出：</h4>
+                            <pre class="code-block"><button class="copy-btn" onclick="copyCode(this)">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                                </svg>
+                            </button><code>#include <stdio.h>
+
+int main() {
+    int number = 42;
+    float pi = 3.14159;
+    char letter = 'C';
+
+    // 基本格式化輸出
+    printf("整數: %d\n", number);
+    printf("浮點數: %f\n", pi);
+    printf("字元: %c\n", letter);
+
+    // 進階格式化
+    printf("\n=== 數字格式化 ===\n");
+    printf("預設: %d\n", number);
+    printf("5位數字，右對齊: %5d\n", number);
+    printf("5位數字，左對齊: %-5d|\n", number);
+    printf("前面補零: %05d\n", number);
+
+    printf("\n=== 浮點數格式化 ===\n");
+    printf("預設: %f\n", pi);
+    printf("2位小數: %.2f\n", pi);
+    printf("6位小數: %.6f\n", pi);
+    printf("科學記號: %e\n", pi);
+    printf("較短格式: %g\n", pi);
+
+    printf("\n=== 十六進位和八進位 ===\n");
+    printf("十進位: %d\n", number);
+    printf("十六進位: %x\n", number);
+    printf("十六進位(大寫): %X\n", number);
+    printf("八進位: %o\n", number);
+
+    printf("\n=== 字元和字串 ===\n");
+    printf("字元: %c\n", letter);
+    printf("ASCII 值: %d\n", letter);
+
+    // 特殊字元
+    printf("\n=== 特殊字元 ===\n");
+    printf("換行符號: 第一行\\n第二行\n");
+    printf("製表符號: 欄位1\\t欄位2\n");
+    printf("反斜線: \\\\\n");
+    printf("雙引號: \"Hello\"\n");
+    printf("單引號: \'C\'\n");
+
+    return 0;
+}</code></pre>
+                        </div>
+                        <div class="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-4">
+                            <h5 class="font-semibold text-blue-900 dark:text-blue-100 mb-2">💡 實作練習</h5>
+                            <p class="text-blue-800 dark:text-blue-200 text-sm">
+                                建立一個程式儲存學生的姓名（用字元陣列）、年齡、身高、體重，並計算 BMI！
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 第3課：陣列與字串 -->
+                <div class="card p-6">
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="flex-1">
+                            <div class="flex items-center mb-2">
+                                <h3 class="text-xl font-bold text-gray-900 dark:text-white mr-3">第3課：陣列與字串</h3>
+                                <span class="px-2 py-1 text-xs font-medium rounded-full bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200">進階</span>
+                            </div>
+                            <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
+                                學習 C 語言的陣列操作和字串處理，掌握資料集合的管理方法。
+                            </p>
+                        </div>
+                        <button onclick="toggleLesson(this)" class="ml-4 p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+                            <svg class="w-5 h-5 text-gray-500 dark:text-gray-400 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="lesson-content hidden space-y-4 border-t border-gray-200 dark:border-gray-700 pt-4">
+                        <div>
+                            <h4 class="font-semibold text-gray-900 dark:text-white mb-2">一維陣列：</h4>
+                            <pre class="code-block"><button class="copy-btn" onclick="copyCode(this)">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                                </svg>
+                            </button><code>#include <stdio.h>
+
+int main() {
+    // 陣列宣告和初始化
+    int numbers[5];                    // 宣告大小為 5 的整數陣列
+    int scores[5] = {85, 92, 78, 96, 88}; // 宣告並初始化
+    int grades[] = {90, 85, 88, 92};   // 自動推導大小（4個元素）
+
+    // 個別賦值
+    numbers[0] = 10;
+    numbers[1] = 20;
+    numbers[2] = 30;
+    numbers[3] = 40;
+    numbers[4] = 50;
+
+    printf("=== 陣列基本操作 ===\n");
+    printf("scores 陣列大小：%zu 個元素\n", sizeof(scores) / sizeof(scores[0]));
+
+    // 存取陣列元素
+    printf("第一個分數：%d\n", scores[0]);
+    printf("最後一個分數：%d\n", scores[4]);
+
+    // 遍歷陣列
+    printf("\n所有分數：");
+    for (int i = 0; i < 5; i++) {
+        printf("%d ", scores[i]);
+    }
+    printf("\n");
+
+    printf("\nnumbers 陣列：");
+    for (int i = 0; i < 5; i++) {
+        printf("%d ", numbers[i]);
+    }
+    printf("\n");
+
+    // 計算陣列統計
+    int sum = 0;
+    int max = scores[0];
+    int min = scores[0];
+
+    for (int i = 0; i < 5; i++) {
+        sum += scores[i];
+        if (scores[i] > max) max = scores[i];
+        if (scores[i] < min) min = scores[i];
+    }
+
+    double average = (double)sum / 5;
+
+    printf("\n=== 統計資訊 ===\n");
+    printf("總分：%d\n", sum);
+    printf("平均分：%.2f\n", average);
+    printf("最高分：%d\n", max);
+    printf("最低分：%d\n", min);
+
+    // 陣列排序（氣泡排序）
+    int temp_array[5];
+    // 複製陣列
+    for (int i = 0; i < 5; i++) {
+        temp_array[i] = scores[i];
+    }
+
+    // 氣泡排序
+    for (int i = 0; i < 4; i++) {
+        for (int j = 0; j < 4 - i; j++) {
+            if (temp_array[j] > temp_array[j + 1]) {
+                int temp = temp_array[j];
+                temp_array[j] = temp_array[j + 1];
+                temp_array[j + 1] = temp;
+            }
+        }
+    }
+
+    printf("\n排序後的分數：");
+    for (int i = 0; i < 5; i++) {
+        printf("%d ", temp_array[i]);
+    }
+    printf("\n");
+
+    // 搜尋元素
+    int target = 92;
+    int found = -1;
+
+    for (int i = 0; i < 5; i++) {
+        if (scores[i] == target) {
+            found = i;
+            break;
+        }
+    }
+
+    if (found != -1) {
+        printf("\n找到分數 %d 在索引 %d\n", target, found);
+    } else {
+        printf("\n未找到分數 %d\n", target);
+    }
+
+    return 0;
+}</code></pre>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-900 dark:text-white mb-2">多維陣列：</h4>
+                            <pre class="code-block"><button class="copy-btn" onclick="copyCode(this)">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                                </svg>
+                            </button><code>#include <stdio.h>
+
+int main() {
+    // 二維陣列宣告和初始化
+    int matrix[3][4];  // 3行4列的矩陣
+
+    // 初始化二維陣列
+    int grades[3][4] = {
+        {85, 92, 78, 96},  // 第一個學生的成績
+        {88, 91, 85, 89},  // 第二個學生的成績
+        {92, 87, 94, 91}   // 第三個學生的成績
+    };
+
+    // 學生和科目名稱
+    char students[3][20] = {"小明", "小華", "小美"};
+    char subjects[4][10] = {"數學", "英文", "物理", "化學"};
+
+    printf("=== 學生成績表 ===\n");
+
+    // 顯示表頭
+    printf("學生\\科目\t");
+    for (int j = 0; j < 4; j++) {
+        printf("%s\t", subjects[j]);
+    }
+    printf("平均\n");
+
+    // 顯示每個學生的成績
+    for (int i = 0; i < 3; i++) {
+        printf("%s\t\t", students[i]);
+
+        int sum = 0;
+        for (int j = 0; j < 4; j++) {
+            printf("%d\t", grades[i][j]);
+            sum += grades[i][j];
+        }
+
+        double average = (double)sum / 4;
+        printf("%.1f\n", average);
+    }
+
+    // 計算各科平均分
+    printf("\n各科平均分：\n");
+    for (int j = 0; j < 4; j++) {
+        int sum = 0;
+        for (int i = 0; i < 3; i++) {
+            sum += grades[i][j];
+        }
+        double average = (double)sum / 3;
+        printf("%s：%.1f\n", subjects[j], average);
+    }
+
+    // 矩陣操作示例
+    printf("\n=== 矩陣操作 ===\n");
+
+    // 初始化矩陣
+    for (int i = 0; i < 3; i++) {
+        for (int j = 0; j < 4; j++) {
+            matrix[i][j] = i * 4 + j + 1;
+        }
+    }
+
+    printf("3x4 矩陣：\n");
+    for (int i = 0; i < 3; i++) {
+        for (int j = 0; j < 4; j++) {
+            printf("%2d ", matrix[i][j]);
+        }
+        printf("\n");
+    }
+
+    // 矩陣轉置（需要不同大小的矩陣）
+    int transposed[4][3];
+
+    for (int i = 0; i < 3; i++) {
+        for (int j = 0; j < 4; j++) {
+            transposed[j][i] = matrix[i][j];
+        }
+    }
+
+    printf("\n轉置後的 4x3 矩陣：\n");
+    for (int i = 0; i < 4; i++) {
+        for (int j = 0; j < 3; j++) {
+            printf("%2d ", transposed[i][j]);
+        }
+        printf("\n");
+    }
+
+    // 找出最大值和位置
+    int max_value = grades[0][0];
+    int max_student = 0, max_subject = 0;
+
+    for (int i = 0; i < 3; i++) {
+        for (int j = 0; j < 4; j++) {
+            if (grades[i][j] > max_value) {
+                max_value = grades[i][j];
+                max_student = i;
+                max_subject = j;
+            }
+        }
+    }
+
+    printf("\n最高分：%d\n", max_value);
+    printf("學生：%s\n", students[max_student]);
+    printf("科目：%s\n", subjects[max_subject]);
+
+    return 0;
+}</code></pre>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-900 dark:text-white mb-2">字串基礎：</h4>
+                            <pre class="code-block"><button class="copy-btn" onclick="copyCode(this)">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                                </svg>
+                            </button><code>#include <stdio.h>
+#include <string.h>  // 字串函數庫
+
+int main() {
+    // 字串宣告和初始化
+    char str1[50] = "Hello";           // 字元陣列初始化
+    char str2[] = "World";             // 自動推導大小
+    char str3[50];                     // 未初始化的字元陣列
+    char *str4 = "C Language";         // 字串指標（唯讀）
+
+    printf("=== 字串基本操作 ===\n");
+    printf("str1: %s\n", str1);
+    printf("str2: %s\n", str2);
+    printf("str4: %s\n", str4);
+
+    // 字串長度
+    printf("\nstr1 長度：%zu\n", strlen(str1));
+    printf("str2 長度：%zu\n", strlen(str2));
+    printf("str4 長度：%zu\n", strlen(str4));
+
+    // 字串複製
+    strcpy(str3, str1);  // 將 str1 複製到 str3
+    printf("複製後 str3: %s\n", str3);
+
+    // 字串連接
+    strcat(str1, " ");   // 在 str1 後面加上空格
+    strcat(str1, str2);  // 在 str1 後面加上 str2
+    printf("連接後 str1: %s\n", str1);
+
+    // 字串比較
+    int cmp_result = strcmp(str3, "Hello");
+    if (cmp_result == 0) {
+        printf("str3 等於 \"Hello\"\n");
+    } else if (cmp_result < 0) {
+        printf("str3 小於 \"Hello\"\n");
+    } else {
+        printf("str3 大於 \"Hello\"\n");
+    }
+
+    // 字串搜尋
+    char *found = strstr(str1, "World");
+    if (found != NULL) {
+        printf("在 str1 中找到 \"World\"\n");
+    }
+
+    // 字元搜尋
+    char *char_pos = strchr(str1, 'W');
+    if (char_pos != NULL) {
+        printf("字元 'W' 在位置：%ld\n", char_pos - str1);
+    }
+
+    printf("\n=== 字串輸入輸出 ===\n");
+
+    char name[50];
+    char message[100];
+
+    printf("請輸入您的姓名：");
+    // scanf("%s", name);  // 注意：scanf 遇到空格會停止
+    // 使用 fgets 更安全
+    fgets(name, sizeof(name), stdin);
+
+    // 移除 fgets 讀入的換行符號
+    name[strcspn(name, "\n")] = '\0';
+
+    printf("您好，%s！\n", name);
+
+    // 格式化字串
+    sprintf(message, "歡迎 %s 學習 C 語言！", name);
+    printf("%s\n", message);
+
+    printf("\n=== 字串處理函數 ===\n");
+
+    char text[] = "Hello, C Programming!";
+    printf("原始字串：%s\n", text);
+
+    // 轉換為大寫（手動實作）
+    char upper_text[50];
+    strcpy(upper_text, text);
+
+    for (int i = 0; upper_text[i] != '\0'; i++) {
+        if (upper_text[i] >= 'a' && upper_text[i] <= 'z') {
+            upper_text[i] = upper_text[i] - 'a' + 'A';
+        }
+    }
+    printf("大寫：%s\n", upper_text);
+
+    // 計算字元出現次數
+    char target_char = 'l';
+    int count = 0;
+
+    for (int i = 0; text[i] != '\0'; i++) {
+        if (text[i] == target_char) {
+            count++;
+        }
+    }
+    printf("字元 '%c' 出現 %d 次\n", target_char, count);
+
+    // 反轉字串
+    char reversed[50];
+    int len = strlen(text);
+
+    for (int i = 0; i < len; i++) {
+        reversed[i] = text[len - 1 - i];
+    }
+    reversed[len] = '\0';
+
+    printf("反轉字串：%s\n", reversed);
+
+    return 0;
+}</code></pre>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-900 dark:text-white mb-2">字串陣列與進階操作：</h4>
+                            <pre class="code-block"><button class="copy-btn" onclick="copyCode(this)">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                                </svg>
+                            </button><code>#include <stdio.h>
+#include <string.h>
+#include <ctype.h>  // 字元處理函數
+
+int main() {
+    // 字串陣列
+    char fruits[5][20] = {
+        "蘋果",
+        "香蕉",
+        "橘子",
+        "葡萄",
+        "草莓"
+    };
+
+    // 字串指標陣列
+    char *colors[] = {
+        "紅色",
+        "綠色",
+        "藍色",
+        "黃色",
+        "紫色"
+    };
+
+    printf("=== 字串陣列操作 ===\n");
+
+    // 顯示所有水果
+    printf("水果清單：\n");
+    for (int i = 0; i < 5; i++) {
+        printf("%d. %s\n", i + 1, fruits[i]);
+    }
+
+    printf("\n顏色清單：\n");
+    for (int i = 0; i < 5; i++) {
+        printf("%d. %s\n", i + 1, colors[i]);
+    }
+
+    // 字串排序（氣泡排序）
+    char temp_fruits[5][20];
+
+    // 複製陣列
+    for (int i = 0; i < 5; i++) {
+        strcpy(temp_fruits[i], fruits[i]);
+    }
+
+    // 排序
+    for (int i = 0; i < 4; i++) {
+        for (int j = 0; j < 4 - i; j++) {
+            if (strcmp(temp_fruits[j], temp_fruits[j + 1]) > 0) {
+                char temp[20];
+                strcpy(temp, temp_fruits[j]);
+                strcpy(temp_fruits[j], temp_fruits[j + 1]);
+                strcpy(temp_fruits[j + 1], temp);
+            }
+        }
+    }
+
+    printf("\n排序後的水果：\n");
+    for (int i = 0; i < 5; i++) {
+        printf("%d. %s\n", i + 1, temp_fruits[i]);
+    }
+
+    printf("\n=== 字串分析 ===\n");
+
+    char sentence[] = "Hello World! This is C Programming.";
+    printf("句子：%s\n", sentence);
+
+    // 統計字元類型
+    int letters = 0, digits = 0, spaces = 0, others = 0;
+
+    for (int i = 0; sentence[i] != '\0'; i++) {
+        if (isalpha(sentence[i])) {
+            letters++;
+        } else if (isdigit(sentence[i])) {
+            digits++;
+        } else if (isspace(sentence[i])) {
+            spaces++;
+        } else {
+            others++;
+        }
+    }
+
+    printf("字母：%d 個\n", letters);
+    printf("數字：%d 個\n", digits);
+    printf("空格：%d 個\n", spaces);
+    printf("其他：%d 個\n", others);
+
+    // 單字計數
+    char text_copy[100];
+    strcpy(text_copy, sentence);
+
+    int word_count = 0;
+    char *token = strtok(text_copy, " !.");
+
+    printf("\n單字列表：\n");
+    while (token != NULL) {
+        word_count++;
+        printf("%d. %s\n", word_count, token);
+        token = strtok(NULL, " !.");
+    }
+
+    printf("總共 %d 個單字\n", word_count);
+
+    printf("\n=== 字串處理工具 ===\n");
+
+    char input[] = "  Hello, World!  ";
+    printf("原始字串：'%s'\n", input);
+
+    // 去除前後空格（簡單實作）
+    char trimmed[100];
+    int start = 0, end = strlen(input) - 1;
+
+    // 找到第一個非空格字元
+    while (input[start] == ' ') {
+        start++;
+    }
+
+    // 找到最後一個非空格字元
+    while (end >= 0 && input[end] == ' ') {
+        end--;
+    }
+
+    // 複製去除空格的部分
+    int j = 0;
+    for (int i = start; i <= end; i++) {
+        trimmed[j++] = input[i];
+    }
+    trimmed[j] = '\0';
+
+    printf("去除空格：'%s'\n", trimmed);
+
+    // 替換字元
+    char replace_text[] = "Hello World";
+    printf("替換前：%s\n", replace_text);
+
+    for (int i = 0; replace_text[i] != '\0'; i++) {
+        if (replace_text[i] == 'l') {
+            replace_text[i] = 'L';
+        }
+    }
+
+    printf("替換後：%s\n", replace_text);
+
+    // 檢查回文
+    char palindrome[] = "madam";
+    int len = strlen(palindrome);
+    int is_palindrome = 1;
+
+    for (int i = 0; i < len / 2; i++) {
+        if (palindrome[i] != palindrome[len - 1 - i]) {
+            is_palindrome = 0;
+            break;
+        }
+    }
+
+    printf("\n'%s' %s回文\n", palindrome, is_palindrome ? "是" : "不是");
+
+    return 0;
+}</code></pre>
+                        </div>
+                        <div class="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-4">
+                            <h5 class="font-semibold text-blue-900 dark:text-blue-100 mb-2">💡 實作練習</h5>
+                            <p class="text-blue-800 dark:text-blue-200 text-sm">
+                                建立一個學生管理系統，使用陣列儲存學生姓名和成績，實作新增、搜尋、排序和統計功能！
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 第4課：函數與指標 -->
+                <div class="card p-6">
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="flex-1">
+                            <div class="flex items-center mb-2">
+                                <h3 class="text-xl font-bold text-gray-900 dark:text-white mr-3">第4課：函數與指標</h3>
+                                <span class="px-2 py-1 text-xs font-medium rounded-full bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200">進階</span>
+                            </div>
+                            <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
+                                學習 C 語言的函數定義和指標操作，掌握程式模組化和記憶體管理的核心概念。
+                            </p>
+                        </div>
+                        <button onclick="toggleLesson(this)" class="ml-4 p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+                            <svg class="w-5 h-5 text-gray-500 dark:text-gray-400 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="lesson-content hidden space-y-4 border-t border-gray-200 dark:border-gray-700 pt-4">
+                        <div>
+                            <h4 class="font-semibold text-gray-900 dark:text-white mb-2">函數基礎：</h4>
+                            <pre class="code-block"><button class="copy-btn" onclick="copyCode(this)">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                                </svg>
+                            </button><code>#include <stdio.h>
+
+// 函數宣告（原型）
+void greet(void);
+int add(int a, int b);
+double calculateArea(double radius);
+void printArray(int arr[], int size);
+int factorial(int n);
+
+// 無參數無回傳值的函數
+void greet(void) {
+    printf("歡迎學習 C 語言函數！\n");
+}
+
+// 有參數有回傳值的函數
+int add(int a, int b) {
+    return a + b;
+}
+
+// 計算圓面積
+double calculateArea(double radius) {
+    const double PI = 3.14159;
+    return PI * radius * radius;
+}
+
+// 陣列作為參數
+void printArray(int arr[], int size) {
+    printf("陣列內容：");
+    for (int i = 0; i < size; i++) {
+        printf("%d ", arr[i]);
+    }
+    printf("\n");
+}
+
+// 遞迴函數
+int factorial(int n) {
+    if (n <= 1) {
+        return 1;
+    }
+    return n * factorial(n - 1);
+}
+
+// 費波那契數列
+int fibonacci(int n) {
+    if (n <= 1) {
+        return n;
+    }
+    return fibonacci(n - 1) + fibonacci(n - 2);
+}
+
+// 判斷質數
+int isPrime(int num) {
+    if (num <= 1) return 0;
+    if (num <= 3) return 1;
+    if (num % 2 == 0 || num % 3 == 0) return 0;
+
+    for (int i = 5; i * i <= num; i += 6) {
+        if (num % i == 0 || num % (i + 2) == 0) {
+            return 0;
+        }
+    }
+    return 1;
+}
+
+// 找出陣列最大值
+int findMax(int arr[], int size) {
+    int max = arr[0];
+    for (int i = 1; i < size; i++) {
+        if (arr[i] > max) {
+            max = arr[i];
+        }
+    }
+    return max;
+}
+
+int main() {
+    printf("=== 函數基本使用 ===\n");
+
+    // 呼叫無參數函數
+    greet();
+
+    // 呼叫有參數函數
+    int sum = add(10, 20);
+    printf("10 + 20 = %d\n", sum);
+
+    // 計算圓面積
+    double area = calculateArea(5.0);
+    printf("半徑 5.0 的圓面積：%.2f\n", area);
+
+    // 陣列參數
+    int numbers[] = {1, 2, 3, 4, 5};
+    int size = sizeof(numbers) / sizeof(numbers[0]);
+    printArray(numbers, size);
+
+    printf("\n=== 遞迴函數 ===\n");
+
+    // 階乘計算
+    for (int i = 1; i <= 5; i++) {
+        printf("%d! = %d\n", i, factorial(i));
+    }
+
+    // 費波那契數列
+    printf("\n費波那契數列前10項：");
+    for (int i = 0; i < 10; i++) {
+        printf("%d ", fibonacci(i));
+    }
+    printf("\n");
+
+    printf("\n=== 實用函數 ===\n");
+
+    // 質數檢查
+    printf("1到20的質數：");
+    for (int i = 1; i <= 20; i++) {
+        if (isPrime(i)) {
+            printf("%d ", i);
+        }
+    }
+    printf("\n");
+
+    // 找最大值
+    int data[] = {23, 45, 12, 67, 34, 89, 56};
+    int data_size = sizeof(data) / sizeof(data[0]);
+    int max = findMax(data, data_size);
+    printf("陣列最大值：%d\n", max);
+
+    return 0;
+}</code></pre>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-900 dark:text-white mb-2">指標基礎：</h4>
+                            <pre class="code-block"><button class="copy-btn" onclick="copyCode(this)">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                                </svg>
+                            </button><code>#include <stdio.h>
+
+int main() {
+    printf("=== 指標基本概念 ===\n");
+
+    // 變數和指標宣告
+    int number = 42;
+    int *ptr;           // 宣告整數指標
+
+    ptr = &number;      // 指標指向 number 的位址
+
+    printf("變數 number 的值：%d\n", number);
+    printf("變數 number 的位址：%p\n", (void*)&number);
+    printf("指標 ptr 的值（位址）：%p\n", (void*)ptr);
+    printf("指標 ptr 指向的值：%d\n", *ptr);
+
+    // 透過指標修改值
+    *ptr = 100;
+    printf("\n透過指標修改後：\n");
+    printf("number 的值：%d\n", number);
+    printf("*ptr 的值：%d\n", *ptr);
+
+    printf("\n=== 指標與陣列 ===\n");
+
+    int arr[] = {10, 20, 30, 40, 50};
+    int *arr_ptr = arr;  // 陣列名稱就是指向第一個元素的指標
+
+    printf("陣列元素（使用陣列索引）：\n");
+    for (int i = 0; i < 5; i++) {
+        printf("arr[%d] = %d\n", i, arr[i]);
+    }
+
+    printf("\n陣列元素（使用指標）：\n");
+    for (int i = 0; i < 5; i++) {
+        printf("*(arr_ptr + %d) = %d\n", i, *(arr_ptr + i));
+    }
+
+    printf("\n陣列元素（指標遞增）：\n");
+    int *temp_ptr = arr;
+    for (int i = 0; i < 5; i++) {
+        printf("*temp_ptr = %d\n", *temp_ptr);
+        temp_ptr++;  // 指標移動到下一個元素
+    }
+
+    printf("\n=== 指標算術 ===\n");
+
+    int values[] = {100, 200, 300, 400, 500};
+    int *p = values;
+
+    printf("初始位置：*p = %d\n", *p);
+
+    p++;  // 移動到下一個元素
+    printf("p++ 後：*p = %d\n", *p);
+
+    p += 2;  // 移動兩個位置
+    printf("p += 2 後：*p = %d\n", *p);
+
+    p--;  // 向前移動一個位置
+    printf("p-- 後：*p = %d\n", *p);
+
+    // 指標相減
+    int *start = values;
+    int *end = &values[4];
+    printf("陣列長度：%ld\n", end - start + 1);
+
+    printf("\n=== 字串與指標 ===\n");
+
+    char str[] = "Hello";
+    char *str_ptr = str;
+
+    printf("字串：%s\n", str);
+    printf("使用指標遍歷字串：\n");
+
+    while (*str_ptr != '\0') {
+        printf("字元：%c (ASCII: %d)\n", *str_ptr, *str_ptr);
+        str_ptr++;
+    }
+
+    // 字串指標
+    char *message = "C Programming";
+    printf("\n字串指標：%s\n", message);
+
+    // 字串陣列與指標陣列
+    char *languages[] = {"C", "C++", "Java", "Python"};
+
+    printf("\n程式語言：\n");
+    for (int i = 0; i < 4; i++) {
+        printf("%d. %s\n", i + 1, languages[i]);
+    }
+
+    printf("\n=== 指標與函數 ===\n");
+
+    // 將在下一個程式碼區塊中示範
+
+    return 0;
+}</code></pre>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-900 dark:text-white mb-2">指標與函數：</h4>
+                            <pre class="code-block"><button class="copy-btn" onclick="copyCode(this)">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                                </svg>
+                            </button><code>#include <stdio.h>
+
+// 傳值呼叫（Call by Value）
+void swapByValue(int a, int b) {
+    printf("函數內交換前：a = %d, b = %d\n", a, b);
+    int temp = a;
+    a = b;
+    b = temp;
+    printf("函數內交換後：a = %d, b = %d\n", a, b);
+}
+
+// 傳址呼叫（Call by Reference）
+void swapByReference(int *a, int *b) {
+    printf("函數內交換前：*a = %d, *b = %d\n", *a, *b);
+    int temp = *a;
+    *a = *b;
+    *b = temp;
+    printf("函數內交換後：*a = %d, *b = %d\n", *a, *b);
+}
+
+// 修改陣列元素
+void modifyArray(int arr[], int size) {
+    printf("在函數中修改陣列：\n");
+    for (int i = 0; i < size; i++) {
+        arr[i] *= 2;  // 每個元素乘以2
+        printf("arr[%d] = %d\n", i, arr[i]);
+    }
+}
+
+// 計算陣列總和
+int sumArray(int *arr, int size) {
+    int sum = 0;
+    for (int i = 0; i < size; i++) {
+        sum += arr[i];  // 等同於 sum += *(arr + i)
+    }
+    return sum;
+}
+
+// 尋找陣列中的最大值和最小值
+void findMinMax(int arr[], int size, int *min, int *max) {
+    *min = *max = arr[0];
+
+    for (int i = 1; i < size; i++) {
+        if (arr[i] < *min) {
+            *min = arr[i];
+        }
+        if (arr[i] > *max) {
+            *max = arr[i];
+        }
+    }
+}
+
+// 字串長度計算（使用指標）
+int stringLength(char *str) {
+    int length = 0;
+    while (*str != '\0') {
+        length++;
+        str++;
+    }
+    return length;
+}
+
+// 字串複製（使用指標）
+void stringCopy(char *dest, char *src) {
+    while (*src != '\0') {
+        *dest = *src;
+        dest++;
+        src++;
+    }
+    *dest = '\0';  // 加上字串結束符號
+}
+
+// 反轉陣列
+void reverseArray(int arr[], int size) {
+    int *start = arr;
+    int *end = arr + size - 1;
+
+    while (start < end) {
+        // 交換元素
+        int temp = *start;
+        *start = *end;
+        *end = temp;
+
+        start++;
+        end--;
+    }
+}
+
+int main() {
+    printf("=== 傳值 vs 傳址 ===\n");
+
+    int x = 10, y = 20;
+
+    printf("原始值：x = %d, y = %d\n", x, y);
+
+    // 傳值呼叫
+    printf("\n--- 傳值呼叫 ---\n");
+    swapByValue(x, y);
+    printf("函數呼叫後：x = %d, y = %d\n", x, y);
+
+    // 傳址呼叫
+    printf("\n--- 傳址呼叫 ---\n");
+    swapByReference(&x, &y);
+    printf("函數呼叫後：x = %d, y = %d\n", x, y);
+
+    printf("\n=== 陣列與指標函數 ===\n");
+
+    int numbers[] = {1, 2, 3, 4, 5};
+    int size = sizeof(numbers) / sizeof(numbers[0]);
+
+    printf("原始陣列：");
+    for (int i = 0; i < size; i++) {
+        printf("%d ", numbers[i]);
+    }
+    printf("\n");
+
+    // 計算總和
+    int total = sumArray(numbers, size);
+    printf("陣列總和：%d\n", total);
+
+    // 修改陣列
+    modifyArray(numbers, size);
+
+    printf("修改後陣列：");
+    for (int i = 0; i < size; i++) {
+        printf("%d ", numbers[i]);
+    }
+    printf("\n");
+
+    // 尋找最大最小值
+    int min, max;
+    findMinMax(numbers, size, &min, &max);
+    printf("最小值：%d，最大值：%d\n", min, max);
+
+    printf("\n=== 字串指標函數 ===\n");
+
+    char original[] = "Hello World";
+    char copy[50];
+
+    printf("原始字串：%s\n", original);
+    printf("字串長度：%d\n", stringLength(original));
+
+    stringCopy(copy, original);
+    printf("複製字串：%s\n", copy);
+
+    printf("\n=== 陣列反轉 ===\n");
+
+    int data[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+    int data_size = sizeof(data) / sizeof(data[0]);
+
+    printf("反轉前：");
+    for (int i = 0; i < data_size; i++) {
+        printf("%d ", data[i]);
+    }
+    printf("\n");
+
+    reverseArray(data, data_size);
+
+    printf("反轉後：");
+    for (int i = 0; i < data_size; i++) {
+        printf("%d ", data[i]);
+    }
+    printf("\n");
+
+    printf("\n=== 指標的指標 ===\n");
+
+    int value = 100;
+    int *ptr1 = &value;
+    int **ptr2 = &ptr1;  // 指向指標的指標
+
+    printf("value = %d\n", value);
+    printf("*ptr1 = %d\n", *ptr1);
+    printf("**ptr2 = %d\n", **ptr2);
+
+    printf("value 的位址：%p\n", (void*)&value);
+    printf("ptr1 的值：%p\n", (void*)ptr1);
+    printf("ptr1 的位址：%p\n", (void*)&ptr1);
+    printf("ptr2 的值：%p\n", (void*)ptr2);
+
+    // 透過二級指標修改值
+    **ptr2 = 200;
+    printf("透過 **ptr2 修改後，value = %d\n", value);
+
+    return 0;
+}</code></pre>
+                        </div>
+                        <div class="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-4">
+                            <h5 class="font-semibold text-blue-900 dark:text-blue-100 mb-2">💡 實作練習</h5>
+                            <p class="text-blue-800 dark:text-blue-200 text-sm">
+                                建立一個動態陣列管理系統，使用指標實作陣列的新增、刪除、搜尋和排序功能！
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 第5課：結構體與檔案處理 -->
+                <div class="card p-6">
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="flex-1">
+                            <div class="flex items-center mb-2">
+                                <h3 class="text-xl font-bold text-gray-900 dark:text-white mr-3">第5課：結構體與檔案處理</h3>
+                                <span class="px-2 py-1 text-xs font-medium rounded-full bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200">進階</span>
+                            </div>
+                            <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
+                                學習 C 語言的結構體定義和檔案操作，掌握複雜資料結構和資料持久化技術。
+                            </p>
+                        </div>
+                        <button onclick="toggleLesson(this)" class="ml-4 p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+                            <svg class="w-5 h-5 text-gray-500 dark:text-gray-400 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="lesson-content hidden space-y-4 border-t border-gray-200 dark:border-gray-700 pt-4">
+                        <div>
+                            <h4 class="font-semibold text-gray-900 dark:text-white mb-2">結構體基礎：</h4>
+                            <pre class="code-block"><button class="copy-btn" onclick="copyCode(this)">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                                </svg>
+                            </button><code>#include <stdio.h>
+#include <string.h>
+
+// 定義學生結構體
+struct Student {
+    int id;
+    char name[50];
+    int age;
+    float gpa;
+    char major[30];
+};
+
+// 定義座標點結構體
+struct Point {
+    double x;
+    double y;
+};
+
+// 定義日期結構體
+struct Date {
+    int day;
+    int month;
+    int year;
+};
+
+// 定義員工結構體（包含日期結構體）
+struct Employee {
+    int id;
+    char name[50];
+    struct Date birthDate;
+    struct Date hireDate;
+    double salary;
+};
+
+// 使用 typedef 簡化結構體名稱
+typedef struct {
+    char title[100];
+    char author[50];
+    int pages;
+    double price;
+} Book;
+
+// 函數：顯示學生資訊
+void displayStudent(struct Student s) {
+    printf("=== 學生資訊 ===\n");
+    printf("學號：%d\n", s.id);
+    printf("姓名：%s\n", s.name);
+    printf("年齡：%d\n", s.age);
+    printf("GPA：%.2f\n", s.gpa);
+    printf("主修：%s\n", s.major);
+}
+
+// 函數：計算兩點距離
+double calculateDistance(struct Point p1, struct Point p2) {
+    double dx = p2.x - p1.x;
+    double dy = p2.y - p1.y;
+    return sqrt(dx * dx + dy * dy);
+}
+
+// 函數：顯示日期
+void displayDate(struct Date date) {
+    printf("%04d/%02d/%02d", date.year, date.month, date.day);
+}
+
+int main() {
+    printf("=== 結構體基本使用 ===\n");
+
+    // 結構體變數宣告和初始化
+    struct Student student1;
+
+    // 個別賦值
+    student1.id = 1001;
+    strcpy(student1.name, "張小明");
+    student1.age = 20;
+    student1.gpa = 3.75;
+    strcpy(student1.major, "資訊工程");
+
+    // 初始化時賦值
+    struct Student student2 = {1002, "李小華", 21, 3.85, "電機工程"};
+
+    // 顯示學生資訊
+    displayStudent(student1);
+    printf("\n");
+    displayStudent(student2);
+
+    printf("\n=== 結構體陣列 ===\n");
+
+    // 結構體陣列
+    struct Student class[3] = {
+        {1001, "張小明", 20, 3.75, "資訊工程"},
+        {1002, "李小華", 21, 3.85, "電機工程"},
+        {1003, "王小美", 19, 3.92, "數學系"}
+    };
+
+    printf("班級學生名單：\n");
+    for (int i = 0; i < 3; i++) {
+        printf("%d. %s (ID: %d, GPA: %.2f)\n",
+               i + 1, class[i].name, class[i].id, class[i].gpa);
+    }
+
+    // 計算班級平均 GPA
+    double totalGPA = 0;
+    for (int i = 0; i < 3; i++) {
+        totalGPA += class[i].gpa;
+    }
+    double averageGPA = totalGPA / 3;
+    printf("班級平均 GPA：%.2f\n", averageGPA);
+
+    printf("\n=== 座標點計算 ===\n");
+
+    struct Point p1 = {0.0, 0.0};
+    struct Point p2 = {3.0, 4.0};
+
+    printf("點 1：(%.1f, %.1f)\n", p1.x, p1.y);
+    printf("點 2：(%.1f, %.1f)\n", p2.x, p2.y);
+
+    double distance = calculateDistance(p1, p2);
+    printf("兩點距離：%.2f\n", distance);
+
+    printf("\n=== 巢狀結構體 ===\n");
+
+    struct Employee emp = {
+        101,
+        "陳大明",
+        {15, 3, 1985},    // 生日
+        {1, 6, 2020},     // 到職日
+        55000.0
+    };
+
+    printf("員工資訊：\n");
+    printf("員工編號：%d\n", emp.id);
+    printf("姓名：%s\n", emp.name);
+    printf("生日：");
+    displayDate(emp.birthDate);
+    printf("\n到職日：");
+    displayDate(emp.hireDate);
+    printf("\n薪水：%.2f\n", emp.salary);
+
+    printf("\n=== typedef 結構體 ===\n");
+
+    Book book1 = {"C 程式設計", "Dennis Ritchie", 272, 450.0};
+    Book book2;
+
+    strcpy(book2.title, "資料結構與演算法");
+    strcpy(book2.author, "Thomas Cormen");
+    book2.pages = 1312;
+    book2.price = 1200.0;
+
+    printf("書籍 1：\n");
+    printf("  書名：%s\n", book1.title);
+    printf("  作者：%s\n", book1.author);
+    printf("  頁數：%d\n", book1.pages);
+    printf("  價格：%.2f\n", book1.price);
+
+    printf("\n書籍 2：\n");
+    printf("  書名：%s\n", book2.title);
+    printf("  作者：%s\n", book2.author);
+    printf("  頁數：%d\n", book2.pages);
+    printf("  價格：%.2f\n", book2.price);
+
+    printf("\n=== 結構體大小 ===\n");
+    printf("Student 結構體大小：%zu bytes\n", sizeof(struct Student));
+    printf("Point 結構體大小：%zu bytes\n", sizeof(struct Point));
+    printf("Date 結構體大小：%zu bytes\n", sizeof(struct Date));
+    printf("Employee 結構體大小：%zu bytes\n", sizeof(struct Employee));
+    printf("Book 結構體大小：%zu bytes\n", sizeof(Book));
+
+    return 0;
+}</code></pre>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-900 dark:text-white mb-2">結構體與指標：</h4>
+                            <pre class="code-block"><button class="copy-btn" onclick="copyCode(this)">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                                </svg>
+                            </button><code>#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+// 定義鏈結串列節點
+struct Node {
+    int data;
+    struct Node* next;
+};
+
+// 定義學生結構體
+typedef struct {
+    int id;
+    char name[50];
+    float gpa;
+} Student;
+
+// 函數：透過指標修改學生資訊
+void updateStudent(Student* s, int newId, const char* newName, float newGpa) {
+    s->id = newId;  // 等同於 (*s).id = newId
+    strcpy(s->name, newName);
+    s->gpa = newGpa;
+}
+
+// 函數：顯示學生資訊（使用指標）
+void printStudent(const Student* s) {
+    printf("學號：%d, 姓名：%s, GPA：%.2f\n", s->id, s->name, s->gpa);
+}
+
+// 函數：比較兩個學生的 GPA
+int compareGPA(const Student* s1, const Student* s2) {
+    if (s1->gpa > s2->gpa) return 1;
+    if (s1->gpa < s2->gpa) return -1;
+    return 0;
+}
+
+// 函數：在鏈結串列開頭插入節點
+struct Node* insertAtBeginning(struct Node* head, int value) {
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    if (newNode == NULL) {
+        printf("記憶體配置失敗\n");
+        return head;
+    }
+
+    newNode->data = value;
+    newNode->next = head;
+    return newNode;
+}
+
+// 函數：顯示鏈結串列
+void printList(struct Node* head) {
+    struct Node* current = head;
+    printf("鏈結串列：");
+
+    while (current != NULL) {
+        printf("%d ", current->data);
+        current = current->next;
+    }
+    printf("\n");
+}
+
+// 函數：釋放鏈結串列記憶體
+void freeList(struct Node* head) {
+    struct Node* current = head;
+    struct Node* next;
+
+    while (current != NULL) {
+        next = current->next;
+        free(current);
+        current = next;
+    }
+}
+
+// 函數：動態配置學生陣列
+Student* createStudentArray(int size) {
+    Student* students = (Student*)malloc(size * sizeof(Student));
+    if (students == NULL) {
+        printf("記憶體配置失敗\n");
+        return NULL;
+    }
+    return students;
+}
+
+int main() {
+    printf("=== 結構體指標基礎 ===\n");
+
+    Student student = {1001, "張小明", 3.75};
+    Student* ptr = &student;
+
+    printf("使用變數存取：\n");
+    printf("學號：%d, 姓名：%s, GPA：%.2f\n",
+           student.id, student.name, student.gpa);
+
+    printf("\n使用指標存取：\n");
+    printf("學號：%d, 姓名：%s, GPA：%.2f\n",
+           ptr->id, ptr->name, ptr->gpa);
+
+    // 透過指標修改
+    updateStudent(ptr, 1002, "李小華", 3.85);
+    printf("\n修改後：\n");
+    printStudent(ptr);
+
+    printf("\n=== 結構體陣列與指標 ===\n");
+
+    // 動態配置學生陣列
+    int numStudents = 3;
+    Student* students = createStudentArray(numStudents);
+
+    if (students != NULL) {
+        // 初始化學生資料
+        updateStudent(&students[0], 1001, "王小明", 3.75);
+        updateStudent(&students[1], 1002, "李小華", 3.85);
+        updateStudent(&students[2], 1003, "張小美", 3.92);
+
+        printf("學生清單：\n");
+        for (int i = 0; i < numStudents; i++) {
+            printf("%d. ", i + 1);
+            printStudent(&students[i]);
+        }
+
+        // 找出 GPA 最高的學生
+        Student* topStudent = &students[0];
+        for (int i = 1; i < numStudents; i++) {
+            if (compareGPA(&students[i], topStudent) > 0) {
+                topStudent = &students[i];
+            }
+        }
+
+        printf("\nGPA 最高的學生：\n");
+        printStudent(topStudent);
+
+        // 釋放記憶體
+        free(students);
+    }
+
+    printf("\n=== 鏈結串列示範 ===\n");
+
+    struct Node* head = NULL;
+
+    // 插入節點
+    head = insertAtBeginning(head, 10);
+    head = insertAtBeginning(head, 20);
+    head = insertAtBeginning(head, 30);
+    head = insertAtBeginning(head, 40);
+
+    printList(head);
+
+    // 遍歷並修改節點
+    struct Node* current = head;
+    printf("將所有值乘以 2：\n");
+    while (current != NULL) {
+        current->data *= 2;
+        current = current->next;
+    }
+
+    printList(head);
+
+    // 計算節點數量
+    current = head;
+    int count = 0;
+    while (current != NULL) {
+        count++;
+        current = current->next;
+    }
+    printf("節點數量：%d\n", count);
+
+    // 釋放鏈結串列記憶體
+    freeList(head);
+
+    printf("\n=== 結構體函數指標 ===\n");
+
+    // 定義包含函數指標的結構體
+    typedef struct {
+        int (*add)(int, int);
+        int (*multiply)(int, int);
+    } Calculator;
+
+    // 定義計算函數
+    int add(int a, int b) { return a + b; }
+    int multiply(int a, int b) { return a * b; }
+
+    // 建立計算器
+    Calculator calc = {add, multiply};
+
+    printf("5 + 3 = %d\n", calc.add(5, 3));
+    printf("5 * 3 = %d\n", calc.multiply(5, 3));
+
+    return 0;
+}</code></pre>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-900 dark:text-white mb-2">檔案處理基礎：</h4>
+                            <pre class="code-block"><button class="copy-btn" onclick="copyCode(this)">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                                </svg>
+                            </button><code>#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+// 學生結構體
+typedef struct {
+    int id;
+    char name[50];
+    float gpa;
+} Student;
+
+// 函數：寫入文字檔案
+void writeTextFile() {
+    FILE *file = fopen("students.txt", "w");
+    if (file == NULL) {
+        printf("無法開啟檔案進行寫入\n");
+        return;
+    }
+
+    fprintf(file, "學生資料\n");
+    fprintf(file, "========\n");
+    fprintf(file, "1001,張小明,3.75\n");
+    fprintf(file, "1002,李小華,3.85\n");
+    fprintf(file, "1003,王小美,3.92\n");
+
+    fclose(file);
+    printf("文字檔案寫入完成：students.txt\n");
+}
+
+// 函數：讀取文字檔案
+void readTextFile() {
+    FILE *file = fopen("students.txt", "r");
+    if (file == NULL) {
+        printf("無法開啟檔案進行讀取\n");
+        return;
+    }
+
+    char line[100];
+    printf("\n讀取文字檔案內容：\n");
+
+    while (fgets(line, sizeof(line), file) != NULL) {
+        printf("%s", line);
+    }
+
+    fclose(file);
+}
+
+// 函數：寫入二進位檔案
+void writeBinaryFile() {
+    FILE *file = fopen("students.dat", "wb");
+    if (file == NULL) {
+        printf("無法開啟二進位檔案進行寫入\n");
+        return;
+    }
+
+    Student students[] = {
+        {1001, "張小明", 3.75},
+        {1002, "李小華", 3.85},
+        {1003, "王小美", 3.92}
+    };
+
+    int count = sizeof(students) / sizeof(students[0]);
+
+    // 寫入學生數量
+    fwrite(&count, sizeof(int), 1, file);
+
+    // 寫入學生資料
+    fwrite(students, sizeof(Student), count, file);
+
+    fclose(file);
+    printf("二進位檔案寫入完成：students.dat\n");
+}
+
+// 函數：讀取二進位檔案
+void readBinaryFile() {
+    FILE *file = fopen("students.dat", "rb");
+    if (file == NULL) {
+        printf("無法開啟二進位檔案進行讀取\n");
+        return;
+    }
+
+    int count;
+
+    // 讀取學生數量
+    if (fread(&count, sizeof(int), 1, file) != 1) {
+        printf("讀取學生數量失敗\n");
+        fclose(file);
+        return;
+    }
+
+    printf("\n從二進位檔案讀取 %d 個學生：\n", count);
+
+    // 讀取學生資料
+    Student student;
+    for (int i = 0; i < count; i++) {
+        if (fread(&student, sizeof(Student), 1, file) == 1) {
+            printf("學號：%d, 姓名：%s, GPA：%.2f\n",
+                   student.id, student.name, student.gpa);
+        }
+    }
+
+    fclose(file);
+}
+
+// 函數：追加資料到檔案
+void appendToFile() {
+    FILE *file = fopen("students.txt", "a");
+    if (file == NULL) {
+        printf("無法開啟檔案進行追加\n");
+        return;
+    }
+
+    fprintf(file, "1004,陳小強,3.68\n");
+    fprintf(file, "1005,林小雅,3.91\n");
+
+    fclose(file);
+    printf("資料追加完成\n");
+}
+
+// 函數：檔案複製
+void copyFile(const char* source, const char* destination) {
+    FILE *src = fopen(source, "r");
+    if (src == NULL) {
+        printf("無法開啟來源檔案：%s\n", source);
+        return;
+    }
+
+    FILE *dest = fopen(destination, "w");
+    if (dest == NULL) {
+        printf("無法建立目標檔案：%s\n", destination);
+        fclose(src);
+        return;
+    }
+
+    char ch;
+    while ((ch = fgetc(src)) != EOF) {
+        fputc(ch, dest);
+    }
+
+    fclose(src);
+    fclose(dest);
+    printf("檔案複製完成：%s -> %s\n", source, destination);
+}
+
+// 函數：統計檔案資訊
+void analyzeFile(const char* filename) {
+    FILE *file = fopen(filename, "r");
+    if (file == NULL) {
+        printf("無法開啟檔案：%s\n", filename);
+        return;
+    }
+
+    int lines = 0, words = 0, chars = 0;
+    char ch, prev_ch = ' ';
+
+    while ((ch = fgetc(file)) != EOF) {
+        chars++;
+
+        if (ch == '\n') {
+            lines++;
+        }
+
+        if ((ch == ' ' || ch == '\n' || ch == '\t') &&
+            (prev_ch != ' ' && prev_ch != '\n' && prev_ch != '\t')) {
+            words++;
+        }
+
+        prev_ch = ch;
+    }
+
+    // 如果檔案不是以換行結尾，最後一行也要計算
+    if (chars > 0 && prev_ch != '\n') {
+        lines++;
+    }
+
+    // 如果最後一個字元不是空白，最後一個單字也要計算
+    if (chars > 0 && prev_ch != ' ' && prev_ch != '\n' && prev_ch != '\t') {
+        words++;
+    }
+
+    fclose(file);
+
+    printf("\n檔案統計：%s\n", filename);
+    printf("行數：%d\n", lines);
+    printf("單字數：%d\n", words);
+    printf("字元數：%d\n", chars);
+}
+
+// 函數：搜尋檔案內容
+void searchInFile(const char* filename, const char* searchTerm) {
+    FILE *file = fopen(filename, "r");
+    if (file == NULL) {
+        printf("無法開啟檔案：%s\n", filename);
+        return;
+    }
+
+    char line[200];
+    int lineNumber = 1;
+    int found = 0;
+
+    printf("\n在檔案 %s 中搜尋 \"%s\"：\n", filename, searchTerm);
+
+    while (fgets(line, sizeof(line), file) != NULL) {
+        if (strstr(line, searchTerm) != NULL) {
+            printf("第 %d 行：%s", lineNumber, line);
+            found = 1;
+        }
+        lineNumber++;
+    }
+
+    if (!found) {
+        printf("未找到 \"%s\"\n", searchTerm);
+    }
+
+    fclose(file);
+}
+
+int main() {
+    printf("=== 檔案處理示範 ===\n");
+
+    // 寫入和讀取文字檔案
+    writeTextFile();
+    readTextFile();
+
+    printf("\n=== 追加資料 ===\n");
+    appendToFile();
+    readTextFile();
+
+    printf("\n=== 二進位檔案操作 ===\n");
+    writeBinaryFile();
+    readBinaryFile();
+
+    printf("\n=== 檔案複製 ===\n");
+    copyFile("students.txt", "students_backup.txt");
+
+    printf("\n=== 檔案分析 ===\n");
+    analyzeFile("students.txt");
+
+    printf("\n=== 檔案搜尋 ===\n");
+    searchInFile("students.txt", "張小明");
+    searchInFile("students.txt", "3.9");
+
+    printf("\n=== 檔案位置操作 ===\n");
+
+    FILE *file = fopen("students.dat", "rb");
+    if (file != NULL) {
+        // 移動到檔案開頭
+        fseek(file, 0, SEEK_SET);
+
+        int count;
+        fread(&count, sizeof(int), 1, file);
+        printf("學生總數：%d\n", count);
+
+        // 移動到第二個學生記錄
+        fseek(file, sizeof(int) + sizeof(Student), SEEK_SET);
+
+        Student student;
+        if (fread(&student, sizeof(Student), 1, file) == 1) {
+            printf("第二個學生：%s\n", student.name);
+        }
+
+        // 取得目前檔案位置
+        long position = ftell(file);
+        printf("目前檔案位置：%ld\n", position);
+
+        fclose(file);
+    }
+
+    return 0;
+}</code></pre>
+                        </div>
+                        <div class="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-4">
+                            <h5 class="font-semibold text-blue-900 dark:text-blue-100 mb-2">💡 實作練習</h5>
+                            <p class="text-blue-800 dark:text-blue-200 text-sm">
+                                建立一個完整的學生管理系統，使用結構體儲存學生資料，並實作檔案的讀取、寫入、搜尋和統計功能！
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // 主題切換功能
+        const themeToggle = document.getElementById('theme-toggle');
+        const sunIcon = document.getElementById('sun-icon');
+        const moonIcon = document.getElementById('moon-icon');
+
+        // 檢查本地儲存的主題設定
+        const currentTheme = localStorage.getItem('theme') || 'light';
+        if (currentTheme === 'dark') {
+            document.documentElement.classList.add('dark');
+            sunIcon.classList.remove('hidden');
+            moonIcon.classList.add('hidden');
+        }
+
+        themeToggle.addEventListener('click', () => {
+            document.documentElement.classList.toggle('dark');
+            
+            if (document.documentElement.classList.contains('dark')) {
+                localStorage.setItem('theme', 'dark');
+                sunIcon.classList.remove('hidden');
+                moonIcon.classList.add('hidden');
+            } else {
+                localStorage.setItem('theme', 'light');
+                sunIcon.classList.add('hidden');
+                moonIcon.classList.remove('hidden');
+            }
+        });
+
+        // 課程展開/收起功能
+        function toggleLesson(button) {
+            const content = button.parentElement.nextElementSibling;
+            const icon = button.querySelector('svg');
+
+            if (content.classList.contains('hidden')) {
+                content.classList.remove('hidden');
+                icon.style.transform = 'rotate(180deg)';
+            } else {
+                content.classList.add('hidden');
+                icon.style.transform = 'rotate(0deg)';
+            }
+        }
+
+        // 複製程式碼功能
+        function copyCode(button) {
+            const codeBlock = button.nextElementSibling;
+            const text = codeBlock.textContent;
+            
+            navigator.clipboard.writeText(text).then(() => {
+                // 顯示複製成功的視覺回饋
+                const originalHTML = button.innerHTML;
+                button.innerHTML = '<svg class="w-4 h-4 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>';
+                
+                setTimeout(() => {
+                    button.innerHTML = originalHTML;
+                }, 1000);
+            }).catch(err => {
+                console.error('複製失敗:', err);
+            });
+        }
+    </script>
+</body>
+</html>

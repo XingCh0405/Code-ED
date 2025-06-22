@@ -1,0 +1,2843 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>C++ 教學 - 程式語言教學平台</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cdefs%3E%3ClinearGradient id='bookGrad' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23059669'/%3E%3Cstop offset='50%25' style='stop-color:%2306B6D4'/%3E%3Cstop offset='100%25' style='stop-color:%234F46E5'/%3E%3C/linearGradient%3E%3ClinearGradient id='pageGrad' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23FBBF24'/%3E%3Cstop offset='100%25' style='stop-color:%23F59E0B'/%3E%3C/linearGradient%3E%3C/defs%3E%3C!-- Book cover --%3E%3Cpath d='M3 4c0-1.1.9-2 2-2h14c1.1 0 2 .9 2 2v16c0 1.1-.9 2-2 2H5c-1.1 0-2-.9-2-2V4z' fill='url(%23bookGrad)'/%3E%3C!-- Book spine --%3E%3Cpath d='M3 4v16c0 1.1.9 2 2 2h1V2H5c-1.1 0-2 .9-2 2z' fill='%23047857' opacity='0.8'/%3E%3C!-- Pages --%3E%3Cpath d='M7 3h12c.6 0 1 .4 1 1v16c0 .6-.4 1-1 1H7V3z' fill='url(%23pageGrad)'/%3E%3C!-- Page lines --%3E%3Cg stroke='%23FFFFFF' stroke-width='0.5' opacity='0.8'%3E%3Cline x1='9' y1='6' x2='17' y2='6'/%3E%3Cline x1='9' y1='8' x2='17' y2='8'/%3E%3Cline x1='9' y1='10' x2='17' y2='10'/%3E%3Cline x1='9' y1='12' x2='17' y2='12'/%3E%3Cline x1='9' y1='14' x2='17' y2='14'/%3E%3Cline x1='9' y1='16' x2='17' y2='16'/%3E%3Cline x1='9' y1='18' x2='17' y2='18'/%3E%3C/g%3E%3C!-- Code symbol --%3E%3Ctext x='12' y='11' font-family='monospace' font-size='6' fill='%23FFFFFF' text-anchor='middle' opacity='0.9'%3E%26lt;/%26gt;%3C/text%3E%3C/svg%3E">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            200: '#bfdbfe',
+                            300: '#93c5fd',
+                            400: '#60a5fa',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            800: '#1e40af',
+                            900: '#1e3a8a',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', system-ui, sans-serif; }
+        code { font-family: 'Fira Code', Monaco, 'Cascadia Code', 'Roboto Mono', monospace; }
+        .card {
+            background-color: white;
+            border-radius: 0.75rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            border: 1px solid #e5e7eb;
+        }
+        .card:hover {
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        .dark .card {
+            background-color: #1f2937;
+            border-color: #374151;
+        }
+        .code-block {
+            background-color: #f3f4f6;
+            border: 1px solid #e5e7eb;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            font-size: 0.875rem;
+            overflow-x: auto;
+            position: relative;
+        }
+        .dark .code-block {
+            background-color: #1e293b;
+            border-color: #475569;
+            color: #e2e8f0;
+        }
+        .copy-btn {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            background: rgba(0, 0, 0, 0.1);
+            border: none;
+            border-radius: 0.25rem;
+            padding: 0.25rem;
+            cursor: pointer;
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+        .code-block:hover .copy-btn {
+            opacity: 1;
+        }
+        .copy-btn:hover {
+            background: rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
+    <!-- Header -->
+    <header class="bg-white dark:bg-gray-800 shadow-sm border-b border-gray-200 dark:border-gray-700">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-2 text-2xl font-bold text-primary-600 dark:text-primary-400">
+                    <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M9.4 16.6L4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0L19.2 12l-4.6-4.6L16 6l6 6-6 6-1.4-1.4z"/>
+                    </svg>
+                    <span>程式教學平台</span>
+                </div>
+
+                <nav class="hidden md:flex items-center space-x-6">
+                    <a href="index.html" class="font-medium text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">首頁</a>
+
+                    <!-- 程式設計下拉選單 -->
+                    <div class="relative group">
+                        <button class="font-medium text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors flex items-center">
+                            程式設計
+                            <svg class="w-4 h-4 ml-1 transform group-hover:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </button>
+
+                        <!-- 下拉選單內容 -->
+                        <div class="absolute left-0 mt-2 w-64 bg-white dark:bg-gray-800 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+                            <!-- 初學者 -->
+                            <div class="px-4 py-2 border-b border-gray-200 dark:border-gray-700">
+                                <h3 class="text-sm font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide">初學者</h3>
+                            </div>
+                            <div class="py-2">
+                                <a href="html-tutorial.html" class="flex items-center px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+                                    <div class="w-6 h-6 bg-orange-500 rounded flex items-center justify-center text-white text-xs font-bold mr-3">
+                                        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
+                                            <path d="M1.5 0h21l-1.91 21.563L11.977 24l-8.564-2.438L1.5 0zm7.031 9.75l-.232-2.718 10.059.003.23-2.622L5.412 4.41l.698 8.01h9.126l-.326 3.426-2.91.804-2.955-.81-.188-2.11H6.248l.33 4.171L12 19.351l5.379-1.443.744-8.157H8.531z"/>
+                                        </svg>
+                                    </div>
+                                    HTML
+                                </a>
+                                <a href="python-tutorial.html" class="flex items-center px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+                                    <div class="w-6 h-6 rounded flex items-center justify-center mr-3">
+                                        <svg viewBox="0 0 24 24" class="w-5 h-5">
+                                            <defs>
+                                                <linearGradient id="python-nav-cpp-gradient-1" x1="0%" y1="0%" x2="100%" y2="100%">
+                                                    <stop offset="0%" style="stop-color:#3776ab"/>
+                                                    <stop offset="100%" style="stop-color:#4b8bbe"/>
+                                                </linearGradient>
+                                                <linearGradient id="python-nav-cpp-gradient-2" x1="0%" y1="0%" x2="100%" y2="100%">
+                                                    <stop offset="0%" style="stop-color:#ffd43b"/>
+                                                    <stop offset="100%" style="stop-color:#ffe873"/>
+                                                </linearGradient>
+                                            </defs>
+                                            <path d="M11.914 0C5.82 0 6.2 2.656 6.2 2.656l.007 2.752h5.814v.826H3.9S0 5.789 0 11.969c0 6.18 3.403 5.96 3.403 5.96h2.03v-2.867s-.109-3.42 3.35-3.42h5.766s3.24.052 3.24-3.148V3.202S18.28 0 11.914 0zM8.708 1.85c.578 0 1.046.47 1.046 1.052 0 .581-.468 1.051-1.046 1.051-.579 0-1.046-.47-1.046-1.051 0-.582.467-1.052 1.046-1.052z" fill="url(#python-nav-cpp-gradient-1)"/>
+                                            <path d="M12.087 24c6.094 0 5.714-2.656 5.714-2.656l-.007-2.752h-5.814v-.826h8.121s4.1.445 4.1-5.735c0-6.18-3.403-5.96-3.403-5.96h-2.03v2.867s.109 3.42-3.35 3.42H9.652s-3.24-.052-3.24 3.148v5.292S5.921 24 12.087 24zm3.206-1.85c-.578 0-1.046-.47-1.046-1.052 0-.581.468-1.051 1.046-1.051.579 0 1.046.47 1.046 1.051 0 .582-.467 1.052-1.046 1.052z" fill="url(#python-nav-cpp-gradient-2)"/>
+                                        </svg>
+                                    </div>
+                                    Python
+                                </a>
+                                <a href="javascript-tutorial.html" class="flex items-center px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+                                    <div class="w-6 h-6 rounded flex items-center justify-center mr-3">
+                                        <svg viewBox="0 0 24 24" class="w-5 h-5">
+                                            <rect width="24" height="24" rx="2" fill="#F7DF1E"/>
+                                            <path d="M22.034 18.276c-.175-1.095-.888-2.015-3.003-2.873-.736-.345-1.554-.585-1.797-1.14-.091-.33-.105-.51-.046-.705.15-.646.915-.84 1.515-.66.39.12.75.42.976.9 1.034-.676 1.034-.676 1.755-1.125-.27-.42-.404-.601-.586-.78-.63-.705-1.469-1.065-2.834-1.034l-.705.089c-.676.165-1.32.525-1.71 1.005-1.14 1.291-.811 3.541.569 4.471 1.365 1.02 3.361 1.244 3.616 2.205.24 1.17-.87 1.545-1.966 1.41-.811-.18-1.26-.586-1.755-1.336l-1.83 1.051c.21.48.45.689.81 1.109 1.74 1.756 6.09 1.666 6.871-1.004.029-.09.24-.705.074-1.65l.046.067zm-8.983-7.245h-2.248c0 1.938-.009 3.864-.009 5.805 0 1.232.063 2.363-.138 2.711-.33.689-1.18.601-1.566.48-.396-.196-.597-.466-.83-.855-.063-.105-.11-.196-.127-.196l-1.825 1.125c.305.63.75 1.172 1.324 1.517.855.51 2.004.675 3.207.405.783-.226 1.458-.691 1.811-1.411.51-.93.402-2.07.397-3.346.012-2.054 0-4.109 0-6.179l.004-.056z" fill="#000"/>
+                                        </svg>
+                                    </div>
+                                    JavaScript
+                                </a>
+                            </div>
+
+                            <!-- 中級 -->
+                            <div class="px-4 py-2 border-b border-gray-200 dark:border-gray-700 border-t">
+                                <h3 class="text-sm font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide">中級</h3>
+                            </div>
+                            <div class="py-2">
+                                <a href="csharp-tutorial.html" class="flex items-center px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+                                    <div class="w-6 h-6 rounded flex items-center justify-center mr-3">
+                                        <svg viewBox="0 0 24 24" class="w-5 h-5">
+                                            <defs>
+                                                <linearGradient id="csharp-nav-cpp-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                                    <stop offset="0%" style="stop-color:#A855F7"/>
+                                                    <stop offset="50%" style="stop-color:#9333EA"/>
+                                                    <stop offset="100%" style="stop-color:#7C3AED"/>
+                                                </linearGradient>
+                                            </defs>
+                                            <rect x="2" y="2" width="20" height="20" rx="3" fill="url(#csharp-nav-cpp-gradient)"/>
+                                            <path d="M14 8.5C13.5 8 12.8 7.5 11 7.5C9 7.5 7.5 9 7.5 12C7.5 15 9 16.5 11 16.5C12.8 16.5 13.5 16 14 15.5" stroke="white" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+                                            <g fill="white">
+                                                <rect x="16.5" y="8.5" width="0.6" height="3"/>
+                                                <rect x="17.4" y="8.5" width="0.6" height="3"/>
+                                                <rect x="16" y="9.2" width="2.5" height="0.6"/>
+                                                <rect x="16" y="10.2" width="2.5" height="0.6"/>
+                                            </g>
+                                        </svg>
+                                    </div>
+                                    C#
+                                </a>
+                                <a href="java-tutorial.html" class="flex items-center px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+                                    <div class="w-6 h-6 rounded flex items-center justify-center mr-3">
+                                        <svg viewBox="0 0 24 24" class="w-5 h-5">
+                                            <defs>
+                                                <linearGradient id="java-nav-cpp-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                                    <stop offset="0%" style="stop-color:#ED8B00"/>
+                                                    <stop offset="100%" style="stop-color:#5382A1"/>
+                                                </linearGradient>
+                                            </defs>
+                                            <path d="M6 8h10c1 0 2 1 2 2v6c0 2-2 4-4 4H10c-2 0-4-2-4-4V10c0-1 1-2 2-2z" fill="url(#java-nav-cpp-gradient)"/>
+                                            <path d="M16 10v4c2 0 3-1 3-2s-1-2-3-2z" fill="url(#java-nav-cpp-gradient)"/>
+                                            <g stroke="#ED8B00" stroke-width="1.5" fill="none" stroke-linecap="round">
+                                                <path d="M8 6c0-1 0-2 0-2"/>
+                                                <path d="M10 6c0-1 0-2 0-2"/>
+                                                <path d="M12 6c0-1 0-2 0-2"/>
+                                                <path d="M14 6c0-1 0-2 0-2"/>
+                                            </g>
+                                        </svg>
+                                    </div>
+                                    Java
+                                </a>
+                                <a href="c-tutorial.html" class="flex items-center px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+                                    <div class="w-6 h-6 bg-gray-600 rounded flex items-center justify-center text-white text-xs font-bold mr-3">
+                                        C
+                                    </div>
+                                    C 語言
+                                </a>
+                            </div>
+
+                            <!-- 進階 -->
+                            <div class="px-4 py-2 border-b border-gray-200 dark:border-gray-700 border-t">
+                                <h3 class="text-sm font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide">進階</h3>
+                            </div>
+                            <div class="py-2">
+                                <a href="cpp-tutorial.html" class="flex items-center px-4 py-2 text-sm text-primary-600 dark:text-primary-400 bg-primary-50 dark:bg-primary-900/20 transition-colors">
+                                    <div class="w-6 h-6 rounded flex items-center justify-center mr-3">
+                                        <svg viewBox="0 0 24 24" class="w-5 h-5">
+                                            <defs>
+                                                <linearGradient id="cpp-page-nav-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                                    <stop offset="0%" style="stop-color:#6BA3D6"/>
+                                                    <stop offset="50%" style="stop-color:#4A90E2"/>
+                                                    <stop offset="100%" style="stop-color:#2E5C8A"/>
+                                                </linearGradient>
+                                            </defs>
+                                            <!-- Hexagon shape -->
+                                            <path d="M12 2L20.5 7V17L12 22L3.5 17V7L12 2Z" fill="url(#cpp-page-nav-gradient)"/>
+                                            <!-- Simple white C letter -->
+                                            <path d="M13 8.5C12.5 8 11.8 7.5 10 7.5C8 7.5 6.5 9 6.5 12C6.5 15 8 16.5 10 16.5C11.8 16.5 12.5 16 13 15.5" stroke="white" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+                                            <!-- Plus signs -->
+                                            <g fill="white">
+                                                <rect x="15.5" y="9" width="0.8" height="2.5"/>
+                                                <rect x="14.75" y="9.75" width="2.3" height="0.8"/>
+                                                <rect x="17.2" y="11.5" width="0.8" height="2.5"/>
+                                                <rect x="16.45" y="12.25" width="2.3" height="0.8"/>
+                                            </g>
+                                        </svg>
+                                    </div>
+                                    C++
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </nav>
+
+                <button id="theme-toggle" class="p-2 rounded-lg bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors duration-200">
+                    <svg id="sun-icon" class="w-5 h-5 text-yellow-500 hidden" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM18.894 6.166a.75.75 0 00-1.06-1.06l-1.591 1.59a.75.75 0 101.06 1.061l1.591-1.59zM21.75 12a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5H21a.75.75 0 01.75.75zM17.834 18.894a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 10-1.061 1.06l1.59 1.591zM12 18a.75.75 0 01.75.75V21a.75.75 0 01-1.5 0v-2.25A.75.75 0 0112 18zM7.758 17.303a.75.75 0 00-1.061-1.06l-1.591 1.59a.75.75 0 001.06 1.061l1.591-1.59zM6 12a.75.75 0 01-.75.75H3a.75.75 0 010-1.5h2.25A.75.75 0 016 12zM6.697 7.757a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 00-1.061 1.06l1.59 1.591z" />
+                    </svg>
+                    <svg id="moon-icon" class="w-5 h-5 text-gray-700" fill="currentColor" viewBox="0 0 24 24">
+                        <path fill-rule="evenodd" d="M9.528 1.718a.75.75 0 01.162.819A8.97 8.97 0 009 6a9 9 0 009 9 8.97 8.97 0 003.463-.69.75.75 0 01.981.98 10.503 10.503 0 01-9.694 6.46c-5.799 0-10.5-4.701-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 01.818.162z" clip-rule="evenodd" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+        <div class="max-w-4xl mx-auto">
+            <div class="mb-8">
+                <div class="flex items-center mb-4">
+                    <a href="index.html" class="text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 mr-4">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                        </svg>
+                    </a>
+                    <div class="flex items-center">
+                        <div class="w-12 h-12 bg-gradient-to-br from-blue-400 to-blue-700 rounded-lg flex items-center justify-center mr-4 p-2">
+                            <svg viewBox="0 0 24 24" class="w-8 h-8">
+                                <defs>
+                                    <linearGradient id="cpp-page-header-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                        <stop offset="0%" style="stop-color:#6BA3D6"/>
+                                        <stop offset="50%" style="stop-color:#4A90E2"/>
+                                        <stop offset="100%" style="stop-color:#2E5C8A"/>
+                                    </linearGradient>
+                                </defs>
+                                <!-- Hexagon shape -->
+                                <path d="M12 2L20.5 7V17L12 22L3.5 17V7L12 2Z" fill="url(#cpp-page-header-gradient)"/>
+                                <!-- Simple white C letter -->
+                                <path d="M13 8.5C12.5 8 11.8 7.5 10 7.5C8 7.5 6.5 9 6.5 12C6.5 15 8 16.5 10 16.5C11.8 16.5 12.5 16 13 15.5" stroke="white" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+                                <!-- Plus signs -->
+                                <g fill="white">
+                                    <rect x="15.5" y="9" width="1" height="3"/>
+                                    <rect x="14.75" y="9.75" width="2.5" height="1"/>
+                                    <rect x="17.5" y="11.5" width="1" height="3"/>
+                                    <rect x="16.75" y="12.25" width="2.5" height="1"/>
+                                </g>
+                            </svg>
+                        </div>
+                        <div>
+                            <h1 class="text-3xl font-bold text-gray-900 dark:text-white">C++ 教學</h1>
+                            <p class="text-gray-600 dark:text-gray-300">物件導向程式語言</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-4">
+                    <h2 class="font-semibold text-blue-900 dark:text-blue-100 mb-2">學習目標</h2>
+                    <ul class="text-blue-800 dark:text-blue-200 text-sm space-y-1">
+                        <li>• 了解 C++ 的特色和與 C 語言的差異</li>
+                        <li>• 掌握物件導向程式設計概念</li>
+                        <li>• 學會類別、物件、封裝和繼承</li>
+                        <li>• 掌握 STL 標準模板庫的使用</li>
+                        <li>• 學會模板和泛型程式設計</li>
+                        <li>• 能夠開發高效能應用程式</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- C++ Lessons -->
+            <div class="space-y-6">
+                <!-- 第1課：C++ 簡介與第一個程式 -->
+                <div class="card p-6">
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="flex-1">
+                            <div class="flex items-center mb-2">
+                                <h3 class="text-xl font-bold text-gray-900 dark:text-white mr-3">第1課：C++ 簡介與第一個程式</h3>
+                                <span class="px-2 py-1 text-xs font-medium rounded-full bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200">進階</span>
+                            </div>
+                            <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
+                                了解什麼是 C++，它與 C 語言的差異和優勢，並編寫你的第一個 C++ 程式。
+                            </p>
+                        </div>
+                        <button onclick="toggleLesson(this)" class="ml-4 p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+                            <svg class="w-5 h-5 text-gray-500 dark:text-gray-400 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="lesson-content hidden space-y-4 border-t border-gray-200 dark:border-gray-700 pt-4">
+                        <div>
+                            <h4 class="font-semibold text-gray-900 dark:text-white mb-2">什麼是 C++？</h4>
+                            <div class="text-gray-600 dark:text-gray-300 leading-relaxed space-y-3">
+                                <p>C++ 是由 Bjarne Stroustrup 在 1980 年代於貝爾實驗室開發的程式語言。它是 C 語言的擴展，最初被稱為「C with Classes」。</p>
+                                <p><strong>C++ 的核心特色：</strong></p>
+                                <ul class="list-disc list-inside space-y-1 ml-4">
+                                    <li><strong>物件導向：</strong>支援封裝、繼承、多型等 OOP 概念</li>
+                                    <li><strong>高效能：</strong>接近硬體層級的控制，執行速度快</li>
+                                    <li><strong>泛型程式設計：</strong>模板系統支援泛型程式設計</li>
+                                    <li><strong>STL：</strong>標準模板庫提供豐富的容器和演算法</li>
+                                    <li><strong>向下相容：</strong>幾乎所有 C 程式碼都可以在 C++ 中執行</li>
+                                    <li><strong>多重程式設計範式：</strong>支援程序式、物件導向、泛型程式設計</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-900 dark:text-white mb-2">你的第一個 C++ 程式：</h4>
+                            <pre class="code-block"><button class="copy-btn" onclick="copyCode(this)">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                                </svg>
+                            </button><code>// hello.cpp
+// 這是你的第一個 C++ 程式
+
+#include <iostream>  // 輸入輸出串流
+#include <string>    // 字串類別
+
+// 使用標準命名空間（可選）
+using namespace std;
+
+int main() {
+    // 輸出文字到控制台
+    cout << "Hello, World!" << endl;
+    cout << "歡迎來到 C++ 的世界！" << endl;
+    cout << "C++ 是一種強大的程式語言" << endl;
+
+    // 宣告和使用變數
+    string language = "C++";        // 字串
+    int year = 1985;               // 整數
+    double version = 20.0;         // 浮點數
+    bool isObjectOriented = true;  // 布林值
+
+    // 使用串流輸出變數
+    cout << "程式語言：" << language << endl;
+    cout << "發布年份：" << year << endl;
+    cout << "目前版本：" << version << endl;
+    cout << "物件導向：" << (isObjectOriented ? "是" : "否") << endl;
+
+    // 程式正常結束
+    return 0;
+}</code></pre>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-900 dark:text-white mb-2">程式碼解釋：</h4>
+                            <div class="text-gray-600 dark:text-gray-300 leading-relaxed space-y-3">
+                                <ul class="list-disc list-inside space-y-2 ml-4">
+                                    <li><strong>#include &lt;iostream&gt;：</strong>引入輸入輸出串流函式庫</li>
+                                    <li><strong>#include &lt;string&gt;：</strong>引入字串類別</li>
+                                    <li><strong>using namespace std：</strong>使用標準命名空間，可省略 std::</li>
+                                    <li><strong>cout：</strong>標準輸出串流，用於輸出資料</li>
+                                    <li><strong>&lt;&lt;：</strong>串流插入運算子</li>
+                                    <li><strong>endl：</strong>換行並清空緩衝區</li>
+                                    <li><strong>string：</strong>C++ 的字串類別，比 C 的字元陣列更方便</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-900 dark:text-white mb-2">C++ vs C 語言的差異：</h4>
+                            <div class="text-gray-600 dark:text-gray-300 leading-relaxed space-y-3">
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div class="bg-gray-50 dark:bg-gray-800 p-3 rounded">
+                                        <p><strong>C 語言</strong></p>
+                                        <ul class="text-sm space-y-1">
+                                            <li>• 程序式程式設計</li>
+                                            <li>• printf/scanf 輸入輸出</li>
+                                            <li>• 手動記憶體管理</li>
+                                            <li>• 結構體（struct）</li>
+                                        </ul>
+                                    </div>
+                                    <div class="bg-gray-50 dark:bg-gray-800 p-3 rounded">
+                                        <p><strong>C++</strong></p>
+                                        <ul class="text-sm space-y-1">
+                                            <li>• 物件導向程式設計</li>
+                                            <li>• cout/cin 串流輸入輸出</li>
+                                            <li>• 智慧指標自動管理</li>
+                                            <li>• 類別（class）</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-4">
+                            <h5 class="font-semibold text-blue-900 dark:text-blue-100 mb-2">💡 實作練習</h5>
+                            <p class="text-blue-800 dark:text-blue-200 text-sm">
+                                修改程式碼，讓它顯示你的個人資訊，並嘗試使用不同的資料型別！
+                            </p>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-900 dark:text-white mb-2">C++ 的應用領域：</h4>
+                            <div class="text-gray-600 dark:text-gray-300 leading-relaxed">
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div>
+                                        <p><strong>🎮 遊戲開發</strong></p>
+                                        <p class="text-sm">Unreal Engine、遊戲引擎</p>
+                                    </div>
+                                    <div>
+                                        <p><strong>🖥️ 系統軟體</strong></p>
+                                        <p class="text-sm">作業系統、驅動程式</p>
+                                    </div>
+                                    <div>
+                                        <p><strong>🏦 金融系統</strong></p>
+                                        <p class="text-sm">高頻交易、風險管理</p>
+                                    </div>
+                                    <div>
+                                        <p><strong>🔬 科學計算</strong></p>
+                                        <p class="text-sm">數值分析、模擬軟體</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card p-6">
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="flex-1">
+                            <div class="flex items-center mb-2">
+                                <h3 class="text-xl font-bold text-gray-900 dark:text-white mr-3">第2課：類別與物件</h3>
+                                <span class="px-2 py-1 text-xs font-medium rounded-full bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200">進階</span>
+                            </div>
+                            <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
+                                學習 C++ 物件導向程式設計的核心：類別和物件的定義與使用。
+                            </p>
+                        </div>
+                        <button onclick="toggleLesson(this)" class="ml-4 p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+                            <svg class="w-5 h-5 text-gray-500 dark:text-gray-400 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="lesson-content hidden space-y-4 border-t border-gray-200 dark:border-gray-700 pt-4">
+                        <div>
+                            <h4 class="font-semibold text-gray-900 dark:text-white mb-2">程式碼範例：</h4>
+                            <pre class="code-block"><button class="copy-btn" onclick="copyCode(this)">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                                </svg>
+                            </button><code>#include &lt;iostream&gt;
+#include &lt;string&gt;
+
+class Student {
+private:
+    std::string name;
+    int age;
+    std::string studentId;
+
+public:
+    // 建構子
+    Student(std::string n, int a, std::string id) 
+        : name(n), age(a), studentId(id) {}
+    
+    // 成員函數
+    void introduce() {
+        std::cout &lt;&lt; "我是 " &lt;&lt; name &lt;&lt; "，今年 " &lt;&lt; age &lt;&lt; " 歲" &lt;&lt; std::endl;
+        std::cout &lt;&lt; "學號：" &lt;&lt; studentId &lt;&lt; std::endl;
+    }
+    
+    // Getter 函數
+    std::string getName() const { return name; }
+    int getAge() const { return age; }
+    
+    // Setter 函數
+    void setAge(int newAge) { age = newAge; }
+};
+
+int main() {
+    // 建立物件
+    Student student1("小明", 20, "S001");
+    Student student2("小華", 19, "S002");
+    
+    // 呼叫成員函數
+    student1.introduce();
+    std::cout &lt;&lt; std::endl;
+    student2.introduce();
+    
+    return 0;
+}</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 第3課：控制流程與函數 -->
+                <div class="card p-6">
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="flex-1">
+                            <div class="flex items-center mb-2">
+                                <h3 class="text-xl font-bold text-gray-900 dark:text-white mr-3">第3課：控制流程與函數</h3>
+                                <span class="px-2 py-1 text-xs font-medium rounded-full bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200">進階</span>
+                            </div>
+                            <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
+                                學習 C++ 的條件判斷、迴圈控制和函數定義，掌握程式流程控制。
+                            </p>
+                        </div>
+                        <button onclick="toggleLesson(this)" class="ml-4 p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+                            <svg class="w-5 h-5 text-gray-500 dark:text-gray-400 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="lesson-content hidden space-y-4 border-t border-gray-200 dark:border-gray-700 pt-4">
+                        <div>
+                            <h4 class="font-semibold text-gray-900 dark:text-white mb-2">條件判斷：</h4>
+                            <pre class="code-block"><button class="copy-btn" onclick="copyCode(this)">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                                </svg>
+                            </button><code>#include <iostream>
+#include <string>
+
+using namespace std;
+
+int main() {
+    // if-else 條件判斷
+    int score = 85;
+
+    cout << "=== 成績等級判斷 ===" << endl;
+    if (score >= 90) {
+        cout << "等級：A (優秀)" << endl;
+    } else if (score >= 80) {
+        cout << "等級：B (良好)" << endl;
+    } else if (score >= 70) {
+        cout << "等級：C (普通)" << endl;
+    } else if (score >= 60) {
+        cout << "等級：D (及格)" << endl;
+    } else {
+        cout << "等級：F (不及格)" << endl;
+    }
+
+    // switch 語句
+    char grade = 'B';
+
+    cout << "\n=== 等級描述 ===" << endl;
+    switch (grade) {
+        case 'A':
+            cout << "表現優異！繼續保持！" << endl;
+            break;
+        case 'B':
+            cout << "表現良好！再接再厲！" << endl;
+            break;
+        case 'C':
+            cout << "表現普通，需要努力！" << endl;
+            break;
+        case 'D':
+            cout << "剛好及格，要加油了！" << endl;
+            break;
+        case 'F':
+            cout << "不及格，需要重修！" << endl;
+            break;
+        default:
+            cout << "無效的等級" << endl;
+            break;
+    }
+
+    // 三元運算子
+    int age = 20;
+    string status = (age >= 18) ? "成年人" : "未成年";
+    cout << "\n年齡 " << age << "：" << status << endl;
+
+    // 邏輯運算子
+    bool hasLicense = true;
+    bool hasInsurance = true;
+
+    cout << "\n=== 駕駛資格檢查 ===" << endl;
+    if (hasLicense && hasInsurance) {
+        cout << "可以開車" << endl;
+    } else if (hasLicense || hasInsurance) {
+        cout << "需要補齊證件" << endl;
+    } else {
+        cout << "不能開車" << endl;
+    }
+
+    return 0;
+}</code></pre>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-900 dark:text-white mb-2">迴圈控制：</h4>
+                            <pre class="code-block"><button class="copy-btn" onclick="copyCode(this)">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                                </svg>
+                            </button><code>#include <iostream>
+#include <vector>
+#include <string>
+
+using namespace std;
+
+int main() {
+    cout << "=== for 迴圈 ===" << endl;
+    // 基本 for 迴圈
+    for (int i = 1; i <= 5; i++) {
+        cout << "第 " << i << " 次迴圈" << endl;
+    }
+
+    cout << "\n=== while 迴圈 ===" << endl;
+    // while 迴圈
+    int count = 1;
+    while (count <= 3) {
+        cout << "while 迴圈第 " << count << " 次" << endl;
+        count++;
+    }
+
+    cout << "\n=== do-while 迴圈 ===" << endl;
+    // do-while 迴圈
+    int number = 1;
+    do {
+        cout << "do-while 迴圈第 " << number << " 次" << endl;
+        number++;
+    } while (number <= 3);
+
+    cout << "\n=== 範圍型 for 迴圈 (C++11) ===" << endl;
+    // 範圍型 for 迴圈（C++11 新特性）
+    vector<string> fruits = {"蘋果", "香蕉", "橘子", "葡萄"};
+
+    for (const string& fruit : fruits) {
+        cout << "水果：" << fruit << endl;
+    }
+
+    // 使用 auto 關鍵字
+    for (const auto& fruit : fruits) {
+        cout << "自動推導：" << fruit << endl;
+    }
+
+    cout << "\n=== 巢狀迴圈 ===" << endl;
+    // 巢狀迴圈 - 九九乘法表
+    for (int i = 1; i <= 3; i++) {
+        for (int j = 1; j <= 3; j++) {
+            cout << i << " x " << j << " = " << (i * j) << "\t";
+        }
+        cout << endl;
+    }
+
+    cout << "\n=== break 和 continue ===" << endl;
+    // break 和 continue
+    for (int i = 1; i <= 10; i++) {
+        if (i == 5) {
+            cout << "跳過 5" << endl;
+            continue;  // 跳過當前迭代
+        }
+
+        if (i == 8) {
+            cout << "在 8 處停止" << endl;
+            break;  // 跳出迴圈
+        }
+
+        cout << "數字：" << i << endl;
+    }
+
+    cout << "\n=== 尋找質數 ===" << endl;
+    // 實用範例：尋找質數
+    int limit = 20;
+    cout << "1 到 " << limit << " 的質數：";
+
+    for (int num = 2; num <= limit; num++) {
+        bool isPrime = true;
+
+        for (int i = 2; i * i <= num; i++) {
+            if (num % i == 0) {
+                isPrime = false;
+                break;
+            }
+        }
+
+        if (isPrime) {
+            cout << num << " ";
+        }
+    }
+    cout << endl;
+
+    return 0;
+}</code></pre>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-900 dark:text-white mb-2">函數定義與使用：</h4>
+                            <pre class="code-block"><button class="copy-btn" onclick="copyCode(this)">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                                </svg>
+                            </button><code>#include <iostream>
+#include <string>
+#include <vector>
+#include <algorithm>
+
+using namespace std;
+
+// 基本函數
+void greet() {
+    cout << "你好！歡迎學習 C++！" << endl;
+}
+
+// 帶參數的函數
+void greetPerson(const string& name) {
+    cout << "你好，" << name << "！" << endl;
+}
+
+// 帶回傳值的函數
+int add(int a, int b) {
+    return a + b;
+}
+
+// 多個參數的函數
+double calculateArea(double length, double width) {
+    return length * width;
+}
+
+// 預設參數
+void introduce(const string& name, int age = 18, const string& city = "台北") {
+    cout << "我是 " << name << "，今年 " << age << " 歲，住在 " << city << endl;
+}
+
+// 函數重載（Overloading）
+int multiply(int a, int b) {
+    return a * b;
+}
+
+double multiply(double a, double b) {
+    return a * b;
+}
+
+string multiply(const string& str, int times) {
+    string result;
+    for (int i = 0; i < times; i++) {
+        result += str;
+    }
+    return result;
+}
+
+// 傳址呼叫（Pass by Reference）
+void swap(int& a, int& b) {
+    int temp = a;
+    a = b;
+    b = temp;
+}
+
+// 陣列參數
+void printArray(const vector<int>& arr) {
+    cout << "陣列內容：";
+    for (const auto& element : arr) {
+        cout << element << " ";
+    }
+    cout << endl;
+}
+
+// 遞迴函數
+int factorial(int n) {
+    if (n <= 1) {
+        return 1;
+    }
+    return n * factorial(n - 1);
+}
+
+// 費波那契數列
+int fibonacci(int n) {
+    if (n <= 1) {
+        return n;
+    }
+    return fibonacci(n - 1) + fibonacci(n - 2);
+}
+
+int main() {
+    cout << "=== 基本函數呼叫 ===" << endl;
+    greet();
+    greetPerson("小明");
+
+    cout << "\n=== 函數回傳值 ===" << endl;
+    int sum = add(5, 3);
+    cout << "5 + 3 = " << sum << endl;
+
+    double area = calculateArea(10.5, 8.2);
+    cout << "面積：" << area << endl;
+
+    cout << "\n=== 預設參數 ===" << endl;
+    introduce("小華");                    // 使用預設值
+    introduce("小美", 25);               // 部分使用預設值
+    introduce("小強", 22, "高雄");        // 不使用預設值
+
+    cout << "\n=== 函數重載 ===" << endl;
+    cout << "整數相乘：" << multiply(5, 3) << endl;
+    cout << "浮點數相乘：" << multiply(2.5, 4.0) << endl;
+    cout << "字串重複：" << multiply("Hello ", 3) << endl;
+
+    cout << "\n=== 傳址呼叫 ===" << endl;
+    int x = 10, y = 20;
+    cout << "交換前：x = " << x << ", y = " << y << endl;
+    swap(x, y);
+    cout << "交換後：x = " << x << ", y = " << y << endl;
+
+    cout << "\n=== 陣列參數 ===" << endl;
+    vector<int> numbers = {1, 2, 3, 4, 5};
+    printArray(numbers);
+
+    cout << "\n=== 遞迴函數 ===" << endl;
+    cout << "5! = " << factorial(5) << endl;
+
+    cout << "費波那契數列前10項：";
+    for (int i = 0; i < 10; i++) {
+        cout << fibonacci(i) << " ";
+    }
+    cout << endl;
+
+    return 0;
+}</code></pre>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-900 dark:text-white mb-2">Lambda 表達式 (C++11)：</h4>
+                            <pre class="code-block"><button class="copy-btn" onclick="copyCode(this)">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                                </svg>
+                            </button><code>#include <iostream>
+#include <vector>
+#include <algorithm>
+#include <functional>
+
+using namespace std;
+
+int main() {
+    cout << "=== Lambda 表達式基礎 ===" << endl;
+
+    // 基本 lambda
+    auto greet = []() {
+        cout << "Hello from lambda!" << endl;
+    };
+    greet();
+
+    // 帶參數的 lambda
+    auto add = [](int a, int b) {
+        return a + b;
+    };
+    cout << "Lambda 加法：" << add(5, 3) << endl;
+
+    // 捕獲外部變數
+    int multiplier = 10;
+    auto multiply = [multiplier](int x) {
+        return x * multiplier;
+    };
+    cout << "Lambda 乘法：" << multiply(5) << endl;
+
+    // 捕獲方式
+    int value = 100;
+
+    // 按值捕獲
+    auto lambda1 = [value]() {
+        cout << "按值捕獲：" << value << endl;
+    };
+
+    // 按引用捕獲
+    auto lambda2 = [&value]() {
+        value += 10;
+        cout << "按引用捕獲並修改：" << value << endl;
+    };
+
+    // 捕獲所有變數
+    auto lambda3 = [=]() {  // 按值捕獲所有
+        cout << "捕獲所有（按值）：" << value << endl;
+    };
+
+    auto lambda4 = [&]() {  // 按引用捕獲所有
+        value += 5;
+        cout << "捕獲所有（按引用）：" << value << endl;
+    };
+
+    lambda1();
+    lambda2();
+    lambda3();
+    lambda4();
+
+    cout << "\n=== Lambda 與 STL 算法 ===" << endl;
+    vector<int> numbers = {5, 2, 8, 1, 9, 3};
+
+    // 使用 lambda 排序
+    sort(numbers.begin(), numbers.end(), [](int a, int b) {
+        return a < b;  // 升序排列
+    });
+
+    cout << "排序後：";
+    for (const auto& num : numbers) {
+        cout << num << " ";
+    }
+    cout << endl;
+
+    // 使用 lambda 篩選
+    vector<int> evenNumbers;
+    copy_if(numbers.begin(), numbers.end(), back_inserter(evenNumbers),
+            [](int n) { return n % 2 == 0; });
+
+    cout << "偶數：";
+    for (const auto& num : evenNumbers) {
+        cout << num << " ";
+    }
+    cout << endl;
+
+    // 使用 lambda 轉換
+    vector<int> squared;
+    transform(numbers.begin(), numbers.end(), back_inserter(squared),
+              [](int n) { return n * n; });
+
+    cout << "平方：";
+    for (const auto& num : squared) {
+        cout << num << " ";
+    }
+    cout << endl;
+
+    // 計算總和
+    int sum = 0;
+    for_each(numbers.begin(), numbers.end(), [&sum](int n) {
+        sum += n;
+    });
+    cout << "總和：" << sum << endl;
+
+    return 0;
+}</code></pre>
+                        </div>
+                        <div class="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-4">
+                            <h5 class="font-semibold text-blue-900 dark:text-blue-100 mb-2">💡 實作練習</h5>
+                            <p class="text-blue-800 dark:text-blue-200 text-sm">
+                                建立一個計算機程式，使用函數實作四則運算，並用 lambda 表達式處理複雜計算！
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 第4課：STL 標準模板庫 -->
+                <div class="card p-6">
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="flex-1">
+                            <div class="flex items-center mb-2">
+                                <h3 class="text-xl font-bold text-gray-900 dark:text-white mr-3">第4課：STL 標準模板庫</h3>
+                                <span class="px-2 py-1 text-xs font-medium rounded-full bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200">進階</span>
+                            </div>
+                            <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
+                                學習 C++ STL 的容器、迭代器和算法，掌握現代 C++ 程式設計的核心工具。
+                            </p>
+                        </div>
+                        <button onclick="toggleLesson(this)" class="ml-4 p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+                            <svg class="w-5 h-5 text-gray-500 dark:text-gray-400 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="lesson-content hidden space-y-4 border-t border-gray-200 dark:border-gray-700 pt-4">
+                        <div>
+                            <h4 class="font-semibold text-gray-900 dark:text-white mb-2">容器 - vector 和 array：</h4>
+                            <pre class="code-block"><button class="copy-btn" onclick="copyCode(this)">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                                </svg>
+                            </button><code>#include <iostream>
+#include <vector>
+#include <array>
+#include <algorithm>
+
+using namespace std;
+
+int main() {
+    cout << "=== vector 動態陣列 ===" << endl;
+
+    // vector 建立和初始化
+    vector<int> numbers;                    // 空 vector
+    vector<int> scores = {85, 92, 78, 96};  // 初始化列表
+    vector<string> names(5, "未知");         // 5個元素，都是"未知"
+
+    // 新增元素
+    numbers.push_back(10);
+    numbers.push_back(20);
+    numbers.push_back(30);
+
+    cout << "numbers 大小：" << numbers.size() << endl;
+    cout << "numbers 容量：" << numbers.capacity() << endl;
+
+    // 存取元素
+    cout << "第一個元素：" << numbers[0] << endl;
+    cout << "最後一個元素：" << numbers.back() << endl;
+
+    // 使用 at() 安全存取（會檢查邊界）
+    try {
+        cout << "安全存取：" << numbers.at(1) << endl;
+        // cout << numbers.at(10) << endl;  // 會拋出例外
+    } catch (const out_of_range& e) {
+        cout << "存取越界：" << e.what() << endl;
+    }
+
+    // 遍歷 vector
+    cout << "所有元素：";
+    for (const auto& num : numbers) {
+        cout << num << " ";
+    }
+    cout << endl;
+
+    // 插入和刪除
+    numbers.insert(numbers.begin() + 1, 15);  // 在位置1插入15
+    cout << "插入後：";
+    for (const auto& num : numbers) {
+        cout << num << " ";
+    }
+    cout << endl;
+
+    numbers.erase(numbers.begin());  // 刪除第一個元素
+    cout << "刪除後：";
+    for (const auto& num : numbers) {
+        cout << num << " ";
+    }
+    cout << endl;
+
+    cout << "\n=== array 固定大小陣列 (C++11) ===" << endl;
+
+    // array 建立和初始化
+    array<int, 5> fixedArray = {1, 2, 3, 4, 5};
+
+    cout << "array 大小：" << fixedArray.size() << endl;
+    cout << "array 內容：";
+    for (const auto& element : fixedArray) {
+        cout << element << " ";
+    }
+    cout << endl;
+
+    // array 的優點：編譯時期大小檢查
+    cout << "第一個元素：" << fixedArray.front() << endl;
+    cout << "最後一個元素：" << fixedArray.back() << endl;
+
+    // 填充 array
+    array<double, 3> temperatures;
+    temperatures.fill(25.5);
+    cout << "溫度陣列：";
+    for (const auto& temp : temperatures) {
+        cout << temp << "°C ";
+    }
+    cout << endl;
+
+    cout << "\n=== vector 進階操作 ===" << endl;
+
+    vector<int> data = {5, 2, 8, 1, 9, 3};
+
+    // 排序
+    sort(data.begin(), data.end());
+    cout << "排序後：";
+    for (const auto& num : data) {
+        cout << num << " ";
+    }
+    cout << endl;
+
+    // 搜尋
+    auto it = find(data.begin(), data.end(), 8);
+    if (it != data.end()) {
+        cout << "找到 8 在位置：" << distance(data.begin(), it) << endl;
+    }
+
+    // 反轉
+    reverse(data.begin(), data.end());
+    cout << "反轉後：";
+    for (const auto& num : data) {
+        cout << num << " ";
+    }
+    cout << endl;
+
+    // 清空和檢查
+    cout << "是否為空：" << (data.empty() ? "是" : "否") << endl;
+    data.clear();
+    cout << "清空後大小：" << data.size() << endl;
+
+    return 0;
+}</code></pre>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-900 dark:text-white mb-2">容器 - map 和 set：</h4>
+                            <pre class="code-block"><button class="copy-btn" onclick="copyCode(this)">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                                </svg>
+                            </button><code>#include <iostream>
+#include <map>
+#include <unordered_map>
+#include <set>
+#include <unordered_set>
+#include <string>
+
+using namespace std;
+
+int main() {
+    cout << "=== map 關聯容器 ===" << endl;
+
+    // map 建立和初始化
+    map<string, int> studentGrades;
+    studentGrades["小明"] = 85;
+    studentGrades["小華"] = 92;
+    studentGrades["小美"] = 78;
+
+    // 使用初始化列表
+    map<string, string> phoneBook = {
+        {"小明", "0912-345-678"},
+        {"小華", "0923-456-789"},
+        {"小美", "0934-567-890"}
+    };
+
+    cout << "學生成績：" << endl;
+    for (const auto& pair : studentGrades) {
+        cout << pair.first << ": " << pair.second << "分" << endl;
+    }
+
+    // 查找元素
+    auto it = studentGrades.find("小華");
+    if (it != studentGrades.end()) {
+        cout << "找到小華的成績：" << it->second << endl;
+    }
+
+    // 檢查是否存在
+    if (studentGrades.count("小強") > 0) {
+        cout << "小強的成績存在" << endl;
+    } else {
+        cout << "小強的成績不存在" << endl;
+    }
+
+    // 插入元素
+    studentGrades.insert({"小強", 88});
+    studentGrades.emplace("小麗", 95);  // C++11 更高效的插入
+
+    cout << "\n新增後的成績：" << endl;
+    for (const auto& [name, grade] : studentGrades) {  // C++17 結構化綁定
+        cout << name << ": " << grade << "分" << endl;
+    }
+
+    cout << "\n=== unordered_map 雜湊表 ===" << endl;
+
+    // unordered_map 更快的查找，但無序
+    unordered_map<string, int> wordCount;
+    vector<string> words = {"apple", "banana", "apple", "cherry", "banana", "apple"};
+
+    // 統計單字出現次數
+    for (const auto& word : words) {
+        wordCount[word]++;
+    }
+
+    cout << "單字統計：" << endl;
+    for (const auto& pair : wordCount) {
+        cout << pair.first << ": " << pair.second << " 次" << endl;
+    }
+
+    cout << "\n=== set 集合 ===" << endl;
+
+    // set 自動排序且不重複
+    set<int> uniqueNumbers = {5, 2, 8, 2, 1, 9, 5, 3};
+
+    cout << "唯一且排序的數字：";
+    for (const auto& num : uniqueNumbers) {
+        cout << num << " ";
+    }
+    cout << endl;
+
+    // 插入和查找
+    uniqueNumbers.insert(7);
+    uniqueNumbers.insert(2);  // 重複，不會插入
+
+    if (uniqueNumbers.find(7) != uniqueNumbers.end()) {
+        cout << "找到數字 7" << endl;
+    }
+
+    // 刪除元素
+    uniqueNumbers.erase(8);
+    cout << "刪除 8 後：";
+    for (const auto& num : uniqueNumbers) {
+        cout << num << " ";
+    }
+    cout << endl;
+
+    cout << "\n=== unordered_set 雜湊集合 ===" << endl;
+
+    unordered_set<string> visitedPages = {
+        "index.html", "about.html", "contact.html"
+    };
+
+    // 檢查頁面是否訪問過
+    string page = "index.html";
+    if (visitedPages.count(page) > 0) {
+        cout << page << " 已經訪問過" << endl;
+    }
+
+    visitedPages.insert("products.html");
+    cout << "訪問過的頁面數量：" << visitedPages.size() << endl;
+
+    cout << "\n=== 集合操作 ===" << endl;
+
+    set<int> set1 = {1, 2, 3, 4, 5};
+    set<int> set2 = {4, 5, 6, 7, 8};
+    set<int> result;
+
+    // 交集
+    set_intersection(set1.begin(), set1.end(),
+                    set2.begin(), set2.end(),
+                    inserter(result, result.begin()));
+
+    cout << "交集：";
+    for (const auto& num : result) {
+        cout << num << " ";
+    }
+    cout << endl;
+
+    // 聯集
+    result.clear();
+    set_union(set1.begin(), set1.end(),
+              set2.begin(), set2.end(),
+              inserter(result, result.begin()));
+
+    cout << "聯集：";
+    for (const auto& num : result) {
+        cout << num << " ";
+    }
+    cout << endl;
+
+    // 差集
+    result.clear();
+    set_difference(set1.begin(), set1.end(),
+                   set2.begin(), set2.end(),
+                   inserter(result, result.begin()));
+
+    cout << "差集 (set1 - set2)：";
+    for (const auto& num : result) {
+        cout << num << " ";
+    }
+    cout << endl;
+
+    return 0;
+}</code></pre>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-900 dark:text-white mb-2">STL 算法：</h4>
+                            <pre class="code-block"><button class="copy-btn" onclick="copyCode(this)">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                                </svg>
+                            </button><code>#include <iostream>
+#include <vector>
+#include <algorithm>
+#include <numeric>
+#include <functional>
+#include <random>
+
+using namespace std;
+
+int main() {
+    cout << "=== 排序算法 ===" << endl;
+
+    vector<int> numbers = {5, 2, 8, 1, 9, 3, 7, 4, 6};
+
+    // 升序排序
+    sort(numbers.begin(), numbers.end());
+    cout << "升序排序：";
+    for (const auto& num : numbers) {
+        cout << num << " ";
+    }
+    cout << endl;
+
+    // 降序排序
+    sort(numbers.begin(), numbers.end(), greater<int>());
+    cout << "降序排序：";
+    for (const auto& num : numbers) {
+        cout << num << " ";
+    }
+    cout << endl;
+
+    // 自定義排序
+    vector<string> words = {"apple", "pie", "a", "longer"};
+    sort(words.begin(), words.end(), [](const string& a, const string& b) {
+        return a.length() < b.length();  // 按長度排序
+    });
+
+    cout << "按長度排序：";
+    for (const auto& word : words) {
+        cout << word << " ";
+    }
+    cout << endl;
+
+    cout << "\n=== 搜尋算法 ===" << endl;
+
+    vector<int> data = {1, 2, 3, 4, 5, 6, 7, 8, 9};
+
+    // 線性搜尋
+    auto it = find(data.begin(), data.end(), 5);
+    if (it != data.end()) {
+        cout << "找到 5 在位置：" << distance(data.begin(), it) << endl;
+    }
+
+    // 二分搜尋（需要已排序）
+    bool found = binary_search(data.begin(), data.end(), 7);
+    cout << "二分搜尋 7：" << (found ? "找到" : "未找到") << endl;
+
+    // 條件搜尋
+    auto evenIt = find_if(data.begin(), data.end(), [](int n) {
+        return n % 2 == 0;
+    });
+
+    if (evenIt != data.end()) {
+        cout << "第一個偶數：" << *evenIt << endl;
+    }
+
+    cout << "\n=== 計數和統計 ===" << endl;
+
+    vector<int> values = {1, 2, 3, 2, 4, 2, 5};
+
+    // 計數
+    int count2 = count(values.begin(), values.end(), 2);
+    cout << "數字 2 出現 " << count2 << " 次" << endl;
+
+    // 條件計數
+    int evenCount = count_if(values.begin(), values.end(), [](int n) {
+        return n % 2 == 0;
+    });
+    cout << "偶數有 " << evenCount << " 個" << endl;
+
+    // 最大最小值
+    auto minIt = min_element(values.begin(), values.end());
+    auto maxIt = max_element(values.begin(), values.end());
+    cout << "最小值：" << *minIt << "，最大值：" << *maxIt << endl;
+
+    // 總和
+    int sum = accumulate(values.begin(), values.end(), 0);
+    cout << "總和：" << sum << endl;
+
+    // 乘積
+    int product = accumulate(values.begin(), values.end(), 1, multiplies<int>());
+    cout << "乘積：" << product << endl;
+
+    cout << "\n=== 變換算法 ===" << endl;
+
+    vector<int> source = {1, 2, 3, 4, 5};
+    vector<int> squares(source.size());
+
+    // 變換：計算平方
+    transform(source.begin(), source.end(), squares.begin(), [](int n) {
+        return n * n;
+    });
+
+    cout << "平方：";
+    for (const auto& num : squares) {
+        cout << num << " ";
+    }
+    cout << endl;
+
+    // 填充
+    vector<int> filled(10);
+    fill(filled.begin(), filled.end(), 42);
+    cout << "填充 42：";
+    for (const auto& num : filled) {
+        cout << num << " ";
+    }
+    cout << endl;
+
+    // 生成
+    vector<int> generated(5);
+    int counter = 0;
+    generate(generated.begin(), generated.end(), [&counter]() {
+        return ++counter * 10;
+    });
+
+    cout << "生成數列：";
+    for (const auto& num : generated) {
+        cout << num << " ";
+    }
+    cout << endl;
+
+    cout << "\n=== 分割和複製 ===" << endl;
+
+    vector<int> mixed = {1, 4, 2, 8, 5, 7, 3, 6, 9};
+
+    // 分割：偶數在前，奇數在後
+    partition(mixed.begin(), mixed.end(), [](int n) {
+        return n % 2 == 0;
+    });
+
+    cout << "分割後（偶數在前）：";
+    for (const auto& num : mixed) {
+        cout << num << " ";
+    }
+    cout << endl;
+
+    // 複製偶數
+    vector<int> evenNumbers;
+    copy_if(mixed.begin(), mixed.end(), back_inserter(evenNumbers), [](int n) {
+        return n % 2 == 0;
+    });
+
+    cout << "偶數：";
+    for (const auto& num : evenNumbers) {
+        cout << num << " ";
+    }
+    cout << endl;
+
+    cout << "\n=== 隨機算法 ===" << endl;
+
+    vector<int> deck = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+
+    // 隨機打亂
+    random_device rd;
+    mt19937 g(rd());
+    shuffle(deck.begin(), deck.end(), g);
+
+    cout << "隨機打亂：";
+    for (const auto& card : deck) {
+        cout << card << " ";
+    }
+    cout << endl;
+
+    return 0;
+}</code></pre>
+                        </div>
+                        <div class="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-4">
+                            <h5 class="font-semibold text-blue-900 dark:text-blue-100 mb-2">💡 實作練習</h5>
+                            <p class="text-blue-800 dark:text-blue-200 text-sm">
+                                建立一個學生成績管理系統，使用 STL 容器儲存資料，並用算法進行排序、搜尋和統計分析！
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 第5課：模板與泛型程式設計 -->
+                <div class="card p-6">
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="flex-1">
+                            <div class="flex items-center mb-2">
+                                <h3 class="text-xl font-bold text-gray-900 dark:text-white mr-3">第5課：模板與泛型程式設計</h3>
+                                <span class="px-2 py-1 text-xs font-medium rounded-full bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200">進階</span>
+                            </div>
+                            <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
+                                學習 C++ 模板系統，掌握泛型程式設計的強大功能。
+                            </p>
+                        </div>
+                        <button onclick="toggleLesson(this)" class="ml-4 p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+                            <svg class="w-5 h-5 text-gray-500 dark:text-gray-400 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="lesson-content hidden space-y-4 border-t border-gray-200 dark:border-gray-700 pt-4">
+                        <div>
+                            <h4 class="font-semibold text-gray-900 dark:text-white mb-2">函數模板：</h4>
+                            <pre class="code-block"><button class="copy-btn" onclick="copyCode(this)">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                                </svg>
+                            </button><code>#include <iostream>
+#include <vector>
+#include <string>
+
+using namespace std;
+
+// 基本函數模板
+template<typename T>
+T getMax(T a, T b) {
+    return (a > b) ? a : b;
+}
+
+// 多個模板參數
+template<typename T, typename U>
+auto add(T a, U b) -> decltype(a + b) {  // C++11 尾隨回傳型別
+    return a + b;
+}
+
+// C++14 簡化版本
+template<typename T, typename U>
+auto multiply(T a, U b) {
+    return a * b;
+}
+
+// 模板特化
+template<>
+string getMax<string>(string a, string b) {
+    cout << "使用字串特化版本" << endl;
+    return (a.length() > b.length()) ? a : b;
+}
+
+// 函數模板重載
+template<typename T>
+void print(T value) {
+    cout << "單一值：" << value << endl;
+}
+
+template<typename T>
+void print(const vector<T>& vec) {
+    cout << "向量：";
+    for (const auto& item : vec) {
+        cout << item << " ";
+    }
+    cout << endl;
+}
+
+// 可變參數模板 (C++11)
+template<typename T>
+void println(T&& t) {
+    cout << t << endl;
+}
+
+template<typename T, typename... Args>
+void println(T&& t, Args&&... args) {
+    cout << t << " ";
+    println(args...);
+}
+
+// 模板參數推導
+template<typename T>
+void processArray(T arr[], int size) {
+    cout << "處理陣列，大小：" << size << endl;
+    for (int i = 0; i < size; i++) {
+        cout << arr[i] << " ";
+    }
+    cout << endl;
+}
+
+int main() {
+    cout << "=== 基本函數模板 ===" << endl;
+
+    // 自動型別推導
+    cout << "整數最大值：" << getMax(10, 20) << endl;
+    cout << "浮點數最大值：" << getMax(3.14, 2.71) << endl;
+    cout << "字元最大值：" << getMax('a', 'z') << endl;
+
+    // 明確指定型別
+    cout << "明確指定：" << getMax<double>(10, 20.5) << endl;
+
+    // 字串特化
+    cout << "字串比較：" << getMax(string("hello"), string("world")) << endl;
+
+    cout << "\n=== 多參數模板 ===" << endl;
+
+    cout << "整數 + 浮點數：" << add(10, 3.14) << endl;
+    cout << "字串 + 字元：" << add(string("Hello"), '!') << endl;
+    cout << "乘法：" << multiply(5, 2.5) << endl;
+
+    cout << "\n=== 函數重載 ===" << endl;
+
+    print(42);
+    print(string("Hello"));
+
+    vector<int> numbers = {1, 2, 3, 4, 5};
+    print(numbers);
+
+    vector<string> words = {"Hello", "World", "C++"};
+    print(words);
+
+    cout << "\n=== 可變參數模板 ===" << endl;
+
+    println("Hello");
+    println("數字：", 42, 3.14, "字串");
+    println("多種型別：", 1, "two", 3.0, '4');
+
+    cout << "\n=== 陣列處理 ===" << endl;
+
+    int intArray[] = {1, 2, 3, 4, 5};
+    processArray(intArray, 5);
+
+    double doubleArray[] = {1.1, 2.2, 3.3};
+    processArray(doubleArray, 3);
+
+    return 0;
+}</code></pre>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-900 dark:text-white mb-2">類別模板：</h4>
+                            <pre class="code-block"><button class="copy-btn" onclick="copyCode(this)">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                                </svg>
+                            </button><code>#include <iostream>
+#include <vector>
+#include <stdexcept>
+
+using namespace std;
+
+// 基本類別模板
+template<typename T>
+class Stack {
+private:
+    vector<T> elements;
+
+public:
+    // 推入元素
+    void push(const T& element) {
+        elements.push_back(element);
+    }
+
+    // 彈出元素
+    T pop() {
+        if (elements.empty()) {
+            throw runtime_error("Stack is empty");
+        }
+        T top = elements.back();
+        elements.pop_back();
+        return top;
+    }
+
+    // 查看頂部元素
+    const T& top() const {
+        if (elements.empty()) {
+            throw runtime_error("Stack is empty");
+        }
+        return elements.back();
+    }
+
+    // 檢查是否為空
+    bool empty() const {
+        return elements.empty();
+    }
+
+    // 取得大小
+    size_t size() const {
+        return elements.size();
+    }
+
+    // 顯示所有元素
+    void display() const {
+        cout << "Stack 內容：";
+        for (const auto& element : elements) {
+            cout << element << " ";
+        }
+        cout << endl;
+    }
+};
+
+// 多個模板參數的類別
+template<typename Key, typename Value>
+class Pair {
+private:
+    Key key;
+    Value value;
+
+public:
+    Pair(const Key& k, const Value& v) : key(k), value(v) {}
+
+    Key getKey() const { return key; }
+    Value getValue() const { return value; }
+
+    void setKey(const Key& k) { key = k; }
+    void setValue(const Value& v) { value = v; }
+
+    void display() const {
+        cout << "(" << key << ", " << value << ")" << endl;
+    }
+};
+
+// 非型別模板參數
+template<typename T, int Size>
+class Array {
+private:
+    T data[Size];
+    int currentSize;
+
+public:
+    Array() : currentSize(0) {}
+
+    void add(const T& element) {
+        if (currentSize < Size) {
+            data[currentSize++] = element;
+        } else {
+            throw runtime_error("Array is full");
+        }
+    }
+
+    T& operator[](int index) {
+        if (index < 0 || index >= currentSize) {
+            throw out_of_range("Index out of range");
+        }
+        return data[index];
+    }
+
+    int size() const { return currentSize; }
+    int capacity() const { return Size; }
+
+    void display() const {
+        cout << "Array 內容：";
+        for (int i = 0; i < currentSize; i++) {
+            cout << data[i] << " ";
+        }
+        cout << endl;
+    }
+};
+
+// 類別模板特化
+template<>
+class Stack<bool> {
+private:
+    vector<bool> elements;
+
+public:
+    void push(bool element) {
+        elements.push_back(element);
+        cout << "推入布林值：" << (element ? "true" : "false") << endl;
+    }
+
+    bool pop() {
+        if (elements.empty()) {
+            throw runtime_error("Stack is empty");
+        }
+        bool top = elements.back();
+        elements.pop_back();
+        cout << "彈出布林值：" << (top ? "true" : "false") << endl;
+        return top;
+    }
+
+    bool empty() const {
+        return elements.empty();
+    }
+
+    size_t size() const {
+        return elements.size();
+    }
+};
+
+// 模板類別的成員函數模板
+template<typename T>
+class Container {
+private:
+    vector<T> items;
+
+public:
+    void add(const T& item) {
+        items.push_back(item);
+    }
+
+    // 成員函數模板
+    template<typename U>
+    void addConverted(const U& item) {
+        items.push_back(static_cast<T>(item));
+    }
+
+    void display() const {
+        cout << "Container 內容：";
+        for (const auto& item : items) {
+            cout << item << " ";
+        }
+        cout << endl;
+    }
+};
+
+int main() {
+    cout << "=== 基本類別模板 ===" << endl;
+
+    // 整數堆疊
+    Stack<int> intStack;
+    intStack.push(10);
+    intStack.push(20);
+    intStack.push(30);
+    intStack.display();
+
+    cout << "頂部元素：" << intStack.top() << endl;
+    cout << "彈出：" << intStack.pop() << endl;
+    intStack.display();
+
+    // 字串堆疊
+    Stack<string> stringStack;
+    stringStack.push("Hello");
+    stringStack.push("World");
+    stringStack.push("C++");
+    stringStack.display();
+
+    cout << "\n=== 多參數模板 ===" << endl;
+
+    Pair<string, int> nameAge("小明", 25);
+    nameAge.display();
+
+    Pair<int, double> idScore(1001, 95.5);
+    idScore.display();
+
+    cout << "\n=== 非型別模板參數 ===" << endl;
+
+    Array<int, 5> intArray;
+    intArray.add(1);
+    intArray.add(2);
+    intArray.add(3);
+    intArray.display();
+
+    cout << "容量：" << intArray.capacity() << "，大小：" << intArray.size() << endl;
+    cout << "第二個元素：" << intArray[1] << endl;
+
+    Array<string, 3> stringArray;
+    stringArray.add("Hello");
+    stringArray.add("World");
+    stringArray.display();
+
+    cout << "\n=== 類別模板特化 ===" << endl;
+
+    Stack<bool> boolStack;
+    boolStack.push(true);
+    boolStack.push(false);
+    boolStack.push(true);
+
+    while (!boolStack.empty()) {
+        boolStack.pop();
+    }
+
+    cout << "\n=== 成員函數模板 ===" << endl;
+
+    Container<double> doubleContainer;
+    doubleContainer.add(3.14);
+    doubleContainer.addConverted(42);      // int 轉 double
+    doubleContainer.addConverted(2.71f);   // float 轉 double
+    doubleContainer.display();
+
+    return 0;
+}</code></pre>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-900 dark:text-white mb-2">進階模板技術：</h4>
+                            <pre class="code-block"><button class="copy-btn" onclick="copyCode(this)">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                                </svg>
+                            </button><code>#include <iostream>
+#include <type_traits>
+#include <vector>
+#include <string>
+
+using namespace std;
+
+// SFINAE (Substitution Failure Is Not An Error)
+template<typename T>
+typename enable_if<is_arithmetic<T>::value, T>::type
+safeAdd(T a, T b) {
+    cout << "算術型別加法：";
+    return a + b;
+}
+
+template<typename T>
+typename enable_if<!is_arithmetic<T>::value, T>::type
+safeAdd(T a, T b) {
+    cout << "非算術型別加法：";
+    return a + b;
+}
+
+// 型別特徵 (Type Traits)
+template<typename T>
+void analyzeType(T value) {
+    cout << "分析型別：" << typeid(T).name() << endl;
+    cout << "  是否為整數：" << is_integral<T>::value << endl;
+    cout << "  是否為浮點數：" << is_floating_point<T>::value << endl;
+    cout << "  是否為指標：" << is_pointer<T>::value << endl;
+    cout << "  是否為參考：" << is_reference<T>::value << endl;
+    cout << "  大小：" << sizeof(T) << " 位元組" << endl;
+    cout << endl;
+}
+
+// 完美轉發 (Perfect Forwarding)
+template<typename T>
+void process(T&& value) {
+    cout << "處理值：" << value << endl;
+}
+
+template<typename T>
+void forwarder(T&& value) {
+    cout << "轉發中..." << endl;
+    process(forward<T>(value));
+}
+
+// 模板元程式設計 - 編譯時期計算
+template<int N>
+struct Factorial {
+    static const int value = N * Factorial<N - 1>::value;
+};
+
+template<>
+struct Factorial<0> {
+    static const int value = 1;
+};
+
+// 編譯時期判斷質數
+template<int N, int I = 2>
+struct IsPrime {
+    static const bool value = (N % I != 0) && IsPrime<N, I + 1>::value;
+};
+
+template<int N>
+struct IsPrime<N, N> {
+    static const bool value = true;
+};
+
+template<>
+struct IsPrime<2, 2> {
+    static const bool value = true;
+};
+
+template<>
+struct IsPrime<1, 2> {
+    static const bool value = false;
+};
+
+// 可變參數模板進階應用
+template<typename... Args>
+void printTypes() {
+    cout << "參數數量：" << sizeof...(Args) << endl;
+}
+
+template<typename T, typename... Args>
+void printTypes() {
+    cout << "型別：" << typeid(T).name() << " ";
+    printTypes<Args...>();
+}
+
+// 摺疊表達式 (C++17)
+#if __cplusplus >= 201703L
+template<typename... Args>
+auto sum(Args... args) {
+    return (args + ...);  // 摺疊表達式
+}
+
+template<typename... Args>
+void printAll(Args... args) {
+    ((cout << args << " "), ...);  // 摺疊表達式
+    cout << endl;
+}
+#endif
+
+// 概念 (Concepts) - C++20 預覽
+#if __cplusplus >= 202002L
+template<typename T>
+concept Numeric = is_arithmetic_v<T>;
+
+template<Numeric T>
+T multiply(T a, T b) {
+    return a * b;
+}
+#endif
+
+// 通用工具函數模板
+template<typename Container>
+void printContainer(const Container& container) {
+    cout << "容器內容：";
+    for (const auto& item : container) {
+        cout << item << " ";
+    }
+    cout << endl;
+}
+
+// 型別推導輔助 (C++17)
+template<typename T>
+class MyClass {
+public:
+    T value;
+    MyClass(T v) : value(v) {}
+};
+
+// 推導指引
+template<typename T>
+MyClass(T) -> MyClass<T>;
+
+int main() {
+    cout << "=== SFINAE 示範 ===" << endl;
+
+    cout << safeAdd(5, 3) << endl;
+    cout << safeAdd(3.14, 2.86) << endl;
+    cout << safeAdd(string("Hello"), string(" World")) << endl;
+
+    cout << "\n=== 型別特徵 ===" << endl;
+
+    analyzeType(42);
+    analyzeType(3.14);
+    analyzeType("Hello");
+
+    int x = 10;
+    analyzeType(&x);
+
+    cout << "\n=== 完美轉發 ===" << endl;
+
+    int value = 42;
+    forwarder(value);           // 左值
+    forwarder(100);             // 右值
+    forwarder(string("test"));  // 臨時物件
+
+    cout << "\n=== 模板元程式設計 ===" << endl;
+
+    cout << "5! = " << Factorial<5>::value << endl;
+    cout << "10! = " << Factorial<10>::value << endl;
+
+    cout << "17 是質數：" << IsPrime<17>::value << endl;
+    cout << "18 是質數：" << IsPrime<18>::value << endl;
+
+    cout << "\n=== 可變參數模板 ===" << endl;
+
+    printTypes<int, double, string>();
+
+#if __cplusplus >= 201703L
+    cout << "\n=== C++17 摺疊表達式 ===" << endl;
+
+    cout << "總和：" << sum(1, 2, 3, 4, 5) << endl;
+    cout << "字串連接：" << sum(string("Hello"), string(" "), string("World")) << endl;
+
+    printAll("數字：", 1, 2, 3, "字串：", "test");
+#endif
+
+    cout << "\n=== 通用容器列印 ===" << endl;
+
+    vector<int> numbers = {1, 2, 3, 4, 5};
+    printContainer(numbers);
+
+    vector<string> words = {"Hello", "World", "C++"};
+    printContainer(words);
+
+    cout << "\n=== 型別推導 (C++17) ===" << endl;
+
+    MyClass obj1(42);        // 推導為 MyClass<int>
+    MyClass obj2(3.14);      // 推導為 MyClass<double>
+    MyClass obj3("Hello");   // 推導為 MyClass<const char*>
+
+    cout << "obj1.value = " << obj1.value << endl;
+    cout << "obj2.value = " << obj2.value << endl;
+    cout << "obj3.value = " << obj3.value << endl;
+
+    return 0;
+}</code></pre>
+                        </div>
+                        <div class="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-4">
+                            <h5 class="font-semibold text-blue-900 dark:text-blue-100 mb-2">💡 實作練習</h5>
+                            <p class="text-blue-800 dark:text-blue-200 text-sm">
+                                設計一個泛型的資料結構庫，包含鏈結串列、二元樹等，使用模板讓它們支援任意型別！
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 第6課：智慧指標與記憶體管理 -->
+                <div class="card p-6">
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="flex-1">
+                            <div class="flex items-center mb-2">
+                                <h3 class="text-xl font-bold text-gray-900 dark:text-white mr-3">第6課：智慧指標與記憶體管理</h3>
+                                <span class="px-2 py-1 text-xs font-medium rounded-full bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200">進階</span>
+                            </div>
+                            <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
+                                學習現代 C++ 的智慧指標和 RAII 原則，掌握安全的記憶體管理技術。
+                            </p>
+                        </div>
+                        <button onclick="toggleLesson(this)" class="ml-4 p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+                            <svg class="w-5 h-5 text-gray-500 dark:text-gray-400 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="lesson-content hidden space-y-4 border-t border-gray-200 dark:border-gray-700 pt-4">
+                        <div>
+                            <h4 class="font-semibold text-gray-900 dark:text-white mb-2">unique_ptr 獨佔指標：</h4>
+                            <pre class="code-block"><button class="copy-btn" onclick="copyCode(this)">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                                </svg>
+                            </button><code>#include <iostream>
+#include <memory>
+#include <vector>
+#include <string>
+
+using namespace std;
+
+// 示範類別
+class Resource {
+private:
+    string name;
+    int id;
+
+public:
+    Resource(const string& n, int i) : name(n), id(i) {
+        cout << "建立資源：" << name << " (ID: " << id << ")" << endl;
+    }
+
+    ~Resource() {
+        cout << "銷毀資源：" << name << " (ID: " << id << ")" << endl;
+    }
+
+    void use() {
+        cout << "使用資源：" << name << " (ID: " << id << ")" << endl;
+    }
+
+    string getName() const { return name; }
+    int getId() const { return id; }
+};
+
+// 工廠函數
+unique_ptr<Resource> createResource(const string& name, int id) {
+    return make_unique<Resource>(name, id);
+}
+
+// 處理資源的函數
+void processResource(unique_ptr<Resource> resource) {
+    if (resource) {
+        resource->use();
+        cout << "處理完成：" << resource->getName() << endl;
+    }
+    // resource 在函數結束時自動銷毀
+}
+
+int main() {
+    cout << "=== unique_ptr 基本使用 ===" << endl;
+
+    // 建立 unique_ptr
+    unique_ptr<Resource> ptr1 = make_unique<Resource>("資源1", 1);
+
+    // 使用指標
+    ptr1->use();
+    cout << "資源名稱：" << (*ptr1).getName() << endl;
+
+    // 檢查指標是否有效
+    if (ptr1) {
+        cout << "ptr1 指向有效資源" << endl;
+    }
+
+    cout << "\n=== unique_ptr 移動語意 ===" << endl;
+
+    // 移動建構
+    unique_ptr<Resource> ptr2 = move(ptr1);
+
+    // ptr1 現在是空的
+    if (!ptr1) {
+        cout << "ptr1 現在是空的" << endl;
+    }
+
+    if (ptr2) {
+        cout << "ptr2 現在擁有資源" << endl;
+        ptr2->use();
+    }
+
+    cout << "\n=== unique_ptr 重置和釋放 ===" << endl;
+
+    unique_ptr<Resource> ptr3 = make_unique<Resource>("資源3", 3);
+
+    // 重置為新資源
+    ptr3.reset(new Resource("新資源3", 33));
+
+    // 釋放所有權但不刪除
+    Resource* rawPtr = ptr3.release();
+    cout << "釋放後 ptr3 是否為空：" << (ptr3 == nullptr) << endl;
+
+    // 手動刪除（不推薦，只是示範）
+    delete rawPtr;
+
+    cout << "\n=== unique_ptr 與函數 ===" << endl;
+
+    // 傳遞給函數（移動）
+    auto resource = createResource("工廠資源", 100);
+    processResource(move(resource));
+
+    // resource 現在是空的
+    if (!resource) {
+        cout << "resource 已被移動" << endl;
+    }
+
+    cout << "\n=== unique_ptr 陣列 ===" << endl;
+
+    // 管理陣列
+    unique_ptr<int[]> arrayPtr = make_unique<int[]>(5);
+
+    // 初始化陣列
+    for (int i = 0; i < 5; i++) {
+        arrayPtr[i] = i * 10;
+    }
+
+    cout << "陣列內容：";
+    for (int i = 0; i < 5; i++) {
+        cout << arrayPtr[i] << " ";
+    }
+    cout << endl;
+
+    cout << "\n=== unique_ptr 容器 ===" << endl;
+
+    // 在容器中使用 unique_ptr
+    vector<unique_ptr<Resource>> resources;
+
+    resources.push_back(make_unique<Resource>("容器資源1", 201));
+    resources.push_back(make_unique<Resource>("容器資源2", 202));
+    resources.push_back(make_unique<Resource>("容器資源3", 203));
+
+    cout << "容器中的資源：" << endl;
+    for (const auto& res : resources) {
+        res->use();
+    }
+
+    // 移除第二個資源
+    resources.erase(resources.begin() + 1);
+    cout << "移除後剩餘資源：" << resources.size() << endl;
+
+    cout << "\n=== 自定義刪除器 ===" << endl;
+
+    // 自定義刪除器
+    auto customDeleter = [](Resource* ptr) {
+        cout << "使用自定義刪除器" << endl;
+        delete ptr;
+    };
+
+    unique_ptr<Resource, decltype(customDeleter)> customPtr(
+        new Resource("自定義刪除", 300), customDeleter);
+
+    customPtr->use();
+
+    cout << "\n程式結束，所有資源將自動清理" << endl;
+
+    return 0;
+}</code></pre>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-900 dark:text-white mb-2">shared_ptr 共享指標：</h4>
+                            <pre class="code-block"><button class="copy-btn" onclick="copyCode(this)">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                                </svg>
+                            </button><code>#include <iostream>
+#include <memory>
+#include <vector>
+#include <string>
+
+using namespace std;
+
+class Document {
+private:
+    string title;
+    string content;
+
+public:
+    Document(const string& t, const string& c) : title(t), content(c) {
+        cout << "建立文件：" << title << endl;
+    }
+
+    ~Document() {
+        cout << "銷毀文件：" << title << endl;
+    }
+
+    void display() const {
+        cout << "文件：" << title << endl;
+        cout << "內容：" << content << endl;
+    }
+
+    string getTitle() const { return title; }
+    void setContent(const string& c) { content = c; }
+};
+
+class Editor {
+private:
+    shared_ptr<Document> document;
+    string editorName;
+
+public:
+    Editor(const string& name) : editorName(name) {
+        cout << "建立編輯器：" << editorName << endl;
+    }
+
+    ~Editor() {
+        cout << "銷毀編輯器：" << editorName << endl;
+    }
+
+    void openDocument(shared_ptr<Document> doc) {
+        document = doc;
+        cout << editorName << " 開啟文件：" << doc->getTitle() << endl;
+    }
+
+    void editDocument(const string& newContent) {
+        if (document) {
+            document->setContent(newContent);
+            cout << editorName << " 編輯了文件" << endl;
+        }
+    }
+
+    void showDocument() const {
+        if (document) {
+            cout << editorName << " 顯示文件：" << endl;
+            document->display();
+        } else {
+            cout << editorName << " 沒有開啟任何文件" << endl;
+        }
+    }
+
+    shared_ptr<Document> getDocument() const {
+        return document;
+    }
+};
+
+// 循環參考示範
+class Parent;
+class Child;
+
+class Parent {
+public:
+    string name;
+    vector<shared_ptr<Child>> children;
+
+    Parent(const string& n) : name(n) {
+        cout << "建立父節點：" << name << endl;
+    }
+
+    ~Parent() {
+        cout << "銷毀父節點：" << name << endl;
+    }
+
+    void addChild(shared_ptr<Child> child);
+};
+
+class Child {
+public:
+    string name;
+    weak_ptr<Parent> parent;  // 使用 weak_ptr 避免循環參考
+
+    Child(const string& n) : name(n) {
+        cout << "建立子節點：" << name << endl;
+    }
+
+    ~Child() {
+        cout << "銷毀子節點：" << name << endl;
+    }
+
+    void setParent(shared_ptr<Parent> p) {
+        parent = p;
+    }
+
+    void showParent() const {
+        if (auto p = parent.lock()) {  // 安全地存取 weak_ptr
+            cout << name << " 的父節點是：" << p->name << endl;
+        } else {
+            cout << name << " 沒有父節點" << endl;
+        }
+    }
+};
+
+void Parent::addChild(shared_ptr<Child> child) {
+    children.push_back(child);
+    child->setParent(shared_from_this());  // 需要繼承 enable_shared_from_this
+}
+
+int main() {
+    cout << "=== shared_ptr 基本使用 ===" << endl;
+
+    // 建立 shared_ptr
+    shared_ptr<Document> doc1 = make_shared<Document>("報告.txt", "這是一份重要報告");
+
+    cout << "引用計數：" << doc1.use_count() << endl;
+
+    // 複製 shared_ptr
+    shared_ptr<Document> doc2 = doc1;
+    cout << "複製後引用計數：" << doc1.use_count() << endl;
+
+    // 使用文件
+    doc1->display();
+    doc2->setContent("修改後的內容");
+    doc1->display();  // 兩個指標指向同一個物件
+
+    cout << "\n=== shared_ptr 與多個物件 ===" << endl;
+
+    // 建立編輯器
+    Editor editor1("編輯器A");
+    Editor editor2("編輯器B");
+
+    // 共享文件
+    auto sharedDoc = make_shared<Document>("共享文件.txt", "多人協作內容");
+
+    editor1.openDocument(sharedDoc);
+    editor2.openDocument(sharedDoc);
+
+    cout << "文件引用計數：" << sharedDoc.use_count() << endl;
+
+    // 編輯文件
+    editor1.editDocument("編輯器A的修改");
+    editor2.showDocument();  // 顯示修改後的內容
+
+    cout << "\n=== shared_ptr 重置和交換 ===" << endl;
+
+    shared_ptr<Document> doc3 = make_shared<Document>("文件3", "內容3");
+    shared_ptr<Document> doc4 = make_shared<Document>("文件4", "內容4");
+
+    cout << "交換前：" << endl;
+    cout << "doc3: " << doc3->getTitle() << endl;
+    cout << "doc4: " << doc4->getTitle() << endl;
+
+    // 交換
+    doc3.swap(doc4);
+
+    cout << "交換後：" << endl;
+    cout << "doc3: " << doc3->getTitle() << endl;
+    cout << "doc4: " << doc4->getTitle() << endl;
+
+    // 重置
+    doc3.reset();
+    cout << "doc3 重置後是否為空：" << (doc3 == nullptr) << endl;
+
+    cout << "\n=== weak_ptr 避免循環參考 ===" << endl;
+
+    {
+        auto parent = make_shared<Parent>("父節點");
+        auto child1 = make_shared<Child>("子節點1");
+        auto child2 = make_shared<Child>("子節點2");
+
+        // 建立父子關係
+        parent->children.push_back(child1);
+        parent->children.push_back(child2);
+        child1->setParent(parent);
+        child2->setParent(parent);
+
+        cout << "父節點引用計數：" << parent.use_count() << endl;
+        cout << "子節點1引用計數：" << child1.use_count() << endl;
+
+        child1->showParent();
+        child2->showParent();
+
+        cout << "離開作用域..." << endl;
+    }
+    cout << "已離開作用域，物件應該被銷毀" << endl;
+
+    cout << "\n=== shared_ptr 自定義刪除器 ===" << endl;
+
+    auto customDeleter = [](Document* ptr) {
+        cout << "使用自定義刪除器刪除：" << ptr->getTitle() << endl;
+        delete ptr;
+    };
+
+    shared_ptr<Document> customDoc(
+        new Document("自定義刪除", "內容"), customDeleter);
+
+    cout << "自定義刪除器引用計數：" << customDoc.use_count() << endl;
+
+    cout << "\n=== shared_ptr 陣列 (C++17) ===" << endl;
+
+    // C++17 支援 shared_ptr 管理陣列
+    shared_ptr<int[]> arrayPtr(new int[5]);
+
+    for (int i = 0; i < 5; i++) {
+        arrayPtr[i] = i * 100;
+    }
+
+    cout << "共享陣列內容：";
+    for (int i = 0; i < 5; i++) {
+        cout << arrayPtr[i] << " ";
+    }
+    cout << endl;
+
+    cout << "\n程式結束，所有共享資源將自動清理" << endl;
+
+    return 0;
+}</code></pre>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-900 dark:text-white mb-2">RAII 與資源管理：</h4>
+                            <pre class="code-block"><button class="copy-btn" onclick="copyCode(this)">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                                </svg>
+                            </button><code>#include <iostream>
+#include <memory>
+#include <fstream>
+#include <mutex>
+#include <thread>
+#include <chrono>
+#include <stdexcept>
+
+using namespace std;
+
+// RAII 檔案管理器
+class FileManager {
+private:
+    string filename;
+    fstream file;
+
+public:
+    FileManager(const string& fname) : filename(fname) {
+        file.open(filename, ios::in | ios::out | ios::app);
+        if (!file.is_open()) {
+            throw runtime_error("無法開啟檔案：" + filename);
+        }
+        cout << "開啟檔案：" << filename << endl;
+    }
+
+    ~FileManager() {
+        if (file.is_open()) {
+            file.close();
+            cout << "關閉檔案：" << filename << endl;
+        }
+    }
+
+    // 禁止複製
+    FileManager(const FileManager&) = delete;
+    FileManager& operator=(const FileManager&) = delete;
+
+    // 允許移動
+    FileManager(FileManager&& other) noexcept
+        : filename(move(other.filename)), file(move(other.file)) {
+        cout << "移動檔案管理器" << endl;
+    }
+
+    void write(const string& content) {
+        if (file.is_open()) {
+            file << content << endl;
+            file.flush();
+            cout << "寫入內容：" << content << endl;
+        }
+    }
+
+    void read() {
+        if (file.is_open()) {
+            file.seekg(0, ios::beg);
+            string line;
+            cout << "檔案內容：" << endl;
+            while (getline(file, line)) {
+                cout << "  " << line << endl;
+            }
+        }
+    }
+};
+
+// RAII 鎖管理器
+class LockManager {
+private:
+    mutex& mtx;
+    bool locked;
+
+public:
+    LockManager(mutex& m) : mtx(m), locked(false) {
+        mtx.lock();
+        locked = true;
+        cout << "取得鎖" << endl;
+    }
+
+    ~LockManager() {
+        if (locked) {
+            mtx.unlock();
+            cout << "釋放鎖" << endl;
+        }
+    }
+
+    // 禁止複製和移動
+    LockManager(const LockManager&) = delete;
+    LockManager& operator=(const LockManager&) = delete;
+    LockManager(LockManager&&) = delete;
+    LockManager& operator=(LockManager&&) = delete;
+
+    void unlock() {
+        if (locked) {
+            mtx.unlock();
+            locked = false;
+            cout << "手動釋放鎖" << endl;
+        }
+    }
+};
+
+// RAII 計時器
+class Timer {
+private:
+    chrono::high_resolution_clock::time_point start;
+    string name;
+
+public:
+    Timer(const string& n) : name(n) {
+        start = chrono::high_resolution_clock::now();
+        cout << "開始計時：" << name << endl;
+    }
+
+    ~Timer() {
+        auto end = chrono::high_resolution_clock::now();
+        auto duration = chrono::duration_cast<chrono::milliseconds>(end - start);
+        cout << "計時結束：" << name << " 耗時 " << duration.count() << " 毫秒" << endl;
+    }
+};
+
+// RAII 資源池
+template<typename T>
+class ResourcePool {
+private:
+    vector<unique_ptr<T>> pool;
+    mutex poolMutex;
+
+public:
+    template<typename... Args>
+    void addResource(Args&&... args) {
+        lock_guard<mutex> lock(poolMutex);
+        pool.push_back(make_unique<T>(forward<Args>(args)...));
+        cout << "新增資源到池中，目前大小：" << pool.size() << endl;
+    }
+
+    unique_ptr<T> getResource() {
+        lock_guard<mutex> lock(poolMutex);
+        if (!pool.empty()) {
+            auto resource = move(pool.back());
+            pool.pop_back();
+            cout << "從池中取得資源，剩餘：" << pool.size() << endl;
+            return resource;
+        }
+        return nullptr;
+    }
+
+    size_t size() const {
+        lock_guard<mutex> lock(poolMutex);
+        return pool.size();
+    }
+
+    ~ResourcePool() {
+        cout << "銷毀資源池，清理 " << pool.size() << " 個資源" << endl;
+    }
+};
+
+// 示範資源類別
+class NetworkConnection {
+private:
+    string address;
+    bool connected;
+
+public:
+    NetworkConnection(const string& addr) : address(addr), connected(false) {
+        connect();
+    }
+
+    ~NetworkConnection() {
+        disconnect();
+    }
+
+    void connect() {
+        connected = true;
+        cout << "連接到：" << address << endl;
+    }
+
+    void disconnect() {
+        if (connected) {
+            connected = false;
+            cout << "斷開連接：" << address << endl;
+        }
+    }
+
+    void sendData(const string& data) {
+        if (connected) {
+            cout << "發送資料到 " << address << "：" << data << endl;
+        }
+    }
+
+    bool isConnected() const { return connected; }
+};
+
+// 異常安全的函數
+void demonstrateExceptionSafety() {
+    cout << "\n=== 異常安全示範 ===" << endl;
+
+    try {
+        Timer timer("異常安全測試");
+
+        auto connection = make_unique<NetworkConnection>("192.168.1.1");
+        connection->sendData("測試資料");
+
+        // 模擬可能拋出異常的操作
+        if (true) {  // 改為 true 來觸發異常
+            throw runtime_error("模擬網路錯誤");
+        }
+
+        connection->sendData("這行不會執行");
+
+    } catch (const exception& e) {
+        cout << "捕獲異常：" << e.what() << endl;
+        cout << "資源已自動清理" << endl;
+    }
+}
+
+int main() {
+    cout << "=== RAII 檔案管理 ===" << endl;
+
+    try {
+        FileManager fm("test.txt");
+        fm.write("第一行內容");
+        fm.write("第二行內容");
+        // 檔案會在 fm 銷毀時自動關閉
+    } catch (const exception& e) {
+        cout << "檔案操作錯誤：" << e.what() << endl;
+    }
+
+    cout << "\n=== RAII 鎖管理 ===" << endl;
+
+    mutex mtx;
+    {
+        LockManager lock(mtx);
+        cout << "在鎖保護下執行操作" << endl;
+        this_thread::sleep_for(chrono::milliseconds(100));
+        // 鎖會在作用域結束時自動釋放
+    }
+
+    cout << "\n=== RAII 計時器 ===" << endl;
+
+    {
+        Timer timer("耗時操作");
+        this_thread::sleep_for(chrono::milliseconds(200));
+        // 計時器會在作用域結束時自動顯示耗時
+    }
+
+    cout << "\n=== RAII 資源池 ===" << endl;
+
+    {
+        ResourcePool<NetworkConnection> pool;
+
+        // 新增資源到池中
+        pool.addResource("server1.com");
+        pool.addResource("server2.com");
+        pool.addResource("server3.com");
+
+        // 從池中取得資源
+        auto conn1 = pool.getResource();
+        if (conn1) {
+            conn1->sendData("Hello Server");
+        }
+
+        auto conn2 = pool.getResource();
+        if (conn2) {
+            conn2->sendData("Hello Again");
+        }
+
+        cout << "池中剩餘資源：" << pool.size() << endl;
+
+        // 資源池會在作用域結束時自動清理
+    }
+
+    // 異常安全示範
+    demonstrateExceptionSafety();
+
+    cout << "\n=== 智慧指標最佳實踐 ===" << endl;
+
+    // 1. 優先使用 make_unique 和 make_shared
+    auto ptr1 = make_unique<NetworkConnection>("best-practice.com");
+    auto ptr2 = make_shared<NetworkConnection>("shared-resource.com");
+
+    // 2. 使用 unique_ptr 作為預設選擇
+    vector<unique_ptr<NetworkConnection>> connections;
+    connections.push_back(make_unique<NetworkConnection>("conn1.com"));
+    connections.push_back(make_unique<NetworkConnection>("conn2.com"));
+
+    // 3. 只在需要共享時使用 shared_ptr
+    shared_ptr<NetworkConnection> sharedConn = make_shared<NetworkConnection>("shared.com");
+    weak_ptr<NetworkConnection> weakRef = sharedConn;
+
+    // 4. 使用 weak_ptr 打破循環參考
+    if (auto locked = weakRef.lock()) {
+        locked->sendData("透過 weak_ptr 存取");
+    }
+
+    cout << "\n程式結束，所有 RAII 資源將自動清理" << endl;
+
+    return 0;
+}</code></pre>
+                        </div>
+                        <div class="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-4">
+                            <h5 class="font-semibold text-blue-900 dark:text-blue-100 mb-2">💡 實作練習</h5>
+                            <p class="text-blue-800 dark:text-blue-200 text-sm">
+                                設計一個記憶體池管理器，使用智慧指標和 RAII 原則，實作高效的物件分配和回收機制！
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // 主題切換功能
+        const themeToggle = document.getElementById('theme-toggle');
+        const sunIcon = document.getElementById('sun-icon');
+        const moonIcon = document.getElementById('moon-icon');
+
+        // 檢查本地儲存的主題設定
+        const currentTheme = localStorage.getItem('theme') || 'light';
+        if (currentTheme === 'dark') {
+            document.documentElement.classList.add('dark');
+            sunIcon.classList.remove('hidden');
+            moonIcon.classList.add('hidden');
+        }
+
+        themeToggle.addEventListener('click', () => {
+            document.documentElement.classList.toggle('dark');
+            
+            if (document.documentElement.classList.contains('dark')) {
+                localStorage.setItem('theme', 'dark');
+                sunIcon.classList.remove('hidden');
+                moonIcon.classList.add('hidden');
+            } else {
+                localStorage.setItem('theme', 'light');
+                sunIcon.classList.add('hidden');
+                moonIcon.classList.remove('hidden');
+            }
+        });
+
+        // 課程展開/收起功能
+        function toggleLesson(button) {
+            const content = button.parentElement.nextElementSibling;
+            const icon = button.querySelector('svg');
+
+            if (content.classList.contains('hidden')) {
+                content.classList.remove('hidden');
+                icon.style.transform = 'rotate(180deg)';
+            } else {
+                content.classList.add('hidden');
+                icon.style.transform = 'rotate(0deg)';
+            }
+        }
+
+        // 複製程式碼功能
+        function copyCode(button) {
+            const codeBlock = button.nextElementSibling;
+            const text = codeBlock.textContent;
+            
+            navigator.clipboard.writeText(text).then(() => {
+                // 顯示複製成功的視覺回饋
+                const originalHTML = button.innerHTML;
+                button.innerHTML = '<svg class="w-4 h-4 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>';
+                
+                setTimeout(() => {
+                    button.innerHTML = originalHTML;
+                }, 1000);
+            }).catch(err => {
+                console.error('複製失敗:', err);
+            });
+        }
+    </script>
+</body>
+</html>

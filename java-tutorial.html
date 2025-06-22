@@ -1,0 +1,2882 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Java 教學 - 程式語言教學平台</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cdefs%3E%3ClinearGradient id='bookGrad' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23059669'/%3E%3Cstop offset='50%25' style='stop-color:%2306B6D4'/%3E%3Cstop offset='100%25' style='stop-color:%234F46E5'/%3E%3C/linearGradient%3E%3ClinearGradient id='pageGrad' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23FBBF24'/%3E%3Cstop offset='100%25' style='stop-color:%23F59E0B'/%3E%3C/linearGradient%3E%3C/defs%3E%3C!-- Book cover --%3E%3Cpath d='M3 4c0-1.1.9-2 2-2h14c1.1 0 2 .9 2 2v16c0 1.1-.9 2-2 2H5c-1.1 0-2-.9-2-2V4z' fill='url(%23bookGrad)'/%3E%3C!-- Book spine --%3E%3Cpath d='M3 4v16c0 1.1.9 2 2 2h1V2H5c-1.1 0-2 .9-2 2z' fill='%23047857' opacity='0.8'/%3E%3C!-- Pages --%3E%3Cpath d='M7 3h12c.6 0 1 .4 1 1v16c0 .6-.4 1-1 1H7V3z' fill='url(%23pageGrad)'/%3E%3C!-- Page lines --%3E%3Cg stroke='%23FFFFFF' stroke-width='0.5' opacity='0.8'%3E%3Cline x1='9' y1='6' x2='17' y2='6'/%3E%3Cline x1='9' y1='8' x2='17' y2='8'/%3E%3Cline x1='9' y1='10' x2='17' y2='10'/%3E%3Cline x1='9' y1='12' x2='17' y2='12'/%3E%3Cline x1='9' y1='14' x2='17' y2='14'/%3E%3Cline x1='9' y1='16' x2='17' y2='16'/%3E%3Cline x1='9' y1='18' x2='17' y2='18'/%3E%3C/g%3E%3C!-- Code symbol --%3E%3Ctext x='12' y='11' font-family='monospace' font-size='6' fill='%23FFFFFF' text-anchor='middle' opacity='0.9'%3E%26lt;/%26gt;%3C/text%3E%3C/svg%3E">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            200: '#bfdbfe',
+                            300: '#93c5fd',
+                            400: '#60a5fa',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            800: '#1e40af',
+                            900: '#1e3a8a',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', system-ui, sans-serif; }
+        code { font-family: 'Fira Code', Monaco, 'Cascadia Code', 'Roboto Mono', monospace; }
+        .card {
+            background-color: white;
+            border-radius: 0.75rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            border: 1px solid #e5e7eb;
+        }
+        .card:hover {
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        .dark .card {
+            background-color: #1f2937;
+            border-color: #374151;
+        }
+        .code-block {
+            background-color: #f3f4f6;
+            border: 1px solid #e5e7eb;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            font-size: 0.875rem;
+            overflow-x: auto;
+            position: relative;
+            color: #1f2937;
+        }
+        .dark .code-block {
+            background-color: #1e293b;
+            border-color: #475569;
+            color: #e2e8f0;
+        }
+        .copy-btn {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            background: rgba(0, 0, 0, 0.1);
+            border: none;
+            border-radius: 0.25rem;
+            padding: 0.25rem;
+            cursor: pointer;
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+        .code-block:hover .copy-btn {
+            opacity: 1;
+        }
+        .copy-btn:hover {
+            background: rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
+    <!-- Header -->
+    <header class="bg-white dark:bg-gray-800 shadow-sm border-b border-gray-200 dark:border-gray-700">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-2 text-2xl font-bold text-primary-600 dark:text-primary-400">
+                    <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M9.4 16.6L4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0L19.2 12l-4.6-4.6L16 6l6 6-6 6-1.4-1.4z"/>
+                    </svg>
+                    <span>程式教學平台</span>
+                </div>
+
+                <nav class="hidden md:flex items-center space-x-6">
+                    <a href="index.html" class="font-medium text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">首頁</a>
+
+                    <!-- 程式設計下拉選單 -->
+                    <div class="relative group">
+                        <button class="font-medium text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors flex items-center">
+                            程式設計
+                            <svg class="w-4 h-4 ml-1 transform group-hover:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </button>
+
+                        <!-- 下拉選單內容 -->
+                        <div class="absolute left-0 mt-2 w-64 bg-white dark:bg-gray-800 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+                            <!-- 初學者 -->
+                            <div class="px-4 py-2 border-b border-gray-200 dark:border-gray-700">
+                                <h3 class="text-sm font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide">初學者</h3>
+                            </div>
+                            <div class="py-2">
+                                <a href="html-tutorial.html" class="flex items-center px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+                                    <div class="w-6 h-6 bg-orange-500 rounded flex items-center justify-center text-white text-xs font-bold mr-3">
+                                        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
+                                            <path d="M1.5 0h21l-1.91 21.563L11.977 24l-8.564-2.438L1.5 0zm7.031 9.75l-.232-2.718 10.059.003.23-2.622L5.412 4.41l.698 8.01h9.126l-.326 3.426-2.91.804-2.955-.81-.188-2.11H6.248l.33 4.171L12 19.351l5.379-1.443.744-8.157H8.531z"/>
+                                        </svg>
+                                    </div>
+                                    HTML
+                                </a>
+                                <a href="python-tutorial.html" class="flex items-center px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+                                    <div class="w-6 h-6 rounded flex items-center justify-center mr-3">
+                                        <svg viewBox="0 0 24 24" class="w-5 h-5">
+                                            <defs>
+                                                <linearGradient id="python-nav-java-gradient-1" x1="0%" y1="0%" x2="100%" y2="100%">
+                                                    <stop offset="0%" style="stop-color:#3776ab"/>
+                                                    <stop offset="100%" style="stop-color:#4b8bbe"/>
+                                                </linearGradient>
+                                                <linearGradient id="python-nav-java-gradient-2" x1="0%" y1="0%" x2="100%" y2="100%">
+                                                    <stop offset="0%" style="stop-color:#ffd43b"/>
+                                                    <stop offset="100%" style="stop-color:#ffe873"/>
+                                                </linearGradient>
+                                            </defs>
+                                            <path d="M11.914 0C5.82 0 6.2 2.656 6.2 2.656l.007 2.752h5.814v.826H3.9S0 5.789 0 11.969c0 6.18 3.403 5.96 3.403 5.96h2.03v-2.867s-.109-3.42 3.35-3.42h5.766s3.24.052 3.24-3.148V3.202S18.28 0 11.914 0zM8.708 1.85c.578 0 1.046.47 1.046 1.052 0 .581-.468 1.051-1.046 1.051-.579 0-1.046-.47-1.046-1.051 0-.582.467-1.052 1.046-1.052z" fill="url(#python-nav-java-gradient-1)"/>
+                                            <path d="M12.087 24c6.094 0 5.714-2.656 5.714-2.656l-.007-2.752h-5.814v-.826h8.121s4.1.445 4.1-5.735c0-6.18-3.403-5.96-3.403-5.96h-2.03v2.867s.109 3.42-3.35 3.42H9.652s-3.24-.052-3.24 3.148v5.292S5.921 24 12.087 24zm3.206-1.85c-.578 0-1.046-.47-1.046-1.052 0-.581.468-1.051 1.046-1.051.579 0 1.046.47 1.046 1.051 0 .582-.467 1.052-1.046 1.052z" fill="url(#python-nav-java-gradient-2)"/>
+                                        </svg>
+                                    </div>
+                                    Python
+                                </a>
+                                <a href="javascript-tutorial.html" class="flex items-center px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+                                    <div class="w-6 h-6 rounded flex items-center justify-center mr-3">
+                                        <svg viewBox="0 0 24 24" class="w-5 h-5">
+                                            <rect width="24" height="24" rx="2" fill="#F7DF1E"/>
+                                            <path d="M22.034 18.276c-.175-1.095-.888-2.015-3.003-2.873-.736-.345-1.554-.585-1.797-1.14-.091-.33-.105-.51-.046-.705.15-.646.915-.84 1.515-.66.39.12.75.42.976.9 1.034-.676 1.034-.676 1.755-1.125-.27-.42-.404-.601-.586-.78-.63-.705-1.469-1.065-2.834-1.034l-.705.089c-.676.165-1.32.525-1.71 1.005-1.14 1.291-.811 3.541.569 4.471 1.365 1.02 3.361 1.244 3.616 2.205.24 1.17-.87 1.545-1.966 1.41-.811-.18-1.26-.586-1.755-1.336l-1.83 1.051c.21.48.45.689.81 1.109 1.74 1.756 6.09 1.666 6.871-1.004.029-.09.24-.705.074-1.65l.046.067zm-8.983-7.245h-2.248c0 1.938-.009 3.864-.009 5.805 0 1.232.063 2.363-.138 2.711-.33.689-1.18.601-1.566.48-.396-.196-.597-.466-.83-.855-.063-.105-.11-.196-.127-.196l-1.825 1.125c.305.63.75 1.172 1.324 1.517.855.51 2.004.675 3.207.405.783-.226 1.458-.691 1.811-1.411.51-.93.402-2.07.397-3.346.012-2.054 0-4.109 0-6.179l.004-.056z" fill="#000"/>
+                                        </svg>
+                                    </div>
+                                    JavaScript
+                                </a>
+                            </div>
+
+                            <!-- 中級 -->
+                            <div class="px-4 py-2 border-b border-gray-200 dark:border-gray-700 border-t">
+                                <h3 class="text-sm font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide">中級</h3>
+                            </div>
+                            <div class="py-2">
+                                <a href="csharp-tutorial.html" class="flex items-center px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+                                    <div class="w-6 h-6 rounded flex items-center justify-center mr-3">
+                                        <svg viewBox="0 0 24 24" class="w-5 h-5">
+                                            <defs>
+                                                <linearGradient id="csharp-nav-java-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                                    <stop offset="0%" style="stop-color:#A855F7"/>
+                                                    <stop offset="50%" style="stop-color:#9333EA"/>
+                                                    <stop offset="100%" style="stop-color:#7C3AED"/>
+                                                </linearGradient>
+                                            </defs>
+                                            <rect x="2" y="2" width="20" height="20" rx="3" fill="url(#csharp-nav-java-gradient)"/>
+                                            <path d="M14 8.5C13.5 8 12.8 7.5 11 7.5C9 7.5 7.5 9 7.5 12C7.5 15 9 16.5 11 16.5C12.8 16.5 13.5 16 14 15.5" stroke="white" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+                                            <g fill="white">
+                                                <rect x="16.5" y="8.5" width="0.6" height="3"/>
+                                                <rect x="17.4" y="8.5" width="0.6" height="3"/>
+                                                <rect x="16" y="9.2" width="2.5" height="0.6"/>
+                                                <rect x="16" y="10.2" width="2.5" height="0.6"/>
+                                            </g>
+                                        </svg>
+                                    </div>
+                                    C#
+                                </a>
+                                <a href="java-tutorial.html" class="flex items-center px-4 py-2 text-sm text-primary-600 dark:text-primary-400 bg-primary-50 dark:bg-primary-900/20 transition-colors">
+                                    <div class="w-6 h-6 rounded flex items-center justify-center mr-3">
+                                        <svg viewBox="0 0 24 24" class="w-5 h-5">
+                                            <!-- Java 咖啡杯 -->
+                                            <path d="M8.851 18.56s-.917.534.653.714c1.902.218 2.874.187 4.969-.211 0 0 .552.346 1.321.646-4.699 2.013-10.633-.118-6.943-1.149M8.276 15.933s-1.028.761.542.924c2.032.209 3.636.227 6.413-.308 0 0 .384.389.987.602-5.679 1.661-12.007.13-7.942-1.218" fill="#ED8B00"/>
+                                            <path d="M13.116 11.475c1.158 1.333-.304 2.533-.304 2.533s2.939-1.518 1.589-3.418c-1.261-1.772-2.228-2.652 3.007-5.688 0-.001-8.216 2.051-4.292 6.573" fill="#ED8B00"/>
+                                            <path d="M19.33 20.504s.679.559-.747.991c-2.712.822-11.288 1.069-13.669.033-.856-.373.75-.89 1.254-.998.527-.114.828-.093.828-.093-.953-.671-6.156 1.317-2.643 1.887 9.58 1.553 17.462-.7 14.977-1.82" fill="#ED8B00"/>
+                                            <path d="M9.292 13.21s-4.362 1.036-1.544 1.412c1.189.159 3.561.123 5.77-.062 1.806-.152 3.618-.477 3.618-.477s-.637.272-1.098.587c-4.429 1.165-12.986.623-10.522-.568 2.082-1.006 3.776-.892 3.776-.892" fill="#ED8B00"/>
+                                            <path d="M17.116 17.584c4.503-2.34 2.421-4.589.968-4.285-.355.074-.515.138-.515.138s.132-.207.385-.297c2.875-1.011 5.086 2.981-.928 4.562 0-.001.07-.062.09-.118" fill="#ED8B00"/>
+                                            <path d="M14.401 0s2.494 2.494-2.365 6.33c-3.896 3.077-.888 4.832-.001 6.836-2.274-2.053-3.943-3.858-2.824-5.539 1.644-2.469 6.197-3.665 5.19-7.627" fill="#ED8B00"/>
+                                            <path d="M9.734 23.924c4.322.277 10.959-.153 11.116-2.198 0 0-.302.775-3.572 1.391-3.688.694-8.239.613-10.937.168 0-.001.553.457 3.393.639" fill="#ED8B00"/>
+                                            <!-- Java 杯子底部 -->
+                                            <ellipse cx="12" cy="22" rx="8" ry="1.5" fill="#5382A1"/>
+                                            <ellipse cx="12" cy="20" rx="7" ry="1.2" fill="#5382A1"/>
+                                            <ellipse cx="12" cy="18" rx="6" ry="1" fill="#5382A1"/>
+                                        </svg>
+                                    </div>
+                                    Java
+                                </a>
+                                <a href="c-tutorial.html" class="flex items-center px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+                                    <div class="w-6 h-6 rounded flex items-center justify-center mr-3">
+                                        <svg viewBox="0 0 24 24" class="w-5 h-5">
+                                            <defs>
+                                                <linearGradient id="c-nav-java-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                                    <stop offset="0%" style="stop-color:#659AD2"/>
+                                                    <stop offset="50%" style="stop-color:#4F81BD"/>
+                                                    <stop offset="100%" style="stop-color:#2E5C8A"/>
+                                                </linearGradient>
+                                            </defs>
+                                            <rect x="2" y="2" width="20" height="20" rx="3" fill="url(#c-nav-java-gradient)"/>
+                                            <path d="M15 8.5C14.5 8 13.8 7.5 12 7.5C10 7.5 8.5 9 8.5 12C8.5 15 10 16.5 12 16.5C13.8 16.5 14.5 16 15 15.5" stroke="white" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+                                        </svg>
+                                    </div>
+                                    C 語言
+                                </a>
+                            </div>
+
+                            <!-- 進階 -->
+                            <div class="px-4 py-2 border-b border-gray-200 dark:border-gray-700 border-t">
+                                <h3 class="text-sm font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide">進階</h3>
+                            </div>
+                            <div class="py-2">
+                                <a href="cpp-tutorial.html" class="flex items-center px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+                                    <div class="w-6 h-6 rounded flex items-center justify-center mr-3">
+                                        <svg viewBox="0 0 24 24" class="w-5 h-5">
+                                            <defs>
+                                                <linearGradient id="cpp-nav-java-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                                    <stop offset="0%" style="stop-color:#6BA3D6"/>
+                                                    <stop offset="50%" style="stop-color:#4A90E2"/>
+                                                    <stop offset="100%" style="stop-color:#2E5C8A"/>
+                                                </linearGradient>
+                                            </defs>
+                                            <path d="M12 2L20.5 7V17L12 22L3.5 17V7L12 2Z" fill="url(#cpp-nav-java-gradient)"/>
+                                            <path d="M13 8.5C12.5 8 11.8 7.5 10 7.5C8 7.5 6.5 9 6.5 12C6.5 15 8 16.5 10 16.5C11.8 16.5 12.5 16 13 15.5" stroke="white" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+                                            <g fill="white">
+                                                <rect x="15.5" y="9" width="0.8" height="2.5"/>
+                                                <rect x="14.75" y="9.75" width="2.3" height="0.8"/>
+                                                <rect x="17.2" y="11.5" width="0.8" height="2.5"/>
+                                                <rect x="16.45" y="12.25" width="2.3" height="0.8"/>
+                                            </g>
+                                        </svg>
+                                    </div>
+                                    C++
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </nav>
+
+                <button id="theme-toggle" class="p-2 rounded-lg bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors duration-200">
+                    <svg id="sun-icon" class="w-5 h-5 text-yellow-500 hidden" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM18.894 6.166a.75.75 0 00-1.06-1.06l-1.591 1.59a.75.75 0 101.06 1.061l1.591-1.59zM21.75 12a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5H21a.75.75 0 01.75.75zM17.834 18.894a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 10-1.061 1.06l1.59 1.591zM12 18a.75.75 0 01.75.75V21a.75.75 0 01-1.5 0v-2.25A.75.75 0 0112 18zM7.758 17.303a.75.75 0 00-1.061-1.06l-1.591 1.59a.75.75 0 001.06 1.061l1.591-1.59zM6 12a.75.75 0 01-.75.75H3a.75.75 0 010-1.5h2.25A.75.75 0 016 12zM6.697 7.757a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 00-1.061 1.06l1.59 1.591z" />
+                    </svg>
+                    <svg id="moon-icon" class="w-5 h-5 text-gray-700" fill="currentColor" viewBox="0 0 24 24">
+                        <path fill-rule="evenodd" d="M9.528 1.718a.75.75 0 01.162.819A8.97 8.97 0 009 6a9 9 0 009 9 8.97 8.97 0 003.463-.69.75.75 0 01.981.98 10.503 10.503 0 01-9.694 6.46c-5.799 0-10.5-4.701-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 01.818.162z" clip-rule="evenodd" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+        <div class="max-w-4xl mx-auto">
+            <div class="mb-8">
+                <div class="flex items-center mb-4">
+                    <a href="index.html" class="text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 mr-4">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                        </svg>
+                    </a>
+                    <div class="flex items-center">
+                        <div class="w-12 h-12 bg-gradient-to-br from-orange-500 to-blue-600 rounded-lg flex items-center justify-center mr-4 p-2">
+                            <svg viewBox="0 0 24 24" class="w-8 h-8">
+                                <!-- Java 咖啡杯 -->
+                                <path d="M8.851 18.56s-.917.534.653.714c1.902.218 2.874.187 4.969-.211 0 0 .552.346 1.321.646-4.699 2.013-10.633-.118-6.943-1.149M8.276 15.933s-1.028.761.542.924c2.032.209 3.636.227 6.413-.308 0 0 .384.389.987.602-5.679 1.661-12.007.13-7.942-1.218" fill="#ED8B00"/>
+                                <path d="M13.116 11.475c1.158 1.333-.304 2.533-.304 2.533s2.939-1.518 1.589-3.418c-1.261-1.772-2.228-2.652 3.007-5.688 0-.001-8.216 2.051-4.292 6.573" fill="#ED8B00"/>
+                                <path d="M19.33 20.504s.679.559-.747.991c-2.712.822-11.288 1.069-13.669.033-.856-.373.75-.89 1.254-.998.527-.114.828-.093.828-.093-.953-.671-6.156 1.317-2.643 1.887 9.58 1.553 17.462-.7 14.977-1.82" fill="#ED8B00"/>
+                                <path d="M9.292 13.21s-4.362 1.036-1.544 1.412c1.189.159 3.561.123 5.77-.062 1.806-.152 3.618-.477 3.618-.477s-.637.272-1.098.587c-4.429 1.165-12.986.623-10.522-.568 2.082-1.006 3.776-.892 3.776-.892" fill="#ED8B00"/>
+                                <path d="M17.116 17.584c4.503-2.34 2.421-4.589.968-4.285-.355.074-.515.138-.515.138s.132-.207.385-.297c2.875-1.011 5.086 2.981-.928 4.562 0-.001.07-.062.09-.118" fill="#ED8B00"/>
+                                <path d="M14.401 0s2.494 2.494-2.365 6.33c-3.896 3.077-.888 4.832-.001 6.836-2.274-2.053-3.943-3.858-2.824-5.539 1.644-2.469 6.197-3.665 5.19-7.627" fill="#ED8B00"/>
+                                <path d="M9.734 23.924c4.322.277 10.959-.153 11.116-2.198 0 0-.302.775-3.572 1.391-3.688.694-8.239.613-10.937.168 0-.001.553.457 3.393.639" fill="#ED8B00"/>
+                                <!-- Java 杯子底部 -->
+                                <ellipse cx="12" cy="22" rx="8" ry="1.5" fill="#5382A1"/>
+                                <ellipse cx="12" cy="20" rx="7" ry="1.2" fill="#5382A1"/>
+                                <ellipse cx="12" cy="18" rx="6" ry="1" fill="#5382A1"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <h1 class="text-3xl font-bold text-gray-900 dark:text-white">Java 教學</h1>
+                            <p class="text-gray-600 dark:text-gray-300">企業級開發的首選語言</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg p-4">
+                    <h2 class="font-semibold text-red-900 dark:text-red-100 mb-2">學習目標</h2>
+                    <ul class="text-red-800 dark:text-red-200 text-sm space-y-1">
+                        <li>• 了解 Java 的特色和平台獨立性</li>
+                        <li>• 掌握基本語法和資料型別</li>
+                        <li>• 學會物件導向程式設計概念</li>
+                        <li>• 掌握類別、物件、封裝和繼承</li>
+                        <li>• 學會例外處理和集合框架</li>
+                        <li>• 了解多執行緒和檔案處理</li>
+                        <li>• 能夠開發企業級應用程式</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Java Lessons -->
+            <div class="space-y-6">
+                <!-- 第1課：Java 簡介與第一個程式 -->
+                <div class="card p-6">
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="flex-1">
+                            <div class="flex items-center mb-2">
+                                <h3 class="text-xl font-bold text-gray-900 dark:text-white mr-3">第1課：Java 簡介與第一個程式</h3>
+                                <span class="px-2 py-1 text-xs font-medium rounded-full bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200">中級</span>
+                            </div>
+                            <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
+                                了解什麼是 Java，它的特色和優勢，並編寫你的第一個 Java 程式。
+                            </p>
+                        </div>
+                        <button onclick="toggleLesson(this)" class="ml-4 p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+                            <svg class="w-5 h-5 text-gray-500 dark:text-gray-400 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="lesson-content hidden space-y-4 border-t border-gray-200 dark:border-gray-700 pt-4">
+                        <div>
+                            <h4 class="font-semibold text-gray-900 dark:text-white mb-2">什麼是 Java？</h4>
+                            <div class="text-gray-600 dark:text-gray-300 leading-relaxed space-y-3">
+                                <p>Java 是由 Sun Microsystems（現在的 Oracle）在 1995 年發布的程式語言。它是一種物件導向的程式語言，以其「一次編寫，到處執行」的特性而聞名。</p>
+                                <p><strong>Java 的核心特色：</strong></p>
+                                <ul class="list-disc list-inside space-y-1 ml-4">
+                                    <li><strong>平台獨立性：</strong>Java 程式可以在任何安裝了 JVM 的系統上執行</li>
+                                    <li><strong>物件導向：</strong>支援封裝、繼承、多型等 OOP 概念</li>
+                                    <li><strong>強型別系統：</strong>在編譯時期檢查型別，減少執行時錯誤</li>
+                                    <li><strong>自動記憶體管理：</strong>垃圾回收機制自動管理記憶體</li>
+                                    <li><strong>豐富的 API：</strong>標準函式庫提供大量現成功能</li>
+                                    <li><strong>多執行緒支援：</strong>內建多執行緒程式設計支援</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-900 dark:text-white mb-2">你的第一個 Java 程式：</h4>
+                            <pre class="code-block"><button class="copy-btn" onclick="copyCode(this)">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                                </svg>
+                            </button><code>// HelloWorld.java
+// 這是你的第一個 Java 程式
+
+public class HelloWorld {
+    // main 方法是程式的進入點
+    public static void main(String[] args) {
+        // 在控制台輸出文字
+        System.out.println("Hello, World!");
+        System.out.println("歡迎來到 Java 的世界！");
+        System.out.println("Java 是一種強大的程式語言");
+
+        // 宣告和使用變數
+        String language = "Java";
+        int year = 1995;
+        double version = 17.0;
+        boolean isPopular = true;
+
+        // 輸出變數內容
+        System.out.println("程式語言：" + language);
+        System.out.println("發布年份：" + year);
+        System.out.println("目前版本：" + version);
+        System.out.println("是否受歡迎：" + isPopular);
+    }
+}</code></pre>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-900 dark:text-white mb-2">程式碼解釋：</h4>
+                            <div class="text-gray-600 dark:text-gray-300 leading-relaxed space-y-3">
+                                <ul class="list-disc list-inside space-y-2 ml-4">
+                                    <li><strong>public class HelloWorld：</strong>定義一個公開的類別，檔名必須與類別名相同</li>
+                                    <li><strong>public static void main(String[] args)：</strong>程式的進入點，JVM 會從這裡開始執行</li>
+                                    <li><strong>System.out.println()：</strong>在控制台輸出文字並換行</li>
+                                    <li><strong>String, int, double, boolean：</strong>Java 的基本資料型別</li>
+                                    <li><strong>// 註解：</strong>單行註解，編譯器會忽略</li>
+                                    <li><strong>分號：</strong>每個陳述句都必須以分號結尾</li>
+                                    <li><strong>大括號：</strong>用來定義程式碼區塊的範圍</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-900 dark:text-white mb-2">Java 程式的執行過程：</h4>
+                            <div class="text-gray-600 dark:text-gray-300 leading-relaxed space-y-3">
+                                <div class="bg-gray-50 dark:bg-gray-800 p-4 rounded-lg">
+                                    <p><strong>1. 編寫原始碼：</strong>建立 .java 檔案</p>
+                                    <p><strong>2. 編譯：</strong>使用 javac 編譯成 .class 檔案（位元組碼）</p>
+                                    <p><strong>3. 執行：</strong>使用 java 命令在 JVM 上執行位元組碼</p>
+                                </div>
+                                <pre class="bg-gray-100 dark:bg-gray-800 p-3 rounded text-sm"><code># 編譯
+javac HelloWorld.java
+
+# 執行
+java HelloWorld</code></pre>
+                            </div>
+                        </div>
+                        <div class="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-4">
+                            <h5 class="font-semibold text-blue-900 dark:text-blue-100 mb-2">💡 實作練習</h5>
+                            <p class="text-blue-800 dark:text-blue-200 text-sm">
+                                修改程式碼，讓它顯示你的姓名、年齡和興趣，體驗 Java 變數的使用！
+                            </p>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-900 dark:text-white mb-2">Java 的應用領域：</h4>
+                            <div class="text-gray-600 dark:text-gray-300 leading-relaxed">
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div>
+                                        <p><strong>🏢 企業應用</strong></p>
+                                        <p class="text-sm">大型企業系統、ERP</p>
+                                    </div>
+                                    <div>
+                                        <p><strong>🌐 Web 開發</strong></p>
+                                        <p class="text-sm">Spring、Struts 框架</p>
+                                    </div>
+                                    <div>
+                                        <p><strong>📱 Android 開發</strong></p>
+                                        <p class="text-sm">Android 應用程式</p>
+                                    </div>
+                                    <div>
+                                        <p><strong>🖥️ 桌面應用</strong></p>
+                                        <p class="text-sm">Swing、JavaFX</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 第2課：基本語法與資料型別 -->
+                <div class="card p-6">
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="flex-1">
+                            <div class="flex items-center mb-2">
+                                <h3 class="text-xl font-bold text-gray-900 dark:text-white mr-3">第2課：基本語法與資料型別</h3>
+                                <span class="px-2 py-1 text-xs font-medium rounded-full bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200">中級</span>
+                            </div>
+                            <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
+                                學習 Java 的基本語法規則和各種資料型別的使用。
+                            </p>
+                        </div>
+                        <button onclick="toggleLesson(this)" class="ml-4 p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+                            <svg class="w-5 h-5 text-gray-500 dark:text-gray-400 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="lesson-content hidden space-y-4 border-t border-gray-200 dark:border-gray-700 pt-4">
+                        <div>
+                            <h4 class="font-semibold text-gray-900 dark:text-white mb-2">基本資料型別：</h4>
+                            <pre class="code-block"><button class="copy-btn" onclick="copyCode(this)">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                                </svg>
+                            </button><code>public class DataTypes {
+    public static void main(String[] args) {
+        // 整數型別
+        byte smallNumber = 127;        // 8位元，範圍 -128 到 127
+        short mediumNumber = 32767;    // 16位元，範圍 -32,768 到 32,767
+        int number = 2147483647;       // 32位元，最常用的整數型別
+        long bigNumber = 9223372036854775807L; // 64位元，需要加 L 後綴
+
+        // 浮點數型別
+        float decimal1 = 3.14f;        // 32位元，需要加 f 後綴
+        double decimal2 = 3.14159265359; // 64位元，預設的浮點數型別
+
+        // 字元型別
+        char letter = 'A';             // 16位元 Unicode 字元
+        char unicode = '\u0041';       // Unicode 表示法，也是 'A'
+
+        // 布林型別
+        boolean isTrue = true;
+        boolean isFalse = false;
+
+        // 字串型別（參考型別）
+        String text = "Hello, Java!";
+        String multiLine = "第一行\n第二行";
+
+        // 輸出所有變數
+        System.out.println("byte: " + smallNumber);
+        System.out.println("short: " + mediumNumber);
+        System.out.println("int: " + number);
+        System.out.println("long: " + bigNumber);
+        System.out.println("float: " + decimal1);
+        System.out.println("double: " + decimal2);
+        System.out.println("char: " + letter);
+        System.out.println("boolean: " + isTrue);
+        System.out.println("String: " + text);
+    }
+}</code></pre>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-900 dark:text-white mb-2">變數宣告和初始化：</h4>
+                            <pre class="code-block"><button class="copy-btn" onclick="copyCode(this)">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                                </svg>
+                            </button><code>public class Variables {
+    public static void main(String[] args) {
+        // 變數宣告和初始化
+        int age;              // 宣告變數
+        age = 25;            // 賦值
+
+        int height = 175;    // 宣告並初始化
+
+        // 常數宣告（使用 final 關鍵字）
+        final double PI = 3.14159;
+        final String COMPANY_NAME = "我的公司";
+
+        // 多個變數同時宣告
+        int x = 10, y = 20, z = 30;
+
+        // 變數命名規則
+        int studentAge = 20;        // camelCase（駝峰命名法）
+        String firstName = "小明";   // 推薦的命名方式
+        boolean isActive = true;    // 布林變數通常以 is 開頭
+
+        // 不合法的變數名（會編譯錯誤）
+        // int 123name;     // 不能以數字開頭
+        // int class;       // 不能使用關鍵字
+        // int my-name;     // 不能使用連字號
+
+        // 型別轉換
+        int intValue = 100;
+        double doubleValue = intValue;  // 自動轉換（擴展轉換）
+
+        double bigValue = 99.99;
+        int smallValue = (int) bigValue; // 強制轉換（縮小轉換）
+
+        System.out.println("年齡: " + age);
+        System.out.println("身高: " + height);
+        System.out.println("圓周率: " + PI);
+        System.out.println("自動轉換: " + doubleValue);
+        System.out.println("強制轉換: " + smallValue);
+    }
+}</code></pre>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-900 dark:text-white mb-2">運算子：</h4>
+                            <pre class="code-block"><button class="copy-btn" onclick="copyCode(this)">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                                </svg>
+                            </button><code>public class Operators {
+    public static void main(String[] args) {
+        int a = 10, b = 3;
+
+        // 算術運算子
+        System.out.println("算術運算：");
+        System.out.println(a + " + " + b + " = " + (a + b));  // 加法
+        System.out.println(a + " - " + b + " = " + (a - b));  // 減法
+        System.out.println(a + " * " + b + " = " + (a * b));  // 乘法
+        System.out.println(a + " / " + b + " = " + (a / b));  // 除法（整數）
+        System.out.println(a + " % " + b + " = " + (a % b));  // 餘數
+
+        // 遞增和遞減運算子
+        int count = 5;
+        System.out.println("\n遞增遞減：");
+        System.out.println("原始值: " + count);
+        System.out.println("count++: " + count++);  // 後遞增
+        System.out.println("++count: " + ++count);  // 前遞增
+        System.out.println("count--: " + count--);  // 後遞減
+        System.out.println("--count: " + --count);  // 前遞減
+
+        // 比較運算子
+        System.out.println("\n比較運算：");
+        System.out.println(a + " == " + b + ": " + (a == b));  // 等於
+        System.out.println(a + " != " + b + ": " + (a != b));  // 不等於
+        System.out.println(a + " > " + b + ": " + (a > b));    // 大於
+        System.out.println(a + " < " + b + ": " + (a < b));    // 小於
+        System.out.println(a + " >= " + b + ": " + (a >= b));  // 大於等於
+        System.out.println(a + " <= " + b + ": " + (a <= b));  // 小於等於
+
+        // 邏輯運算子
+        boolean x = true, y = false;
+        System.out.println("\n邏輯運算：");
+        System.out.println("x && y: " + (x && y));  // AND
+        System.out.println("x || y: " + (x || y));  // OR
+        System.out.println("!x: " + (!x));          // NOT
+
+        // 複合賦值運算子
+        int value = 10;
+        System.out.println("\n複合賦值：");
+        System.out.println("原始值: " + value);
+        value += 5;  // value = value + 5
+        System.out.println("value += 5: " + value);
+        value -= 3;  // value = value - 3
+        System.out.println("value -= 3: " + value);
+        value *= 2;  // value = value * 2
+        System.out.println("value *= 2: " + value);
+        value /= 4;  // value = value / 4
+        System.out.println("value /= 4: " + value);
+    }
+}</code></pre>
+                        </div>
+                        <div class="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-4">
+                            <h5 class="font-semibold text-blue-900 dark:text-blue-100 mb-2">💡 實作練習</h5>
+                            <p class="text-blue-800 dark:text-blue-200 text-sm">
+                                建立一個程式計算圓的面積和周長，使用適當的資料型別儲存半徑、面積和周長！
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 第3課：類別與物件 -->
+                <div class="card p-6">
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="flex-1">
+                            <div class="flex items-center mb-2">
+                                <h3 class="text-xl font-bold text-gray-900 dark:text-white mr-3">第3課：類別與物件</h3>
+                                <span class="px-2 py-1 text-xs font-medium rounded-full bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200">進階</span>
+                            </div>
+                            <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
+                                學習 Java 物件導向程式設計的核心概念：類別和物件。
+                            </p>
+                        </div>
+                        <button onclick="toggleLesson(this)" class="ml-4 p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+                            <svg class="w-5 h-5 text-gray-500 dark:text-gray-400 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="lesson-content hidden space-y-4 border-t border-gray-200 dark:border-gray-700 pt-4">
+                        <div>
+                            <h4 class="font-semibold text-gray-900 dark:text-white mb-2">什麼是類別和物件？</h4>
+                            <div class="text-gray-600 dark:text-gray-300 leading-relaxed space-y-3">
+                                <p><strong>類別（Class）</strong>是物件的藍圖或模板，定義了物件應該有什麼屬性和行為。</p>
+                                <p><strong>物件（Object）</strong>是類別的實例，是實際存在的個體。</p>
+                                <p>例如：「汽車」是一個類別，而「我的紅色 Toyota」是一個物件。</p>
+                            </div>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-900 dark:text-white mb-2">建立第一個類別：</h4>
+                            <pre class="code-block"><button class="copy-btn" onclick="copyCode(this)">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                                </svg>
+                            </button><code>// Student.java - 學生類別
+public class Student {
+    // 屬性（成員變數）
+    private String name;        // 姓名
+    private int age;           // 年齡
+    private String studentId;  // 學號
+    private double gpa;        // 平均成績
+
+    // 預設建構子
+    public Student() {
+        this.name = "未知";
+        this.age = 0;
+        this.studentId = "N/A";
+        this.gpa = 0.0;
+    }
+
+    // 參數化建構子
+    public Student(String name, int age, String studentId) {
+        this.name = name;
+        this.age = age;
+        this.studentId = studentId;
+        this.gpa = 0.0;
+    }
+
+    // 完整建構子
+    public Student(String name, int age, String studentId, double gpa) {
+        this.name = name;
+        this.age = age;
+        this.studentId = studentId;
+        this.gpa = gpa;
+    }
+
+    // 方法（行為）
+    public void introduce() {
+        System.out.println("大家好，我是 " + name);
+        System.out.println("我今年 " + age + " 歲");
+        System.out.println("我的學號是 " + studentId);
+        System.out.println("我的 GPA 是 " + gpa);
+    }
+
+    public void study(String subject) {
+        System.out.println(name + " 正在學習 " + subject);
+    }
+
+    public void takeExam(String subject, double score) {
+        System.out.println(name + " 在 " + subject + " 考試中得到 " + score + " 分");
+        if (score >= 90) {
+            System.out.println("優秀！");
+        } else if (score >= 80) {
+            System.out.println("良好！");
+        } else if (score >= 70) {
+            System.out.println("及格");
+        } else {
+            System.out.println("需要加油");
+        }
+    }
+}</code></pre>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-900 dark:text-white mb-2">使用類別建立物件：</h4>
+                            <pre class="code-block"><button class="copy-btn" onclick="copyCode(this)">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                                </svg>
+                            </button><code>// Main.java - 主程式
+public class Main {
+    public static void main(String[] args) {
+        // 使用不同的建構子建立物件
+        Student student1 = new Student();  // 使用預設建構子
+        Student student2 = new Student("小明", 20, "S001");  // 使用參數化建構子
+        Student student3 = new Student("小華", 19, "S002", 3.8);  // 使用完整建構子
+
+        System.out.println("=== 學生1 ===");
+        student1.introduce();
+
+        System.out.println("\n=== 學生2 ===");
+        student2.introduce();
+        student2.study("Java 程式設計");
+        student2.takeExam("Java 程式設計", 85);
+
+        System.out.println("\n=== 學生3 ===");
+        student3.introduce();
+        student3.study("資料結構");
+        student3.takeExam("資料結構", 92);
+
+        // 建立多個物件
+        Student[] students = {
+            new Student("張三", 21, "S003", 3.5),
+            new Student("李四", 20, "S004", 3.9),
+            new Student("王五", 22, "S005", 3.2)
+        };
+
+        System.out.println("\n=== 所有學生 ===");
+        for (Student student : students) {
+            student.introduce();
+            System.out.println("---");
+        }
+    }
+}</code></pre>
+                        </div>
+                        <div class="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-4">
+                            <h5 class="font-semibold text-blue-900 dark:text-blue-100 mb-2">💡 實作練習</h5>
+                            <p class="text-blue-800 dark:text-blue-200 text-sm">
+                                建立一個 Car 類別，包含品牌、型號、年份等屬性，以及啟動、停止等方法！
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 第4課：控制流程 -->
+                <div class="card p-6">
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="flex-1">
+                            <div class="flex items-center mb-2">
+                                <h3 class="text-xl font-bold text-gray-900 dark:text-white mr-3">第4課：控制流程</h3>
+                                <span class="px-2 py-1 text-xs font-medium rounded-full bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200">中級</span>
+                            </div>
+                            <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
+                                學習 Java 中的條件判斷和迴圈控制，讓程式能夠做出決策和重複執行。
+                            </p>
+                        </div>
+                        <button onclick="toggleLesson(this)" class="ml-4 p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+                            <svg class="w-5 h-5 text-gray-500 dark:text-gray-400 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="lesson-content hidden space-y-4 border-t border-gray-200 dark:border-gray-700 pt-4">
+                        <div>
+                            <h4 class="font-semibold text-gray-900 dark:text-white mb-2">條件判斷 - if/else：</h4>
+                            <pre class="code-block"><button class="copy-btn" onclick="copyCode(this)">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                                </svg>
+                            </button><code>public class ConditionalStatements {
+    public static void main(String[] args) {
+        int score = 85;
+
+        // 基本 if 語句
+        if (score >= 60) {
+            System.out.println("及格了！");
+        }
+
+        // if-else 語句
+        if (score >= 80) {
+            System.out.println("成績優良");
+        } else {
+            System.out.println("成績普通");
+        }
+
+        // if-else if-else 語句
+        if (score >= 90) {
+            System.out.println("等級：A");
+        } else if (score >= 80) {
+            System.out.println("等級：B");
+        } else if (score >= 70) {
+            System.out.println("等級：C");
+        } else if (score >= 60) {
+            System.out.println("等級：D");
+        } else {
+            System.out.println("等級：F");
+        }
+
+        // 巢狀 if 語句
+        boolean isStudent = true;
+        int age = 20;
+
+        if (isStudent) {
+            if (age >= 18) {
+                System.out.println("成年學生");
+            } else {
+                System.out.println("未成年學生");
+            }
+        } else {
+            System.out.println("非學生");
+        }
+
+        // 複雜條件
+        String weather = "sunny";
+        int temperature = 25;
+
+        if (weather.equals("sunny") && temperature > 20) {
+            System.out.println("適合出門");
+        } else if (weather.equals("rainy") || temperature < 10) {
+            System.out.println("待在家裡");
+        } else {
+            System.out.println("看情況決定");
+        }
+
+        // 三元運算子（條件運算子）
+        String result = (score >= 60) ? "及格" : "不及格";
+        System.out.println("考試結果：" + result);
+
+        // 字串比較
+        String name = "Java";
+        if (name.equals("Java")) {  // 使用 equals() 比較字串
+            System.out.println("這是 Java！");
+        }
+
+        // 避免 NullPointerException
+        String nullString = null;
+        if ("Java".equals(nullString)) {  // 安全的字串比較
+            System.out.println("不會執行");
+        }
+    }
+}</code></pre>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-900 dark:text-white mb-2">switch 語句：</h4>
+                            <pre class="code-block"><button class="copy-btn" onclick="copyCode(this)">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                                </svg>
+                            </button><code>public class SwitchStatements {
+    public static void main(String[] args) {
+        // 基本 switch 語句
+        int dayOfWeek = 3;
+
+        switch (dayOfWeek) {
+            case 1:
+                System.out.println("星期一");
+                break;
+            case 2:
+                System.out.println("星期二");
+                break;
+            case 3:
+                System.out.println("星期三");
+                break;
+            case 4:
+                System.out.println("星期四");
+                break;
+            case 5:
+                System.out.println("星期五");
+                break;
+            case 6:
+                System.out.println("星期六");
+                break;
+            case 7:
+                System.out.println("星期日");
+                break;
+            default:
+                System.out.println("無效的日期");
+                break;
+        }
+
+        // 字串 switch（Java 7+）
+        String grade = "B";
+
+        switch (grade) {
+            case "A":
+                System.out.println("優秀！90-100分");
+                break;
+            case "B":
+                System.out.println("良好！80-89分");
+                break;
+            case "C":
+                System.out.println("普通！70-79分");
+                break;
+            case "D":
+                System.out.println("及格！60-69分");
+                break;
+            case "F":
+                System.out.println("不及格！0-59分");
+                break;
+            default:
+                System.out.println("無效的等級");
+                break;
+        }
+
+        // 多個 case 共用程式碼
+        char operator = '+';
+        int a = 10, b = 5;
+        int result = 0;
+
+        switch (operator) {
+            case '+':
+            case 'a':  // 多個 case 可以共用
+                result = a + b;
+                System.out.println("加法結果：" + result);
+                break;
+            case '-':
+                result = a - b;
+                System.out.println("減法結果：" + result);
+                break;
+            case '*':
+                result = a * b;
+                System.out.println("乘法結果：" + result);
+                break;
+            case '/':
+                if (b != 0) {
+                    result = a / b;
+                    System.out.println("除法結果：" + result);
+                } else {
+                    System.out.println("除數不能為零");
+                }
+                break;
+            default:
+                System.out.println("不支援的運算子");
+                break;
+        }
+
+        // 沒有 break 的情況（fall-through）
+        int month = 12;
+        String season;
+
+        switch (month) {
+            case 12:
+            case 1:
+            case 2:
+                season = "冬天";
+                break;
+            case 3:
+            case 4:
+            case 5:
+                season = "春天";
+                break;
+            case 6:
+            case 7:
+            case 8:
+                season = "夏天";
+                break;
+            case 9:
+            case 10:
+            case 11:
+                season = "秋天";
+                break;
+            default:
+                season = "無效月份";
+                break;
+        }
+
+        System.out.println(month + "月是" + season);
+    }
+}</code></pre>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-900 dark:text-white mb-2">迴圈 - for/while：</h4>
+                            <pre class="code-block"><button class="copy-btn" onclick="copyCode(this)">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                                </svg>
+                            </button><code>public class Loops {
+    public static void main(String[] args) {
+        // for 迴圈
+        System.out.println("=== for 迴圈 ===");
+        for (int i = 1; i <= 5; i++) {
+            System.out.println("第 " + i + " 次迴圈");
+        }
+
+        // 計算 1 到 100 的總和
+        int sum = 0;
+        for (int i = 1; i <= 100; i++) {
+            sum += i;
+        }
+        System.out.println("1到100的總和：" + sum);
+
+        // while 迴圈
+        System.out.println("\n=== while 迴圈 ===");
+        int count = 1;
+        while (count <= 5) {
+            System.out.println("while 迴圈第 " + count + " 次");
+            count++;
+        }
+
+        // do-while 迴圈
+        System.out.println("\n=== do-while 迴圈 ===");
+        int number = 1;
+        do {
+            System.out.println("do-while 迴圈第 " + number + " 次");
+            number++;
+        } while (number <= 3);
+
+        // 增強型 for 迴圈（for-each）
+        System.out.println("\n=== 增強型 for 迴圈 ===");
+        int[] numbers = {10, 20, 30, 40, 50};
+
+        for (int num : numbers) {
+            System.out.println("數字：" + num);
+        }
+
+        String[] fruits = {"蘋果", "香蕉", "橘子"};
+        for (String fruit : fruits) {
+            System.out.println("水果：" + fruit);
+        }
+
+        // 巢狀迴圈
+        System.out.println("\n=== 巢狀迴圈 ===");
+        for (int i = 1; i <= 3; i++) {
+            for (int j = 1; j <= 3; j++) {
+                System.out.print(i + "x" + j + "=" + (i*j) + " ");
+            }
+            System.out.println();  // 換行
+        }
+
+        // 九九乘法表
+        System.out.println("\n=== 九九乘法表 ===");
+        for (int i = 1; i <= 9; i++) {
+            for (int j = 1; j <= 9; j++) {
+                System.out.printf("%d×%d=%2d ", i, j, i*j);
+            }
+            System.out.println();
+        }
+    }
+}</code></pre>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-900 dark:text-white mb-2">迴圈控制 - break/continue：</h4>
+                            <pre class="code-block"><button class="copy-btn" onclick="copyCode(this)">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                                </svg>
+                            </button><code>public class LoopControl {
+    public static void main(String[] args) {
+        // break 語句 - 跳出迴圈
+        System.out.println("=== break 範例 ===");
+        for (int i = 1; i <= 10; i++) {
+            if (i == 6) {
+                System.out.println("遇到 6，跳出迴圈");
+                break;  // 跳出迴圈
+            }
+            System.out.println("i = " + i);
+        }
+
+        // continue 語句 - 跳過當前迭代
+        System.out.println("\n=== continue 範例 ===");
+        for (int i = 1; i <= 10; i++) {
+            if (i % 2 == 0) {
+                continue;  // 跳過偶數
+            }
+            System.out.println("奇數：" + i);
+        }
+
+        // 在巢狀迴圈中使用 break 和 continue
+        System.out.println("\n=== 巢狀迴圈中的控制 ===");
+        for (int i = 1; i <= 3; i++) {
+            System.out.println("外層迴圈 i = " + i);
+
+            for (int j = 1; j <= 5; j++) {
+                if (j == 3) {
+                    System.out.println("  內層迴圈跳過 j = 3");
+                    continue;
+                }
+                if (j == 4) {
+                    System.out.println("  內層迴圈在 j = 4 時跳出");
+                    break;
+                }
+                System.out.println("  內層迴圈 j = " + j);
+            }
+        }
+
+        // 標籤（Label）的使用
+        System.out.println("\n=== 標籤控制 ===");
+        outer: for (int i = 1; i <= 3; i++) {
+            inner: for (int j = 1; j <= 3; j++) {
+                if (i == 2 && j == 2) {
+                    System.out.println("跳出外層迴圈");
+                    break outer;  // 跳出外層迴圈
+                }
+                System.out.println("i=" + i + ", j=" + j);
+            }
+        }
+
+        // 實用範例：尋找質數
+        System.out.println("\n=== 尋找質數 ===");
+        int limit = 20;
+
+        for (int num = 2; num <= limit; num++) {
+            boolean isPrime = true;
+
+            for (int i = 2; i <= Math.sqrt(num); i++) {
+                if (num % i == 0) {
+                    isPrime = false;
+                    break;  // 找到因數，不是質數
+                }
+            }
+
+            if (isPrime) {
+                System.out.print(num + " ");
+            }
+        }
+        System.out.println();
+
+        // 實用範例：猜數字遊戲
+        System.out.println("\n=== 簡化版猜數字 ===");
+        int secretNumber = 7;
+        int[] guesses = {3, 5, 7, 9};  // 模擬猜測
+
+        for (int guess : guesses) {
+            System.out.println("猜測：" + guess);
+
+            if (guess == secretNumber) {
+                System.out.println("恭喜！猜對了！");
+                break;
+            } else if (guess < secretNumber) {
+                System.out.println("太小了");
+            } else {
+                System.out.println("太大了");
+            }
+        }
+    }
+}</code></pre>
+                        </div>
+                        <div class="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-4">
+                            <h5 class="font-semibold text-blue-900 dark:text-blue-100 mb-2">💡 實作練習</h5>
+                            <p class="text-blue-800 dark:text-blue-200 text-sm">
+                                建立一個程式，使用迴圈計算階乘，並用條件判斷處理特殊情況（如負數）！
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 第5課：陣列與字串處理 -->
+                <div class="card p-6">
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="flex-1">
+                            <div class="flex items-center mb-2">
+                                <h3 class="text-xl font-bold text-gray-900 dark:text-white mr-3">第5課：陣列與字串處理</h3>
+                                <span class="px-2 py-1 text-xs font-medium rounded-full bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200">進階</span>
+                            </div>
+                            <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
+                                學習 Java 中陣列的使用和字串的各種處理方法。
+                            </p>
+                        </div>
+                        <button onclick="toggleLesson(this)" class="ml-4 p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+                            <svg class="w-5 h-5 text-gray-500 dark:text-gray-400 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="lesson-content hidden space-y-4 border-t border-gray-200 dark:border-gray-700 pt-4">
+                        <div>
+                            <h4 class="font-semibold text-gray-900 dark:text-white mb-2">一維陣列：</h4>
+                            <pre class="code-block"><button class="copy-btn" onclick="copyCode(this)">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                                </svg>
+                            </button><code>public class Arrays {
+    public static void main(String[] args) {
+        // 陣列宣告和初始化
+        int[] numbers1 = new int[5];  // 宣告大小為5的陣列
+        int[] numbers2 = {1, 2, 3, 4, 5};  // 直接初始化
+        int[] numbers3 = new int[]{10, 20, 30, 40, 50};  // 另一種初始化方式
+
+        // 存取陣列元素
+        numbers1[0] = 100;  // 設定第一個元素
+        numbers1[1] = 200;  // 設定第二個元素
+
+        System.out.println("第一個元素：" + numbers1[0]);
+        System.out.println("陣列長度：" + numbers1.length);
+
+        // 遍歷陣列
+        System.out.println("\n=== 使用 for 迴圈 ===");
+        for (int i = 0; i < numbers2.length; i++) {
+            System.out.println("索引 " + i + "：" + numbers2[i]);
+        }
+
+        System.out.println("\n=== 使用增強型 for 迴圈 ===");
+        for (int num : numbers2) {
+            System.out.println("數字：" + num);
+        }
+
+        // 字串陣列
+        String[] fruits = {"蘋果", "香蕉", "橘子", "葡萄"};
+        System.out.println("\n=== 水果陣列 ===");
+        for (String fruit : fruits) {
+            System.out.println("水果：" + fruit);
+        }
+
+        // 陣列操作
+        int[] scores = {85, 92, 78, 96, 88};
+
+        // 計算總分和平均分
+        int total = 0;
+        for (int score : scores) {
+            total += score;
+        }
+        double average = (double) total / scores.length;
+
+        System.out.println("\n=== 成績統計 ===");
+        System.out.println("總分：" + total);
+        System.out.println("平均分：" + String.format("%.2f", average));
+
+        // 尋找最大值和最小值
+        int max = scores[0];
+        int min = scores[0];
+
+        for (int score : scores) {
+            if (score > max) max = score;
+            if (score < min) min = score;
+        }
+
+        System.out.println("最高分：" + max);
+        System.out.println("最低分：" + min);
+
+        // 陣列複製
+        int[] originalArray = {1, 2, 3, 4, 5};
+        int[] copiedArray = new int[originalArray.length];
+
+        // 手動複製
+        for (int i = 0; i < originalArray.length; i++) {
+            copiedArray[i] = originalArray[i];
+        }
+
+        // 使用 System.arraycopy()
+        int[] anotherCopy = new int[originalArray.length];
+        System.arraycopy(originalArray, 0, anotherCopy, 0, originalArray.length);
+
+        System.out.println("\n=== 陣列複製 ===");
+        System.out.print("原始陣列：");
+        for (int num : originalArray) {
+            System.out.print(num + " ");
+        }
+        System.out.print("\n複製陣列：");
+        for (int num : copiedArray) {
+            System.out.print(num + " ");
+        }
+        System.out.println();
+    }
+}</code></pre>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-900 dark:text-white mb-2">多維陣列：</h4>
+                            <pre class="code-block"><button class="copy-btn" onclick="copyCode(this)">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                                </svg>
+                            </button><code>public class MultiDimensionalArrays {
+    public static void main(String[] args) {
+        // 二維陣列宣告和初始化
+        int[][] matrix1 = new int[3][4];  // 3行4列的陣列
+        int[][] matrix2 = {
+            {1, 2, 3, 4},
+            {5, 6, 7, 8},
+            {9, 10, 11, 12}
+        };
+
+        // 存取二維陣列元素
+        matrix1[0][0] = 100;
+        matrix1[1][2] = 200;
+
+        System.out.println("matrix1[0][0] = " + matrix1[0][0]);
+        System.out.println("matrix2[1][2] = " + matrix2[1][2]);
+
+        // 遍歷二維陣列
+        System.out.println("\n=== 二維陣列內容 ===");
+        for (int i = 0; i < matrix2.length; i++) {
+            for (int j = 0; j < matrix2[i].length; j++) {
+                System.out.print(matrix2[i][j] + "\t");
+            }
+            System.out.println();
+        }
+
+        // 使用增強型 for 迴圈
+        System.out.println("\n=== 使用增強型 for 迴圈 ===");
+        for (int[] row : matrix2) {
+            for (int element : row) {
+                System.out.print(element + "\t");
+            }
+            System.out.println();
+        }
+
+        // 不規則陣列（Jagged Array）
+        int[][] jaggedArray = {
+            {1, 2},
+            {3, 4, 5, 6},
+            {7, 8, 9}
+        };
+
+        System.out.println("\n=== 不規則陣列 ===");
+        for (int i = 0; i < jaggedArray.length; i++) {
+            System.out.print("第 " + (i+1) + " 行：");
+            for (int j = 0; j < jaggedArray[i].length; j++) {
+                System.out.print(jaggedArray[i][j] + " ");
+            }
+            System.out.println();
+        }
+
+        // 三維陣列
+        int[][][] cube = new int[2][3][4];
+        cube[0][1][2] = 999;
+
+        System.out.println("三維陣列元素：" + cube[0][1][2]);
+
+        // 實用範例：成績表
+        String[] students = {"小明", "小華", "小美"};
+        String[] subjects = {"數學", "英文", "物理"};
+        int[][] grades = {
+            {85, 92, 78},  // 小明的成績
+            {90, 88, 95},  // 小華的成績
+            {87, 91, 89}   // 小美的成績
+        };
+
+        System.out.println("\n=== 學生成績表 ===");
+        System.out.print("學生\t");
+        for (String subject : subjects) {
+            System.out.print(subject + "\t");
+        }
+        System.out.println("平均");
+
+        for (int i = 0; i < students.length; i++) {
+            System.out.print(students[i] + "\t");
+            int total = 0;
+            for (int j = 0; j < subjects.length; j++) {
+                System.out.print(grades[i][j] + "\t");
+                total += grades[i][j];
+            }
+            double average = (double) total / subjects.length;
+            System.out.println(String.format("%.1f", average));
+        }
+    }
+}</code></pre>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-900 dark:text-white mb-2">字串基礎操作：</h4>
+                            <pre class="code-block"><button class="copy-btn" onclick="copyCode(this)">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                                </svg>
+                            </button><code>public class StringOperations {
+    public static void main(String[] args) {
+        // 字串建立
+        String str1 = "Hello";
+        String str2 = new String("World");
+        String str3 = "Java Programming";
+
+        // 字串長度
+        System.out.println("str1 長度：" + str1.length());
+        System.out.println("str3 長度：" + str3.length());
+
+        // 字串連接
+        String combined = str1 + " " + str2;
+        String concatenated = str1.concat(" ").concat(str2);
+
+        System.out.println("連接結果1：" + combined);
+        System.out.println("連接結果2：" + concatenated);
+
+        // 字串比較
+        String name1 = "Java";
+        String name2 = "Java";
+        String name3 = new String("Java");
+
+        System.out.println("\n=== 字串比較 ===");
+        System.out.println("name1 == name2：" + (name1 == name2));  // true（字串池）
+        System.out.println("name1 == name3：" + (name1 == name3));  // false（不同物件）
+        System.out.println("name1.equals(name3)：" + name1.equals(name3));  // true（內容相同）
+        System.out.println("name1.equalsIgnoreCase(\"JAVA\")：" + name1.equalsIgnoreCase("JAVA"));
+
+        // 字串搜尋
+        String text = "Java is a powerful programming language";
+
+        System.out.println("\n=== 字串搜尋 ===");
+        System.out.println("包含 'Java'：" + text.contains("Java"));
+        System.out.println("以 'Java' 開頭：" + text.startsWith("Java"));
+        System.out.println("以 'language' 結尾：" + text.endsWith("language"));
+        System.out.println("'programming' 的位置：" + text.indexOf("programming"));
+        System.out.println("最後一個 'a' 的位置：" + text.lastIndexOf("a"));
+
+        // 字串擷取
+        System.out.println("\n=== 字串擷取 ===");
+        System.out.println("第5個字元：" + text.charAt(5));
+        System.out.println("前4個字元：" + text.substring(0, 4));
+        System.out.println("從第5個字元開始：" + text.substring(5));
+        System.out.println("中間部分：" + text.substring(8, 18));
+
+        // 字串轉換
+        String original = "  Hello World  ";
+
+        System.out.println("\n=== 字串轉換 ===");
+        System.out.println("原始：'" + original + "'");
+        System.out.println("大寫：'" + original.toUpperCase() + "'");
+        System.out.println("小寫：'" + original.toLowerCase() + "'");
+        System.out.println("去空格：'" + original.trim() + "'");
+        System.out.println("替換：'" + original.replace("World", "Java") + "'");
+
+        // 字串分割
+        String data = "蘋果,香蕉,橘子,葡萄";
+        String[] fruits = data.split(",");
+
+        System.out.println("\n=== 字串分割 ===");
+        System.out.println("原始字串：" + data);
+        System.out.println("分割後：");
+        for (int i = 0; i < fruits.length; i++) {
+            System.out.println("  [" + i + "] " + fruits[i]);
+        }
+
+        // 字串格式化
+        String name = "小明";
+        int age = 20;
+        double score = 85.67;
+
+        System.out.println("\n=== 字串格式化 ===");
+        String formatted1 = String.format("姓名：%s，年齡：%d，分數：%.2f", name, age, score);
+        System.out.println(formatted1);
+
+        // 使用 printf
+        System.out.printf("姓名：%s，年齡：%d，分數：%.2f%n", name, age, score);
+    }
+}</code></pre>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-900 dark:text-white mb-2">StringBuilder 和字串處理進階：</h4>
+                            <pre class="code-block"><button class="copy-btn" onclick="copyCode(this)">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                                </svg>
+                            </button><code>public class StringBuilderExample {
+    public static void main(String[] args) {
+        // StringBuilder 基本使用
+        StringBuilder sb = new StringBuilder();
+
+        sb.append("Hello");
+        sb.append(" ");
+        sb.append("World");
+        sb.append("!");
+
+        System.out.println("StringBuilder 結果：" + sb.toString());
+
+        // StringBuilder 方法鏈
+        StringBuilder sb2 = new StringBuilder()
+            .append("Java")
+            .append(" is")
+            .append(" awesome")
+            .append("!");
+
+        System.out.println("方法鏈結果：" + sb2.toString());
+
+        // StringBuilder 其他操作
+        StringBuilder sb3 = new StringBuilder("Hello World");
+
+        System.out.println("\n=== StringBuilder 操作 ===");
+        System.out.println("原始：" + sb3.toString());
+
+        sb3.insert(5, " Beautiful");
+        System.out.println("插入後：" + sb3.toString());
+
+        sb3.delete(5, 15);
+        System.out.println("刪除後：" + sb3.toString());
+
+        sb3.reverse();
+        System.out.println("反轉後：" + sb3.toString());
+
+        sb3.reverse();  // 再反轉回來
+        sb3.replace(0, 5, "Hi");
+        System.out.println("替換後：" + sb3.toString());
+
+        // 效能比較範例
+        System.out.println("\n=== 效能比較 ===");
+
+        // 使用 String 連接（效能較差）
+        long startTime = System.currentTimeMillis();
+        String result1 = "";
+        for (int i = 0; i < 1000; i++) {
+            result1 += "a";
+        }
+        long endTime = System.currentTimeMillis();
+        System.out.println("String 連接耗時：" + (endTime - startTime) + " ms");
+
+        // 使用 StringBuilder（效能較好）
+        startTime = System.currentTimeMillis();
+        StringBuilder sb4 = new StringBuilder();
+        for (int i = 0; i < 1000; i++) {
+            sb4.append("a");
+        }
+        String result2 = sb4.toString();
+        endTime = System.currentTimeMillis();
+        System.out.println("StringBuilder 耗時：" + (endTime - startTime) + " ms");
+
+        // 實用範例：建立 CSV 格式
+        String[] headers = {"姓名", "年齡", "城市"};
+        String[][] data = {
+            {"小明", "20", "台北"},
+            {"小華", "22", "高雄"},
+            {"小美", "21", "台中"}
+        };
+
+        StringBuilder csv = new StringBuilder();
+
+        // 加入標題
+        for (int i = 0; i < headers.length; i++) {
+            csv.append(headers[i]);
+            if (i < headers.length - 1) {
+                csv.append(",");
+            }
+        }
+        csv.append("\n");
+
+        // 加入資料
+        for (String[] row : data) {
+            for (int i = 0; i < row.length; i++) {
+                csv.append(row[i]);
+                if (i < row.length - 1) {
+                    csv.append(",");
+                }
+            }
+            csv.append("\n");
+        }
+
+        System.out.println("\n=== CSV 格式 ===");
+        System.out.println(csv.toString());
+
+        // 字串驗證範例
+        System.out.println("\n=== 字串驗證 ===");
+        String email = "user@example.com";
+        String phone = "0912345678";
+        String password = "MyPassword123";
+
+        System.out.println("Email 驗證：" + isValidEmail(email));
+        System.out.println("電話驗證：" + isValidPhone(phone));
+        System.out.println("密碼驗證：" + isValidPassword(password));
+    }
+
+    // 簡單的 Email 驗證
+    public static boolean isValidEmail(String email) {
+        return email != null && email.contains("@") && email.contains(".");
+    }
+
+    // 簡單的電話驗證
+    public static boolean isValidPhone(String phone) {
+        return phone != null && phone.length() == 10 && phone.startsWith("09");
+    }
+
+    // 簡單的密碼驗證
+    public static boolean isValidPassword(String password) {
+        if (password == null || password.length() < 8) {
+            return false;
+        }
+
+        boolean hasUpper = false;
+        boolean hasLower = false;
+        boolean hasDigit = false;
+
+        for (char c : password.toCharArray()) {
+            if (Character.isUpperCase(c)) hasUpper = true;
+            if (Character.isLowerCase(c)) hasLower = true;
+            if (Character.isDigit(c)) hasDigit = true;
+        }
+
+        return hasUpper && hasLower && hasDigit;
+    }
+}</code></pre>
+                        </div>
+                        <div class="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-4">
+                            <h5 class="font-semibold text-blue-900 dark:text-blue-100 mb-2">💡 實作練習</h5>
+                            <p class="text-blue-800 dark:text-blue-200 text-sm">
+                                建立一個文字分析程式，統計字串中的字元數、單字數、最常出現的字元等資訊！
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 第6課：繼承與多型 -->
+                <div class="card p-6">
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="flex-1">
+                            <div class="flex items-center mb-2">
+                                <h3 class="text-xl font-bold text-gray-900 dark:text-white mr-3">第6課：繼承與多型</h3>
+                                <span class="px-2 py-1 text-xs font-medium rounded-full bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200">進階</span>
+                            </div>
+                            <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
+                                學習 Java 物件導向程式設計的核心概念：繼承和多型。
+                            </p>
+                        </div>
+                        <button onclick="toggleLesson(this)" class="ml-4 p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+                            <svg class="w-5 h-5 text-gray-500 dark:text-gray-400 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="lesson-content hidden space-y-4 border-t border-gray-200 dark:border-gray-700 pt-4">
+                        <div>
+                            <h4 class="font-semibold text-gray-900 dark:text-white mb-2">繼承基礎：</h4>
+                            <pre class="code-block"><button class="copy-btn" onclick="copyCode(this)">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                                </svg>
+                            </button><code>// 父類別（基底類別）
+class Animal {
+    protected String name;
+    protected int age;
+
+    public Animal(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    public void eat() {
+        System.out.println(name + " 正在吃東西");
+    }
+
+    public void sleep() {
+        System.out.println(name + " 正在睡覺");
+    }
+
+    public void makeSound() {
+        System.out.println(name + " 發出聲音");
+    }
+
+    public void showInfo() {
+        System.out.println("動物名稱：" + name + "，年齡：" + age);
+    }
+}
+
+// 子類別1：狗
+class Dog extends Animal {
+    private String breed;  // 品種
+
+    public Dog(String name, int age, String breed) {
+        super(name, age);  // 呼叫父類別建構子
+        this.breed = breed;
+    }
+
+    // 覆寫父類別方法
+    @Override
+    public void makeSound() {
+        System.out.println(name + " 汪汪叫");
+    }
+
+    // 新增子類別特有方法
+    public void wagTail() {
+        System.out.println(name + " 搖尾巴");
+    }
+
+    public void fetch() {
+        System.out.println(name + " 去撿球");
+    }
+
+    @Override
+    public void showInfo() {
+        super.showInfo();  // 呼叫父類別方法
+        System.out.println("品種：" + breed);
+    }
+}
+
+// 子類別2：貓
+class Cat extends Animal {
+    private boolean isIndoor;  // 是否為室內貓
+
+    public Cat(String name, int age, boolean isIndoor) {
+        super(name, age);
+        this.isIndoor = isIndoor;
+    }
+
+    @Override
+    public void makeSound() {
+        System.out.println(name + " 喵喵叫");
+    }
+
+    public void climb() {
+        System.out.println(name + " 爬樹");
+    }
+
+    public void purr() {
+        System.out.println(name + " 發出呼嚕聲");
+    }
+
+    @Override
+    public void showInfo() {
+        super.showInfo();
+        System.out.println("類型：" + (isIndoor ? "室內貓" : "戶外貓"));
+    }
+}
+
+// 使用範例
+public class InheritanceExample {
+    public static void main(String[] args) {
+        // 建立物件
+        Dog dog = new Dog("小白", 3, "黃金獵犬");
+        Cat cat = new Cat("小花", 2, true);
+
+        System.out.println("=== 狗的行為 ===");
+        dog.showInfo();
+        dog.eat();
+        dog.makeSound();
+        dog.wagTail();
+        dog.fetch();
+
+        System.out.println("\n=== 貓的行為 ===");
+        cat.showInfo();
+        cat.eat();
+        cat.makeSound();
+        cat.climb();
+        cat.purr();
+    }
+}</code></pre>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-900 dark:text-white mb-2">多型 (Polymorphism)：</h4>
+                            <pre class="code-block"><button class="copy-btn" onclick="copyCode(this)">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                                </svg>
+                            </button><code>public class PolymorphismExample {
+    public static void main(String[] args) {
+        // 多型：父類別參考指向子類別物件
+        Animal animal1 = new Dog("旺財", 4, "柴犬");
+        Animal animal2 = new Cat("咪咪", 3, false);
+        Animal animal3 = new Animal("未知動物", 1);
+
+        // 建立動物陣列
+        Animal[] animals = {animal1, animal2, animal3};
+
+        System.out.println("=== 多型示範 ===");
+        for (Animal animal : animals) {
+            System.out.println("\n--- " + animal.name + " ---");
+            animal.showInfo();
+            animal.makeSound();  // 會呼叫各自覆寫的方法
+            animal.eat();
+
+            // 型別檢查和轉型
+            if (animal instanceof Dog) {
+                Dog dog = (Dog) animal;  // 向下轉型
+                dog.wagTail();
+                dog.fetch();
+            } else if (animal instanceof Cat) {
+                Cat cat = (Cat) animal;  // 向下轉型
+                cat.purr();
+                cat.climb();
+            }
+        }
+
+        // 多型的好處：統一處理
+        System.out.println("\n=== 統一餵食 ===");
+        feedAnimals(animals);
+
+        System.out.println("\n=== 統一叫聲 ===");
+        makeAllAnimalsSound(animals);
+    }
+
+    // 統一餵食方法
+    public static void feedAnimals(Animal[] animals) {
+        for (Animal animal : animals) {
+            System.out.println("餵食 " + animal.name);
+            animal.eat();
+        }
+    }
+
+    // 統一發聲方法
+    public static void makeAllAnimalsSound(Animal[] animals) {
+        for (Animal animal : animals) {
+            animal.makeSound();  // 多型：執行時決定呼叫哪個方法
+        }
+    }
+}</code></pre>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-900 dark:text-white mb-2">抽象類別和方法：</h4>
+                            <pre class="code-block"><button class="copy-btn" onclick="copyCode(this)">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                                </svg>
+                            </button><code>// 抽象類別
+abstract class Shape {
+    protected String color;
+    protected double x, y;  // 位置
+
+    public Shape(String color, double x, double y) {
+        this.color = color;
+        this.x = x;
+        this.y = y;
+    }
+
+    // 具體方法
+    public void move(double newX, double newY) {
+        this.x = newX;
+        this.y = newY;
+        System.out.println("圖形移動到 (" + x + ", " + y + ")");
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+        System.out.println("圖形顏色改為 " + color);
+    }
+
+    // 抽象方法：子類別必須實作
+    public abstract double calculateArea();
+    public abstract double calculatePerimeter();
+    public abstract void draw();
+}
+
+// 圓形類別
+class Circle extends Shape {
+    private double radius;
+
+    public Circle(String color, double x, double y, double radius) {
+        super(color, x, y);
+        this.radius = radius;
+    }
+
+    @Override
+    public double calculateArea() {
+        return Math.PI * radius * radius;
+    }
+
+    @Override
+    public double calculatePerimeter() {
+        return 2 * Math.PI * radius;
+    }
+
+    @Override
+    public void draw() {
+        System.out.println("繪製" + color + "圓形，半徑：" + radius +
+                          "，位置：(" + x + ", " + y + ")");
+    }
+}
+
+// 矩形類別
+class Rectangle extends Shape {
+    private double width, height;
+
+    public Rectangle(String color, double x, double y, double width, double height) {
+        super(color, x, y);
+        this.width = width;
+        this.height = height;
+    }
+
+    @Override
+    public double calculateArea() {
+        return width * height;
+    }
+
+    @Override
+    public double calculatePerimeter() {
+        return 2 * (width + height);
+    }
+
+    @Override
+    public void draw() {
+        System.out.println("繪製" + color + "矩形，寬：" + width +
+                          "，高：" + height + "，位置：(" + x + ", " + y + ")");
+    }
+}
+
+// 三角形類別
+class Triangle extends Shape {
+    private double side1, side2, side3;
+
+    public Triangle(String color, double x, double y, double side1, double side2, double side3) {
+        super(color, x, y);
+        this.side1 = side1;
+        this.side2 = side2;
+        this.side3 = side3;
+    }
+
+    @Override
+    public double calculateArea() {
+        // 使用海倫公式
+        double s = (side1 + side2 + side3) / 2;
+        return Math.sqrt(s * (s - side1) * (s - side2) * (s - side3));
+    }
+
+    @Override
+    public double calculatePerimeter() {
+        return side1 + side2 + side3;
+    }
+
+    @Override
+    public void draw() {
+        System.out.println("繪製" + color + "三角形，邊長：" + side1 +
+                          ", " + side2 + ", " + side3 + "，位置：(" + x + ", " + y + ")");
+    }
+}
+
+// 使用範例
+public class AbstractExample {
+    public static void main(String[] args) {
+        // 無法直接建立抽象類別的物件
+        // Shape shape = new Shape("red", 0, 0);  // 編譯錯誤
+
+        // 建立具體子類別的物件
+        Shape circle = new Circle("紅色", 10, 20, 5);
+        Shape rectangle = new Rectangle("藍色", 0, 0, 10, 8);
+        Shape triangle = new Triangle("綠色", 5, 5, 3, 4, 5);
+
+        Shape[] shapes = {circle, rectangle, triangle};
+
+        System.out.println("=== 圖形資訊 ===");
+        for (Shape shape : shapes) {
+            shape.draw();
+            System.out.printf("面積：%.2f\n", shape.calculateArea());
+            System.out.printf("周長：%.2f\n", shape.calculatePerimeter());
+            System.out.println();
+        }
+
+        // 移動圖形
+        System.out.println("=== 移動圖形 ===");
+        circle.move(15, 25);
+        circle.setColor("黃色");
+        circle.draw();
+
+        // 計算總面積
+        double totalArea = 0;
+        for (Shape shape : shapes) {
+            totalArea += shape.calculateArea();
+        }
+        System.out.printf("所有圖形總面積：%.2f\n", totalArea);
+    }
+}</code></pre>
+                        </div>
+                        <div class="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-4">
+                            <h5 class="font-semibold text-blue-900 dark:text-blue-100 mb-2">💡 實作練習</h5>
+                            <p class="text-blue-800 dark:text-blue-200 text-sm">
+                                建立一個車輛繼承體系，包含汽車、機車等子類別，實作多型和抽象方法！
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 第7課：介面與封裝 -->
+                <div class="card p-6">
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="flex-1">
+                            <div class="flex items-center mb-2">
+                                <h3 class="text-xl font-bold text-gray-900 dark:text-white mr-3">第7課：介面與封裝</h3>
+                                <span class="px-2 py-1 text-xs font-medium rounded-full bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200">進階</span>
+                            </div>
+                            <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
+                                學習 Java 的介面設計和封裝概念，掌握物件導向程式設計的核心原則。
+                            </p>
+                        </div>
+                        <button onclick="toggleLesson(this)" class="ml-4 p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+                            <svg class="w-5 h-5 text-gray-500 dark:text-gray-400 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="lesson-content hidden space-y-4 border-t border-gray-200 dark:border-gray-700 pt-4">
+                        <div>
+                            <h4 class="font-semibold text-gray-900 dark:text-white mb-2">介面 (Interface) 基礎：</h4>
+                            <pre class="code-block"><button class="copy-btn" onclick="copyCode(this)">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                                </svg>
+                            </button><code>// 定義介面
+interface Flyable {
+    // 介面中的變數預設是 public static final
+    double MAX_ALTITUDE = 10000.0;
+
+    // 抽象方法（預設是 public abstract）
+    void fly();
+    void land();
+    double getAltitude();
+}
+
+interface Swimmable {
+    void swim();
+    void dive();
+    double getDepth();
+}
+
+// 鳥類實作飛行介面
+class Bird implements Flyable {
+    private String name;
+    private double currentAltitude;
+
+    public Bird(String name) {
+        this.name = name;
+        this.currentAltitude = 0;
+    }
+
+    @Override
+    public void fly() {
+        currentAltitude = 100;
+        System.out.println(name + " 開始飛行，高度：" + currentAltitude + " 公尺");
+    }
+
+    @Override
+    public void land() {
+        currentAltitude = 0;
+        System.out.println(name + " 降落了");
+    }
+
+    @Override
+    public double getAltitude() {
+        return currentAltitude;
+    }
+
+    public void chirp() {
+        System.out.println(name + " 在鳴叫");
+    }
+}
+
+// 魚類實作游泳介面
+class Fish implements Swimmable {
+    private String name;
+    private double currentDepth;
+
+    public Fish(String name) {
+        this.name = name;
+        this.currentDepth = 0;
+    }
+
+    @Override
+    public void swim() {
+        System.out.println(name + " 在游泳");
+    }
+
+    @Override
+    public void dive() {
+        currentDepth = 50;
+        System.out.println(name + " 潛水到 " + currentDepth + " 公尺深");
+    }
+
+    @Override
+    public double getDepth() {
+        return currentDepth;
+    }
+}
+
+// 鴨子：既能飛又能游泳
+class Duck implements Flyable, Swimmable {
+    private String name;
+    private double currentAltitude;
+    private double currentDepth;
+
+    public Duck(String name) {
+        this.name = name;
+        this.currentAltitude = 0;
+        this.currentDepth = 0;
+    }
+
+    // 實作飛行介面
+    @Override
+    public void fly() {
+        currentAltitude = 50;
+        currentDepth = 0;
+        System.out.println(name + " 飛行中，高度：" + currentAltitude + " 公尺");
+    }
+
+    @Override
+    public void land() {
+        currentAltitude = 0;
+        System.out.println(name + " 降落到地面");
+    }
+
+    @Override
+    public double getAltitude() {
+        return currentAltitude;
+    }
+
+    // 實作游泳介面
+    @Override
+    public void swim() {
+        currentAltitude = 0;
+        System.out.println(name + " 在水面游泳");
+    }
+
+    @Override
+    public void dive() {
+        currentDepth = 5;
+        currentAltitude = 0;
+        System.out.println(name + " 潛水到 " + currentDepth + " 公尺深");
+    }
+
+    @Override
+    public double getDepth() {
+        return currentDepth;
+    }
+
+    public void quack() {
+        System.out.println(name + " 嘎嘎叫");
+    }
+}
+
+// 使用範例
+public class InterfaceExample {
+    public static void main(String[] args) {
+        Bird eagle = new Bird("老鷹");
+        Fish salmon = new Fish("鮭魚");
+        Duck duck = new Duck("小鴨");
+
+        System.out.println("=== 鳥類行為 ===");
+        eagle.fly();
+        eagle.chirp();
+        eagle.land();
+
+        System.out.println("\n=== 魚類行為 ===");
+        salmon.swim();
+        salmon.dive();
+
+        System.out.println("\n=== 鴨子行為 ===");
+        duck.fly();
+        duck.land();
+        duck.swim();
+        duck.dive();
+        duck.quack();
+
+        // 多型：使用介面參考
+        System.out.println("\n=== 介面多型 ===");
+        Flyable[] flyingAnimals = {eagle, duck};
+        for (Flyable animal : flyingAnimals) {
+            animal.fly();
+            System.out.println("飛行高度：" + animal.getAltitude());
+        }
+
+        Swimmable[] swimmingAnimals = {salmon, duck};
+        for (Swimmable animal : swimmingAnimals) {
+            animal.swim();
+            animal.dive();
+        }
+    }
+}</code></pre>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-900 dark:text-white mb-2">封裝 (Encapsulation)：</h4>
+                            <pre class="code-block"><button class="copy-btn" onclick="copyCode(this)">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                                </svg>
+                            </button><code>// 良好封裝的銀行帳戶類別
+class BankAccount {
+    // 私有屬性：外部無法直接存取
+    private String accountNumber;
+    private String accountHolder;
+    private double balance;
+    private String pin;
+    private boolean isLocked;
+
+    // 建構子
+    public BankAccount(String accountNumber, String accountHolder, String pin) {
+        this.accountNumber = accountNumber;
+        this.accountHolder = accountHolder;
+        this.pin = pin;
+        this.balance = 0.0;
+        this.isLocked = false;
+    }
+
+    // 公開方法：提供安全的存取方式
+
+    // Getter 方法：只讀存取
+    public String getAccountNumber() {
+        return accountNumber;
+    }
+
+    public String getAccountHolder() {
+        return accountHolder;
+    }
+
+    public double getBalance() {
+        return balance;
+    }
+
+    public boolean isLocked() {
+        return isLocked;
+    }
+
+    // 存款方法
+    public boolean deposit(double amount) {
+        if (isLocked) {
+            System.out.println("帳戶已鎖定，無法存款");
+            return false;
+        }
+
+        if (amount <= 0) {
+            System.out.println("存款金額必須大於零");
+            return false;
+        }
+
+        balance += amount;
+        System.out.println("存款成功！金額：" + amount + "，餘額：" + balance);
+        return true;
+    }
+
+    // 提款方法
+    public boolean withdraw(double amount, String inputPin) {
+        if (isLocked) {
+            System.out.println("帳戶已鎖定，無法提款");
+            return false;
+        }
+
+        if (!verifyPin(inputPin)) {
+            System.out.println("PIN 碼錯誤");
+            return false;
+        }
+
+        if (amount <= 0) {
+            System.out.println("提款金額必須大於零");
+            return false;
+        }
+
+        if (amount > balance) {
+            System.out.println("餘額不足，無法提款");
+            return false;
+        }
+
+        balance -= amount;
+        System.out.println("提款成功！金額：" + amount + "，餘額：" + balance);
+        return true;
+    }
+
+    // 轉帳方法
+    public boolean transfer(BankAccount targetAccount, double amount, String inputPin) {
+        if (this.withdraw(amount, inputPin)) {
+            if (targetAccount.deposit(amount)) {
+                System.out.println("轉帳成功！轉帳至：" + targetAccount.getAccountHolder());
+                return true;
+            } else {
+                // 如果目標帳戶存款失敗，退回金額
+                this.balance += amount;
+                System.out.println("轉帳失敗，金額已退回");
+                return false;
+            }
+        }
+        return false;
+    }
+
+    // 修改 PIN 碼
+    public boolean changePin(String oldPin, String newPin) {
+        if (!verifyPin(oldPin)) {
+            System.out.println("舊 PIN 碼錯誤");
+            return false;
+        }
+
+        if (newPin == null || newPin.length() != 4) {
+            System.out.println("新 PIN 碼必須是4位數字");
+            return false;
+        }
+
+        this.pin = newPin;
+        System.out.println("PIN 碼修改成功");
+        return true;
+    }
+
+    // 鎖定帳戶
+    public void lockAccount() {
+        this.isLocked = true;
+        System.out.println("帳戶已鎖定");
+    }
+
+    // 解鎖帳戶（需要管理員權限）
+    public void unlockAccount(String adminCode) {
+        if ("ADMIN123".equals(adminCode)) {
+            this.isLocked = false;
+            System.out.println("帳戶已解鎖");
+        } else {
+            System.out.println("管理員代碼錯誤");
+        }
+    }
+
+    // 私有方法：內部使用
+    private boolean verifyPin(String inputPin) {
+        return this.pin.equals(inputPin);
+    }
+
+    // 帳戶資訊（隱藏敏感資訊）
+    public void showAccountInfo() {
+        System.out.println("=== 帳戶資訊 ===");
+        System.out.println("帳號：" + accountNumber);
+        System.out.println("戶名：" + accountHolder);
+        System.out.println("餘額：" + balance);
+        System.out.println("狀態：" + (isLocked ? "鎖定" : "正常"));
+    }
+}
+
+// 使用範例
+public class EncapsulationExample {
+    public static void main(String[] args) {
+        // 建立銀行帳戶
+        BankAccount account1 = new BankAccount("001-123456", "張小明", "1234");
+        BankAccount account2 = new BankAccount("001-789012", "李小華", "5678");
+
+        // 無法直接存取私有屬性
+        // account1.balance = 1000000;  // 編譯錯誤
+        // account1.pin = "0000";       // 編譯錯誤
+
+        System.out.println("=== 帳戶操作示範 ===");
+
+        // 存款
+        account1.deposit(1000);
+        account1.deposit(-100);  // 無效操作
+
+        // 查看帳戶資訊
+        account1.showAccountInfo();
+
+        // 提款
+        account1.withdraw(200, "1234");  // 正確 PIN
+        account1.withdraw(200, "0000");  // 錯誤 PIN
+        account1.withdraw(2000, "1234"); // 餘額不足
+
+        // 轉帳
+        account2.deposit(500);
+        account1.transfer(account2, 300, "1234");
+
+        System.out.println("\n=== 轉帳後帳戶狀態 ===");
+        account1.showAccountInfo();
+        account2.showAccountInfo();
+
+        // 修改 PIN 碼
+        account1.changePin("1234", "9999");
+        account1.withdraw(100, "9999");  // 使用新 PIN
+
+        // 鎖定帳戶
+        account1.lockAccount();
+        account1.deposit(100);  // 鎖定後無法操作
+
+        // 解鎖帳戶
+        account1.unlockAccount("ADMIN123");
+        account1.deposit(100);  // 解鎖後可以操作
+    }
+}</code></pre>
+                        </div>
+                        <div class="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-4">
+                            <h5 class="font-semibold text-blue-900 dark:text-blue-100 mb-2">💡 實作練習</h5>
+                            <p class="text-blue-800 dark:text-blue-200 text-sm">
+                                設計一個圖書館管理系統，使用介面定義可借閱物品，用封裝保護書籍和會員資料！
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 第8課：例外處理與集合框架 -->
+                <div class="card p-6">
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="flex-1">
+                            <div class="flex items-center mb-2">
+                                <h3 class="text-xl font-bold text-gray-900 dark:text-white mr-3">第8課：例外處理與集合框架</h3>
+                                <span class="px-2 py-1 text-xs font-medium rounded-full bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200">進階</span>
+                            </div>
+                            <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
+                                學習 Java 的例外處理機制和強大的集合框架，提升程式的穩定性和效率。
+                            </p>
+                        </div>
+                        <button onclick="toggleLesson(this)" class="ml-4 p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+                            <svg class="w-5 h-5 text-gray-500 dark:text-gray-400 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="lesson-content hidden space-y-4 border-t border-gray-200 dark:border-gray-700 pt-4">
+                        <div>
+                            <h4 class="font-semibold text-gray-900 dark:text-white mb-2">例外處理基礎：</h4>
+                            <pre class="code-block"><button class="copy-btn" onclick="copyCode(this)">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                                </svg>
+                            </button><code>import java.util.Scanner;
+import java.io.FileReader;
+import java.io.IOException;
+
+public class ExceptionHandling {
+    public static void main(String[] args) {
+        // 基本 try-catch 結構
+        try {
+            int result = 10 / 0;  // 會拋出 ArithmeticException
+            System.out.println("結果：" + result);
+        } catch (ArithmeticException e) {
+            System.out.println("發生算術錯誤：" + e.getMessage());
+        }
+
+        // 處理多種例外
+        try {
+            String[] array = {"1", "2", "abc"};
+            for (int i = 0; i <= array.length; i++) {  // 會超出陣列範圍
+                int number = Integer.parseInt(array[i]);  // 可能拋出 NumberFormatException
+                System.out.println("數字：" + number);
+            }
+        } catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println("陣列索引超出範圍：" + e.getMessage());
+        } catch (NumberFormatException e) {
+            System.out.println("數字格式錯誤：" + e.getMessage());
+        } catch (Exception e) {
+            System.out.println("其他錯誤：" + e.getMessage());
+        }
+
+        // 使用 finally 區塊
+        Scanner scanner = null;
+        try {
+            scanner = new Scanner(System.in);
+            System.out.print("請輸入一個數字：");
+            // int number = scanner.nextInt();  // 實際使用時取消註解
+            // System.out.println("您輸入的數字是：" + number);
+        } catch (Exception e) {
+            System.out.println("輸入錯誤：" + e.getMessage());
+        } finally {
+            // 無論是否發生例外都會執行
+            if (scanner != null) {
+                scanner.close();
+                System.out.println("Scanner 已關閉");
+            }
+        }
+
+        // try-with-resources（自動資源管理）
+        try (FileReader reader = new FileReader("test.txt")) {
+            // 讀取檔案內容
+            int character;
+            while ((character = reader.read()) != -1) {
+                System.out.print((char) character);
+            }
+        } catch (IOException e) {
+            System.out.println("檔案讀取錯誤：" + e.getMessage());
+        }
+        // FileReader 會自動關閉
+
+        // 方法呼叫中的例外處理
+        try {
+            double result = divide(10, 0);
+            System.out.println("除法結果：" + result);
+        } catch (IllegalArgumentException e) {
+            System.out.println("參數錯誤：" + e.getMessage());
+        }
+
+        // 檢查型例外的處理
+        try {
+            readFile("nonexistent.txt");
+        } catch (IOException e) {
+            System.out.println("檔案操作失敗：" + e.getMessage());
+        }
+    }
+
+    // 拋出例外的方法
+    public static double divide(double a, double b) {
+        if (b == 0) {
+            throw new IllegalArgumentException("除數不能為零");
+        }
+        return a / b;
+    }
+
+    // 宣告拋出檢查型例外
+    public static void readFile(String filename) throws IOException {
+        FileReader reader = new FileReader(filename);
+        // 讀取檔案...
+        reader.close();
+    }
+}</code></pre>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-900 dark:text-white mb-2">自定義例外：</h4>
+                            <pre class="code-block"><button class="copy-btn" onclick="copyCode(this)">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                                </svg>
+                            </button><code>// 自定義例外類別
+class InsufficientFundsException extends Exception {
+    private double amount;
+    private double balance;
+
+    public InsufficientFundsException(double amount, double balance) {
+        super("餘額不足：嘗試提取 " + amount + "，但餘額只有 " + balance);
+        this.amount = amount;
+        this.balance = balance;
+    }
+
+    public double getAmount() { return amount; }
+    public double getBalance() { return balance; }
+}
+
+class InvalidAccountException extends Exception {
+    public InvalidAccountException(String message) {
+        super(message);
+    }
+}
+
+// 銀行帳戶類別（使用自定義例外）
+class SafeBankAccount {
+    private String accountNumber;
+    private double balance;
+
+    public SafeBankAccount(String accountNumber, double initialBalance) {
+        this.accountNumber = accountNumber;
+        this.balance = initialBalance;
+    }
+
+    public void deposit(double amount) throws IllegalArgumentException {
+        if (amount <= 0) {
+            throw new IllegalArgumentException("存款金額必須大於零");
+        }
+        balance += amount;
+        System.out.println("存款成功：" + amount + "，餘額：" + balance);
+    }
+
+    public void withdraw(double amount) throws InsufficientFundsException, IllegalArgumentException {
+        if (amount <= 0) {
+            throw new IllegalArgumentException("提款金額必須大於零");
+        }
+        if (amount > balance) {
+            throw new InsufficientFundsException(amount, balance);
+        }
+        balance -= amount;
+        System.out.println("提款成功：" + amount + "，餘額：" + balance);
+    }
+
+    public double getBalance() { return balance; }
+    public String getAccountNumber() { return accountNumber; }
+}
+
+// 銀行服務類別
+class BankService {
+    public static void transferMoney(SafeBankAccount from, SafeBankAccount to, double amount)
+            throws InsufficientFundsException, IllegalArgumentException, InvalidAccountException {
+
+        if (from == null || to == null) {
+            throw new InvalidAccountException("帳戶不能為 null");
+        }
+
+        if (from.getAccountNumber().equals(to.getAccountNumber())) {
+            throw new InvalidAccountException("不能轉帳給自己");
+        }
+
+        // 先從來源帳戶提款
+        from.withdraw(amount);
+
+        try {
+            // 再存入目標帳戶
+            to.deposit(amount);
+            System.out.println("轉帳成功：從 " + from.getAccountNumber() +
+                             " 轉帳 " + amount + " 到 " + to.getAccountNumber());
+        } catch (Exception e) {
+            // 如果存款失敗，退回金額
+            from.deposit(amount);
+            throw new RuntimeException("轉帳失敗，金額已退回：" + e.getMessage());
+        }
+    }
+}
+
+// 使用範例
+public class CustomExceptionExample {
+    public static void main(String[] args) {
+        SafeBankAccount account1 = new SafeBankAccount("001", 1000);
+        SafeBankAccount account2 = new SafeBankAccount("002", 500);
+
+        try {
+            // 正常操作
+            account1.deposit(200);
+            account1.withdraw(300);
+
+            // 嘗試提取超過餘額的金額
+            account1.withdraw(2000);
+
+        } catch (InsufficientFundsException e) {
+            System.out.println("餘額不足例外：" + e.getMessage());
+            System.out.println("嘗試金額：" + e.getAmount());
+            System.out.println("當前餘額：" + e.getBalance());
+        } catch (IllegalArgumentException e) {
+            System.out.println("參數錯誤：" + e.getMessage());
+        }
+
+        // 轉帳操作
+        try {
+            BankService.transferMoney(account1, account2, 400);
+            BankService.transferMoney(account1, account2, 1000);  // 餘額不足
+        } catch (InsufficientFundsException e) {
+            System.out.println("轉帳失敗 - " + e.getMessage());
+        } catch (InvalidAccountException e) {
+            System.out.println("帳戶錯誤 - " + e.getMessage());
+        } catch (Exception e) {
+            System.out.println("未預期的錯誤：" + e.getMessage());
+        }
+    }
+}</code></pre>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-900 dark:text-white mb-2">集合框架 - List 和 Set：</h4>
+                            <pre class="code-block"><button class="copy-btn" onclick="copyCode(this)">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                                </svg>
+                            </button><code>import java.util.*;
+
+public class CollectionsExample {
+    public static void main(String[] args) {
+        // ArrayList - 動態陣列
+        System.out.println("=== ArrayList 示範 ===");
+        List&lt;String&gt; fruits = new ArrayList&lt;&gt;();
+
+        // 新增元素
+        fruits.add("蘋果");
+        fruits.add("香蕉");
+        fruits.add("橘子");
+        fruits.add("蘋果");  // 允許重複
+
+        System.out.println("水果清單：" + fruits);
+        System.out.println("清單大小：" + fruits.size());
+        System.out.println("第一個水果：" + fruits.get(0));
+
+        // 插入和移除
+        fruits.add(1, "葡萄");  // 在索引1插入
+        System.out.println("插入後：" + fruits);
+
+        fruits.remove("香蕉");  // 移除第一個符合的元素
+        fruits.remove(0);       // 移除索引0的元素
+        System.out.println("移除後：" + fruits);
+
+        // 遍歷
+        System.out.println("遍歷水果：");
+        for (String fruit : fruits) {
+            System.out.println("- " + fruit);
+        }
+
+        // LinkedList - 鏈結串列
+        System.out.println("\n=== LinkedList 示範 ===");
+        LinkedList&lt;Integer&gt; numbers = new LinkedList&lt;&gt;();
+
+        numbers.add(10);
+        numbers.add(20);
+        numbers.add(30);
+        numbers.addFirst(5);   // 在開頭新增
+        numbers.addLast(40);   // 在結尾新增
+
+        System.out.println("數字串列：" + numbers);
+        System.out.println("第一個：" + numbers.getFirst());
+        System.out.println("最後一個：" + numbers.getLast());
+
+        // HashSet - 不重複集合
+        System.out.println("\n=== HashSet 示範 ===");
+        Set&lt;String&gt; uniqueFruits = new HashSet&lt;&gt;();
+
+        uniqueFruits.add("蘋果");
+        uniqueFruits.add("香蕉");
+        uniqueFruits.add("橘子");
+        uniqueFruits.add("蘋果");  // 重複，不會被加入
+
+        System.out.println("唯一水果：" + uniqueFruits);
+        System.out.println("包含蘋果：" + uniqueFruits.contains("蘋果"));
+
+        // TreeSet - 排序集合
+        System.out.println("\n=== TreeSet 示範 ===");
+        Set&lt;Integer&gt; sortedNumbers = new TreeSet&lt;&gt;();
+
+        sortedNumbers.add(30);
+        sortedNumbers.add(10);
+        sortedNumbers.add(20);
+        sortedNumbers.add(40);
+        sortedNumbers.add(10);  // 重複，不會被加入
+
+        System.out.println("排序數字：" + sortedNumbers);  // 自動排序
+
+        // 集合操作
+        System.out.println("\n=== 集合操作 ===");
+        Set&lt;String&gt; set1 = new HashSet&lt;&gt;(Arrays.asList("A", "B", "C"));
+        Set&lt;String&gt; set2 = new HashSet&lt;&gt;(Arrays.asList("B", "C", "D"));
+
+        // 聯集
+        Set&lt;String&gt; union = new HashSet&lt;&gt;(set1);
+        union.addAll(set2);
+        System.out.println("聯集：" + union);
+
+        // 交集
+        Set&lt;String&gt; intersection = new HashSet&lt;&gt;(set1);
+        intersection.retainAll(set2);
+        System.out.println("交集：" + intersection);
+
+        // 差集
+        Set&lt;String&gt; difference = new HashSet&lt;&gt;(set1);
+        difference.removeAll(set2);
+        System.out.println("差集：" + difference);
+    }
+}</code></pre>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-900 dark:text-white mb-2">Map 和進階集合操作：</h4>
+                            <pre class="code-block"><button class="copy-btn" onclick="copyCode(this)">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                                </svg>
+                            </button><code>import java.util.*;
+import java.util.stream.Collectors;
+
+public class MapAndAdvancedCollections {
+    public static void main(String[] args) {
+        // HashMap - 鍵值對映
+        System.out.println("=== HashMap 示範 ===");
+        Map&lt;String, Integer&gt; studentGrades = new HashMap&lt;&gt;();
+
+        // 新增鍵值對
+        studentGrades.put("小明", 85);
+        studentGrades.put("小華", 92);
+        studentGrades.put("小美", 78);
+        studentGrades.put("小強", 96);
+
+        System.out.println("學生成績：" + studentGrades);
+        System.out.println("小華的成績：" + studentGrades.get("小華"));
+        System.out.println("包含小明：" + studentGrades.containsKey("小明"));
+
+        // 遍歷 Map
+        System.out.println("\n成績清單：");
+        for (Map.Entry&lt;String, Integer&gt; entry : studentGrades.entrySet()) {
+            System.out.println(entry.getKey() + ": " + entry.getValue() + "分");
+        }
+
+        // TreeMap - 排序的 Map
+        System.out.println("\n=== TreeMap 示範 ===");
+        Map&lt;String, String&gt; phoneBook = new TreeMap&lt;&gt;();
+
+        phoneBook.put("張三", "0912-345-678");
+        phoneBook.put("李四", "0923-456-789");
+        phoneBook.put("王五", "0934-567-890");
+        phoneBook.put("陳六", "0945-678-901");
+
+        System.out.println("電話簿（按姓名排序）：");
+        phoneBook.forEach((name, phone) -&gt;
+            System.out.println(name + ": " + phone));
+
+        // 集合的進階操作
+        System.out.println("\n=== 進階集合操作 ===");
+        List&lt;String&gt; names = Arrays.asList("Alice", "Bob", "Charlie", "David", "Eve");
+        List&lt;Integer&gt; scores = Arrays.asList(85, 92, 78, 96, 88);
+
+        // 排序
+        List&lt;String&gt; sortedNames = new ArrayList&lt;&gt;(names);
+        Collections.sort(sortedNames);
+        System.out.println("排序後的姓名：" + sortedNames);
+
+        List&lt;Integer&gt; sortedScores = new ArrayList&lt;&gt;(scores);
+        Collections.sort(sortedScores, Collections.reverseOrder());
+        System.out.println("分數降序：" + sortedScores);
+
+        // 搜尋
+        int maxScore = Collections.max(scores);
+        int minScore = Collections.min(scores);
+        System.out.println("最高分：" + maxScore + "，最低分：" + minScore);
+
+        // 統計
+        Map&lt;String, Long&gt; letterCount = names.stream()
+            .flatMap(name -&gt; name.chars().mapToObj(c -&gt; String.valueOf((char) c)))
+            .collect(Collectors.groupingBy(c -&gt; c, Collectors.counting()));
+        System.out.println("字母統計：" + letterCount);
+
+        // 學生管理系統範例
+        System.out.println("\n=== 學生管理系統 ===");
+
+        // 建立學生資料
+        Map&lt;String, Map&lt;String, Integer&gt;&gt; studentData = new HashMap&lt;&gt;();
+
+        Map&lt;String, Integer&gt; mingScores = new HashMap&lt;&gt;();
+        mingScores.put("數學", 85);
+        mingScores.put("英文", 92);
+        mingScores.put("物理", 78);
+        studentData.put("小明", mingScores);
+
+        Map&lt;String, Integer&gt; huaScores = new HashMap&lt;&gt;();
+        huaScores.put("數學", 90);
+        huaScores.put("英文", 88);
+        huaScores.put("物理", 95);
+        studentData.put("小華", huaScores);
+
+        // 計算每個學生的平均分數
+        for (Map.Entry&lt;String, Map&lt;String, Integer&gt;&gt; student : studentData.entrySet()) {
+            String name = student.getKey();
+            Map&lt;String, Integer&gt; subjects = student.getValue();
+
+            double average = subjects.values().stream()
+                .mapToInt(Integer::intValue)
+                .average()
+                .orElse(0.0);
+
+            System.out.println(name + " 的平均分數：" + String.format("%.1f", average));
+
+            // 顯示各科成績
+            subjects.forEach((subject, score) -&gt;
+                System.out.println("  " + subject + ": " + score));
+        }
+
+        // 找出數學成績最高的學生
+        String topMathStudent = studentData.entrySet().stream()
+            .max(Comparator.comparing(entry -&gt; entry.getValue().get("數學")))
+            .map(Map.Entry::getKey)
+            .orElse("無");
+
+        System.out.println("數學成績最高的學生：" + topMathStudent);
+    }
+}</code></pre>
+                        </div>
+                        <div class="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-4">
+                            <h5 class="font-semibold text-blue-900 dark:text-blue-100 mb-2">💡 實作練習</h5>
+                            <p class="text-blue-800 dark:text-blue-200 text-sm">
+                                建立一個購物車系統，使用 Map 儲存商品和數量，實作例外處理來處理庫存不足等情況！
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // 主題切換功能
+        const themeToggle = document.getElementById('theme-toggle');
+        const sunIcon = document.getElementById('sun-icon');
+        const moonIcon = document.getElementById('moon-icon');
+
+        // 檢查本地儲存的主題設定
+        const currentTheme = localStorage.getItem('theme') || 'light';
+        if (currentTheme === 'dark') {
+            document.documentElement.classList.add('dark');
+            sunIcon.classList.remove('hidden');
+            moonIcon.classList.add('hidden');
+        }
+
+        themeToggle.addEventListener('click', () => {
+            document.documentElement.classList.toggle('dark');
+            
+            if (document.documentElement.classList.contains('dark')) {
+                localStorage.setItem('theme', 'dark');
+                sunIcon.classList.remove('hidden');
+                moonIcon.classList.add('hidden');
+            } else {
+                localStorage.setItem('theme', 'light');
+                sunIcon.classList.add('hidden');
+                moonIcon.classList.remove('hidden');
+            }
+        });
+
+        // 課程展開/收起功能
+        function toggleLesson(button) {
+            const content = button.parentElement.nextElementSibling;
+            const icon = button.querySelector('svg');
+
+            if (content.classList.contains('hidden')) {
+                content.classList.remove('hidden');
+                icon.style.transform = 'rotate(180deg)';
+            } else {
+                content.classList.add('hidden');
+                icon.style.transform = 'rotate(0deg)';
+            }
+        }
+
+        // 複製程式碼功能
+        function copyCode(button) {
+            const codeBlock = button.nextElementSibling;
+            const text = codeBlock.textContent;
+            
+            navigator.clipboard.writeText(text).then(() => {
+                // 顯示複製成功的視覺回饋
+                const originalHTML = button.innerHTML;
+                button.innerHTML = '<svg class="w-4 h-4 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>';
+                
+                setTimeout(() => {
+                    button.innerHTML = originalHTML;
+                }, 1000);
+            }).catch(err => {
+                console.error('複製失敗:', err);
+            });
+        }
+    </script>
+</body>
+</html>

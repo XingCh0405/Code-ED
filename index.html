@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>程式語言教學平台</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cdefs%3E%3ClinearGradient id='bookGrad' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23059669'/%3E%3Cstop offset='50%25' style='stop-color:%2306B6D4'/%3E%3Cstop offset='100%25' style='stop-color:%234F46E5'/%3E%3C/linearGradient%3E%3ClinearGradient id='pageGrad' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23FBBF24'/%3E%3Cstop offset='100%25' style='stop-color:%23F59E0B'/%3E%3C/linearGradient%3E%3C/defs%3E%3C!-- Book cover --%3E%3Cpath d='M3 4c0-1.1.9-2 2-2h14c1.1 0 2 .9 2 2v16c0 1.1-.9 2-2 2H5c-1.1 0-2-.9-2-2V4z' fill='url(%23bookGrad)'/%3E%3C!-- Book spine --%3E%3Cpath d='M3 4v16c0 1.1.9 2 2 2h1V2H5c-1.1 0-2 .9-2 2z' fill='%23047857' opacity='0.8'/%3E%3C!-- Pages --%3E%3Cpath d='M7 3h12c.6 0 1 .4 1 1v16c0 .6-.4 1-1 1H7V3z' fill='url(%23pageGrad)'/%3E%3C!-- Page lines --%3E%3Cg stroke='%23FFFFFF' stroke-width='0.5' opacity='0.8'%3E%3Cline x1='9' y1='6' x2='17' y2='6'/%3E%3Cline x1='9' y1='8' x2='17' y2='8'/%3E%3Cline x1='9' y1='10' x2='17' y2='10'/%3E%3Cline x1='9' y1='12' x2='17' y2='12'/%3E%3Cline x1='9' y1='14' x2='17' y2='14'/%3E%3Cline x1='9' y1='16' x2='17' y2='16'/%3E%3Cline x1='9' y1='18' x2='17' y2='18'/%3E%3C/g%3E%3C!-- Code symbol --%3E%3Ctext x='12' y='11' font-family='monospace' font-size='6' fill='%23FFFFFF' text-anchor='middle' opacity='0.9'%3E%26lt;/%26gt;%3C/text%3E%3C/svg%3E">
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -115,10 +116,165 @@
 
                 <nav class="hidden md:flex items-center space-x-6">
                     <a href="#" onclick="showHome()" class="font-medium text-primary-600 dark:text-primary-400">首頁</a>
-                    <a href="#" onclick="showLanguage('html')" class="font-medium text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">HTML</a>
-                    <a href="#" onclick="showLanguage('python')" class="font-medium text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">Python</a>
-                    <a href="#" onclick="showLanguage('javascript')" class="font-medium text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">JavaScript</a>
-                    <a href="#" onclick="showLanguage('java')" class="font-medium text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">Java</a>
+
+                    <!-- 程式設計下拉選單 -->
+                    <div class="relative group">
+                        <button class="font-medium text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors flex items-center space-x-1">
+                            <span>程式設計</span>
+                            <svg class="w-4 h-4 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </button>
+
+                        <!-- 下拉選單內容 -->
+                        <div class="absolute top-full left-0 mt-2 w-48 bg-white dark:bg-gray-800 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+                            <div class="py-2">
+                                <!-- 初學者級別 -->
+                                <div class="px-4 py-2 text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider border-b border-gray-100 dark:border-gray-700">
+                                    初學者
+                                </div>
+                                <a href="#" onclick="showLanguage('html')" class="flex items-center px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
+                                    <div class="w-6 h-6 rounded flex items-center justify-center mr-3">
+                                        <svg viewBox="0 0 24 24" class="w-5 h-5">
+                                            <path d="M1.5 0h21l-1.91 21.563L11.977 24l-8.564-2.438L1.5 0zm7.031 9.75l-.232-2.718 10.059.003.23-2.622L5.412 4.41l.698 8.01h9.126l-.326 3.426-2.91.804-2.955-.81-.188-2.11H6.248l.33 4.171L12 19.351l5.379-1.443.744-8.157H8.531z" fill="#E34F26"/>
+                                        </svg>
+                                    </div>
+                                    HTML
+                                </a>
+                                <a href="#" onclick="showLanguage('python')" class="flex items-center px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
+                                    <div class="w-6 h-6 rounded flex items-center justify-center mr-3">
+                                        <svg viewBox="0 0 24 24" class="w-5 h-5">
+                                            <defs>
+                                                <linearGradient id="python-nav-gradient-1" x1="0%" y1="0%" x2="100%" y2="100%">
+                                                    <stop offset="0%" style="stop-color:#3776ab"/>
+                                                    <stop offset="100%" style="stop-color:#4b8bbe"/>
+                                                </linearGradient>
+                                                <linearGradient id="python-nav-gradient-2" x1="0%" y1="0%" x2="100%" y2="100%">
+                                                    <stop offset="0%" style="stop-color:#ffd43b"/>
+                                                    <stop offset="100%" style="stop-color:#ffe873"/>
+                                                </linearGradient>
+                                            </defs>
+                                            <path d="M11.914 0C5.82 0 6.2 2.656 6.2 2.656l.007 2.752h5.814v.826H3.9S0 5.789 0 11.969c0 6.18 3.403 5.96 3.403 5.96h2.03v-2.867s-.109-3.42 3.35-3.42h5.766s3.24.052 3.24-3.148V3.202S18.28 0 11.914 0zM8.708 1.85c.578 0 1.046.47 1.046 1.052 0 .581-.468 1.051-1.046 1.051-.579 0-1.046-.47-1.046-1.051 0-.582.467-1.052 1.046-1.052z" fill="url(#python-nav-gradient-1)"/>
+                                            <path d="M12.087 24c6.094 0 5.714-2.656 5.714-2.656l-.007-2.752h-5.814v-.826h8.121s4.1.445 4.1-5.735c0-6.18-3.403-5.96-3.403-5.96h-2.03v2.867s.109 3.42-3.35 3.42H9.652s-3.24-.052-3.24 3.148v5.292S5.921 24 12.087 24zm3.206-1.85c-.578 0-1.046-.47-1.046-1.052 0-.581.468-1.051 1.046-1.051.579 0 1.046.47 1.046 1.051 0 .582-.467 1.052-1.046 1.052z" fill="url(#python-nav-gradient-2)"/>
+                                        </svg>
+                                    </div>
+                                    Python
+                                </a>
+                                <a href="#" onclick="showLanguage('javascript')" class="flex items-center px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
+                                    <div class="w-6 h-6 rounded flex items-center justify-center mr-3">
+                                        <svg viewBox="0 0 24 24" class="w-5 h-5">
+                                            <rect width="24" height="24" rx="2" fill="#F7DF1E"/>
+                                            <path d="M22.034 18.276c-.175-1.095-.888-2.015-3.003-2.873-.736-.345-1.554-.585-1.797-1.14-.091-.33-.105-.51-.046-.705.15-.646.915-.84 1.515-.66.39.12.75.42.976.9 1.034-.676 1.034-.676 1.755-1.125-.27-.42-.404-.601-.586-.78-.63-.705-1.469-1.065-2.834-1.034l-.705.089c-.676.165-1.32.525-1.71 1.005-1.14 1.291-.811 3.541.569 4.471 1.365 1.02 3.361 1.244 3.616 2.205.24 1.17-.87 1.545-1.966 1.41-.811-.18-1.26-.586-1.755-1.336l-1.83 1.051c.21.48.45.689.81 1.109 1.74 1.756 6.09 1.666 6.871-1.004.029-.09.24-.705.074-1.65l.046.067zm-8.983-7.245h-2.248c0 1.938-.009 3.864-.009 5.805 0 1.232.063 2.363-.138 2.711-.33.689-1.18.601-1.566.48-.396-.196-.597-.466-.83-.855-.063-.105-.11-.196-.127-.196l-1.825 1.125c.305.63.75 1.172 1.324 1.517.855.51 2.004.675 3.207.405.783-.226 1.458-.691 1.811-1.411.51-.93.402-2.07.397-3.346.012-2.054 0-4.109 0-6.179l.004-.056z" fill="#000"/>
+                                        </svg>
+                                    </div>
+                                    JavaScript
+                                </a>
+
+                                <!-- 中級級別 -->
+                                <div class="px-4 py-2 text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider border-b border-gray-100 dark:border-gray-700 mt-2">
+                                    中級
+                                </div>
+                                <a href="#" onclick="showLanguage('csharp')" class="flex items-center px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
+                                    <div class="w-6 h-6 rounded flex items-center justify-center mr-3">
+                                        <svg viewBox="0 0 24 24" class="w-5 h-5">
+                                            <defs>
+                                                <linearGradient id="csharp-nav-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                                    <stop offset="0%" style="stop-color:#A855F7"/>
+                                                    <stop offset="50%" style="stop-color:#9333EA"/>
+                                                    <stop offset="100%" style="stop-color:#7C3AED"/>
+                                                </linearGradient>
+                                            </defs>
+                                            <!-- Modern rounded rectangle -->
+                                            <rect x="2" y="2" width="20" height="20" rx="3" fill="url(#csharp-nav-gradient)"/>
+                                            <!-- Simple white C letter -->
+                                            <path d="M14 8.5C13.5 8 12.8 7.5 11 7.5C9 7.5 7.5 9 7.5 12C7.5 15 9 16.5 11 16.5C12.8 16.5 13.5 16 14 15.5" stroke="white" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+                                            <!-- Hash symbol -->
+                                            <g fill="white">
+                                                <rect x="16.5" y="8.5" width="0.6" height="3"/>
+                                                <rect x="17.4" y="8.5" width="0.6" height="3"/>
+                                                <rect x="16" y="9.2" width="2.5" height="0.6"/>
+                                                <rect x="16" y="10.2" width="2.5" height="0.6"/>
+                                            </g>
+                                        </svg>
+                                    </div>
+                                    C#
+                                </a>
+                                <a href="#" onclick="showLanguage('java')" class="flex items-center px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
+                                    <div class="w-6 h-6 rounded flex items-center justify-center mr-3">
+                                        <svg viewBox="0 0 24 24" class="w-5 h-5">
+                                            <!-- Simplified Java cup -->
+                                            <defs>
+                                                <linearGradient id="java-nav-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                                    <stop offset="0%" style="stop-color:#ED8B00"/>
+                                                    <stop offset="100%" style="stop-color:#5382A1"/>
+                                                </linearGradient>
+                                            </defs>
+                                            <!-- Coffee cup shape -->
+                                            <path d="M6 8h10c1 0 2 1 2 2v6c0 2-2 4-4 4H10c-2 0-4-2-4-4V10c0-1 1-2 2-2z" fill="url(#java-nav-gradient)"/>
+                                            <!-- Cup handle -->
+                                            <path d="M16 10v4c2 0 3-1 3-2s-1-2-3-2z" fill="url(#java-nav-gradient)"/>
+                                            <!-- Steam -->
+                                            <g stroke="#ED8B00" stroke-width="1.5" fill="none" stroke-linecap="round">
+                                                <path d="M8 6c0-1 0-2 0-2"/>
+                                                <path d="M10 6c0-1 0-2 0-2"/>
+                                                <path d="M12 6c0-1 0-2 0-2"/>
+                                                <path d="M14 6c0-1 0-2 0-2"/>
+                                            </g>
+                                        </svg>
+                                    </div>
+                                    Java
+                                </a>
+                                <a href="#" onclick="showLanguage('c')" class="flex items-center px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
+                                    <div class="w-6 h-6 rounded flex items-center justify-center mr-3">
+                                        <svg viewBox="0 0 24 24" class="w-5 h-5">
+                                            <defs>
+                                                <linearGradient id="c-nav-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                                    <stop offset="0%" style="stop-color:#659AD2"/>
+                                                    <stop offset="50%" style="stop-color:#4F81BD"/>
+                                                    <stop offset="100%" style="stop-color:#2E5C8A"/>
+                                                </linearGradient>
+                                            </defs>
+                                            <!-- Modern rounded rectangle -->
+                                            <rect x="2" y="2" width="20" height="20" rx="3" fill="url(#c-nav-gradient)"/>
+                                            <!-- Simple white C letter -->
+                                            <path d="M15 8.5C14.5 8 13.8 7.5 12 7.5C10 7.5 8.5 9 8.5 12C8.5 15 10 16.5 12 16.5C13.8 16.5 14.5 16 15 15.5" stroke="white" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+                                        </svg>
+                                    </div>
+                                    C 語言
+                                </a>
+
+                                <!-- 進階級別 -->
+                                <div class="px-4 py-2 text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider border-b border-gray-100 dark:border-gray-700 mt-2">
+                                    進階
+                                </div>
+                                <a href="#" onclick="showLanguage('cpp')" class="flex items-center px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
+                                    <div class="w-6 h-6 rounded flex items-center justify-center mr-3">
+                                        <svg viewBox="0 0 24 24" class="w-5 h-5">
+                                            <defs>
+                                                <linearGradient id="cpp-nav-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                                    <stop offset="0%" style="stop-color:#6BA3D6"/>
+                                                    <stop offset="50%" style="stop-color:#4A90E2"/>
+                                                    <stop offset="100%" style="stop-color:#2E5C8A"/>
+                                                </linearGradient>
+                                            </defs>
+                                            <!-- Hexagon shape -->
+                                            <path d="M12 2L20.5 7V17L12 22L3.5 17V7L12 2Z" fill="url(#cpp-nav-gradient)"/>
+                                            <!-- Simple white C letter -->
+                                            <path d="M13 8.5C12.5 8 11.8 7.5 10 7.5C8 7.5 6.5 9 6.5 12C6.5 15 8 16.5 10 16.5C11.8 16.5 12.5 16 13 15.5" stroke="white" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+                                            <!-- Plus signs -->
+                                            <g fill="white">
+                                                <rect x="15.5" y="9" width="0.8" height="2.5"/>
+                                                <rect x="14.75" y="9.75" width="2.3" height="0.8"/>
+                                                <rect x="17.2" y="11.5" width="0.8" height="2.5"/>
+                                                <rect x="16.45" y="12.25" width="2.3" height="0.8"/>
+                                            </g>
+                                        </svg>
+                                    </div>
+                                    C++
+                                </a>
+                            </div>
+                        </div>
+                    </div>
                 </nav>
 
                 <button id="theme-toggle" class="p-2 rounded-lg bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors duration-200">
@@ -156,7 +312,7 @@
                 </h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                     <!-- HTML Card -->
-                    <div class="card p-6 h-full hover:scale-105 transform transition-all duration-300 cursor-pointer" onclick="showLanguage('html')">
+                    <div class="card p-6 h-full hover:scale-105 transform transition-all duration-300 cursor-pointer" onclick="window.location.href='html-tutorial.html'">
                         <div class="flex items-center mb-4">
                             <div class="w-12 h-12 rounded-lg bg-orange-500 flex items-center justify-center text-white mr-4">
                                 <svg class="w-8 h-8" viewBox="0 0 24 24" fill="currentColor">
@@ -203,10 +359,23 @@
                     </div>
 
                     <!-- Python Card -->
-                    <div class="card p-6 h-full hover:scale-105 transform transition-all duration-300 cursor-pointer" onclick="showLanguage('python')">
+                    <div class="card p-6 h-full hover:scale-105 transform transition-all duration-300 cursor-pointer" onclick="window.location.href='python-tutorial.html'">
                         <div class="flex items-center mb-4">
-                            <div class="w-12 h-12 rounded-lg bg-blue-500 flex items-center justify-center text-white text-2xl font-bold mr-4">
-                                🐍
+                            <div class="w-12 h-12 rounded-lg bg-gradient-to-br from-blue-500 to-yellow-400 flex items-center justify-center mr-4 p-2">
+                                <svg viewBox="0 0 24 24" class="w-8 h-8">
+                                    <defs>
+                                        <linearGradient id="python-card-gradient-1" x1="0%" y1="0%" x2="100%" y2="100%">
+                                            <stop offset="0%" style="stop-color:#3776ab"/>
+                                            <stop offset="100%" style="stop-color:#4b8bbe"/>
+                                        </linearGradient>
+                                        <linearGradient id="python-card-gradient-2" x1="0%" y1="0%" x2="100%" y2="100%">
+                                            <stop offset="0%" style="stop-color:#ffd43b"/>
+                                            <stop offset="100%" style="stop-color:#ffe873"/>
+                                        </linearGradient>
+                                    </defs>
+                                    <path d="M11.914 0C5.82 0 6.2 2.656 6.2 2.656l.007 2.752h5.814v.826H3.9S0 5.789 0 11.969c0 6.18 3.403 5.96 3.403 5.96h2.03v-2.867s-.109-3.42 3.35-3.42h5.766s3.24.052 3.24-3.148V3.202S18.28 0 11.914 0zM8.708 1.85c.578 0 1.046.47 1.046 1.052 0 .581-.468 1.051-1.046 1.051-.579 0-1.046-.47-1.046-1.051 0-.582.467-1.052 1.046-1.052z" fill="url(#python-card-gradient-1)"/>
+                                    <path d="M12.087 24c6.094 0 5.714-2.656 5.714-2.656l-.007-2.752h-5.814v-.826h8.121s4.1.445 4.1-5.735c0-6.18-3.403-5.96-3.403-5.96h-2.03v2.867s.109 3.42-3.35 3.42H9.652s-3.24-.052-3.24 3.148v5.292S5.921 24 12.087 24zm3.206-1.85c-.578 0-1.046-.47-1.046-1.052 0-.581.468-1.051 1.046-1.051.579 0 1.046.47 1.046 1.051 0 .582-.467 1.052-1.046 1.052z" fill="url(#python-card-gradient-2)"/>
+                                </svg>
                             </div>
                             <div>
                                 <h3 class="text-xl font-bold text-gray-900 dark:text-white">Python</h3>
@@ -248,11 +417,12 @@
                     </div>
 
                     <!-- JavaScript Card -->
-                    <div class="card p-6 h-full hover:scale-105 transform transition-all duration-300 cursor-pointer" onclick="showLanguage('javascript')">
+                    <div class="card p-6 h-full hover:scale-105 transform transition-all duration-300 cursor-pointer" onclick="window.location.href='javascript-tutorial.html'">
                         <div class="flex items-center mb-4">
-                            <div class="w-12 h-12 rounded-lg bg-yellow-500 flex items-center justify-center text-white mr-4">
-                                <svg class="w-8 h-8" viewBox="0 0 24 24" fill="currentColor">
-                                    <path d="M0 0h24v24H0V0zm22.034 18.276c-.175-1.095-.888-2.015-3.003-2.873-.736-.345-1.554-.585-1.797-1.14-.091-.33-.105-.51-.046-.705.15-.646.915-.84 1.515-.66.39.12.75.42.976.9 1.034-.676 1.034-.676 1.755-1.125-.27-.42-.404-.601-.586-.78-.63-.705-1.469-1.065-2.834-1.034l-.705.089c-.676.165-1.32.525-1.71 1.005-1.14 1.291-.811 3.541.569 4.471 1.365 1.02 3.361 1.244 3.616 2.205.24 1.17-.87 1.545-1.966 1.41-.811-.18-1.26-.586-1.755-1.336l-1.83 1.051c.21.48.45.689.81 1.109 1.74 1.756 6.09 1.666 6.871-1.004.029-.09.24-.705.074-1.65l.046.067zm-8.983-7.245h-2.248c0 1.938-.009 3.864-.009 5.805 0 1.232.063 2.363-.138 2.711-.33.689-1.18.601-1.566.48-.396-.196-.597-.466-.83-.855-.063-.105-.11-.196-.127-.196l-1.825 1.125c.305.63.75 1.172 1.324 1.517.855.51 2.004.675 3.207.405.783-.226 1.458-.691 1.811-1.411.51-.93.402-2.07.397-3.346.012-2.054 0-4.109 0-6.179l.004-.056z"/>
+                            <div class="w-12 h-12 rounded-lg bg-yellow-400 flex items-center justify-center mr-4 p-2">
+                                <svg viewBox="0 0 24 24" class="w-8 h-8">
+                                    <rect width="24" height="24" fill="#F7DF1E"/>
+                                    <path d="M22.034 18.276c-.175-1.095-.888-2.015-3.003-2.873-.736-.345-1.554-.585-1.797-1.14-.091-.33-.105-.51-.046-.705.15-.646.915-.84 1.515-.66.39.12.75.42.976.9 1.034-.676 1.034-.676 1.755-1.125-.27-.42-.404-.601-.586-.78-.63-.705-1.469-1.065-2.834-1.034l-.705.089c-.676.165-1.32.525-1.71 1.005-1.14 1.291-.811 3.541.569 4.471 1.365 1.02 3.361 1.244 3.616 2.205.24 1.17-.87 1.545-1.966 1.41-.811-.18-1.26-.586-1.755-1.336l-1.83 1.051c.21.48.45.689.81 1.109 1.74 1.756 6.09 1.666 6.871-1.004.029-.09.24-.705.074-1.65l.046.067zm-8.983-7.245h-2.248c0 1.938-.009 3.864-.009 5.805 0 1.232.063 2.363-.138 2.711-.33.689-1.18.601-1.566.48-.396-.196-.597-.466-.83-.855-.063-.105-.11-.196-.127-.196l-1.825 1.125c.305.63.75 1.172 1.324 1.517.855.51 2.004.675 3.207.405.783-.226 1.458-.691 1.811-1.411.51-.93.402-2.07.397-3.346.012-2.054 0-4.109 0-6.179l.004-.056z" fill="#000"/>
                                 </svg>
                             </div>
                             <div>
@@ -294,12 +464,87 @@
                         </div>
                     </div>
 
-                    <!-- Java Card -->
-                    <div class="card p-6 h-full hover:scale-105 transform transition-all duration-300 cursor-pointer" onclick="showLanguage('java')">
+                    <!-- C# Card -->
+                    <div class="card p-6 h-full hover:scale-105 transform transition-all duration-300 cursor-pointer" onclick="window.location.href='csharp-tutorial.html'">
                         <div class="flex items-center mb-4">
-                            <div class="w-12 h-12 rounded-lg bg-red-500 flex items-center justify-center text-white mr-4">
-                                <svg class="w-8 h-8" viewBox="0 0 24 24" fill="currentColor">
-                                    <path d="M8.851 18.56s-.917.534.653.714c1.902.218 2.874.187 4.969-.211 0 0 .552.346 1.321.646-4.699 2.013-10.633-.118-6.943-1.149M8.276 15.933s-1.028.761.542.924c2.032.209 3.636.227 6.413-.308 0 0 .384.389.987.602-5.679 1.661-12.007.13-7.942-1.218M13.116 11.475c1.158 1.333-.304 2.533-.304 2.533s2.939-1.518 1.589-3.418c-1.261-1.772-2.228-2.652 3.007-5.688 0-.001-8.216 2.051-4.292 6.573M19.33 20.504s.679.559-.747.991c-2.712.822-11.288 1.069-13.669.033-.856-.373.75-.89 1.254-.998.527-.114.828-.093.828-.093-.953-.671-6.156 1.317-2.643 1.887 9.58 1.553 17.462-.7 14.977-1.82M9.292 13.21s-4.362 1.036-1.544 1.412c1.189.159 3.561.123 5.77-.062 1.806-.152 3.618-.477 3.618-.477s-.637.272-1.098.587c-4.429 1.165-12.986.623-10.522-.568 2.082-1.006 3.776-.892 3.776-.892M17.116 17.584c4.503-2.34 2.421-4.589.968-4.285-.355.074-.515.138-.515.138s.132-.207.385-.297c2.875-1.011 5.086 2.981-.928 4.562 0-.001.07-.062.09-.118M14.401 0s2.494 2.494-2.365 6.33c-3.896 3.077-.888 4.832-.001 6.836-2.274-2.053-3.943-3.858-2.824-5.539 1.644-2.469 6.197-3.665 5.19-7.627M9.734 23.924c4.322.277 10.959-.153 11.116-2.198 0 0-.302.775-3.572 1.391-3.688.694-8.239.613-10.937.168 0-.001.553.457 3.393.639"/>
+                            <div class="w-12 h-12 rounded-lg bg-gradient-to-br from-purple-400 to-purple-700 flex items-center justify-center mr-4 p-2">
+                                <svg viewBox="0 0 24 24" class="w-8 h-8">
+                                    <defs>
+                                        <linearGradient id="csharp-card-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                            <stop offset="0%" style="stop-color:#A855F7"/>
+                                            <stop offset="50%" style="stop-color:#9333EA"/>
+                                            <stop offset="100%" style="stop-color:#7C3AED"/>
+                                        </linearGradient>
+                                    </defs>
+                                    <!-- Hexagon shape -->
+                                    <path d="M12 2L20.5 7V17L12 22L3.5 17V7L12 2Z" fill="url(#csharp-card-gradient)"/>
+                                    <!-- Simple white C letter -->
+                                    <path d="M14 8.5C13.5 8 12.8 7.5 11 7.5C9 7.5 7.5 9 7.5 12C7.5 15 9 16.5 11 16.5C12.8 16.5 13.5 16 14 15.5" stroke="white" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+                                    <!-- Hash symbol -->
+                                    <g fill="white">
+                                        <rect x="16.5" y="8.5" width="0.8" height="3.5"/>
+                                        <rect x="17.6" y="8.5" width="0.8" height="3.5"/>
+                                        <rect x="16" y="9.2" width="3" height="0.8"/>
+                                        <rect x="16" y="10.5" width="3" height="0.8"/>
+                                    </g>
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold text-gray-900 dark:text-white">C#</h3>
+                                <span class="inline-block px-2 py-1 text-xs font-medium rounded-full bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200">中級</span>
+                            </div>
+                        </div>
+                        <p class="text-gray-600 dark:text-gray-300 mb-4 leading-relaxed">
+                            微軟開發的現代化程式語言，語法簡潔優雅，適合Windows應用程式和網頁開發。
+                        </p>
+                        <div class="space-y-2">
+                            <h4 class="font-semibold text-gray-900 dark:text-white text-sm">主要特色：</h4>
+                            <ul class="space-y-1">
+                                <li class="flex items-center text-sm text-gray-600 dark:text-gray-300">
+                                    <svg class="w-4 h-4 text-green-500 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                                    </svg>
+                                    .NET框架支援
+                                </li>
+                                <li class="flex items-center text-sm text-gray-600 dark:text-gray-300">
+                                    <svg class="w-4 h-4 text-green-500 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                                    </svg>
+                                    跨平台開發
+                                </li>
+                                <li class="flex items-center text-sm text-gray-600 dark:text-gray-300">
+                                    <svg class="w-4 h-4 text-green-500 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                                    </svg>
+                                    強型別系統
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="mt-6 flex items-center text-primary-600 dark:text-primary-400 font-medium">
+                            開始學習
+                            <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                            </svg>
+                        </div>
+                    </div>
+
+                    <!-- Java Card -->
+                    <div class="card p-6 h-full hover:scale-105 transform transition-all duration-300 cursor-pointer" onclick="window.location.href='java-tutorial.html'">
+                        <div class="flex items-center mb-4">
+                            <div class="w-12 h-12 rounded-lg bg-gradient-to-br from-orange-500 to-blue-600 flex items-center justify-center mr-4 p-2">
+                                <svg viewBox="0 0 24 24" class="w-8 h-8">
+                                    <!-- Java 咖啡杯 -->
+                                    <path d="M8.851 18.56s-.917.534.653.714c1.902.218 2.874.187 4.969-.211 0 0 .552.346 1.321.646-4.699 2.013-10.633-.118-6.943-1.149M8.276 15.933s-1.028.761.542.924c2.032.209 3.636.227 6.413-.308 0 0 .384.389.987.602-5.679 1.661-12.007.13-7.942-1.218" fill="#ED8B00"/>
+                                    <path d="M13.116 11.475c1.158 1.333-.304 2.533-.304 2.533s2.939-1.518 1.589-3.418c-1.261-1.772-2.228-2.652 3.007-5.688 0-.001-8.216 2.051-4.292 6.573" fill="#ED8B00"/>
+                                    <path d="M19.33 20.504s.679.559-.747.991c-2.712.822-11.288 1.069-13.669.033-.856-.373.75-.89 1.254-.998.527-.114.828-.093.828-.093-.953-.671-6.156 1.317-2.643 1.887 9.58 1.553 17.462-.7 14.977-1.82" fill="#ED8B00"/>
+                                    <path d="M9.292 13.21s-4.362 1.036-1.544 1.412c1.189.159 3.561.123 5.77-.062 1.806-.152 3.618-.477 3.618-.477s-.637.272-1.098.587c-4.429 1.165-12.986.623-10.522-.568 2.082-1.006 3.776-.892 3.776-.892" fill="#ED8B00"/>
+                                    <path d="M17.116 17.584c4.503-2.34 2.421-4.589.968-4.285-.355.074-.515.138-.515.138s.132-.207.385-.297c2.875-1.011 5.086 2.981-.928 4.562 0-.001.07-.062.09-.118" fill="#ED8B00"/>
+                                    <path d="M14.401 0s2.494 2.494-2.365 6.33c-3.896 3.077-.888 4.832-.001 6.836-2.274-2.053-3.943-3.858-2.824-5.539 1.644-2.469 6.197-3.665 5.19-7.627" fill="#ED8B00"/>
+                                    <path d="M9.734 23.924c4.322.277 10.959-.153 11.116-2.198 0 0-.302.775-3.572 1.391-3.688.694-8.239.613-10.937.168 0-.001.553.457 3.393.639" fill="#ED8B00"/>
+                                    <!-- Java 杯子底部 -->
+                                    <ellipse cx="12" cy="22" rx="8" ry="1.5" fill="#5382A1"/>
+                                    <ellipse cx="12" cy="20" rx="7" ry="1.2" fill="#5382A1"/>
+                                    <ellipse cx="12" cy="18" rx="6" ry="1" fill="#5382A1"/>
                                 </svg>
                             </div>
                             <div>
@@ -340,6 +585,129 @@
                             </svg>
                         </div>
                     </div>
+
+                    <!-- C Card -->
+                    <div class="card p-6 h-full hover:scale-105 transform transition-all duration-300 cursor-pointer" onclick="window.location.href='c-tutorial.html'">
+                        <div class="flex items-center mb-4">
+                            <div class="w-12 h-12 rounded-lg bg-gradient-to-br from-blue-400 to-blue-700 flex items-center justify-center mr-4 p-2">
+                                <svg viewBox="0 0 24 24" class="w-8 h-8">
+                                    <defs>
+                                        <linearGradient id="c-card-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                            <stop offset="0%" style="stop-color:#659AD2"/>
+                                            <stop offset="50%" style="stop-color:#4F81BD"/>
+                                            <stop offset="100%" style="stop-color:#2E5C8A"/>
+                                        </linearGradient>
+                                    </defs>
+                                    <!-- Hexagon shape -->
+                                    <path d="M12 2L20.5 7V17L12 22L3.5 17V7L12 2Z" fill="url(#c-card-gradient)"/>
+                                    <!-- Simple white C letter -->
+                                    <path d="M15 8.5C14.5 8 13.8 7.5 12 7.5C10 7.5 8.5 9 8.5 12C8.5 15 10 16.5 12 16.5C13.8 16.5 14.5 16 15 15.5" stroke="white" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold text-gray-900 dark:text-white">C</h3>
+                                <span class="inline-block px-2 py-1 text-xs font-medium rounded-full bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200">中級</span>
+                            </div>
+                        </div>
+                        <p class="text-gray-600 dark:text-gray-300 mb-4 leading-relaxed">
+                            系統程式設計的基礎語言，學習程式設計核心概念的最佳選擇，廣泛應用於作業系統和嵌入式開發。
+                        </p>
+                        <div class="space-y-2">
+                            <h4 class="font-semibold text-gray-900 dark:text-white text-sm">主要特色：</h4>
+                            <ul class="space-y-1">
+                                <li class="flex items-center text-sm text-gray-600 dark:text-gray-300">
+                                    <svg class="w-4 h-4 text-green-500 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                                    </svg>
+                                    系統程式設計
+                                </li>
+                                <li class="flex items-center text-sm text-gray-600 dark:text-gray-300">
+                                    <svg class="w-4 h-4 text-green-500 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                                    </svg>
+                                    記憶體管理
+                                </li>
+                                <li class="flex items-center text-sm text-gray-600 dark:text-gray-300">
+                                    <svg class="w-4 h-4 text-green-500 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                                    </svg>
+                                    高效能執行
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="mt-6 flex items-center text-primary-600 dark:text-primary-400 font-medium">
+                            開始學習
+                            <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                            </svg>
+                        </div>
+                    </div>
+
+                    <!-- C++ Card -->
+                    <div class="card p-6 h-full hover:scale-105 transform transition-all duration-300 cursor-pointer" onclick="window.location.href='cpp-tutorial.html'">
+                        <div class="flex items-center mb-4">
+                            <div class="w-12 h-12 rounded-lg bg-gradient-to-br from-blue-400 to-blue-700 flex items-center justify-center mr-4 p-2">
+                                <svg viewBox="0 0 24 24" class="w-8 h-8">
+                                    <defs>
+                                        <linearGradient id="cpp-card-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                            <stop offset="0%" style="stop-color:#6BA3D6"/>
+                                            <stop offset="50%" style="stop-color:#4A90E2"/>
+                                            <stop offset="100%" style="stop-color:#2E5C8A"/>
+                                        </linearGradient>
+                                    </defs>
+                                    <!-- Hexagon shape -->
+                                    <path d="M12 2L20.5 7V17L12 22L3.5 17V7L12 2Z" fill="url(#cpp-card-gradient)"/>
+                                    <!-- Simple white C letter -->
+                                    <path d="M13 8.5C12.5 8 11.8 7.5 10 7.5C8 7.5 6.5 9 6.5 12C6.5 15 8 16.5 10 16.5C11.8 16.5 12.5 16 13 15.5" stroke="white" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+                                    <!-- Plus signs -->
+                                    <g fill="white">
+                                        <rect x="15.5" y="9" width="1" height="3"/>
+                                        <rect x="14.75" y="9.75" width="2.5" height="1"/>
+                                        <rect x="17.5" y="11.5" width="1" height="3"/>
+                                        <rect x="16.75" y="12.25" width="2.5" height="1"/>
+                                    </g>
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold text-gray-900 dark:text-white">C++</h3>
+                                <span class="inline-block px-2 py-1 text-xs font-medium rounded-full bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200">進階</span>
+                            </div>
+                        </div>
+                        <p class="text-gray-600 dark:text-gray-300 mb-4 leading-relaxed">
+                            物件導向程式語言，結合C語言效能與現代程式設計概念，適合遊戲開發和高效能應用。
+                        </p>
+                        <div class="space-y-2">
+                            <h4 class="font-semibold text-gray-900 dark:text-white text-sm">主要特色：</h4>
+                            <ul class="space-y-1">
+                                <li class="flex items-center text-sm text-gray-600 dark:text-gray-300">
+                                    <svg class="w-4 h-4 text-green-500 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                                    </svg>
+                                    物件導向設計
+                                </li>
+                                <li class="flex items-center text-sm text-gray-600 dark:text-gray-300">
+                                    <svg class="w-4 h-4 text-green-500 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                                    </svg>
+                                    高效能執行
+                                </li>
+                                <li class="flex items-center text-sm text-gray-600 dark:text-gray-300">
+                                    <svg class="w-4 h-4 text-green-500 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                                    </svg>
+                                    遊戲開發
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="mt-6 flex items-center text-primary-600 dark:text-primary-400 font-medium">
+                            開始學習
+                            <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                            </svg>
+                        </div>
+                    </div>
+
+
                 </div>
             </div>
 
@@ -1265,8 +1633,21 @@ function sayHello() {
                         </svg>
                     </button>
                     <div class="flex items-center">
-                        <div class="w-12 h-12 bg-blue-500 rounded-lg flex items-center justify-center text-white text-2xl font-bold mr-4">
-                            🐍
+                        <div class="w-12 h-12 bg-gradient-to-br from-blue-500 to-yellow-400 rounded-lg flex items-center justify-center mr-4 p-2">
+                            <svg viewBox="0 0 24 24" class="w-8 h-8">
+                                <defs>
+                                    <linearGradient id="python-header-gradient-1" x1="0%" y1="0%" x2="100%" y2="100%">
+                                        <stop offset="0%" style="stop-color:#3776ab"/>
+                                        <stop offset="100%" style="stop-color:#4b8bbe"/>
+                                    </linearGradient>
+                                    <linearGradient id="python-header-gradient-2" x1="0%" y1="0%" x2="100%" y2="100%">
+                                        <stop offset="0%" style="stop-color:#ffd43b"/>
+                                        <stop offset="100%" style="stop-color:#ffe873"/>
+                                    </linearGradient>
+                                </defs>
+                                <path d="M11.914 0C5.82 0 6.2 2.656 6.2 2.656l.007 2.752h5.814v.826H3.9S0 5.789 0 11.969c0 6.18 3.403 5.96 3.403 5.96h2.03v-2.867s-.109-3.42 3.35-3.42h5.766s3.24.052 3.24-3.148V3.202S18.28 0 11.914 0zM8.708 1.85c.578 0 1.046.47 1.046 1.052 0 .581-.468 1.051-1.046 1.051-.579 0-1.046-.47-1.046-1.051 0-.582.467-1.052 1.046-1.052z" fill="url(#python-header-gradient-1)"/>
+                                <path d="M12.087 24c6.094 0 5.714-2.656 5.714-2.656l-.007-2.752h-5.814v-.826h8.121s4.1.445 4.1-5.735c0-6.18-3.403-5.96-3.403-5.96h-2.03v2.867s.109 3.42-3.35 3.42H9.652s-3.24-.052-3.24 3.148v5.292S5.921 24 12.087 24zm3.206-1.85c-.578 0-1.046-.47-1.046-1.052 0-.581.468-1.051 1.046-1.051.579 0 1.046.47 1.046 1.051 0 .582-.467 1.052-1.046 1.052z" fill="url(#python-header-gradient-2)"/>
+                            </svg>
                         </div>
                         <div>
                             <h1 class="text-3xl font-bold text-gray-900 dark:text-white">Python 教學</h1>
@@ -2691,9 +3072,10 @@ file_backup()</code></pre>
                         </svg>
                     </button>
                     <div class="flex items-center">
-                        <div class="w-12 h-12 bg-yellow-500 rounded-lg flex items-center justify-center text-white mr-4">
-                            <svg class="w-8 h-8" viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M0 0h24v24H0V0zm22.034 18.276c-.175-1.095-.888-2.015-3.003-2.873-.736-.345-1.554-.585-1.797-1.14-.091-.33-.105-.51-.046-.705.15-.646.915-.84 1.515-.66.39.12.75.42.976.9 1.034-.676 1.034-.676 1.755-1.125-.27-.42-.404-.601-.586-.78-.63-.705-1.469-1.065-2.834-1.034l-.705.089c-.676.165-1.32.525-1.71 1.005-1.14 1.291-.811 3.541.569 4.471 1.365 1.02 3.361 1.244 3.616 2.205.24 1.17-.87 1.545-1.966 1.41-.811-.18-1.26-.586-1.755-1.336l-1.83 1.051c.21.48.45.689.81 1.109 1.74 1.756 6.09 1.666 6.871-1.004.029-.09.24-.705.074-1.65l.046.067zm-8.983-7.245h-2.248c0 1.938-.009 3.864-.009 5.805 0 1.232.063 2.363-.138 2.711-.33.689-1.18.601-1.566.48-.396-.196-.597-.466-.83-.855-.063-.105-.11-.196-.127-.196l-1.825 1.125c.305.63.75 1.172 1.324 1.517.855.51 2.004.675 3.207.405.783-.226 1.458-.691 1.811-1.411.51-.93.402-2.07.397-3.346.012-2.054 0-4.109 0-6.179l.004-.056z"/>
+                        <div class="w-12 h-12 bg-yellow-400 rounded-lg flex items-center justify-center mr-4 p-2">
+                            <svg viewBox="0 0 24 24" class="w-8 h-8">
+                                <rect width="24" height="24" fill="#F7DF1E"/>
+                                <path d="M22.034 18.276c-.175-1.095-.888-2.015-3.003-2.873-.736-.345-1.554-.585-1.797-1.14-.091-.33-.105-.51-.046-.705.15-.646.915-.84 1.515-.66.39.12.75.42.976.9 1.034-.676 1.034-.676 1.755-1.125-.27-.42-.404-.601-.586-.78-.63-.705-1.469-1.065-2.834-1.034l-.705.089c-.676.165-1.32.525-1.71 1.005-1.14 1.291-.811 3.541.569 4.471 1.365 1.02 3.361 1.244 3.616 2.205.24 1.17-.87 1.545-1.966 1.41-.811-.18-1.26-.586-1.755-1.336l-1.83 1.051c.21.48.45.689.81 1.109 1.74 1.756 6.09 1.666 6.871-1.004.029-.09.24-.705.074-1.65l.046.067zm-8.983-7.245h-2.248c0 1.938-.009 3.864-.009 5.805 0 1.232.063 2.363-.138 2.711-.33.689-1.18.601-1.566.48-.396-.196-.597-.466-.83-.855-.063-.105-.11-.196-.127-.196l-1.825 1.125c.305.63.75 1.172 1.324 1.517.855.51 2.004.675 3.207.405.783-.226 1.458-.691 1.811-1.411.51-.93.402-2.07.397-3.346.012-2.054 0-4.109 0-6.179l.004-.056z" fill="#000"/>
                             </svg>
                         </div>
                         <div>
@@ -4741,9 +5123,20 @@ async function example() {
                         </svg>
                     </button>
                     <div class="flex items-center">
-                        <div class="w-12 h-12 bg-red-500 rounded-lg flex items-center justify-center text-white mr-4">
-                            <svg class="w-8 h-8" viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M8.851 18.56s-.917.534.653.714c1.902.218 2.874.187 4.969-.211 0 0 .552.346 1.321.646-4.699 2.013-10.633-.118-6.943-1.149M8.276 15.933s-1.028.761.542.924c2.032.209 3.636.227 6.413-.308 0 0 .384.389.987.602-5.679 1.661-12.007.13-7.942-1.218M13.116 11.475c1.158 1.333-.304 2.533-.304 2.533s2.939-1.518 1.589-3.418c-1.261-1.772-2.228-2.652 3.007-5.688 0-.001-8.216 2.051-4.292 6.573M19.33 20.504s.679.559-.747.991c-2.712.822-11.288 1.069-13.669.033-.856-.373.75-.89 1.254-.998.527-.114.828-.093.828-.093-.953-.671-6.156 1.317-2.643 1.887 9.58 1.553 17.462-.7 14.977-1.82M9.292 13.21s-4.362 1.036-1.544 1.412c1.189.159 3.561.123 5.77-.062 1.806-.152 3.618-.477 3.618-.477s-.637.272-1.098.587c-4.429 1.165-12.986.623-10.522-.568 2.082-1.006 3.776-.892 3.776-.892M17.116 17.584c4.503-2.34 2.421-4.589.968-4.285-.355.074-.515.138-.515.138s.132-.207.385-.297c2.875-1.011 5.086 2.981-.928 4.562 0-.001.07-.062.09-.118M14.401 0s2.494 2.494-2.365 6.33c-3.896 3.077-.888 4.832-.001 6.836-2.274-2.053-3.943-3.858-2.824-5.539 1.644-2.469 6.197-3.665 5.19-7.627M9.734 23.924c4.322.277 10.959-.153 11.116-2.198 0 0-.302.775-3.572 1.391-3.688.694-8.239.613-10.937.168 0-.001.553.457 3.393.639"/>
+                        <div class="w-12 h-12 bg-gradient-to-br from-orange-500 to-blue-600 rounded-lg flex items-center justify-center mr-4 p-2">
+                            <svg viewBox="0 0 24 24" class="w-8 h-8">
+                                <!-- Java 咖啡杯 -->
+                                <path d="M8.851 18.56s-.917.534.653.714c1.902.218 2.874.187 4.969-.211 0 0 .552.346 1.321.646-4.699 2.013-10.633-.118-6.943-1.149M8.276 15.933s-1.028.761.542.924c2.032.209 3.636.227 6.413-.308 0 0 .384.389.987.602-5.679 1.661-12.007.13-7.942-1.218" fill="#ED8B00"/>
+                                <path d="M13.116 11.475c1.158 1.333-.304 2.533-.304 2.533s2.939-1.518 1.589-3.418c-1.261-1.772-2.228-2.652 3.007-5.688 0-.001-8.216 2.051-4.292 6.573" fill="#ED8B00"/>
+                                <path d="M19.33 20.504s.679.559-.747.991c-2.712.822-11.288 1.069-13.669.033-.856-.373.75-.89 1.254-.998.527-.114.828-.093.828-.093-.953-.671-6.156 1.317-2.643 1.887 9.58 1.553 17.462-.7 14.977-1.82" fill="#ED8B00"/>
+                                <path d="M9.292 13.21s-4.362 1.036-1.544 1.412c1.189.159 3.561.123 5.77-.062 1.806-.152 3.618-.477 3.618-.477s-.637.272-1.098.587c-4.429 1.165-12.986.623-10.522-.568 2.082-1.006 3.776-.892 3.776-.892" fill="#ED8B00"/>
+                                <path d="M17.116 17.584c4.503-2.34 2.421-4.589.968-4.285-.355.074-.515.138-.515.138s.132-.207.385-.297c2.875-1.011 5.086 2.981-.928 4.562 0-.001.07-.062.09-.118" fill="#ED8B00"/>
+                                <path d="M14.401 0s2.494 2.494-2.365 6.33c-3.896 3.077-.888 4.832-.001 6.836-2.274-2.053-3.943-3.858-2.824-5.539 1.644-2.469 6.197-3.665 5.19-7.627" fill="#ED8B00"/>
+                                <path d="M9.734 23.924c4.322.277 10.959-.153 11.116-2.198 0 0-.302.775-3.572 1.391-3.688.694-8.239.613-10.937.168 0-.001.553.457 3.393.639" fill="#ED8B00"/>
+                                <!-- Java 杯子底部 -->
+                                <ellipse cx="12" cy="22" rx="8" ry="1.5" fill="#5382A1"/>
+                                <ellipse cx="12" cy="20" rx="7" ry="1.2" fill="#5382A1"/>
+                                <ellipse cx="12" cy="18" rx="6" ry="1" fill="#5382A1"/>
                             </svg>
                         </div>
                         <div>
@@ -5681,6 +6074,1114 @@ public class ArrayExample {
                 </div>
             </div>
         </div>
+
+        <!-- C 教學 -->
+        <div id="c" class="hidden">
+            <div class="max-w-4xl mx-auto">
+                <!-- Header -->
+                <div class="mb-8">
+                    <div class="flex items-center mb-4">
+                        <button onclick="showHome()" class="text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 mr-4">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                            </svg>
+                        </button>
+                        <div class="flex items-center">
+                            <div class="w-12 h-12 bg-gradient-to-br from-blue-400 to-blue-700 rounded-lg flex items-center justify-center mr-4 p-2">
+                                <svg viewBox="0 0 24 24" class="w-8 h-8">
+                                    <defs>
+                                        <linearGradient id="c-header-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                            <stop offset="0%" style="stop-color:#659AD2"/>
+                                            <stop offset="50%" style="stop-color:#4F81BD"/>
+                                            <stop offset="100%" style="stop-color:#2E5C8A"/>
+                                        </linearGradient>
+                                    </defs>
+                                    <!-- Hexagon shape -->
+                                    <path d="M12 2L20.5 7V17L12 22L3.5 17V7L12 2Z" fill="url(#c-header-gradient)"/>
+                                    <!-- Simple white C letter -->
+                                    <path d="M15 8.5C14.5 8 13.8 7.5 12 7.5C10 7.5 8.5 9 8.5 12C8.5 15 10 16.5 12 16.5C13.8 16.5 14.5 16 15 15.5" stroke="white" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <h1 class="text-3xl font-bold text-gray-900 dark:text-white">C 語言教學</h1>
+                                <p class="text-gray-600 dark:text-gray-300">系統程式設計的基礎語言</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-gray-50 dark:bg-gray-900/20 border border-gray-200 dark:border-gray-800 rounded-lg p-4">
+                        <h2 class="font-semibold text-gray-900 dark:text-gray-100 mb-2">學習目標</h2>
+                        <ul class="text-gray-800 dark:text-gray-200 text-sm space-y-1">
+                            <li>• 了解 C 語言基本語法和概念</li>
+                            <li>• 掌握變數、資料型別和運算子</li>
+                            <li>• 學會條件判斷和迴圈控制</li>
+                            <li>• 理解函數和指標的使用</li>
+                            <li>• 掌握陣列和結構體</li>
+                            <li>• 學會記憶體管理</li>
+                            <li>• 能夠編寫完整的 C 程式</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- 課程內容 -->
+                <div class="space-y-6">
+                    <div class="card">
+                        <div class="p-6">
+                            <div class="flex items-center justify-between mb-4">
+                                <div>
+                                    <h3 class="text-xl font-bold text-gray-900 dark:text-white">1. C 語言簡介與環境設置</h3>
+                                    <span class="inline-block px-2 py-1 text-xs font-medium rounded-full bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200 mt-2">基礎</span>
+                                </div>
+                                <button onclick="toggleLesson(this)" class="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">
+                                    <svg class="w-6 h-6 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                                    </svg>
+                                </button>
+                            </div>
+                            <p class="text-gray-600 dark:text-gray-300 mb-4">了解 C 語言的歷史、特色，以及如何設置開發環境。</p>
+                        </div>
+
+                        <div class="hidden border-t border-gray-200 dark:border-gray-700 p-6">
+                            <div class="mb-4">
+                                <h4 class="font-semibold text-gray-900 dark:text-white mb-2">程式碼範例：</h4>
+                                <pre class="code-block"><code>#include &lt;stdio.h&gt;
+
+int main() {
+    printf("Hello, World!\\n");
+    return 0;
+}</code></pre>
+                            </div>
+                            <div class="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-4">
+                                <h4 class="font-semibold text-blue-900 dark:text-blue-100 mb-2">重點說明：</h4>
+                                <ul class="text-blue-800 dark:text-blue-200 text-sm space-y-1">
+                                    <li>• C 語言是系統程式設計的基礎</li>
+                                    <li>• #include &lt;stdio.h&gt; 引入標準輸入輸出函式庫</li>
+                                    <li>• printf() 用於輸出文字</li>
+                                    <li>• main() 是程式的進入點</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="p-6">
+                            <div class="flex items-center justify-between mb-4">
+                                <div>
+                                    <h3 class="text-xl font-bold text-gray-900 dark:text-white">2. 變數與資料型別</h3>
+                                    <span class="inline-block px-2 py-1 text-xs font-medium rounded-full bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200 mt-2">基礎</span>
+                                </div>
+                                <button onclick="toggleLesson(this)" class="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">
+                                    <svg class="w-6 h-6 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                                    </svg>
+                                </button>
+                            </div>
+                            <p class="text-gray-600 dark:text-gray-300 mb-4">學習 C 語言的基本資料型別和變數宣告方式。</p>
+                        </div>
+
+                        <div class="hidden border-t border-gray-200 dark:border-gray-700 p-6">
+                            <div class="mb-4">
+                                <h4 class="font-semibold text-gray-900 dark:text-white mb-2">程式碼範例：</h4>
+                                <pre class="code-block"><code>#include &lt;stdio.h&gt;
+
+int main() {
+    int age = 25;
+    float height = 175.5;
+    char grade = 'A';
+
+    printf("年齡: %d\\n", age);
+    printf("身高: %.1f 公分\\n", height);
+    printf("等級: %c\\n", grade);
+
+    return 0;
+}</code></pre>
+                            </div>
+                            <div class="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-4">
+                                <h4 class="font-semibold text-blue-900 dark:text-blue-100 mb-2">重點說明：</h4>
+                                <ul class="text-blue-800 dark:text-blue-200 text-sm space-y-1">
+                                    <li>• int：整數型別</li>
+                                    <li>• float：浮點數型別</li>
+                                    <li>• char：字元型別</li>
+                                    <li>• printf() 格式化輸出：%d (整數)、%f (浮點數)、%c (字元)</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 第2課：變數與資料型別 -->
+                    <div class="card">
+                        <div class="p-6">
+                            <div class="flex items-center justify-between mb-4">
+                                <div>
+                                    <h3 class="text-xl font-bold text-gray-900 dark:text-white">2. 變數與資料型別</h3>
+                                    <span class="inline-block px-2 py-1 text-xs font-medium rounded-full bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200 mt-2">基礎</span>
+                                </div>
+                                <button onclick="toggleLesson(this)" class="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">
+                                    <svg class="w-6 h-6 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                                    </svg>
+                                </button>
+                            </div>
+                            <p class="text-gray-600 dark:text-gray-300 mb-4">學習 C 語言中的基本資料型別和變數宣告方式。</p>
+                        </div>
+
+                        <div class="hidden border-t border-gray-200 dark:border-gray-700 p-6">
+                            <div class="mb-4">
+                                <h4 class="font-semibold text-gray-900 dark:text-white mb-2">程式碼範例：</h4>
+                                <pre class="code-block"><code>#include &lt;stdio.h&gt;
+
+int main() {
+    // 整數型別
+    int age = 25;
+    short year = 2024;
+    long population = 23000000L;
+
+    // 浮點數型別
+    float height = 175.5f;
+    double weight = 68.5;
+
+    // 字元型別
+    char grade = 'A';
+
+    // 輸出變數值
+    printf("年齡: %d\\n", age);
+    printf("身高: %.1f 公分\\n", height);
+    printf("體重: %.1f 公斤\\n", weight);
+    printf("成績: %c\\n", grade);
+
+    return 0;
+}</code></pre>
+                            </div>
+                            <div class="bg-gray-50 dark:bg-gray-900/20 border border-gray-200 dark:border-gray-800 rounded-lg p-4">
+                                <h4 class="font-semibold text-gray-900 dark:text-gray-100 mb-2">重點說明：</h4>
+                                <ul class="text-gray-800 dark:text-gray-200 text-sm space-y-1">
+                                    <li>• int：整數 (通常 4 bytes)</li>
+                                    <li>• float：單精度浮點數 (4 bytes)</li>
+                                    <li>• double：雙精度浮點數 (8 bytes)</li>
+                                    <li>• char：字元 (1 byte)</li>
+                                    <li>• printf() 格式化字串：%d 整數、%f 浮點數、%c 字元</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 第3課：運算子與表達式 -->
+                    <div class="card">
+                        <div class="p-6">
+                            <div class="flex items-center justify-between mb-4">
+                                <div>
+                                    <h3 class="text-xl font-bold text-gray-900 dark:text-white">3. 運算子與表達式</h3>
+                                    <span class="inline-block px-2 py-1 text-xs font-medium rounded-full bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200 mt-2">基礎</span>
+                                </div>
+                                <button onclick="toggleLesson(this)" class="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">
+                                    <svg class="w-6 h-6 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                                    </svg>
+                                </button>
+                            </div>
+                            <p class="text-gray-600 dark:text-gray-300 mb-4">學習 C 語言中的各種運算子和表達式的使用方法。</p>
+                        </div>
+
+                        <div class="hidden border-t border-gray-200 dark:border-gray-700 p-6">
+                            <div class="mb-4">
+                                <h4 class="font-semibold text-gray-900 dark:text-white mb-2">程式碼範例：</h4>
+                                <pre class="code-block"><code>#include &lt;stdio.h&gt;
+
+int main() {
+    int a = 10, b = 3;
+
+    // 算術運算子
+    printf("a + b = %d\\n", a + b);  // 加法
+    printf("a - b = %d\\n", a - b);  // 減法
+    printf("a * b = %d\\n", a * b);  // 乘法
+    printf("a / b = %d\\n", a / b);  // 除法
+    printf("a %% b = %d\\n", a % b); // 餘數
+
+    // 比較運算子
+    printf("a > b: %d\\n", a > b);   // 大於
+    printf("a == b: %d\\n", a == b); // 等於
+    printf("a != b: %d\\n", a != b); // 不等於
+
+    // 邏輯運算子
+    int x = 1, y = 0;
+    printf("x && y: %d\\n", x && y); // 邏輯 AND
+    printf("x || y: %d\\n", x || y); // 邏輯 OR
+    printf("!x: %d\\n", !x);         // 邏輯 NOT
+
+    return 0;
+}</code></pre>
+                            </div>
+                            <div class="bg-gray-50 dark:bg-gray-900/20 border border-gray-200 dark:border-gray-800 rounded-lg p-4">
+                                <h4 class="font-semibold text-gray-900 dark:text-gray-100 mb-2">重點說明：</h4>
+                                <ul class="text-gray-800 dark:text-gray-200 text-sm space-y-1">
+                                    <li>• 算術運算子：+、-、*、/、% (餘數)</li>
+                                    <li>• 比較運算子：>、<、>=、<=、==、!=</li>
+                                    <li>• 邏輯運算子：&& (AND)、|| (OR)、! (NOT)</li>
+                                    <li>• 在 C 語言中，0 代表 false，非 0 代表 true</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 第4課：輸入與輸出 -->
+                    <div class="card">
+                        <div class="p-6">
+                            <div class="flex items-center justify-between mb-4">
+                                <div>
+                                    <h3 class="text-xl font-bold text-gray-900 dark:text-white">4. 輸入與輸出</h3>
+                                    <span class="inline-block px-2 py-1 text-xs font-medium rounded-full bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200 mt-2">基礎</span>
+                                </div>
+                                <button onclick="toggleLesson(this)" class="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">
+                                    <svg class="w-6 h-6 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                                    </svg>
+                                </button>
+                            </div>
+                            <p class="text-gray-600 dark:text-gray-300 mb-4">學習如何使用 scanf() 接收使用者輸入和 printf() 格式化輸出。</p>
+                        </div>
+
+                        <div class="hidden border-t border-gray-200 dark:border-gray-700 p-6">
+                            <div class="mb-4">
+                                <h4 class="font-semibold text-gray-900 dark:text-white mb-2">程式碼範例：</h4>
+                                <pre class="code-block"><code>#include &lt;stdio.h&gt;
+
+int main() {
+    char name[50];
+    int age;
+    float height;
+
+    // 接收使用者輸入
+    printf("請輸入您的姓名: ");
+    scanf("%s", name);
+
+    printf("請輸入您的年齡: ");
+    scanf("%d", &age);
+
+    printf("請輸入您的身高 (公分): ");
+    scanf("%f", &height);
+
+    // 格式化輸出
+    printf("\\n=== 個人資料 ===\\n");
+    printf("姓名: %s\\n", name);
+    printf("年齡: %d 歲\\n", age);
+    printf("身高: %.1f 公分\\n", height);
+
+    return 0;
+}</code></pre>
+                            </div>
+                            <div class="bg-gray-50 dark:bg-gray-900/20 border border-gray-200 dark:border-gray-800 rounded-lg p-4">
+                                <h4 class="font-semibold text-gray-900 dark:text-gray-100 mb-2">重點說明：</h4>
+                                <ul class="text-gray-800 dark:text-gray-200 text-sm space-y-1">
+                                    <li>• scanf() 用於接收使用者輸入</li>
+                                    <li>• %s：字串 (不需要 & 符號)</li>
+                                    <li>• %d：整數 (需要 & 符號)</li>
+                                    <li>• %f：浮點數 (需要 & 符號)</li>
+                                    <li>• & 符號表示取得變數的記憶體位址</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-12 card p-6">
+                        <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-4">完整課程內容</h2>
+                        <p class="text-gray-600 dark:text-gray-300 mb-4">
+                            C 語言教學包含 10 個完整課程，涵蓋從基礎到進階的所有概念：
+                        </p>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-4">
+                                <h3 class="font-semibold text-gray-900 dark:text-white mb-2">基礎課程 (1-5)</h3>
+                                <ul class="text-sm text-gray-600 dark:text-gray-300 space-y-1">
+                                    <li>✅ C 語言簡介與環境設置</li>
+                                    <li>✅ 變數與資料型別</li>
+                                    <li>✅ 運算子與表達式</li>
+                                    <li>✅ 輸入與輸出</li>
+                                    <li>• 條件判斷 (if/else/switch)</li>
+                                </ul>
+                            </div>
+                            <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-4">
+                                <h3 class="font-semibold text-gray-900 dark:text-white mb-2">進階課程 (6-10)</h3>
+                                <ul class="text-sm text-gray-600 dark:text-gray-300 space-y-1">
+                                    <li>• 迴圈 (for/while/do-while)</li>
+                                    <li>• 陣列 (Array)</li>
+                                    <li>• 函數 (Function)</li>
+                                    <li>• 指標基礎 (Pointer)</li>
+                                    <li>• 結構體與檔案處理</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- C++ 教學 -->
+        <div id="cpp" class="hidden">
+            <div class="max-w-4xl mx-auto">
+                <!-- Header -->
+                <div class="mb-8">
+                    <div class="flex items-center mb-4">
+                        <button onclick="showHome()" class="text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 mr-4">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                            </svg>
+                        </button>
+                        <div class="flex items-center">
+                            <div class="w-12 h-12 bg-gradient-to-br from-blue-400 to-blue-700 rounded-lg flex items-center justify-center mr-4 p-2">
+                                <svg viewBox="0 0 24 24" class="w-8 h-8">
+                                    <defs>
+                                        <linearGradient id="cpp-header-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                            <stop offset="0%" style="stop-color:#6BA3D6"/>
+                                            <stop offset="50%" style="stop-color:#4A90E2"/>
+                                            <stop offset="100%" style="stop-color:#2E5C8A"/>
+                                        </linearGradient>
+                                    </defs>
+                                    <!-- Hexagon shape -->
+                                    <path d="M12 2L20.5 7V17L12 22L3.5 17V7L12 2Z" fill="url(#cpp-header-gradient)"/>
+                                    <!-- Simple white C letter -->
+                                    <path d="M13 8.5C12.5 8 11.8 7.5 10 7.5C8 7.5 6.5 9 6.5 12C6.5 15 8 16.5 10 16.5C11.8 16.5 12.5 16 13 15.5" stroke="white" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+                                    <!-- Plus signs -->
+                                    <g fill="white">
+                                        <rect x="15.5" y="9" width="1" height="3"/>
+                                        <rect x="14.75" y="9.75" width="2.5" height="1"/>
+                                        <rect x="17.5" y="11.5" width="1" height="3"/>
+                                        <rect x="16.75" y="12.25" width="2.5" height="1"/>
+                                    </g>
+                                </svg>
+                            </div>
+                            <div>
+                                <h1 class="text-3xl font-bold text-gray-900 dark:text-white">C++ 教學</h1>
+                                <p class="text-gray-600 dark:text-gray-300">物件導向程式設計語言</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-4">
+                        <h2 class="font-semibold text-blue-900 dark:text-blue-100 mb-2">學習目標</h2>
+                        <ul class="text-blue-800 dark:text-blue-200 text-sm space-y-1">
+                            <li>• 掌握 C++ 基本語法和特色</li>
+                            <li>• 了解物件導向程式設計</li>
+                            <li>• 學會類別與物件的使用</li>
+                            <li>• 理解繼承與多型機制</li>
+                            <li>• 掌握 STL 標準函式庫</li>
+                            <li>• 學會模板程式設計</li>
+                            <li>• 能夠開發完整的 C++ 應用程式</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- 課程內容 -->
+                <div class="space-y-6">
+                    <div class="card">
+                        <div class="p-6">
+                            <div class="flex items-center justify-between mb-4">
+                                <div>
+                                    <h3 class="text-xl font-bold text-gray-900 dark:text-white">1. C++ 簡介與環境設置</h3>
+                                    <span class="inline-block px-2 py-1 text-xs font-medium rounded-full bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200 mt-2">基礎</span>
+                                </div>
+                                <button onclick="toggleLesson(this)" class="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">
+                                    <svg class="w-6 h-6 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                                    </svg>
+                                </button>
+                            </div>
+                            <p class="text-gray-600 dark:text-gray-300 mb-4">了解 C++ 語言的特色和發展歷史，以及開發環境的設置。</p>
+                        </div>
+
+                        <div class="hidden border-t border-gray-200 dark:border-gray-700 p-6">
+                            <div class="mb-4">
+                                <h4 class="font-semibold text-gray-900 dark:text-white mb-2">程式碼範例：</h4>
+                                <pre class="code-block"><code>#include &lt;iostream&gt;
+using namespace std;
+
+int main() {
+    cout &lt;&lt; "Hello, C++ World!" &lt;&lt; endl;
+    return 0;
+}</code></pre>
+                            </div>
+                            <div class="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-4">
+                                <h4 class="font-semibold text-blue-900 dark:text-blue-100 mb-2">重點說明：</h4>
+                                <ul class="text-blue-800 dark:text-blue-200 text-sm space-y-1">
+                                    <li>• C++ 支援物件導向程式設計</li>
+                                    <li>• iostream 是 C++ 的輸入輸出串流函式庫</li>
+                                    <li>• cout 用於輸出，endl 用於換行</li>
+                                    <li>• using namespace std 簡化程式碼</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 第2課：變數與資料型別 -->
+                    <div class="card">
+                        <div class="p-6">
+                            <div class="flex items-center justify-between mb-4">
+                                <div>
+                                    <h3 class="text-xl font-bold text-gray-900 dark:text-white">2. 變數與資料型別</h3>
+                                    <span class="inline-block px-2 py-1 text-xs font-medium rounded-full bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200 mt-2">基礎</span>
+                                </div>
+                                <button onclick="toggleLesson(this)" class="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">
+                                    <svg class="w-6 h-6 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                                    </svg>
+                                </button>
+                            </div>
+                            <p class="text-gray-600 dark:text-gray-300 mb-4">學習 C++ 的基本資料型別、變數宣告和初始化方式。</p>
+                        </div>
+
+                        <div class="hidden border-t border-gray-200 dark:border-gray-700 p-6">
+                            <div class="mb-4">
+                                <h4 class="font-semibold text-gray-900 dark:text-white mb-2">程式碼範例：</h4>
+                                <pre class="code-block"><code>#include &lt;iostream&gt;
+#include &lt;string&gt;
+using namespace std;
+
+int main() {
+    // 基本資料型別
+    int age = 25;
+    double height = 175.5;
+    float weight = 68.5f;
+    char grade = 'A';
+    bool isStudent = true;
+    string name = "張小明";
+
+    // 顯示變數資訊
+    cout &lt;&lt; "姓名: " &lt;&lt; name &lt;&lt; endl;
+    cout &lt;&lt; "年齡: " &lt;&lt; age &lt;&lt; " 歲" &lt;&lt; endl;
+    cout &lt;&lt; "身高: " &lt;&lt; height &lt;&lt; " 公分" &lt;&lt; endl;
+    cout &lt;&lt; "體重: " &lt;&lt; weight &lt;&lt; " 公斤" &lt;&lt; endl;
+    cout &lt;&lt; "等級: " &lt;&lt; grade &lt;&lt; endl;
+    cout &lt;&lt; "是學生: " &lt;&lt; (isStudent ? "是" : "否") &lt;&lt; endl;
+
+    // 常數
+    const double PI = 3.14159;
+    cout &lt;&lt; "圓周率: " &lt;&lt; PI &lt;&lt; endl;
+
+    // auto 關鍵字 (C++11)
+    auto temperature = 25.5;  // 自動推導為 double
+    cout &lt;&lt; "溫度: " &lt;&lt; temperature &lt;&lt; " 度" &lt;&lt; endl;
+
+    return 0;
+}</code></pre>
+                            </div>
+                            <div class="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-4">
+                                <h4 class="font-semibold text-blue-900 dark:text-blue-100 mb-2">重點說明：</h4>
+                                <ul class="text-blue-800 dark:text-blue-200 text-sm space-y-1">
+                                    <li>• int, double, float, char, bool 是基本型別</li>
+                                    <li>• string 需要引入 &lt;string&gt; 標頭檔</li>
+                                    <li>• const 關鍵字定義常數</li>
+                                    <li>• auto 讓編譯器自動推導型別</li>
+                                    <li>• sizeof 可以查看型別大小</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 第3課：運算子與表達式 -->
+                    <div class="card">
+                        <div class="p-6">
+                            <div class="flex items-center justify-between mb-4">
+                                <div>
+                                    <h3 class="text-xl font-bold text-gray-900 dark:text-white">3. 運算子與表達式</h3>
+                                    <span class="inline-block px-2 py-1 text-xs font-medium rounded-full bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200 mt-2">基礎</span>
+                                </div>
+                                <button onclick="toggleLesson(this)" class="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">
+                                    <svg class="w-6 h-6 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                                    </svg>
+                                </button>
+                            </div>
+                            <p class="text-gray-600 dark:text-gray-300 mb-4">學習 C++ 中的各種運算子和表達式操作。</p>
+                        </div>
+
+                        <div class="hidden border-t border-gray-200 dark:border-gray-700 p-6">
+                            <div class="mb-4">
+                                <h4 class="font-semibold text-gray-900 dark:text-white mb-2">程式碼範例：</h4>
+                                <pre class="code-block"><code>#include &lt;iostream&gt;
+using namespace std;
+
+int main() {
+    int a = 15, b = 4;
+
+    // 算術運算子
+    cout &lt;&lt; "=== 算術運算 ===" &lt;&lt; endl;
+    cout &lt;&lt; a &lt;&lt; " + " &lt;&lt; b &lt;&lt; " = " &lt;&lt; (a + b) &lt;&lt; endl;
+    cout &lt;&lt; a &lt;&lt; " - " &lt;&lt; b &lt;&lt; " = " &lt;&lt; (a - b) &lt;&lt; endl;
+    cout &lt;&lt; a &lt;&lt; " * " &lt;&lt; b &lt;&lt; " = " &lt;&lt; (a * b) &lt;&lt; endl;
+    cout &lt;&lt; a &lt;&lt; " / " &lt;&lt; b &lt;&lt; " = " &lt;&lt; (a / b) &lt;&lt; endl;
+    cout &lt;&lt; a &lt;&lt; " % " &lt;&lt; b &lt;&lt; " = " &lt;&lt; (a % b) &lt;&lt; endl;
+
+    // 比較運算子
+    cout &lt;&lt; "\\n=== 比較運算 ===" &lt;&lt; endl;
+    cout &lt;&lt; a &lt;&lt; " == " &lt;&lt; b &lt;&lt; ": " &lt;&lt; (a == b) &lt;&lt; endl;
+    cout &lt;&lt; a &lt;&lt; " != " &lt;&lt; b &lt;&lt; ": " &lt;&lt; (a != b) &lt;&lt; endl;
+    cout &lt;&lt; a &lt;&lt; " > " &lt;&lt; b &lt;&lt; ": " &lt;&lt; (a > b) &lt;&lt; endl;
+
+    // 邏輯運算子
+    bool x = true, y = false;
+    cout &lt;&lt; "\\n=== 邏輯運算 ===" &lt;&lt; endl;
+    cout &lt;&lt; "true && false = " &lt;&lt; (x && y) &lt;&lt; endl;
+    cout &lt;&lt; "true || false = " &lt;&lt; (x || y) &lt;&lt; endl;
+    cout &lt;&lt; "!true = " &lt;&lt; (!x) &lt;&lt; endl;
+
+    return 0;
+}</code></pre>
+                            </div>
+                            <div class="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-4">
+                                <h4 class="font-semibold text-blue-900 dark:text-blue-100 mb-2">重點說明：</h4>
+                                <ul class="text-blue-800 dark:text-blue-200 text-sm space-y-1">
+                                    <li>• 算術運算子：+, -, *, /, %</li>
+                                    <li>• 比較運算子：==, !=, >, <, >=, <=</li>
+                                    <li>• 邏輯運算子：&&, ||, !</li>
+                                    <li>• 位元運算子：&, |, ^, ~</li>
+                                    <li>• 遞增遞減：++, --</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 第4課：輸入與輸出 -->
+                    <div class="card">
+                        <div class="p-6">
+                            <div class="flex items-center justify-between mb-4">
+                                <div>
+                                    <h3 class="text-xl font-bold text-gray-900 dark:text-white">4. 輸入與輸出</h3>
+                                    <span class="inline-block px-2 py-1 text-xs font-medium rounded-full bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200 mt-2">基礎</span>
+                                </div>
+                                <button onclick="toggleLesson(this)" class="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">
+                                    <svg class="w-6 h-6 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                                    </svg>
+                                </button>
+                            </div>
+                            <p class="text-gray-600 dark:text-gray-300 mb-4">學習 C++ 的串流輸入輸出操作。</p>
+                        </div>
+
+                        <div class="hidden border-t border-gray-200 dark:border-gray-700 p-6">
+                            <div class="mb-4">
+                                <h4 class="font-semibold text-gray-900 dark:text-white mb-2">程式碼範例：</h4>
+                                <pre class="code-block"><code>#include &lt;iostream&gt;
+#include &lt;iomanip&gt;
+#include &lt;string&gt;
+using namespace std;
+
+int main() {
+    string name;
+    int age;
+    double height, weight;
+
+    // 基本輸入
+    cout &lt;&lt; "請輸入您的姓名: ";
+    getline(cin, name);  // 讀取包含空格的字串
+
+    cout &lt;&lt; "請輸入您的年齡: ";
+    cin &gt;&gt; age;
+
+    cout &lt;&lt; "請輸入您的身高 (公分): ";
+    cin &gt;&gt; height;
+
+    cout &lt;&lt; "請輸入您的體重 (公斤): ";
+    cin &gt;&gt; weight;
+
+    // 計算 BMI
+    double bmi = weight / ((height / 100) * (height / 100));
+
+    // 格式化輸出
+    cout &lt;&lt; "\\n=== 個人資料 ===" &lt;&lt; endl;
+    cout &lt;&lt; "姓名: " &lt;&lt; name &lt;&lt; endl;
+    cout &lt;&lt; "年齡: " &lt;&lt; age &lt;&lt; " 歲" &lt;&lt; endl;
+    cout &lt;&lt; "身高: " &lt;&lt; fixed &lt;&lt; setprecision(1) &lt;&lt; height &lt;&lt; " 公分" &lt;&lt; endl;
+    cout &lt;&lt; "體重: " &lt;&lt; fixed &lt;&lt; setprecision(1) &lt;&lt; weight &lt;&lt; " 公斤" &lt;&lt; endl;
+    cout &lt;&lt; "BMI: " &lt;&lt; fixed &lt;&lt; setprecision(2) &lt;&lt; bmi &lt;&lt; endl;
+
+    return 0;
+}</code></pre>
+                            </div>
+                            <div class="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-4">
+                                <h4 class="font-semibold text-blue-900 dark:text-blue-100 mb-2">重點說明：</h4>
+                                <ul class="text-blue-800 dark:text-blue-200 text-sm space-y-1">
+                                    <li>• cout：標準輸出串流</li>
+                                    <li>• cin：標準輸入串流</li>
+                                    <li>• getline()：讀取包含空格的字串</li>
+                                    <li>• iomanip：輸出格式控制</li>
+                                    <li>• setprecision()：設定精確度</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 第5課：條件判斷與迴圈 -->
+                    <div class="card">
+                        <div class="p-6">
+                            <div class="flex items-center justify-between mb-4">
+                                <div>
+                                    <h3 class="text-xl font-bold text-gray-900 dark:text-white">5. 條件判斷與迴圈</h3>
+                                    <span class="inline-block px-2 py-1 text-xs font-medium rounded-full bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200 mt-2">基礎</span>
+                                </div>
+                                <button onclick="toggleLesson(this)" class="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">
+                                    <svg class="w-6 h-6 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                                    </svg>
+                                </button>
+                            </div>
+                            <p class="text-gray-600 dark:text-gray-300 mb-4">學習 C++ 的控制結構和迴圈語法。</p>
+                        </div>
+
+                        <div class="hidden border-t border-gray-200 dark:border-gray-700 p-6">
+                            <div class="mb-4">
+                                <h4 class="font-semibold text-gray-900 dark:text-white mb-2">程式碼範例：</h4>
+                                <pre class="code-block"><code>#include &lt;iostream&gt;
+#include &lt;vector&gt;
+using namespace std;
+
+int main() {
+    // if-else 條件判斷
+    int score;
+    cout &lt;&lt; "請輸入成績 (0-100): ";
+    cin &gt;&gt; score;
+
+    char grade;
+    if (score &gt;= 90) {
+        grade = 'A';
+        cout &lt;&lt; "優秀！" &lt;&lt; endl;
+    } else if (score &gt;= 80) {
+        grade = 'B';
+        cout &lt;&lt; "良好！" &lt;&lt; endl;
+    } else if (score &gt;= 70) {
+        grade = 'C';
+        cout &lt;&lt; "及格！" &lt;&lt; endl;
+    } else {
+        grade = 'F';
+        cout &lt;&lt; "不及格，需要加油！" &lt;&lt; endl;
+    }
+
+    // switch 語句
+    switch (grade) {
+        case 'A':
+            cout &lt;&lt; "繼續保持優秀表現！" &lt;&lt; endl;
+            break;
+        case 'B':
+            cout &lt;&lt; "很好，再努力一點就能達到 A！" &lt;&lt; endl;
+            break;
+        case 'C':
+            cout &lt;&lt; "需要更加努力學習。" &lt;&lt; endl;
+            break;
+        case 'F':
+            cout &lt;&lt; "建議尋求額外的學習資源。" &lt;&lt; endl;
+            break;
+    }
+
+    // for 迴圈
+    cout &lt;&lt; "\\n=== for 迴圈 - 九九乘法表 (7的倍數) ===" &lt;&lt; endl;
+    for (int i = 1; i &lt;= 9; i++) {
+        cout &lt;&lt; "7 x " &lt;&lt; i &lt;&lt; " = " &lt;&lt; (7 * i) &lt;&lt; endl;
+    }
+
+    // range-based for 迴圈 (C++11)
+    vector&lt;string&gt; fruits = {"蘋果", "香蕉", "橘子", "葡萄"};
+    cout &lt;&lt; "\\n水果清單:" &lt;&lt; endl;
+    for (const auto& fruit : fruits) {
+        cout &lt;&lt; "- " &lt;&lt; fruit &lt;&lt; endl;
+    }
+
+    return 0;
+}</code></pre>
+                            </div>
+                            <div class="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-4">
+                                <h4 class="font-semibold text-blue-900 dark:text-blue-100 mb-2">重點說明：</h4>
+                                <ul class="text-blue-800 dark:text-blue-200 text-sm space-y-1">
+                                    <li>• if-else：條件判斷</li>
+                                    <li>• switch：多分支選擇</li>
+                                    <li>• for：計數型迴圈</li>
+                                    <li>• while/do-while：條件型迴圈</li>
+                                    <li>• range-based for：C++11 新語法</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 第6課：陣列與字串 -->
+                    <div class="card">
+                        <div class="p-6">
+                            <div class="flex items-center justify-between mb-4">
+                                <div>
+                                    <h3 class="text-xl font-bold text-gray-900 dark:text-white">6. 陣列與字串</h3>
+                                    <span class="inline-block px-2 py-1 text-xs font-medium rounded-full bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200 mt-2">中級</span>
+                                </div>
+                                <button onclick="toggleLesson(this)" class="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">
+                                    <svg class="w-6 h-6 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                                    </svg>
+                                </button>
+                            </div>
+                            <p class="text-gray-600 dark:text-gray-300 mb-4">學習 C++ 中陣列和字串的操作方法。</p>
+                        </div>
+
+                        <div class="hidden border-t border-gray-200 dark:border-gray-700 p-6">
+                            <div class="mb-4">
+                                <h4 class="font-semibold text-gray-900 dark:text-white mb-2">程式碼範例：</h4>
+                                <pre class="code-block"><code>#include &lt;iostream&gt;
+#include &lt;string&gt;
+#include &lt;vector&gt;
+using namespace std;
+
+int main() {
+    // 傳統陣列
+    int numbers[5] = {10, 20, 30, 40, 50};
+    cout &lt;&lt; "傳統陣列：";
+    for (int i = 0; i &lt; 5; i++) {
+        cout &lt;&lt; numbers[i] &lt;&lt; " ";
+    }
+    cout &lt;&lt; endl;
+
+    // vector 動態陣列
+    vector&lt;int&gt; scores = {85, 92, 78, 96, 88};
+    cout &lt;&lt; "vector 陣列：";
+    for (int score : scores) {  // 範圍型 for 迴圈
+        cout &lt;&lt; score &lt;&lt; " ";
+    }
+    cout &lt;&lt; endl;
+
+    // 新增元素到 vector
+    scores.push_back(95);
+    cout &lt;&lt; "新增後大小：" &lt;&lt; scores.size() &lt;&lt; endl;
+
+    // 字串操作
+    string name = "C++ Programming";
+    cout &lt;&lt; "字串：" &lt;&lt; name &lt;&lt; endl;
+    cout &lt;&lt; "長度：" &lt;&lt; name.length() &lt;&lt; endl;
+    cout &lt;&lt; "第一個字元：" &lt;&lt; name[0] &lt;&lt; endl;
+
+    // 字串方法
+    string text = "Hello World";
+    cout &lt;&lt; "原始字串：" &lt;&lt; text &lt;&lt; endl;
+    cout &lt;&lt; "子字串：" &lt;&lt; text.substr(0, 5) &lt;&lt; endl;
+    cout &lt;&lt; "尋找 'World'：" &lt;&lt; text.find("World") &lt;&lt; endl;
+
+    return 0;
+}</code></pre>
+                            </div>
+                            <div class="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-4">
+                                <h4 class="font-semibold text-blue-900 dark:text-blue-100 mb-2">重點說明：</h4>
+                                <ul class="text-blue-800 dark:text-blue-200 text-sm space-y-1">
+                                    <li>• 傳統陣列：固定大小，效能較好</li>
+                                    <li>• vector：動態陣列，可變大小</li>
+                                    <li>• string：C++ 字串類別</li>
+                                    <li>• 範圍型 for：簡化陣列遍歷</li>
+                                    <li>• 字串方法：length(), substr(), find()</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-12 card p-6">
+                        <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-4">完整課程內容</h2>
+                        <p class="text-gray-600 dark:text-gray-300 mb-4">
+                            C++ 教學包含 12 個完整課程，從基礎語法到進階物件導向程式設計：
+                        </p>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-4">
+                                <h3 class="font-semibold text-gray-900 dark:text-white mb-2">基礎課程 (1-6)</h3>
+                                <ul class="text-sm text-gray-600 dark:text-gray-300 space-y-1">
+                                    <li>✅ C++ 簡介與環境設置</li>
+                                    <li>✅ 變數與資料型別</li>
+                                    <li>✅ 運算子與表達式</li>
+                                    <li>✅ 輸入與輸出</li>
+                                    <li>✅ 條件判斷與迴圈</li>
+                                    <li>✅ 陣列與字串</li>
+                                </ul>
+                            </div>
+                            <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-4">
+                                <h3 class="font-semibold text-gray-900 dark:text-white mb-2">進階課程 (7-12)</h3>
+                                <ul class="text-sm text-gray-600 dark:text-gray-300 space-y-1">
+                                    <li>• 函數基礎</li>
+                                    <li>• 物件導向程式設計基礎</li>
+                                    <li>• 類別與物件</li>
+                                    <li>• 繼承與多型</li>
+                                    <li>• 模板與STL</li>
+                                    <li>• 檔案處理與例外處理</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- C# 教學 -->
+        <div id="csharp" class="hidden">
+            <div class="max-w-4xl mx-auto">
+                <!-- Header -->
+                <div class="mb-8">
+                    <div class="flex items-center mb-4">
+                        <button onclick="showHome()" class="text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 mr-4">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                            </svg>
+                        </button>
+                        <div class="flex items-center">
+                            <div class="w-12 h-12 bg-gradient-to-br from-purple-400 to-purple-700 rounded-lg flex items-center justify-center mr-4 p-2">
+                                <svg viewBox="0 0 24 24" class="w-8 h-8">
+                                    <defs>
+                                        <linearGradient id="csharp-header-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                            <stop offset="0%" style="stop-color:#A855F7"/>
+                                            <stop offset="50%" style="stop-color:#9333EA"/>
+                                            <stop offset="100%" style="stop-color:#7C3AED"/>
+                                        </linearGradient>
+                                    </defs>
+                                    <!-- Hexagon shape -->
+                                    <path d="M12 2L20.5 7V17L12 22L3.5 17V7L12 2Z" fill="url(#csharp-header-gradient)"/>
+                                    <!-- Simple white C letter -->
+                                    <path d="M14 8.5C13.5 8 12.8 7.5 11 7.5C9 7.5 7.5 9 7.5 12C7.5 15 9 16.5 11 16.5C12.8 16.5 13.5 16 14 15.5" stroke="white" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+                                    <!-- Hash symbol -->
+                                    <g fill="white">
+                                        <rect x="16.5" y="8.5" width="0.8" height="3.5"/>
+                                        <rect x="17.6" y="8.5" width="0.8" height="3.5"/>
+                                        <rect x="16" y="9.2" width="3" height="0.8"/>
+                                        <rect x="16" y="10.5" width="3" height="0.8"/>
+                                    </g>
+                                </svg>
+                            </div>
+                            <div>
+                                <h1 class="text-3xl font-bold text-gray-900 dark:text-white">C# 教學</h1>
+                                <p class="text-gray-600 dark:text-gray-300">現代化的 .NET 程式語言</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-purple-50 dark:bg-purple-900/20 border border-purple-200 dark:border-purple-800 rounded-lg p-4">
+                        <h2 class="font-semibold text-purple-900 dark:text-purple-100 mb-2">學習目標</h2>
+                        <ul class="text-purple-800 dark:text-purple-200 text-sm space-y-1">
+                            <li>• 了解 C# 基本語法和 .NET 框架</li>
+                            <li>• 掌握物件導向程式設計概念</li>
+                            <li>• 學會類別與物件的使用</li>
+                            <li>• 理解繼承與多型機制</li>
+                            <li>• 掌握 .NET 類別庫的使用</li>
+                            <li>• 學會例外處理和檔案操作</li>
+                            <li>• 能夠開發完整的 C# 應用程式</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- 課程內容 -->
+                <div class="space-y-6">
+                    <div class="card">
+                        <div class="p-6">
+                            <div class="flex items-center justify-between mb-4">
+                                <div>
+                                    <h3 class="text-xl font-bold text-gray-900 dark:text-white">1. C# 簡介與環境設置</h3>
+                                    <span class="inline-block px-2 py-1 text-xs font-medium rounded-full bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200 mt-2">基礎</span>
+                                </div>
+                                <button onclick="toggleLesson(this)" class="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">
+                                    <svg class="w-6 h-6 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                                    </svg>
+                                </button>
+                            </div>
+                            <p class="text-gray-600 dark:text-gray-300 mb-4">了解 C# 語言的特色和 .NET 框架，以及開發環境的設置。</p>
+                        </div>
+
+                        <div class="hidden border-t border-gray-200 dark:border-gray-700 p-6">
+                            <div class="mb-4">
+                                <h4 class="font-semibold text-gray-900 dark:text-white mb-2">程式碼範例：</h4>
+                                <pre class="code-block"><code>using System;
+
+namespace HelloWorld
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Hello, C# World!");
+            Console.ReadKey();
+        }
+    }
+}</code></pre>
+                            </div>
+                            <div class="bg-purple-50 dark:bg-purple-900/20 border border-purple-200 dark:border-purple-800 rounded-lg p-4">
+                                <h4 class="font-semibold text-purple-900 dark:text-purple-100 mb-2">重點說明：</h4>
+                                <ul class="text-purple-800 dark:text-purple-200 text-sm space-y-1">
+                                    <li>• C# 是微軟開發的現代化程式語言</li>
+                                    <li>• using System 引入系統命名空間</li>
+                                    <li>• Console.WriteLine() 用於輸出</li>
+                                    <li>• 支援強型別和自動記憶體管理</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 第2課：變數與資料型別 -->
+                    <div class="card">
+                        <div class="p-6">
+                            <div class="flex items-center justify-between mb-4">
+                                <div>
+                                    <h3 class="text-xl font-bold text-gray-900 dark:text-white">2. 變數與資料型別</h3>
+                                    <span class="inline-block px-2 py-1 text-xs font-medium rounded-full bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200 mt-2">基礎</span>
+                                </div>
+                                <button onclick="toggleLesson(this)" class="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">
+                                    <svg class="w-6 h-6 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                                    </svg>
+                                </button>
+                            </div>
+                            <p class="text-gray-600 dark:text-gray-300 mb-4">學習 C# 中的基本資料型別和變數宣告方式。</p>
+                        </div>
+
+                        <div class="hidden border-t border-gray-200 dark:border-gray-700 p-6">
+                            <div class="mb-4">
+                                <h4 class="font-semibold text-gray-900 dark:text-white mb-2">程式碼範例：</h4>
+                                <pre class="code-block"><code>using System;
+
+namespace DataTypes
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            // 基本資料型別
+            int age = 25;                    // 整數
+            double height = 175.5;           // 雙精度浮點數
+            float weight = 68.5f;            // 單精度浮點數
+            char grade = 'A';                // 字元
+            string name = "張小明";           // 字串
+            bool isStudent = true;           // 布林值
+
+            // 輸出變數值
+            Console.WriteLine($"姓名: {name}");
+            Console.WriteLine($"年齡: {age} 歲");
+            Console.WriteLine($"身高: {height} 公分");
+            Console.WriteLine($"體重: {weight} 公斤");
+            Console.WriteLine($"等級: {grade}");
+            Console.WriteLine($"是學生: {isStudent}");
+
+            // var 關鍵字 (型別推斷)
+            var city = "台北";  // 編譯器自動推斷為 string
+            var score = 95;     // 編譯器自動推斷為 int
+
+            Console.WriteLine($"城市: {city}");
+            Console.WriteLine($"分數: {score}");
+
+            Console.ReadLine();
+        }
+    }
+}</code></pre>
+                            </div>
+                            <div class="bg-purple-50 dark:bg-purple-900/20 border border-purple-200 dark:border-purple-800 rounded-lg p-4">
+                                <h4 class="font-semibold text-purple-900 dark:text-purple-100 mb-2">重點說明：</h4>
+                                <ul class="text-purple-800 dark:text-purple-200 text-sm space-y-1">
+                                    <li>• int：32位元整數</li>
+                                    <li>• double：64位元雙精度浮點數</li>
+                                    <li>• string：字串 (參考型別)</li>
+                                    <li>• bool：布林值 (true/false)</li>
+                                    <li>• $""：字串插值語法</li>
+                                    <li>• var：自動型別推斷</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 第3課：運算子與表達式 -->
+                    <div class="card">
+                        <div class="p-6">
+                            <div class="flex items-center justify-between mb-4">
+                                <div>
+                                    <h3 class="text-xl font-bold text-gray-900 dark:text-white">3. 運算子與表達式</h3>
+                                    <span class="inline-block px-2 py-1 text-xs font-medium rounded-full bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200 mt-2">基礎</span>
+                                </div>
+                                <button onclick="toggleLesson(this)" class="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">
+                                    <svg class="w-6 h-6 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                                    </svg>
+                                </button>
+                            </div>
+                            <p class="text-gray-600 dark:text-gray-300 mb-4">學習 C# 中的各種運算子和表達式的使用方法。</p>
+                        </div>
+
+                        <div class="hidden border-t border-gray-200 dark:border-gray-700 p-6">
+                            <div class="mb-4">
+                                <h4 class="font-semibold text-gray-900 dark:text-white mb-2">程式碼範例：</h4>
+                                <pre class="code-block"><code>using System;
+
+namespace Operators
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int a = 10, b = 3;
+
+            // 算術運算子
+            Console.WriteLine("=== 算術運算 ===");
+            Console.WriteLine($"{a} + {b} = {a + b}");
+            Console.WriteLine($"{a} - {b} = {a - b}");
+            Console.WriteLine($"{a} * {b} = {a * b}");
+            Console.WriteLine($"{a} / {b} = {a / b}");        // 整數除法
+            Console.WriteLine($"{a} / {b} = {(double)a / b}"); // 浮點除法
+            Console.WriteLine($"{a} % {b} = {a % b}");
+
+            // 比較運算子
+            Console.WriteLine("\\n=== 比較運算 ===");
+            Console.WriteLine($"{a} == {b}: {a == b}");
+            Console.WriteLine($"{a} != {b}: {a != b}");
+            Console.WriteLine($"{a} > {b}: {a > b}");
+            Console.WriteLine($"{a} < {b}: {a < b}");
+
+            // 邏輯運算子
+            bool x = true, y = false;
+            Console.WriteLine("\\n=== 邏輯運算 ===");
+            Console.WriteLine($"{x} && {y} = {x && y}");  // AND
+            Console.WriteLine($"{x} || {y} = {x || y}");  // OR
+            Console.WriteLine($"!{x} = {!x}");            // NOT
+
+            Console.ReadLine();
+        }
+    }
+}</code></pre>
+                            </div>
+                            <div class="bg-purple-50 dark:bg-purple-900/20 border border-purple-200 dark:border-purple-800 rounded-lg p-4">
+                                <h4 class="font-semibold text-purple-900 dark:text-purple-100 mb-2">重點說明：</h4>
+                                <ul class="text-purple-800 dark:text-purple-200 text-sm space-y-1">
+                                    <li>• 算術運算子：+、-、*、/、% (餘數)</li>
+                                    <li>• 比較運算子：==、!=、>、<、>=、<=</li>
+                                    <li>• 邏輯運算子：&& (AND)、|| (OR)、! (NOT)</li>
+                                    <li>• 賦值運算子：=、+=、-=、*=、/=</li>
+                                    <li>• 整數除法會截斷小數部分</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-12 card p-6">
+                        <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-4">完整課程內容</h2>
+                        <p class="text-gray-600 dark:text-gray-300 mb-4">
+                            C# 教學包含 12 個完整課程，涵蓋 .NET 開發的各個方面：
+                        </p>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-4">
+                                <h3 class="font-semibold text-gray-900 dark:text-white mb-2">基礎課程 (1-6)</h3>
+                                <ul class="text-sm text-gray-600 dark:text-gray-300 space-y-1">
+                                    <li>✅ C# 簡介與環境設置</li>
+                                    <li>✅ 變數與資料型別</li>
+                                    <li>✅ 運算子與表達式</li>
+                                    <li>• 輸入與輸出</li>
+                                    <li>• 條件判斷與迴圈</li>
+                                    <li>• 陣列與集合</li>
+                                </ul>
+                            </div>
+                            <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-4">
+                                <h3 class="font-semibold text-gray-900 dark:text-white mb-2">進階課程 (7-12)</h3>
+                                <ul class="text-sm text-gray-600 dark:text-gray-300 space-y-1">
+                                    <li>• 方法與函數</li>
+                                    <li>• 物件導向程式設計</li>
+                                    <li>• 類別與物件</li>
+                                    <li>• 繼承與多型</li>
+                                    <li>• 介面與抽象類別</li>
+                                    <li>• 例外處理與檔案操作</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </main>
 
     <script>
@@ -5729,6 +7230,9 @@ public class ArrayExample {
             document.getElementById('python').classList.add('hidden');
             document.getElementById('javascript').classList.add('hidden');
             document.getElementById('java').classList.add('hidden');
+            document.getElementById('c').classList.add('hidden');
+            document.getElementById('cpp').classList.add('hidden');
+            document.getElementById('csharp').classList.add('hidden');
         }
 
         function showLanguage(language) {
@@ -5737,6 +7241,9 @@ public class ArrayExample {
             document.getElementById('python').classList.add('hidden');
             document.getElementById('javascript').classList.add('hidden');
             document.getElementById('java').classList.add('hidden');
+            document.getElementById('c').classList.add('hidden');
+            document.getElementById('cpp').classList.add('hidden');
+            document.getElementById('csharp').classList.add('hidden');
             document.getElementById(language).classList.remove('hidden');
         }
 

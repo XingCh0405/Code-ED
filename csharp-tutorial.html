@@ -1,0 +1,2666 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>C# 教學 - 程式語言教學平台</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cdefs%3E%3ClinearGradient id='bookGrad' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23059669'/%3E%3Cstop offset='50%25' style='stop-color:%2306B6D4'/%3E%3Cstop offset='100%25' style='stop-color:%234F46E5'/%3E%3C/linearGradient%3E%3ClinearGradient id='pageGrad' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23FBBF24'/%3E%3Cstop offset='100%25' style='stop-color:%23F59E0B'/%3E%3C/linearGradient%3E%3C/defs%3E%3C!-- Book cover --%3E%3Cpath d='M3 4c0-1.1.9-2 2-2h14c1.1 0 2 .9 2 2v16c0 1.1-.9 2-2 2H5c-1.1 0-2-.9-2-2V4z' fill='url(%23bookGrad)'/%3E%3C!-- Book spine --%3E%3Cpath d='M3 4v16c0 1.1.9 2 2 2h1V2H5c-1.1 0-2 .9-2 2z' fill='%23047857' opacity='0.8'/%3E%3C!-- Pages --%3E%3Cpath d='M7 3h12c.6 0 1 .4 1 1v16c0 .6-.4 1-1 1H7V3z' fill='url(%23pageGrad)'/%3E%3C!-- Page lines --%3E%3Cg stroke='%23FFFFFF' stroke-width='0.5' opacity='0.8'%3E%3Cline x1='9' y1='6' x2='17' y2='6'/%3E%3Cline x1='9' y1='8' x2='17' y2='8'/%3E%3Cline x1='9' y1='10' x2='17' y2='10'/%3E%3Cline x1='9' y1='12' x2='17' y2='12'/%3E%3Cline x1='9' y1='14' x2='17' y2='14'/%3E%3Cline x1='9' y1='16' x2='17' y2='16'/%3E%3Cline x1='9' y1='18' x2='17' y2='18'/%3E%3C/g%3E%3C!-- Code symbol --%3E%3Ctext x='12' y='11' font-family='monospace' font-size='6' fill='%23FFFFFF' text-anchor='middle' opacity='0.9'%3E%26lt;/%26gt;%3C/text%3E%3C/svg%3E">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            200: '#bfdbfe',
+                            300: '#93c5fd',
+                            400: '#60a5fa',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            800: '#1e40af',
+                            900: '#1e3a8a',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', system-ui, sans-serif; }
+        code { font-family: 'Fira Code', Monaco, 'Cascadia Code', 'Roboto Mono', monospace; }
+        .card {
+            background-color: white;
+            border-radius: 0.75rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            border: 1px solid #e5e7eb;
+        }
+        .card:hover {
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        .dark .card {
+            background-color: #1f2937;
+            border-color: #374151;
+        }
+        .code-block {
+            background-color: #f3f4f6;
+            border: 1px solid #e5e7eb;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            font-size: 0.875rem;
+            overflow-x: auto;
+            position: relative;
+        }
+        .dark .code-block {
+            background-color: #1e293b;
+            border-color: #475569;
+            color: #e2e8f0;
+        }
+        .copy-btn {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            background: rgba(0, 0, 0, 0.1);
+            border: none;
+            border-radius: 0.25rem;
+            padding: 0.25rem;
+            cursor: pointer;
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+        .code-block:hover .copy-btn {
+            opacity: 1;
+        }
+        .copy-btn:hover {
+            background: rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
+    <!-- Header -->
+    <header class="bg-white dark:bg-gray-800 shadow-sm border-b border-gray-200 dark:border-gray-700">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-2 text-2xl font-bold text-primary-600 dark:text-primary-400">
+                    <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M9.4 16.6L4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0L19.2 12l-4.6-4.6L16 6l6 6-6 6-1.4-1.4z"/>
+                    </svg>
+                    <span>程式教學平台</span>
+                </div>
+
+                <nav class="hidden md:flex items-center space-x-6">
+                    <a href="index.html" class="font-medium text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">首頁</a>
+
+                    <!-- 程式設計下拉選單 -->
+                    <div class="relative group">
+                        <button class="font-medium text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors flex items-center">
+                            程式設計
+                            <svg class="w-4 h-4 ml-1 transform group-hover:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </button>
+
+                        <!-- 下拉選單內容 -->
+                        <div class="absolute left-0 mt-2 w-64 bg-white dark:bg-gray-800 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+                            <!-- 初學者 -->
+                            <div class="px-4 py-2 border-b border-gray-200 dark:border-gray-700">
+                                <h3 class="text-sm font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide">初學者</h3>
+                            </div>
+                            <div class="py-2">
+                                <a href="html-tutorial.html" class="flex items-center px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+                                    <div class="w-6 h-6 bg-orange-500 rounded flex items-center justify-center text-white text-xs font-bold mr-3">
+                                        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
+                                            <path d="M1.5 0h21l-1.91 21.563L11.977 24l-8.564-2.438L1.5 0zm7.031 9.75l-.232-2.718 10.059.003.23-2.622L5.412 4.41l.698 8.01h9.126l-.326 3.426-2.91.804-2.955-.81-.188-2.11H6.248l.33 4.171L12 19.351l5.379-1.443.744-8.157H8.531z"/>
+                                        </svg>
+                                    </div>
+                                    HTML
+                                </a>
+                                <a href="python-tutorial.html" class="flex items-center px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+                                    <div class="w-6 h-6 rounded flex items-center justify-center mr-3">
+                                        <svg viewBox="0 0 24 24" class="w-5 h-5">
+                                            <defs>
+                                                <linearGradient id="python-nav-csharp-gradient-1" x1="0%" y1="0%" x2="100%" y2="100%">
+                                                    <stop offset="0%" style="stop-color:#3776ab"/>
+                                                    <stop offset="100%" style="stop-color:#4b8bbe"/>
+                                                </linearGradient>
+                                                <linearGradient id="python-nav-csharp-gradient-2" x1="0%" y1="0%" x2="100%" y2="100%">
+                                                    <stop offset="0%" style="stop-color:#ffd43b"/>
+                                                    <stop offset="100%" style="stop-color:#ffe873"/>
+                                                </linearGradient>
+                                            </defs>
+                                            <path d="M11.914 0C5.82 0 6.2 2.656 6.2 2.656l.007 2.752h5.814v.826H3.9S0 5.789 0 11.969c0 6.18 3.403 5.96 3.403 5.96h2.03v-2.867s-.109-3.42 3.35-3.42h5.766s3.24.052 3.24-3.148V3.202S18.28 0 11.914 0zM8.708 1.85c.578 0 1.046.47 1.046 1.052 0 .581-.468 1.051-1.046 1.051-.579 0-1.046-.47-1.046-1.051 0-.582.467-1.052 1.046-1.052z" fill="url(#python-nav-csharp-gradient-1)"/>
+                                            <path d="M12.087 24c6.094 0 5.714-2.656 5.714-2.656l-.007-2.752h-5.814v-.826h8.121s4.1.445 4.1-5.735c0-6.18-3.403-5.96-3.403-5.96h-2.03v2.867s.109 3.42-3.35 3.42H9.652s-3.24-.052-3.24 3.148v5.292S5.921 24 12.087 24zm3.206-1.85c-.578 0-1.046-.47-1.046-1.052 0-.581.468-1.051 1.046-1.051.579 0 1.046.47 1.046 1.051 0 .582-.467 1.052-1.046 1.052z" fill="url(#python-nav-csharp-gradient-2)"/>
+                                        </svg>
+                                    </div>
+                                    Python
+                                </a>
+                                <a href="javascript-tutorial.html" class="flex items-center px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+                                    <div class="w-6 h-6 rounded flex items-center justify-center mr-3">
+                                        <svg viewBox="0 0 24 24" class="w-5 h-5">
+                                            <rect width="24" height="24" rx="2" fill="#F7DF1E"/>
+                                            <path d="M22.034 18.276c-.175-1.095-.888-2.015-3.003-2.873-.736-.345-1.554-.585-1.797-1.14-.091-.33-.105-.51-.046-.705.15-.646.915-.84 1.515-.66.39.12.75.42.976.9 1.034-.676 1.034-.676 1.755-1.125-.27-.42-.404-.601-.586-.78-.63-.705-1.469-1.065-2.834-1.034l-.705.089c-.676.165-1.32.525-1.71 1.005-1.14 1.291-.811 3.541.569 4.471 1.365 1.02 3.361 1.244 3.616 2.205.24 1.17-.87 1.545-1.966 1.41-.811-.18-1.26-.586-1.755-1.336l-1.83 1.051c.21.48.45.689.81 1.109 1.74 1.756 6.09 1.666 6.871-1.004.029-.09.24-.705.074-1.65l.046.067zm-8.983-7.245h-2.248c0 1.938-.009 3.864-.009 5.805 0 1.232.063 2.363-.138 2.711-.33.689-1.18.601-1.566.48-.396-.196-.597-.466-.83-.855-.063-.105-.11-.196-.127-.196l-1.825 1.125c.305.63.75 1.172 1.324 1.517.855.51 2.004.675 3.207.405.783-.226 1.458-.691 1.811-1.411.51-.93.402-2.07.397-3.346.012-2.054 0-4.109 0-6.179l.004-.056z" fill="#000"/>
+                                        </svg>
+                                    </div>
+                                    JavaScript
+                                </a>
+                            </div>
+
+                            <!-- 中級 -->
+                            <div class="px-4 py-2 border-b border-gray-200 dark:border-gray-700 border-t">
+                                <h3 class="text-sm font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide">中級</h3>
+                            </div>
+                            <div class="py-2">
+                                <a href="csharp-tutorial.html" class="flex items-center px-4 py-2 text-sm text-primary-600 dark:text-primary-400 bg-primary-50 dark:bg-primary-900/20 transition-colors">
+                                    <div class="w-6 h-6 rounded flex items-center justify-center mr-3">
+                                        <svg viewBox="0 0 24 24" class="w-5 h-5">
+                                            <defs>
+                                                <linearGradient id="csharp-page-nav-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                                    <stop offset="0%" style="stop-color:#A855F7"/>
+                                                    <stop offset="50%" style="stop-color:#9333EA"/>
+                                                    <stop offset="100%" style="stop-color:#7C3AED"/>
+                                                </linearGradient>
+                                            </defs>
+                                            <!-- Hexagon shape -->
+                                            <path d="M12 2L20.5 7V17L12 22L3.5 17V7L12 2Z" fill="url(#csharp-page-nav-gradient)"/>
+                                            <!-- Simple white C letter -->
+                                            <path d="M14 8.5C13.5 8 12.8 7.5 11 7.5C9 7.5 7.5 9 7.5 12C7.5 15 9 16.5 11 16.5C12.8 16.5 13.5 16 14 15.5" stroke="white" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+                                            <!-- Hash symbol -->
+                                            <g fill="white">
+                                                <rect x="16.5" y="8.5" width="0.6" height="3"/>
+                                                <rect x="17.4" y="8.5" width="0.6" height="3"/>
+                                                <rect x="16" y="9.2" width="2.5" height="0.6"/>
+                                                <rect x="16" y="10.2" width="2.5" height="0.6"/>
+                                            </g>
+                                        </svg>
+                                    </div>
+                                    C#
+                                </a>
+                                <a href="java-tutorial.html" class="flex items-center px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+                                    <div class="w-6 h-6 rounded flex items-center justify-center mr-3">
+                                        <svg viewBox="0 0 24 24" class="w-5 h-5">
+                                            <defs>
+                                                <linearGradient id="java-nav-csharp-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                                    <stop offset="0%" style="stop-color:#ED8B00"/>
+                                                    <stop offset="100%" style="stop-color:#5382A1"/>
+                                                </linearGradient>
+                                            </defs>
+                                            <path d="M6 8h10c1 0 2 1 2 2v6c0 2-2 4-4 4H10c-2 0-4-2-4-4V10c0-1 1-2 2-2z" fill="url(#java-nav-csharp-gradient)"/>
+                                            <path d="M16 10v4c2 0 3-1 3-2s-1-2-3-2z" fill="url(#java-nav-csharp-gradient)"/>
+                                            <g stroke="#ED8B00" stroke-width="1.5" fill="none" stroke-linecap="round">
+                                                <path d="M8 6c0-1 0-2 0-2"/>
+                                                <path d="M10 6c0-1 0-2 0-2"/>
+                                                <path d="M12 6c0-1 0-2 0-2"/>
+                                                <path d="M14 6c0-1 0-2 0-2"/>
+                                            </g>
+                                        </svg>
+                                    </div>
+                                    Java
+                                </a>
+                                <a href="c-tutorial.html" class="flex items-center px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+                                    <div class="w-6 h-6 rounded flex items-center justify-center mr-3">
+                                        <svg viewBox="0 0 24 24" class="w-5 h-5">
+                                            <defs>
+                                                <linearGradient id="c-nav-csharp-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                                    <stop offset="0%" style="stop-color:#659AD2"/>
+                                                    <stop offset="50%" style="stop-color:#4F81BD"/>
+                                                    <stop offset="100%" style="stop-color:#2E5C8A"/>
+                                                </linearGradient>
+                                            </defs>
+                                            <rect x="2" y="2" width="20" height="20" rx="3" fill="url(#c-nav-csharp-gradient)"/>
+                                            <path d="M15 8.5C14.5 8 13.8 7.5 12 7.5C10 7.5 8.5 9 8.5 12C8.5 15 10 16.5 12 16.5C13.8 16.5 14.5 16 15 15.5" stroke="white" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+                                        </svg>
+                                    </div>
+                                    C 語言
+                                </a>
+                            </div>
+
+                            <!-- 進階 -->
+                            <div class="px-4 py-2 border-b border-gray-200 dark:border-gray-700 border-t">
+                                <h3 class="text-sm font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide">進階</h3>
+                            </div>
+                            <div class="py-2">
+                                <a href="cpp-tutorial.html" class="flex items-center px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+                                    <div class="w-6 h-6 rounded flex items-center justify-center mr-3">
+                                        <svg viewBox="0 0 24 24" class="w-5 h-5">
+                                            <defs>
+                                                <linearGradient id="cpp-nav-csharp-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                                    <stop offset="0%" style="stop-color:#6BA3D6"/>
+                                                    <stop offset="50%" style="stop-color:#4A90E2"/>
+                                                    <stop offset="100%" style="stop-color:#2E5C8A"/>
+                                                </linearGradient>
+                                            </defs>
+                                            <path d="M12 2L20.5 7V17L12 22L3.5 17V7L12 2Z" fill="url(#cpp-nav-csharp-gradient)"/>
+                                            <path d="M13 8.5C12.5 8 11.8 7.5 10 7.5C8 7.5 6.5 9 6.5 12C6.5 15 8 16.5 10 16.5C11.8 16.5 12.5 16 13 15.5" stroke="white" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+                                            <g fill="white">
+                                                <rect x="15.5" y="9" width="0.8" height="2.5"/>
+                                                <rect x="14.75" y="9.75" width="2.3" height="0.8"/>
+                                                <rect x="17.2" y="11.5" width="0.8" height="2.5"/>
+                                                <rect x="16.45" y="12.25" width="2.3" height="0.8"/>
+                                            </g>
+                                        </svg>
+                                    </div>
+                                    C++
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </nav>
+
+                <button id="theme-toggle" class="p-2 rounded-lg bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors duration-200">
+                    <svg id="sun-icon" class="w-5 h-5 text-yellow-500 hidden" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM18.894 6.166a.75.75 0 00-1.06-1.06l-1.591 1.59a.75.75 0 101.06 1.061l1.591-1.59zM21.75 12a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5H21a.75.75 0 01.75.75zM17.834 18.894a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 10-1.061 1.06l1.59 1.591zM12 18a.75.75 0 01.75.75V21a.75.75 0 01-1.5 0v-2.25A.75.75 0 0112 18zM7.758 17.303a.75.75 0 00-1.061-1.06l-1.591 1.59a.75.75 0 001.06 1.061l1.591-1.59zM6 12a.75.75 0 01-.75.75H3a.75.75 0 010-1.5h2.25A.75.75 0 016 12zM6.697 7.757a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 00-1.061 1.06l1.59 1.591z" />
+                    </svg>
+                    <svg id="moon-icon" class="w-5 h-5 text-gray-700" fill="currentColor" viewBox="0 0 24 24">
+                        <path fill-rule="evenodd" d="M9.528 1.718a.75.75 0 01.162.819A8.97 8.97 0 009 6a9 9 0 009 9 8.97 8.97 0 003.463-.69.75.75 0 01.981.98 10.503 10.503 0 01-9.694 6.46c-5.799 0-10.5-4.701-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 01.818.162z" clip-rule="evenodd" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+        <div class="max-w-4xl mx-auto">
+            <div class="mb-8">
+                <div class="flex items-center mb-4">
+                    <a href="index.html" class="text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 mr-4">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                        </svg>
+                    </a>
+                    <div class="flex items-center">
+                        <div class="w-12 h-12 bg-gradient-to-br from-purple-400 to-purple-700 rounded-lg flex items-center justify-center mr-4 p-2">
+                            <svg viewBox="0 0 24 24" class="w-8 h-8">
+                                <defs>
+                                    <linearGradient id="csharp-page-header-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                        <stop offset="0%" style="stop-color:#A855F7"/>
+                                        <stop offset="50%" style="stop-color:#9333EA"/>
+                                        <stop offset="100%" style="stop-color:#7C3AED"/>
+                                    </linearGradient>
+                                </defs>
+                                <!-- Hexagon shape -->
+                                <path d="M12 2L20.5 7V17L12 22L3.5 17V7L12 2Z" fill="url(#csharp-page-header-gradient)"/>
+                                <!-- Simple white C letter -->
+                                <path d="M14 8.5C13.5 8 12.8 7.5 11 7.5C9 7.5 7.5 9 7.5 12C7.5 15 9 16.5 11 16.5C12.8 16.5 13.5 16 14 15.5" stroke="white" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+                                <!-- Hash symbol -->
+                                <g fill="white">
+                                    <rect x="16.5" y="8.5" width="0.8" height="3.5"/>
+                                    <rect x="17.6" y="8.5" width="0.8" height="3.5"/>
+                                    <rect x="16" y="9.2" width="3" height="0.8"/>
+                                    <rect x="16" y="10.5" width="3" height="0.8"/>
+                                </g>
+                            </svg>
+                        </div>
+                        <div>
+                            <h1 class="text-3xl font-bold text-gray-900 dark:text-white">C# 教學</h1>
+                            <p class="text-gray-600 dark:text-gray-300">微軟的現代化程式語言</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-purple-50 dark:bg-purple-900/20 border border-purple-200 dark:border-purple-800 rounded-lg p-4">
+                    <h2 class="font-semibold text-purple-900 dark:text-purple-100 mb-2">學習目標</h2>
+                    <ul class="text-purple-800 dark:text-purple-200 text-sm space-y-1">
+                        <li>• 了解 C# 的特色和 .NET 生態系統</li>
+                        <li>• 掌握基本語法和強型別系統</li>
+                        <li>• 學會物件導向程式設計概念</li>
+                        <li>• 掌握類別、物件、封裝和繼承</li>
+                        <li>• 學會例外處理和集合操作</li>
+                        <li>• 了解 LINQ 和非同步程式設計</li>
+                        <li>• 能夠開發現代化應用程式</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- C# Lessons -->
+            <div class="space-y-6">
+                <!-- 第1課：C# 簡介與第一個程式 -->
+                <div class="card p-6">
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="flex-1">
+                            <div class="flex items-center mb-2">
+                                <h3 class="text-xl font-bold text-gray-900 dark:text-white mr-3">第1課：C# 簡介與第一個程式</h3>
+                                <span class="px-2 py-1 text-xs font-medium rounded-full bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200">中級</span>
+                            </div>
+                            <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
+                                了解什麼是 C#，它的特色和 .NET 生態系統，並編寫你的第一個 C# 程式。
+                            </p>
+                        </div>
+                        <button onclick="toggleLesson(this)" class="ml-4 p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+                            <svg class="w-5 h-5 text-gray-500 dark:text-gray-400 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="lesson-content hidden space-y-4 border-t border-gray-200 dark:border-gray-700 pt-4">
+                        <div>
+                            <h4 class="font-semibold text-gray-900 dark:text-white mb-2">什麼是 C#？</h4>
+                            <div class="text-gray-600 dark:text-gray-300 leading-relaxed space-y-3">
+                                <p>C#（讀作 "C Sharp"）是由微軟開發的現代化程式語言，於 2000 年首次發布。它是 .NET 平台的主要語言之一，結合了 C++ 的強大功能和 Visual Basic 的易用性。</p>
+                                <p><strong>C# 的核心特色：</strong></p>
+                                <ul class="list-disc list-inside space-y-1 ml-4">
+                                    <li><strong>強型別系統：</strong>編譯時期檢查型別，減少執行時錯誤</li>
+                                    <li><strong>物件導向：</strong>完整支援封裝、繼承、多型</li>
+                                    <li><strong>記憶體管理：</strong>自動垃圾回收，無需手動管理記憶體</li>
+                                    <li><strong>跨平台：</strong>.NET Core/.NET 5+ 支援 Windows、macOS、Linux</li>
+                                    <li><strong>豐富的 API：</strong>.NET 基礎類別庫提供大量功能</li>
+                                    <li><strong>現代語法：</strong>支援 LINQ、async/await、泛型等現代特性</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-900 dark:text-white mb-2">你的第一個 C# 程式：</h4>
+                            <pre class="code-block"><button class="copy-btn" onclick="copyCode(this)">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                                </svg>
+                            </button><code>// Program.cs
+// 這是你的第一個 C# 程式
+
+using System;  // 引入 System 命名空間
+
+namespace HelloWorld  // 定義命名空間
+{
+    class Program  // 定義類別
+    {
+        // Main 方法是程式的進入點
+        static void Main(string[] args)
+        {
+            // 在控制台輸出文字
+            Console.WriteLine("Hello, World!");
+            Console.WriteLine("歡迎來到 C# 的世界！");
+            Console.WriteLine("C# 是一種現代化的程式語言");
+
+            // 宣告和使用變數
+            string language = "C#";
+            int year = 2000;
+            double version = 10.0;
+            bool isModern = true;
+
+            // 使用字串插值輸出變數
+            Console.WriteLine($"程式語言：{language}");
+            Console.WriteLine($"發布年份：{year}");
+            Console.WriteLine($"目前版本：{version}");
+            Console.WriteLine($"是否現代化：{isModern}");
+
+            // 等待使用者按鍵（防止程式立即結束）
+            Console.WriteLine("\n按任意鍵結束程式...");
+            Console.ReadKey();
+        }
+    }
+}</code></pre>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-900 dark:text-white mb-2">程式碼解釋：</h4>
+                            <div class="text-gray-600 dark:text-gray-300 leading-relaxed space-y-3">
+                                <ul class="list-disc list-inside space-y-2 ml-4">
+                                    <li><strong>using System：</strong>引入 System 命名空間，提供基本功能如 Console</li>
+                                    <li><strong>namespace：</strong>命名空間用來組織程式碼，避免名稱衝突</li>
+                                    <li><strong>class Program：</strong>定義一個類別，C# 中所有程式碼都必須在類別內</li>
+                                    <li><strong>static void Main：</strong>程式的進入點，CLR 會從這裡開始執行</li>
+                                    <li><strong>Console.WriteLine：</strong>在控制台輸出文字並換行</li>
+                                    <li><strong>$""：</strong>字串插值，可以在字串中嵌入變數</li>
+                                    <li><strong>Console.ReadKey：</strong>等待使用者按鍵</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-900 dark:text-white mb-2">.NET 生態系統：</h4>
+                            <div class="text-gray-600 dark:text-gray-300 leading-relaxed space-y-3">
+                                <div class="bg-gray-50 dark:bg-gray-800 p-4 rounded-lg">
+                                    <p><strong>.NET Framework：</strong>Windows 專用的原始版本</p>
+                                    <p><strong>.NET Core：</strong>跨平台的開源版本</p>
+                                    <p><strong>.NET 5/6/7/8：</strong>統一的跨平台版本</p>
+                                    <p><strong>CLR：</strong>Common Language Runtime，負責執行 .NET 程式</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-4">
+                            <h5 class="font-semibold text-blue-900 dark:text-blue-100 mb-2">💡 實作練習</h5>
+                            <p class="text-blue-800 dark:text-blue-200 text-sm">
+                                修改程式碼，讓它顯示你的個人資訊：姓名、年齡、居住城市，體驗 C# 變數和字串插值的使用！
+                            </p>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-900 dark:text-white mb-2">C# 的應用領域：</h4>
+                            <div class="text-gray-600 dark:text-gray-300 leading-relaxed">
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div>
+                                        <p><strong>🖥️ 桌面應用</strong></p>
+                                        <p class="text-sm">WPF、WinForms、WinUI</p>
+                                    </div>
+                                    <div>
+                                        <p><strong>🌐 Web 開發</strong></p>
+                                        <p class="text-sm">ASP.NET Core、Blazor</p>
+                                    </div>
+                                    <div>
+                                        <p><strong>📱 行動應用</strong></p>
+                                        <p class="text-sm">Xamarin、.NET MAUI</p>
+                                    </div>
+                                    <div>
+                                        <p><strong>🎮 遊戲開發</strong></p>
+                                        <p class="text-sm">Unity 遊戲引擎</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card p-6">
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="flex-1">
+                            <div class="flex items-center mb-2">
+                                <h3 class="text-xl font-bold text-gray-900 dark:text-white mr-3">第2課：變數與資料型別</h3>
+                                <span class="px-2 py-1 text-xs font-medium rounded-full bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200">中級</span>
+                            </div>
+                            <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
+                                學習 C# 的型別系統、變數宣告和型別轉換。
+                            </p>
+                        </div>
+                        <button onclick="toggleLesson(this)" class="ml-4 p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+                            <svg class="w-5 h-5 text-gray-500 dark:text-gray-400 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="lesson-content hidden space-y-4 border-t border-gray-200 dark:border-gray-700 pt-4">
+                        <div>
+                            <h4 class="font-semibold text-gray-900 dark:text-white mb-2">程式碼範例：</h4>
+                            <pre class="code-block"><button class="copy-btn" onclick="copyCode(this)">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                                </svg>
+                            </button><code>using System;
+
+class DataTypes
+{
+    static void Main()
+    {
+        // 基本資料型別
+        int age = 25;                    // 整數
+        double height = 175.5;           // 雙精度浮點數
+        float weight = 70.5f;            // 單精度浮點數
+        char grade = 'A';                // 字元
+        string name = "小明";             // 字串
+        bool isStudent = true;           // 布林值
+        
+        // var 關鍵字 (型別推斷)
+        var city = "台北";               // 編譯器推斷為 string
+        var score = 95;                  // 編譯器推斷為 int
+        
+        // 常數
+        const double PI = 3.14159;
+        
+        // 顯示資訊
+        Console.WriteLine($"姓名：{name}");
+        Console.WriteLine($"年齡：{age}");
+        Console.WriteLine($"身高：{height} 公分");
+        Console.WriteLine($"體重：{weight} 公斤");
+        Console.WriteLine($"等級：{grade}");
+        Console.WriteLine($"是學生：{isStudent}");
+        Console.WriteLine($"城市：{city}");
+        Console.WriteLine($"分數：{score}");
+        Console.WriteLine($"圓周率：{PI}");
+    }
+}</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 第3課：控制流程與陣列 -->
+                <div class="card p-6">
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="flex-1">
+                            <div class="flex items-center mb-2">
+                                <h3 class="text-xl font-bold text-gray-900 dark:text-white mr-3">第3課：控制流程與陣列</h3>
+                                <span class="px-2 py-1 text-xs font-medium rounded-full bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200">進階</span>
+                            </div>
+                            <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
+                                學習 C# 的條件判斷、迴圈控制和陣列操作。
+                            </p>
+                        </div>
+                        <button onclick="toggleLesson(this)" class="ml-4 p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+                            <svg class="w-5 h-5 text-gray-500 dark:text-gray-400 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="lesson-content hidden space-y-4 border-t border-gray-200 dark:border-gray-700 pt-4">
+                        <div>
+                            <h4 class="font-semibold text-gray-900 dark:text-white mb-2">條件判斷：</h4>
+                            <pre class="code-block"><button class="copy-btn" onclick="copyCode(this)">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                                </svg>
+                            </button><code>using System;
+
+class ControlFlow
+{
+    static void Main()
+    {
+        // if-else 條件判斷
+        int score = 85;
+
+        if (score >= 90)
+        {
+            Console.WriteLine("等級：A");
+        }
+        else if (score >= 80)
+        {
+            Console.WriteLine("等級：B");
+        }
+        else if (score >= 70)
+        {
+            Console.WriteLine("等級：C");
+        }
+        else if (score >= 60)
+        {
+            Console.WriteLine("等級：D");
+        }
+        else
+        {
+            Console.WriteLine("等級：F");
+        }
+
+        // switch 語句
+        string dayOfWeek = "Monday";
+
+        switch (dayOfWeek)
+        {
+            case "Monday":
+                Console.WriteLine("星期一 - 新的一週開始！");
+                break;
+            case "Tuesday":
+                Console.WriteLine("星期二 - 繼續努力！");
+                break;
+            case "Wednesday":
+                Console.WriteLine("星期三 - 週中了！");
+                break;
+            case "Thursday":
+                Console.WriteLine("星期四 - 快到週末了！");
+                break;
+            case "Friday":
+                Console.WriteLine("星期五 - 週末即將到來！");
+                break;
+            case "Saturday":
+            case "Sunday":
+                Console.WriteLine("週末 - 休息時間！");
+                break;
+            default:
+                Console.WriteLine("無效的日期");
+                break;
+        }
+
+        // 三元運算子
+        int age = 20;
+        string status = (age >= 18) ? "成年人" : "未成年";
+        Console.WriteLine($"年齡 {age}：{status}");
+
+        // 邏輯運算子
+        bool hasLicense = true;
+        bool hasInsurance = true;
+
+        if (hasLicense && hasInsurance)
+        {
+            Console.WriteLine("可以開車");
+        }
+        else if (hasLicense || hasInsurance)
+        {
+            Console.WriteLine("需要補齊證件");
+        }
+        else
+        {
+            Console.WriteLine("不能開車");
+        }
+
+        // null 條件運算子 (C# 6.0+)
+        string name = null;
+        int? nameLength = name?.Length;  // 如果 name 為 null，結果也是 null
+        Console.WriteLine($"姓名長度：{nameLength ?? 0}");  // ?? 是 null 合併運算子
+    }
+}</code></pre>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-900 dark:text-white mb-2">迴圈控制：</h4>
+                            <pre class="code-block"><button class="copy-btn" onclick="copyCode(this)">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                                </svg>
+                            </button><code>using System;
+
+class Loops
+{
+    static void Main()
+    {
+        Console.WriteLine("=== for 迴圈 ===");
+        // for 迴圈
+        for (int i = 1; i <= 5; i++)
+        {
+            Console.WriteLine($"第 {i} 次迴圈");
+        }
+
+        Console.WriteLine("\n=== while 迴圈 ===");
+        // while 迴圈
+        int count = 1;
+        while (count <= 3)
+        {
+            Console.WriteLine($"while 迴圈第 {count} 次");
+            count++;
+        }
+
+        Console.WriteLine("\n=== do-while 迴圈 ===");
+        // do-while 迴圈
+        int number = 1;
+        do
+        {
+            Console.WriteLine($"do-while 迴圈第 {number} 次");
+            number++;
+        } while (number <= 3);
+
+        Console.WriteLine("\n=== foreach 迴圈 ===");
+        // foreach 迴圈（用於陣列和集合）
+        string[] fruits = { "蘋果", "香蕉", "橘子" };
+        foreach (string fruit in fruits)
+        {
+            Console.WriteLine($"水果：{fruit}");
+        }
+
+        Console.WriteLine("\n=== 巢狀迴圈 ===");
+        // 巢狀迴圈 - 九九乘法表
+        for (int i = 1; i <= 3; i++)
+        {
+            for (int j = 1; j <= 3; j++)
+            {
+                Console.Write($"{i} x {j} = {i * j}\t");
+            }
+            Console.WriteLine();
+        }
+
+        Console.WriteLine("\n=== break 和 continue ===");
+        // break 和 continue
+        for (int i = 1; i <= 10; i++)
+        {
+            if (i == 5)
+            {
+                Console.WriteLine("跳過 5");
+                continue;  // 跳過當前迭代
+            }
+
+            if (i == 8)
+            {
+                Console.WriteLine("在 8 處停止");
+                break;  // 跳出迴圈
+            }
+
+            Console.WriteLine($"數字：{i}");
+        }
+
+        Console.WriteLine("\n=== 尋找質數 ===");
+        // 實用範例：尋找質數
+        int limit = 20;
+        Console.WriteLine($"1 到 {limit} 的質數：");
+
+        for (int num = 2; num <= limit; num++)
+        {
+            bool isPrime = true;
+
+            for (int i = 2; i <= Math.Sqrt(num); i++)
+            {
+                if (num % i == 0)
+                {
+                    isPrime = false;
+                    break;
+                }
+            }
+
+            if (isPrime)
+            {
+                Console.Write($"{num} ");
+            }
+        }
+        Console.WriteLine();
+    }
+}</code></pre>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-900 dark:text-white mb-2">陣列基礎：</h4>
+                            <pre class="code-block"><button class="copy-btn" onclick="copyCode(this)">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                                </svg>
+                            </button><code>using System;
+using System.Linq;  // 用於 LINQ 方法
+
+class Arrays
+{
+    static void Main()
+    {
+        Console.WriteLine("=== 陣列宣告和初始化 ===");
+
+        // 陣列宣告方式
+        int[] numbers1 = new int[5];  // 宣告大小為 5 的陣列
+        int[] numbers2 = { 1, 2, 3, 4, 5 };  // 直接初始化
+        int[] numbers3 = new int[] { 10, 20, 30, 40, 50 };  // 另一種初始化方式
+
+        // 字串陣列
+        string[] names = { "小明", "小華", "小美", "小強" };
+
+        Console.WriteLine($"numbers2 陣列長度：{numbers2.Length}");
+
+        Console.WriteLine("\n=== 存取陣列元素 ===");
+        // 存取和修改陣列元素
+        numbers1[0] = 100;
+        numbers1[1] = 200;
+        numbers1[2] = 300;
+
+        Console.WriteLine($"第一個元素：{numbers1[0]}");
+        Console.WriteLine($"最後一個元素：{numbers2[numbers2.Length - 1]}");
+
+        Console.WriteLine("\n=== 遍歷陣列 ===");
+        // 使用 for 迴圈
+        Console.WriteLine("使用 for 迴圈：");
+        for (int i = 0; i < numbers2.Length; i++)
+        {
+            Console.WriteLine($"索引 {i}：{numbers2[i]}");
+        }
+
+        // 使用 foreach 迴圈
+        Console.WriteLine("\n使用 foreach 迴圈：");
+        foreach (int number in numbers2)
+        {
+            Console.WriteLine($"數字：{number}");
+        }
+
+        Console.WriteLine("\n=== 陣列操作 ===");
+        int[] scores = { 85, 92, 78, 96, 88, 73, 91 };
+
+        // 計算總分和平均分
+        int total = 0;
+        foreach (int score in scores)
+        {
+            total += score;
+        }
+        double average = (double)total / scores.Length;
+
+        Console.WriteLine($"總分：{total}");
+        Console.WriteLine($"平均分：{average:F2}");
+
+        // 尋找最大值和最小值
+        int max = scores[0];
+        int min = scores[0];
+
+        foreach (int score in scores)
+        {
+            if (score > max) max = score;
+            if (score < min) min = score;
+        }
+
+        Console.WriteLine($"最高分：{max}");
+        Console.WriteLine($"最低分：{min}");
+
+        // 使用 LINQ 方法（更簡潔）
+        Console.WriteLine("\n=== 使用 LINQ 方法 ===");
+        Console.WriteLine($"LINQ 總分：{scores.Sum()}");
+        Console.WriteLine($"LINQ 平均分：{scores.Average():F2}");
+        Console.WriteLine($"LINQ 最高分：{scores.Max()}");
+        Console.WriteLine($"LINQ 最低分：{scores.Min()}");
+        Console.WriteLine($"及格人數：{scores.Count(s => s >= 60)}");
+
+        // 排序
+        Array.Sort(scores);
+        Console.WriteLine("\n排序後的分數：");
+        foreach (int score in scores)
+        {
+            Console.Write($"{score} ");
+        }
+        Console.WriteLine();
+
+        // 搜尋
+        int searchScore = 85;
+        int index = Array.IndexOf(scores, searchScore);
+        if (index >= 0)
+        {
+            Console.WriteLine($"分數 {searchScore} 在索引 {index}");
+        }
+        else
+        {
+            Console.WriteLine($"找不到分數 {searchScore}");
+        }
+    }
+}</code></pre>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-900 dark:text-white mb-2">多維陣列：</h4>
+                            <pre class="code-block"><button class="copy-btn" onclick="copyCode(this)">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                                </svg>
+                            </button><code>using System;
+
+class MultiDimensionalArrays
+{
+    static void Main()
+    {
+        Console.WriteLine("=== 二維陣列 ===");
+
+        // 二維陣列宣告和初始化
+        int[,] matrix = new int[3, 4];  // 3 行 4 列
+        int[,] numbers = {
+            { 1, 2, 3, 4 },
+            { 5, 6, 7, 8 },
+            { 9, 10, 11, 12 }
+        };
+
+        // 存取二維陣列元素
+        matrix[0, 0] = 100;
+        matrix[1, 2] = 200;
+
+        Console.WriteLine($"matrix[0,0] = {matrix[0, 0]}");
+        Console.WriteLine($"numbers[1,2] = {numbers[1, 2]}");
+
+        // 遍歷二維陣列
+        Console.WriteLine("\n二維陣列內容：");
+        for (int i = 0; i < numbers.GetLength(0); i++)  // GetLength(0) 取得第一維長度
+        {
+            for (int j = 0; j < numbers.GetLength(1); j++)  // GetLength(1) 取得第二維長度
+            {
+                Console.Write($"{numbers[i, j]}\t");
+            }
+            Console.WriteLine();
+        }
+
+        Console.WriteLine("\n=== 鋸齒陣列 (Jagged Array) ===");
+
+        // 鋸齒陣列：陣列的陣列
+        int[][] jaggedArray = new int[3][];
+        jaggedArray[0] = new int[] { 1, 2 };
+        jaggedArray[1] = new int[] { 3, 4, 5, 6 };
+        jaggedArray[2] = new int[] { 7, 8, 9 };
+
+        // 或者直接初始化
+        int[][] jaggedArray2 = {
+            new int[] { 1, 2 },
+            new int[] { 3, 4, 5, 6 },
+            new int[] { 7, 8, 9 }
+        };
+
+        Console.WriteLine("鋸齒陣列內容：");
+        for (int i = 0; i < jaggedArray2.Length; i++)
+        {
+            Console.Write($"第 {i + 1} 行：");
+            for (int j = 0; j < jaggedArray2[i].Length; j++)
+            {
+                Console.Write($"{jaggedArray2[i][j]} ");
+            }
+            Console.WriteLine();
+        }
+
+        Console.WriteLine("\n=== 實用範例：成績表 ===");
+
+        // 學生成績表
+        string[] students = { "小明", "小華", "小美" };
+        string[] subjects = { "數學", "英文", "物理" };
+        int[,] grades = {
+            { 85, 92, 78 },  // 小明的成績
+            { 90, 88, 95 },  // 小華的成績
+            { 87, 91, 89 }   // 小美的成績
+        };
+
+        // 顯示成績表
+        Console.Write("學生\t");
+        foreach (string subject in subjects)
+        {
+            Console.Write($"{subject}\t");
+        }
+        Console.WriteLine("平均");
+
+        for (int i = 0; i < students.Length; i++)
+        {
+            Console.Write($"{students[i]}\t");
+            int total = 0;
+
+            for (int j = 0; j < subjects.Length; j++)
+            {
+                Console.Write($"{grades[i, j]}\t");
+                total += grades[i, j];
+            }
+
+            double average = (double)total / subjects.Length;
+            Console.WriteLine($"{average:F1}");
+        }
+
+        // 計算各科平均
+        Console.WriteLine("\n各科平均分數：");
+        for (int j = 0; j < subjects.Length; j++)
+        {
+            int subjectTotal = 0;
+            for (int i = 0; i < students.Length; i++)
+            {
+                subjectTotal += grades[i, j];
+            }
+            double subjectAverage = (double)subjectTotal / students.Length;
+            Console.WriteLine($"{subjects[j]}：{subjectAverage:F1}");
+        }
+    }
+}</code></pre>
+                        </div>
+                        <div class="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-4">
+                            <h5 class="font-semibold text-blue-900 dark:text-blue-100 mb-2">💡 實作練習</h5>
+                            <p class="text-blue-800 dark:text-blue-200 text-sm">
+                                建立一個簡單的學生管理系統，使用陣列儲存學生資料，實作新增、搜尋和統計功能！
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 第4課：物件導向程式設計 -->
+                <div class="card p-6">
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="flex-1">
+                            <div class="flex items-center mb-2">
+                                <h3 class="text-xl font-bold text-gray-900 dark:text-white mr-3">第4課：物件導向程式設計</h3>
+                                <span class="px-2 py-1 text-xs font-medium rounded-full bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200">進階</span>
+                            </div>
+                            <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
+                                學習 C# 的類別、物件、封裝、繼承和多型等物件導向核心概念。
+                            </p>
+                        </div>
+                        <button onclick="toggleLesson(this)" class="ml-4 p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+                            <svg class="w-5 h-5 text-gray-500 dark:text-gray-400 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="lesson-content hidden space-y-4 border-t border-gray-200 dark:border-gray-700 pt-4">
+                        <div>
+                            <h4 class="font-semibold text-gray-900 dark:text-white mb-2">類別與物件基礎：</h4>
+                            <pre class="code-block"><button class="copy-btn" onclick="copyCode(this)">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                                </svg>
+                            </button><code>using System;
+
+// 定義一個學生類別
+public class Student
+{
+    // 欄位 (Fields) - 私有資料
+    private string name;
+    private int age;
+    private double gpa;
+
+    // 屬性 (Properties) - 提供安全的存取方式
+    public string Name
+    {
+        get { return name; }
+        set
+        {
+            if (!string.IsNullOrEmpty(value))
+                name = value;
+        }
+    }
+
+    public int Age
+    {
+        get { return age; }
+        set
+        {
+            if (value >= 0 && value <= 150)
+                age = value;
+        }
+    }
+
+    public double GPA
+    {
+        get { return gpa; }
+        set
+        {
+            if (value >= 0.0 && value <= 4.0)
+                gpa = value;
+        }
+    }
+
+    // 自動屬性 (Auto-implemented Properties)
+    public string StudentId { get; set; }
+    public string Major { get; set; }
+
+    // 建構子 (Constructor)
+    public Student()
+    {
+        // 預設建構子
+        Name = "未知";
+        Age = 0;
+        GPA = 0.0;
+        StudentId = "000000";
+        Major = "未定";
+    }
+
+    public Student(string name, int age, string studentId)
+    {
+        Name = name;
+        Age = age;
+        StudentId = studentId;
+        GPA = 0.0;
+        Major = "未定";
+    }
+
+    public Student(string name, int age, string studentId, string major, double gpa)
+    {
+        Name = name;
+        Age = age;
+        StudentId = studentId;
+        Major = major;
+        GPA = gpa;
+    }
+
+    // 方法 (Methods)
+    public void Study(string subject)
+    {
+        Console.WriteLine($"{Name} 正在學習 {subject}");
+    }
+
+    public void TakeExam(string subject, double score)
+    {
+        Console.WriteLine($"{Name} 參加了 {subject} 考試，得分：{score}");
+
+        if (score >= 90)
+            Console.WriteLine("表現優秀！");
+        else if (score >= 70)
+            Console.WriteLine("表現良好！");
+        else
+            Console.WriteLine("需要更加努力！");
+    }
+
+    public string GetGradeLevel()
+    {
+        if (GPA >= 3.5) return "優等生";
+        else if (GPA >= 3.0) return "良好";
+        else if (GPA >= 2.0) return "及格";
+        else return "需要改進";
+    }
+
+    public void DisplayInfo()
+    {
+        Console.WriteLine($"=== 學生資訊 ===");
+        Console.WriteLine($"姓名：{Name}");
+        Console.WriteLine($"年齡：{Age}");
+        Console.WriteLine($"學號：{StudentId}");
+        Console.WriteLine($"主修：{Major}");
+        Console.WriteLine($"GPA：{GPA:F2}");
+        Console.WriteLine($"等級：{GetGradeLevel()}");
+    }
+
+    // 覆寫 ToString 方法
+    public override string ToString()
+    {
+        return $"學生[{Name}, {Age}歲, {Major}]";
+    }
+}
+
+// 使用範例
+class Program
+{
+    static void Main()
+    {
+        // 建立物件
+        Student student1 = new Student();
+        Student student2 = new Student("小明", 20, "S001");
+        Student student3 = new Student("小華", 21, "S002", "資訊工程", 3.8);
+
+        // 設定屬性
+        student1.Name = "小美";
+        student1.Age = 19;
+        student1.StudentId = "S003";
+        student1.Major = "電機工程";
+        student1.GPA = 3.5;
+
+        // 呼叫方法
+        student2.Study("程式設計");
+        student2.TakeExam("程式設計", 95);
+
+        // 顯示資訊
+        student1.DisplayInfo();
+        Console.WriteLine();
+        student2.DisplayInfo();
+        Console.WriteLine();
+        student3.DisplayInfo();
+
+        // 使用 ToString
+        Console.WriteLine($"\n所有學生：");
+        Console.WriteLine(student1);
+        Console.WriteLine(student2);
+        Console.WriteLine(student3);
+    }
+}</code></pre>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-900 dark:text-white mb-2">繼承 (Inheritance)：</h4>
+                            <pre class="code-block"><button class="copy-btn" onclick="copyCode(this)">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                                </svg>
+                            </button><code>using System;
+
+// 基底類別 (Base Class)
+public class Person
+{
+    protected string name;  // protected：子類別可以存取
+    protected int age;
+
+    public string Name
+    {
+        get { return name; }
+        set { name = value; }
+    }
+
+    public int Age
+    {
+        get { return age; }
+        set { age = value; }
+    }
+
+    public Person(string name, int age)
+    {
+        this.name = name;
+        this.age = age;
+    }
+
+    // 虛擬方法 (Virtual Method) - 可以被子類別覆寫
+    public virtual void Introduce()
+    {
+        Console.WriteLine($"我是 {name}，今年 {age} 歲");
+    }
+
+    public virtual void Work()
+    {
+        Console.WriteLine($"{name} 正在工作");
+    }
+}
+
+// 衍生類別 (Derived Class) - 學生
+public class Student : Person
+{
+    private string studentId;
+    private string major;
+
+    public string StudentId
+    {
+        get { return studentId; }
+        set { studentId = value; }
+    }
+
+    public string Major
+    {
+        get { return major; }
+        set { major = value; }
+    }
+
+    // 建構子：使用 base 呼叫父類別建構子
+    public Student(string name, int age, string studentId, string major)
+        : base(name, age)
+    {
+        this.studentId = studentId;
+        this.major = major;
+    }
+
+    // 覆寫父類別方法
+    public override void Introduce()
+    {
+        base.Introduce();  // 呼叫父類別的方法
+        Console.WriteLine($"我是學生，學號：{studentId}，主修：{major}");
+    }
+
+    public override void Work()
+    {
+        Console.WriteLine($"學生 {name} 正在學習和做作業");
+    }
+
+    // 新增學生特有的方法
+    public void Study()
+    {
+        Console.WriteLine($"{name} 正在讀書");
+    }
+
+    public void TakeExam()
+    {
+        Console.WriteLine($"{name} 正在考試");
+    }
+}
+
+// 衍生類別 - 教師
+public class Teacher : Person
+{
+    private string employeeId;
+    private string department;
+    private double salary;
+
+    public string EmployeeId { get; set; }
+    public string Department { get; set; }
+    public double Salary { get; set; }
+
+    public Teacher(string name, int age, string employeeId, string department, double salary)
+        : base(name, age)
+    {
+        EmployeeId = employeeId;
+        Department = department;
+        Salary = salary;
+    }
+
+    public override void Introduce()
+    {
+        base.Introduce();
+        Console.WriteLine($"我是教師，員工編號：{EmployeeId}，部門：{Department}");
+    }
+
+    public override void Work()
+    {
+        Console.WriteLine($"教師 {name} 正在教學和研究");
+    }
+
+    public void Teach(string subject)
+    {
+        Console.WriteLine($"{name} 正在教授 {subject}");
+    }
+
+    public void GradeExams()
+    {
+        Console.WriteLine($"{name} 正在批改考卷");
+    }
+}
+
+// 使用範例
+class InheritanceExample
+{
+    static void Main()
+    {
+        // 建立不同類型的物件
+        Person person = new Person("一般人", 30);
+        Student student = new Student("小明", 20, "S001", "資訊工程");
+        Teacher teacher = new Teacher("王老師", 35, "T001", "資訊系", 60000);
+
+        Console.WriteLine("=== 個別介紹 ===");
+        person.Introduce();
+        Console.WriteLine();
+
+        student.Introduce();
+        student.Study();
+        student.TakeExam();
+        Console.WriteLine();
+
+        teacher.Introduce();
+        teacher.Teach("程式設計");
+        teacher.GradeExams();
+        Console.WriteLine();
+
+        Console.WriteLine("=== 多型示範 ===");
+        // 多型：使用基底類別參考指向衍生類別物件
+        Person[] people = { person, student, teacher };
+
+        foreach (Person p in people)
+        {
+            p.Introduce();  // 會呼叫各自覆寫的方法
+            p.Work();       // 會呼叫各自覆寫的方法
+            Console.WriteLine();
+        }
+
+        Console.WriteLine("=== 型別檢查 ===");
+        foreach (Person p in people)
+        {
+            Console.WriteLine($"{p.Name} 的型別：{p.GetType().Name}");
+
+            // 使用 is 運算子檢查型別
+            if (p is Student s)
+            {
+                Console.WriteLine($"  這是學生，主修：{s.Major}");
+            }
+            else if (p is Teacher t)
+            {
+                Console.WriteLine($"  這是教師，部門：{t.Department}");
+            }
+            else
+            {
+                Console.WriteLine("  這是一般人");
+            }
+        }
+    }
+}</code></pre>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-900 dark:text-white mb-2">介面 (Interface) 與抽象類別：</h4>
+                            <pre class="code-block"><button class="copy-btn" onclick="copyCode(this)">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                                </svg>
+                            </button><code>using System;
+using System.Collections.Generic;
+
+// 介面定義
+public interface IDrawable
+{
+    void Draw();
+    void Move(int x, int y);
+}
+
+public interface IResizable
+{
+    void Resize(double factor);
+}
+
+// 抽象類別
+public abstract class Shape : IDrawable
+{
+    protected string color;
+    protected int x, y;
+
+    public string Color
+    {
+        get { return color; }
+        set { color = value; }
+    }
+
+    public int X { get { return x; } }
+    public int Y { get { return y; } }
+
+    public Shape(string color, int x, int y)
+    {
+        this.color = color;
+        this.x = x;
+        this.y = y;
+    }
+
+    // 抽象方法：子類別必須實作
+    public abstract double CalculateArea();
+    public abstract double CalculatePerimeter();
+
+    // 虛擬方法：子類別可以選擇覆寫
+    public virtual void Move(int newX, int newY)
+    {
+        x = newX;
+        y = newY;
+        Console.WriteLine($"{GetType().Name} 移動到 ({x}, {y})");
+    }
+
+    // 介面方法的預設實作
+    public virtual void Draw()
+    {
+        Console.WriteLine($"繪製{color}的{GetType().Name}在位置({x}, {y})");
+    }
+}
+
+// 圓形類別
+public class Circle : Shape, IResizable
+{
+    private double radius;
+
+    public double Radius
+    {
+        get { return radius; }
+        set { radius = value > 0 ? value : 1; }
+    }
+
+    public Circle(string color, int x, int y, double radius) : base(color, x, y)
+    {
+        Radius = radius;
+    }
+
+    public override double CalculateArea()
+    {
+        return Math.PI * radius * radius;
+    }
+
+    public override double CalculatePerimeter()
+    {
+        return 2 * Math.PI * radius;
+    }
+
+    public override void Draw()
+    {
+        Console.WriteLine($"繪製{color}圓形，半徑：{radius}，位置：({x}, {y})");
+    }
+
+    public void Resize(double factor)
+    {
+        radius *= factor;
+        Console.WriteLine($"圓形大小調整為原來的 {factor} 倍，新半徑：{radius:F2}");
+    }
+}
+
+// 矩形類別
+public class Rectangle : Shape, IResizable
+{
+    private double width, height;
+
+    public double Width
+    {
+        get { return width; }
+        set { width = value > 0 ? value : 1; }
+    }
+
+    public double Height
+    {
+        get { return height; }
+        set { height = value > 0 ? value : 1; }
+    }
+
+    public Rectangle(string color, int x, int y, double width, double height) : base(color, x, y)
+    {
+        Width = width;
+        Height = height;
+    }
+
+    public override double CalculateArea()
+    {
+        return width * height;
+    }
+
+    public override double CalculatePerimeter()
+    {
+        return 2 * (width + height);
+    }
+
+    public override void Draw()
+    {
+        Console.WriteLine($"繪製{color}矩形，寬：{width}，高：{height}，位置：({x}, {y})");
+    }
+
+    public void Resize(double factor)
+    {
+        width *= factor;
+        height *= factor;
+        Console.WriteLine($"矩形大小調整為原來的 {factor} 倍");
+    }
+}
+
+// 圖形管理器
+public class ShapeManager
+{
+    private List<Shape> shapes = new List<Shape>();
+
+    public void AddShape(Shape shape)
+    {
+        shapes.Add(shape);
+        Console.WriteLine($"新增了 {shape.GetType().Name}");
+    }
+
+    public void DrawAllShapes()
+    {
+        Console.WriteLine("=== 繪製所有圖形 ===");
+        foreach (Shape shape in shapes)
+        {
+            shape.Draw();
+        }
+    }
+
+    public void ShowAllAreas()
+    {
+        Console.WriteLine("=== 所有圖形面積 ===");
+        double totalArea = 0;
+
+        foreach (Shape shape in shapes)
+        {
+            double area = shape.CalculateArea();
+            Console.WriteLine($"{shape.GetType().Name}：{area:F2}");
+            totalArea += area;
+        }
+
+        Console.WriteLine($"總面積：{totalArea:F2}");
+    }
+
+    public void ResizeAllShapes(double factor)
+    {
+        Console.WriteLine($"=== 調整所有可調整大小的圖形 ===");
+        foreach (Shape shape in shapes)
+        {
+            if (shape is IResizable resizable)
+            {
+                resizable.Resize(factor);
+            }
+        }
+    }
+}
+
+// 使用範例
+class InterfaceExample
+{
+    static void Main()
+    {
+        // 建立圖形管理器
+        ShapeManager manager = new ShapeManager();
+
+        // 建立不同的圖形
+        Circle circle = new Circle("紅色", 10, 20, 5);
+        Rectangle rectangle = new Rectangle("藍色", 0, 0, 10, 8);
+
+        // 新增到管理器
+        manager.AddShape(circle);
+        manager.AddShape(rectangle);
+
+        // 繪製所有圖形
+        manager.DrawAllShapes();
+        Console.WriteLine();
+
+        // 顯示面積
+        manager.ShowAllAreas();
+        Console.WriteLine();
+
+        // 移動圖形
+        circle.Move(15, 25);
+        rectangle.Move(5, 5);
+        Console.WriteLine();
+
+        // 調整大小
+        manager.ResizeAllShapes(1.5);
+        Console.WriteLine();
+
+        // 再次顯示面積
+        manager.ShowAllAreas();
+
+        Console.WriteLine("\n=== 介面多型示範 ===");
+        // 使用介面參考
+        IDrawable[] drawables = { circle, rectangle };
+        foreach (IDrawable drawable in drawables)
+        {
+            drawable.Draw();
+        }
+
+        IResizable[] resizables = { circle, rectangle };
+        foreach (IResizable resizable in resizables)
+        {
+            resizable.Resize(0.8);
+        }
+    }
+}</code></pre>
+                        </div>
+                        <div class="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-4">
+                            <h5 class="font-semibold text-blue-900 dark:text-blue-100 mb-2">💡 實作練習</h5>
+                            <p class="text-blue-800 dark:text-blue-200 text-sm">
+                                設計一個動物園管理系統，建立動物基底類別和不同動物子類別，實作餵食和表演介面！
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 第5課：LINQ 與集合操作 -->
+                <div class="card p-6">
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="flex-1">
+                            <div class="flex items-center mb-2">
+                                <h3 class="text-xl font-bold text-gray-900 dark:text-white mr-3">第5課：LINQ 與集合操作</h3>
+                                <span class="px-2 py-1 text-xs font-medium rounded-full bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200">進階</span>
+                            </div>
+                            <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
+                                學習 C# 的 LINQ 查詢語法和強大的集合操作功能。
+                            </p>
+                        </div>
+                        <button onclick="toggleLesson(this)" class="ml-4 p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+                            <svg class="w-5 h-5 text-gray-500 dark:text-gray-400 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="lesson-content hidden space-y-4 border-t border-gray-200 dark:border-gray-700 pt-4">
+                        <div>
+                            <h4 class="font-semibold text-gray-900 dark:text-white mb-2">集合基礎 - List 和 Dictionary：</h4>
+                            <pre class="code-block"><button class="copy-btn" onclick="copyCode(this)">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                                </svg>
+                            </button><code>using System;
+using System.Collections.Generic;
+using System.Linq;
+
+class CollectionsBasics
+{
+    static void Main()
+    {
+        Console.WriteLine("=== List&lt;T&gt; 基礎操作 ===");
+
+        // 建立和初始化 List
+        List&lt;string&gt; fruits = new List&lt;string&gt;();
+        fruits.Add("蘋果");
+        fruits.Add("香蕉");
+        fruits.Add("橘子");
+
+        // 使用集合初始化器
+        List&lt;int&gt; numbers = new List&lt;int&gt; { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+
+        Console.WriteLine($"水果數量：{fruits.Count}");
+        Console.WriteLine($"第一個水果：{fruits[0]}");
+
+        // 遍歷 List
+        Console.WriteLine("所有水果：");
+        foreach (string fruit in fruits)
+        {
+            Console.WriteLine($"- {fruit}");
+        }
+
+        // List 操作
+        fruits.Insert(1, "葡萄");  // 在索引1插入
+        fruits.Remove("香蕉");     // 移除第一個符合的項目
+        fruits.RemoveAt(0);       // 移除索引0的項目
+
+        Console.WriteLine($"操作後的水果：{string.Join(", ", fruits)}");
+
+        Console.WriteLine("\n=== Dictionary&lt;TKey, TValue&gt; 基礎操作 ===");
+
+        // 建立字典
+        Dictionary&lt;string, int&gt; studentGrades = new Dictionary&lt;string, int&gt;
+        {
+            {"小明", 85},
+            {"小華", 92},
+            {"小美", 78},
+            {"小強", 96}
+        };
+
+        // 新增和修改
+        studentGrades["小麗"] = 88;  // 新增
+        studentGrades["小明"] = 90;  // 修改
+
+        Console.WriteLine($"學生人數：{studentGrades.Count}");
+        Console.WriteLine($"小華的成績：{studentGrades["小華"]}");
+
+        // 安全存取
+        if (studentGrades.TryGetValue("小王", out int grade))
+        {
+            Console.WriteLine($"小王的成績：{grade}");
+        }
+        else
+        {
+            Console.WriteLine("找不到小王的成績");
+        }
+
+        // 遍歷字典
+        Console.WriteLine("所有學生成績：");
+        foreach (KeyValuePair&lt;string, int&gt; kvp in studentGrades)
+        {
+            Console.WriteLine($"{kvp.Key}: {kvp.Value}分");
+        }
+
+        // 只遍歷鍵或值
+        Console.WriteLine("學生名單：" + string.Join(", ", studentGrades.Keys));
+        Console.WriteLine("成績列表：" + string.Join(", ", studentGrades.Values));
+
+        Console.WriteLine("\n=== HashSet&lt;T&gt; 和 Queue&lt;T&gt; ===");
+
+        // HashSet - 不重複集合
+        HashSet&lt;string&gt; uniqueFruits = new HashSet&lt;string&gt; { "蘋果", "香蕉", "橘子", "蘋果" };
+        Console.WriteLine($"唯一水果：{string.Join(", ", uniqueFruits)}");  // 不會有重複的蘋果
+
+        // Queue - 佇列 (先進先出)
+        Queue&lt;string&gt; taskQueue = new Queue&lt;string&gt;();
+        taskQueue.Enqueue("任務1");
+        taskQueue.Enqueue("任務2");
+        taskQueue.Enqueue("任務3");
+
+        Console.WriteLine("處理任務：");
+        while (taskQueue.Count > 0)
+        {
+            string task = taskQueue.Dequeue();
+            Console.WriteLine($"執行：{task}");
+        }
+
+        // Stack - 堆疊 (後進先出)
+        Stack&lt;string&gt; history = new Stack&lt;string&gt;();
+        history.Push("頁面1");
+        history.Push("頁面2");
+        history.Push("頁面3");
+
+        Console.WriteLine("瀏覽歷史（後退）：");
+        while (history.Count > 0)
+        {
+            string page = history.Pop();
+            Console.WriteLine($"回到：{page}");
+        }
+    }
+}</code></pre>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-900 dark:text-white mb-2">LINQ 基礎查詢：</h4>
+                            <pre class="code-block"><button class="copy-btn" onclick="copyCode(this)">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                                </svg>
+                            </button><code>using System;
+using System.Collections.Generic;
+using System.Linq;
+
+// 學生類別
+public class Student
+{
+    public string Name { get; set; }
+    public int Age { get; set; }
+    public string Major { get; set; }
+    public double GPA { get; set; }
+    public List&lt;int&gt; Scores { get; set; }
+
+    public Student(string name, int age, string major, double gpa, params int[] scores)
+    {
+        Name = name;
+        Age = age;
+        Major = major;
+        GPA = gpa;
+        Scores = scores.ToList();
+    }
+
+    public override string ToString()
+    {
+        return $"{Name}({Age}歲, {Major}, GPA:{GPA})";
+    }
+}
+
+class LinqBasics
+{
+    static void Main()
+    {
+        // 建立測試資料
+        List&lt;Student&gt; students = new List&lt;Student&gt;
+        {
+            new Student("小明", 20, "資訊工程", 3.8, 85, 92, 78),
+            new Student("小華", 21, "電機工程", 3.5, 90, 88, 95),
+            new Student("小美", 19, "資訊工程", 3.9, 87, 91, 89),
+            new Student("小強", 22, "機械工程", 3.2, 75, 80, 85),
+            new Student("小麗", 20, "電機工程", 3.7, 92, 89, 94)
+        };
+
+        List&lt;int&gt; numbers = new List&lt;int&gt; { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+
+        Console.WriteLine("=== Where - 篩選 ===");
+
+        // 篩選 GPA 大於 3.5 的學生
+        var highGpaStudents = students.Where(s =&gt; s.GPA &gt; 3.5);
+        Console.WriteLine("GPA &gt; 3.5 的學生：");
+        foreach (var student in highGpaStudents)
+        {
+            Console.WriteLine($"  {student}");
+        }
+
+        // 篩選偶數
+        var evenNumbers = numbers.Where(n =&gt; n % 2 == 0);
+        Console.WriteLine($"偶數：{string.Join(", ", evenNumbers)}");
+
+        Console.WriteLine("\n=== Select - 投影 ===");
+
+        // 選取學生姓名
+        var studentNames = students.Select(s =&gt; s.Name);
+        Console.WriteLine($"學生姓名：{string.Join(", ", studentNames)}");
+
+        // 建立匿名物件
+        var studentInfo = students.Select(s =&gt; new { s.Name, s.Major, s.GPA });
+        Console.WriteLine("學生基本資訊：");
+        foreach (var info in studentInfo)
+        {
+            Console.WriteLine($"  {info.Name} - {info.Major} (GPA: {info.GPA})");
+        }
+
+        // 數字平方
+        var squares = numbers.Select(n =&gt; n * n);
+        Console.WriteLine($"平方數：{string.Join(", ", squares)}");
+
+        Console.WriteLine("\n=== OrderBy - 排序 ===");
+
+        // 按 GPA 排序
+        var sortedByGpa = students.OrderBy(s =&gt; s.GPA);
+        Console.WriteLine("按 GPA 升序排列：");
+        foreach (var student in sortedByGpa)
+        {
+            Console.WriteLine($"  {student}");
+        }
+
+        // 按 GPA 降序排列
+        var sortedByGpaDesc = students.OrderByDescending(s =&gt; s.GPA);
+        Console.WriteLine("\n按 GPA 降序排列：");
+        foreach (var student in sortedByGpaDesc)
+        {
+            Console.WriteLine($"  {student}");
+        }
+
+        // 多重排序：先按主修，再按 GPA
+        var multiSort = students.OrderBy(s =&gt; s.Major).ThenByDescending(s =&gt; s.GPA);
+        Console.WriteLine("\n按主修分組，再按 GPA 降序：");
+        foreach (var student in multiSort)
+        {
+            Console.WriteLine($"  {student}");
+        }
+
+        Console.WriteLine("\n=== GroupBy - 分組 ===");
+
+        // 按主修分組
+        var groupedByMajor = students.GroupBy(s =&gt; s.Major);
+        Console.WriteLine("按主修分組：");
+        foreach (var group in groupedByMajor)
+        {
+            Console.WriteLine($"  {group.Key}：");
+            foreach (var student in group)
+            {
+                Console.WriteLine($"    {student}");
+            }
+        }
+
+        Console.WriteLine("\n=== 聚合函數 ===");
+
+        // 統計資訊
+        Console.WriteLine($"學生總數：{students.Count()}");
+        Console.WriteLine($"平均 GPA：{students.Average(s =&gt; s.GPA):F2}");
+        Console.WriteLine($"最高 GPA：{students.Max(s =&gt; s.GPA)}");
+        Console.WriteLine($"最低 GPA：{students.Min(s =&gt; s.GPA)}");
+        Console.WriteLine($"GPA 總和：{students.Sum(s =&gt; s.GPA):F2}");
+
+        // 條件統計
+        Console.WriteLine($"資訊工程學生數：{students.Count(s =&gt; s.Major == "資訊工程")}");
+        Console.WriteLine($"是否有 GPA 滿分學生：{students.Any(s =&gt; s.GPA == 4.0)}");
+        Console.WriteLine($"是否所有學生都及格：{students.All(s =&gt; s.GPA &gt;= 2.0)}");
+    }
+}</code></pre>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-900 dark:text-white mb-2">LINQ 進階操作：</h4>
+                            <pre class="code-block"><button class="copy-btn" onclick="copyCode(this)">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                                </svg>
+                            </button><code>using System;
+using System.Collections.Generic;
+using System.Linq;
+
+// 課程類別
+public class Course
+{
+    public string Name { get; set; }
+    public string Department { get; set; }
+    public int Credits { get; set; }
+
+    public Course(string name, string department, int credits)
+    {
+        Name = name;
+        Department = department;
+        Credits = credits;
+    }
+
+    public override string ToString()
+    {
+        return $"{Name}({Department}, {Credits}學分)";
+    }
+}
+
+// 選課記錄
+public class Enrollment
+{
+    public string StudentName { get; set; }
+    public string CourseName { get; set; }
+    public int Score { get; set; }
+
+    public Enrollment(string studentName, string courseName, int score)
+    {
+        StudentName = studentName;
+        CourseName = courseName;
+        Score = score;
+    }
+}
+
+class AdvancedLinq
+{
+    static void Main()
+    {
+        // 測試資料
+        List&lt;Student&gt; students = new List&lt;Student&gt;
+        {
+            new Student("小明", 20, "資訊工程", 3.8, 85, 92, 78),
+            new Student("小華", 21, "電機工程", 3.5, 90, 88, 95),
+            new Student("小美", 19, "資訊工程", 3.9, 87, 91, 89),
+            new Student("小強", 22, "機械工程", 3.2, 75, 80, 85)
+        };
+
+        List&lt;Course&gt; courses = new List&lt;Course&gt;
+        {
+            new Course("程式設計", "資訊工程", 3),
+            new Course("資料結構", "資訊工程", 3),
+            new Course("電路學", "電機工程", 4),
+            new Course("工程數學", "電機工程", 3),
+            new Course("機械設計", "機械工程", 4)
+        };
+
+        List&lt;Enrollment&gt; enrollments = new List&lt;Enrollment&gt;
+        {
+            new Enrollment("小明", "程式設計", 85),
+            new Enrollment("小明", "資料結構", 92),
+            new Enrollment("小華", "電路學", 90),
+            new Enrollment("小華", "工程數學", 88),
+            new Enrollment("小美", "程式設計", 87),
+            new Enrollment("小強", "機械設計", 75)
+        };
+
+        Console.WriteLine("=== Join - 聯結操作 ===");
+
+        // 內部聯結：學生和他們的選課記錄
+        var studentEnrollments = students.Join(
+            enrollments,
+            student =&gt; student.Name,
+            enrollment =&gt; enrollment.StudentName,
+            (student, enrollment) =&gt; new
+            {
+                StudentName = student.Name,
+                Major = student.Major,
+                Course = enrollment.CourseName,
+                Score = enrollment.Score
+            });
+
+        Console.WriteLine("學生選課記錄：");
+        foreach (var record in studentEnrollments)
+        {
+            Console.WriteLine($"  {record.StudentName}({record.Major}) - {record.Course}: {record.Score}分");
+        }
+
+        Console.WriteLine("\n=== SelectMany - 扁平化 ===");
+
+        // 取得所有學生的所有分數
+        var allScores = students.SelectMany(s =&gt; s.Scores);
+        Console.WriteLine($"所有分數：{string.Join(", ", allScores)}");
+
+        // 帶索引的扁平化
+        var studentScoreDetails = students.SelectMany(
+            (student, index) =&gt; student.Scores.Select(score =&gt; new
+            {
+                StudentIndex = index,
+                StudentName = student.Name,
+                Score = score
+            }));
+
+        Console.WriteLine("學生分數詳細：");
+        foreach (var detail in studentScoreDetails.Take(5))  // 只顯示前5筆
+        {
+            Console.WriteLine($"  學生{detail.StudentIndex}: {detail.StudentName} - {detail.Score}分");
+        }
+
+        Console.WriteLine("\n=== 集合操作 ===");
+
+        List&lt;string&gt; list1 = new List&lt;string&gt; { "A", "B", "C", "D" };
+        List&lt;string&gt; list2 = new List&lt;string&gt; { "C", "D", "E", "F" };
+
+        // 聯集
+        var union = list1.Union(list2);
+        Console.WriteLine($"聯集：{string.Join(", ", union)}");
+
+        // 交集
+        var intersect = list1.Intersect(list2);
+        Console.WriteLine($"交集：{string.Join(", ", intersect)}");
+
+        // 差集
+        var except = list1.Except(list2);
+        Console.WriteLine($"差集 (list1 - list2)：{string.Join(", ", except)}");
+
+        Console.WriteLine("\n=== 分頁和跳過 ===");
+
+        // 分頁顯示學生
+        int pageSize = 2;
+        for (int page = 0; page &lt; (students.Count + pageSize - 1) / pageSize; page++)
+        {
+            var pageStudents = students.Skip(page * pageSize).Take(pageSize);
+            Console.WriteLine($"第 {page + 1} 頁：");
+            foreach (var student in pageStudents)
+            {
+                Console.WriteLine($"  {student}");
+            }
+        }
+
+        Console.WriteLine("\n=== 複雜查詢範例 ===");
+
+        // 找出每個系 GPA 最高的學生
+        var topStudentsByMajor = students
+            .GroupBy(s =&gt; s.Major)
+            .Select(g =&gt; g.OrderByDescending(s =&gt; s.GPA).First())
+            .OrderBy(s =&gt; s.Major);
+
+        Console.WriteLine("各系 GPA 最高的學生：");
+        foreach (var student in topStudentsByMajor)
+        {
+            Console.WriteLine($"  {student}");
+        }
+
+        // 統計每個系的平均 GPA
+        var majorStats = students
+            .GroupBy(s =&gt; s.Major)
+            .Select(g =&gt; new
+            {
+                Major = g.Key,
+                Count = g.Count(),
+                AverageGPA = g.Average(s =&gt; s.GPA),
+                MaxGPA = g.Max(s =&gt; s.GPA),
+                MinGPA = g.Min(s =&gt; s.GPA)
+            })
+            .OrderByDescending(stat =&gt; stat.AverageGPA);
+
+        Console.WriteLine("\n各系統計資訊：");
+        foreach (var stat in majorStats)
+        {
+            Console.WriteLine($"  {stat.Major}：");
+            Console.WriteLine($"    學生數：{stat.Count}");
+            Console.WriteLine($"    平均 GPA：{stat.AverageGPA:F2}");
+            Console.WriteLine($"    最高 GPA：{stat.MaxGPA}");
+            Console.WriteLine($"    最低 GPA：{stat.MinGPA}");
+        }
+
+        Console.WriteLine("\n=== LINQ 查詢語法 ===");
+
+        // 使用查詢語法（類似 SQL）
+        var queryResult = from student in students
+                         where student.GPA &gt; 3.5
+                         orderby student.GPA descending
+                         select new { student.Name, student.Major, student.GPA };
+
+        Console.WriteLine("查詢語法結果（GPA &gt; 3.5）：");
+        foreach (var result in queryResult)
+        {
+            Console.WriteLine($"  {result.Name} - {result.Major} (GPA: {result.GPA})");
+        }
+    }
+}</code></pre>
+                        </div>
+                        <div class="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-4">
+                            <h5 class="font-semibold text-blue-900 dark:text-blue-100 mb-2">💡 實作練習</h5>
+                            <p class="text-blue-800 dark:text-blue-200 text-sm">
+                                建立一個電商系統，使用 LINQ 查詢商品、計算銷售統計、分析客戶購買行為！
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 第6課：非同步程式設計 -->
+                <div class="card p-6">
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="flex-1">
+                            <div class="flex items-center mb-2">
+                                <h3 class="text-xl font-bold text-gray-900 dark:text-white mr-3">第6課：非同步程式設計</h3>
+                                <span class="px-2 py-1 text-xs font-medium rounded-full bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200">進階</span>
+                            </div>
+                            <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
+                                學習 C# 的 async/await 非同步程式設計，提升應用程式的響應性和效能。
+                            </p>
+                        </div>
+                        <button onclick="toggleLesson(this)" class="ml-4 p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+                            <svg class="w-5 h-5 text-gray-500 dark:text-gray-400 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="lesson-content hidden space-y-4 border-t border-gray-200 dark:border-gray-700 pt-4">
+                        <div>
+                            <h4 class="font-semibold text-gray-900 dark:text-white mb-2">async/await 基礎：</h4>
+                            <pre class="code-block"><button class="copy-btn" onclick="copyCode(this)">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                                </svg>
+                            </button><code>using System;
+using System.Threading.Tasks;
+using System.Threading;
+
+class AsyncBasics
+{
+    static async Task Main(string[] args)
+    {
+        Console.WriteLine("=== 基本 async/await 示範 ===");
+
+        // 同步方法呼叫
+        Console.WriteLine("開始同步操作...");
+        SynchronousMethod();
+        Console.WriteLine("同步操作完成");
+
+        Console.WriteLine("\n開始非同步操作...");
+        // 非同步方法呼叫
+        await AsynchronousMethod();
+        Console.WriteLine("非同步操作完成");
+
+        Console.WriteLine("\n=== 多個非同步操作 ===");
+        await MultipleAsyncOperations();
+
+        Console.WriteLine("\n=== 並行執行 ===");
+        await ParallelAsyncOperations();
+    }
+
+    // 同步方法
+    static void SynchronousMethod()
+    {
+        Console.WriteLine("  執行同步任務...");
+        Thread.Sleep(2000);  // 模擬耗時操作
+        Console.WriteLine("  同步任務完成");
+    }
+
+    // 非同步方法
+    static async Task AsynchronousMethod()
+    {
+        Console.WriteLine("  開始非同步任務...");
+        await Task.Delay(2000);  // 非同步等待
+        Console.WriteLine("  非同步任務完成");
+    }
+
+    // 有回傳值的非同步方法
+    static async Task&lt;string&gt; GetDataAsync()
+    {
+        Console.WriteLine("  正在取得資料...");
+        await Task.Delay(1000);
+        return "重要資料";
+    }
+
+    // 多個非同步操作（順序執行）
+    static async Task MultipleAsyncOperations()
+    {
+        Console.WriteLine("順序執行多個非同步操作：");
+
+        string data1 = await GetDataAsync();
+        Console.WriteLine($"  取得資料1：{data1}");
+
+        string data2 = await GetDataAsync();
+        Console.WriteLine($"  取得資料2：{data2}");
+
+        string data3 = await GetDataAsync();
+        Console.WriteLine($"  取得資料3：{data3}");
+    }
+
+    // 並行執行非同步操作
+    static async Task ParallelAsyncOperations()
+    {
+        Console.WriteLine("並行執行多個非同步操作：");
+
+        // 同時啟動多個任務
+        Task&lt;string&gt; task1 = GetDataAsync();
+        Task&lt;string&gt; task2 = GetDataAsync();
+        Task&lt;string&gt; task3 = GetDataAsync();
+
+        // 等待所有任務完成
+        string[] results = await Task.WhenAll(task1, task2, task3);
+
+        for (int i = 0; i < results.Length; i++)
+        {
+            Console.WriteLine($"  並行結果{i + 1}：{results[i]}");
+        }
+    }
+}</code></pre>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-900 dark:text-white mb-2">Task 和 Task&lt;T&gt;：</h4>
+                            <pre class="code-block"><button class="copy-btn" onclick="copyCode(this)">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                                </svg>
+                            </button><code>using System;
+using System.Threading.Tasks;
+using System.Threading;
+
+class TaskExamples
+{
+    static async Task Main()
+    {
+        Console.WriteLine("=== Task 建立和執行 ===");
+
+        // 方法1：Task.Run
+        Task task1 = Task.Run(() =&gt;
+        {
+            Console.WriteLine($"Task1 在執行緒 {Thread.CurrentThread.ManagedThreadId} 執行");
+            Thread.Sleep(1000);
+            Console.WriteLine("Task1 完成");
+        });
+
+        // 方法2：Task.Factory.StartNew
+        Task task2 = Task.Factory.StartNew(() =&gt;
+        {
+            Console.WriteLine($"Task2 在執行緒 {Thread.CurrentThread.ManagedThreadId} 執行");
+            Thread.Sleep(1000);
+            Console.WriteLine("Task2 完成");
+        });
+
+        // 方法3：new Task + Start
+        Task task3 = new Task(() =&gt;
+        {
+            Console.WriteLine($"Task3 在執行緒 {Thread.CurrentThread.ManagedThreadId} 執行");
+            Thread.Sleep(1000);
+            Console.WriteLine("Task3 完成");
+        });
+        task3.Start();
+
+        // 等待所有任務完成
+        await Task.WhenAll(task1, task2, task3);
+
+        Console.WriteLine("\n=== Task&lt;T&gt; 有回傳值的任務 ===");
+
+        // 建立有回傳值的任務
+        Task&lt;int&gt; calculationTask = Task.Run(() =&gt;
+        {
+            Console.WriteLine("開始計算...");
+            Thread.Sleep(2000);
+            int result = 0;
+            for (int i = 1; i <= 100; i++)
+            {
+                result += i;
+            }
+            Console.WriteLine("計算完成");
+            return result;
+        });
+
+        Task&lt;string&gt; dataTask = Task.Run(async () =&gt;
+        {
+            Console.WriteLine("開始取得資料...");
+            await Task.Delay(1500);
+            Console.WriteLine("資料取得完成");
+            return "重要資料內容";
+        });
+
+        // 等待並取得結果
+        int calculationResult = await calculationTask;
+        string dataResult = await dataTask;
+
+        Console.WriteLine($"計算結果：{calculationResult}");
+        Console.WriteLine($"資料結果：{dataResult}");
+
+        Console.WriteLine("\n=== 任務狀態和例外處理 ===");
+        await TaskStatusAndExceptionHandling();
+
+        Console.WriteLine("\n=== 取消令牌 ===");
+        await CancellationTokenExample();
+    }
+
+    static async Task TaskStatusAndExceptionHandling()
+    {
+        // 正常完成的任務
+        Task&lt;string&gt; successTask = Task.Run(async () =&gt;
+        {
+            await Task.Delay(1000);
+            return "成功完成";
+        });
+
+        // 會拋出例外的任務
+        Task&lt;string&gt; faultedTask = Task.Run&lt;string&gt;(() =&gt;
+        {
+            Thread.Sleep(500);
+            throw new InvalidOperationException("模擬錯誤");
+        });
+
+        try
+        {
+            string result1 = await successTask;
+            Console.WriteLine($"成功任務結果：{result1}");
+            Console.WriteLine($"任務狀態：{successTask.Status}");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"成功任務發生例外：{ex.Message}");
+        }
+
+        try
+        {
+            string result2 = await faultedTask;
+            Console.WriteLine($"錯誤任務結果：{result2}");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"錯誤任務發生例外：{ex.Message}");
+            Console.WriteLine($"任務狀態：{faultedTask.Status}");
+        }
+    }
+
+    static async Task CancellationTokenExample()
+    {
+        // 建立取消令牌
+        CancellationTokenSource cts = new CancellationTokenSource();
+
+        // 設定 3 秒後自動取消
+        cts.CancelAfter(TimeSpan.FromSeconds(3));
+
+        try
+        {
+            await LongRunningTask(cts.Token);
+        }
+        catch (OperationCanceledException)
+        {
+            Console.WriteLine("任務被取消了");
+        }
+        finally
+        {
+            cts.Dispose();
+        }
+    }
+
+    static async Task LongRunningTask(CancellationToken cancellationToken)
+    {
+        Console.WriteLine("開始長時間執行的任務...");
+
+        for (int i = 1; i <= 10; i++)
+        {
+            // 檢查是否被取消
+            cancellationToken.ThrowIfCancellationRequested();
+
+            Console.WriteLine($"  步驟 {i}/10");
+            await Task.Delay(1000, cancellationToken);
+        }
+
+        Console.WriteLine("長時間任務完成");
+    }
+}</code></pre>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-900 dark:text-white mb-2">實用非同步範例：</h4>
+                            <pre class="code-block"><button class="copy-btn" onclick="copyCode(this)">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                                </svg>
+                            </button><code>using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using System.Threading;
+using System.Net.Http;
+using System.IO;
+
+// 模擬的資料服務
+public class DataService
+{
+    private static readonly Random random = new Random();
+
+    public async Task&lt;string&gt; GetUserDataAsync(int userId)
+    {
+        Console.WriteLine($"開始取得用戶 {userId} 的資料...");
+
+        // 模擬網路延遲
+        await Task.Delay(random.Next(1000, 3000));
+
+        // 模擬偶爾失敗
+        if (random.NextDouble() &lt; 0.2)  // 20% 機率失敗
+        {
+            throw new HttpRequestException($"無法取得用戶 {userId} 的資料");
+        }
+
+        return $"用戶{userId}的資料";
+    }
+
+    public async Task&lt;List&lt;string&gt;&gt; GetUserOrdersAsync(int userId)
+    {
+        Console.WriteLine($"開始取得用戶 {userId} 的訂單...");
+
+        await Task.Delay(random.Next(500, 1500));
+
+        return new List&lt;string&gt;
+        {
+            $"用戶{userId}的訂單1",
+            $"用戶{userId}的訂單2",
+            $"用戶{userId}的訂單3"
+        };
+    }
+
+    public async Task&lt;string&gt; GetUserPreferencesAsync(int userId)
+    {
+        Console.WriteLine($"開始取得用戶 {userId} 的偏好設定...");
+
+        await Task.Delay(random.Next(800, 2000));
+
+        return $"用戶{userId}的偏好設定";
+    }
+}
+
+// 檔案處理服務
+public class FileService
+{
+    public async Task&lt;string&gt; ReadFileAsync(string fileName)
+    {
+        Console.WriteLine($"開始讀取檔案：{fileName}");
+
+        // 模擬檔案讀取
+        await Task.Delay(1000);
+
+        return $"檔案 {fileName} 的內容";
+    }
+
+    public async Task WriteFileAsync(string fileName, string content)
+    {
+        Console.WriteLine($"開始寫入檔案：{fileName}");
+
+        // 模擬檔案寫入
+        await Task.Delay(800);
+
+        Console.WriteLine($"檔案 {fileName} 寫入完成");
+    }
+
+    public async Task&lt;List&lt;string&gt;&gt; ProcessMultipleFilesAsync(List&lt;string&gt; fileNames)
+    {
+        Console.WriteLine("開始並行處理多個檔案...");
+
+        // 建立所有檔案讀取任務
+        List&lt;Task&lt;string&gt;&gt; tasks = new List&lt;Task&lt;string&gt;&gt;();
+
+        foreach (string fileName in fileNames)
+        {
+            tasks.Add(ReadFileAsync(fileName));
+        }
+
+        // 等待所有任務完成
+        string[] results = await Task.WhenAll(tasks);
+
+        return new List&lt;string&gt;(results);
+    }
+}
+
+class PracticalAsyncExamples
+{
+    static async Task Main()
+    {
+        DataService dataService = new DataService();
+        FileService fileService = new FileService();
+
+        Console.WriteLine("=== 順序執行 vs 並行執行 ===");
+
+        // 順序執行
+        var stopwatch = System.Diagnostics.Stopwatch.StartNew();
+        await SequentialExecution(dataService);
+        stopwatch.Stop();
+        Console.WriteLine($"順序執行耗時：{stopwatch.ElapsedMilliseconds} ms\n");
+
+        // 並行執行
+        stopwatch.Restart();
+        await ParallelExecution(dataService);
+        stopwatch.Stop();
+        Console.WriteLine($"並行執行耗時：{stopwatch.ElapsedMilliseconds} ms\n");
+
+        Console.WriteLine("=== 錯誤處理和重試 ===");
+        await ErrorHandlingAndRetry(dataService);
+
+        Console.WriteLine("\n=== 檔案批次處理 ===");
+        await BatchFileProcessing(fileService);
+
+        Console.WriteLine("\n=== 進度報告 ===");
+        await ProgressReporting();
+    }
+
+    static async Task SequentialExecution(DataService dataService)
+    {
+        Console.WriteLine("順序執行：");
+        int userId = 1;
+
+        try
+        {
+            string userData = await dataService.GetUserDataAsync(userId);
+            Console.WriteLine($"  取得：{userData}");
+
+            List&lt;string&gt; orders = await dataService.GetUserOrdersAsync(userId);
+            Console.WriteLine($"  取得：{orders.Count} 個訂單");
+
+            string preferences = await dataService.GetUserPreferencesAsync(userId);
+            Console.WriteLine($"  取得：{preferences}");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"  錯誤：{ex.Message}");
+        }
+    }
+
+    static async Task ParallelExecution(DataService dataService)
+    {
+        Console.WriteLine("並行執行：");
+        int userId = 2;
+
+        try
+        {
+            // 同時啟動所有任務
+            Task&lt;string&gt; userDataTask = dataService.GetUserDataAsync(userId);
+            Task&lt;List&lt;string&gt;&gt; ordersTask = dataService.GetUserOrdersAsync(userId);
+            Task&lt;string&gt; preferencesTask = dataService.GetUserPreferencesAsync(userId);
+
+            // 等待所有任務完成
+            await Task.WhenAll(userDataTask, ordersTask, preferencesTask);
+
+            Console.WriteLine($"  取得：{userDataTask.Result}");
+            Console.WriteLine($"  取得：{ordersTask.Result.Count} 個訂單");
+            Console.WriteLine($"  取得：{preferencesTask.Result}");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"  錯誤：{ex.Message}");
+        }
+    }
+
+    static async Task ErrorHandlingAndRetry(DataService dataService)
+    {
+        int userId = 3;
+        int maxRetries = 3;
+
+        for (int attempt = 1; attempt <= maxRetries; attempt++)
+        {
+            try
+            {
+                Console.WriteLine($"嘗試第 {attempt} 次取得用戶資料...");
+                string userData = await dataService.GetUserDataAsync(userId);
+                Console.WriteLine($"成功取得：{userData}");
+                break;  // 成功就跳出迴圈
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"第 {attempt} 次嘗試失敗：{ex.Message}");
+
+                if (attempt == maxRetries)
+                {
+                    Console.WriteLine("已達最大重試次數，放棄操作");
+                }
+                else
+                {
+                    Console.WriteLine("等待後重試...");
+                    await Task.Delay(1000);  // 等待 1 秒後重試
+                }
+            }
+        }
+    }
+
+    static async Task BatchFileProcessing(FileService fileService)
+    {
+        List&lt;string&gt; fileNames = new List&lt;string&gt;
+        {
+            "file1.txt", "file2.txt", "file3.txt", "file4.txt", "file5.txt"
+        };
+
+        List&lt;string&gt; results = await fileService.ProcessMultipleFilesAsync(fileNames);
+
+        Console.WriteLine("批次處理結果：");
+        foreach (string result in results)
+        {
+            Console.WriteLine($"  {result}");
+        }
+    }
+
+    static async Task ProgressReporting()
+    {
+        Console.WriteLine("開始進度報告任務...");
+
+        var progress = new Progress&lt;int&gt;(percentage =&gt;
+        {
+            Console.WriteLine($"進度：{percentage}%");
+        });
+
+        await LongRunningTaskWithProgress(progress);
+        Console.WriteLine("進度報告任務完成");
+    }
+
+    static async Task LongRunningTaskWithProgress(IProgress&lt;int&gt; progress)
+    {
+        for (int i = 0; i <= 100; i += 10)
+        {
+            await Task.Delay(200);  // 模擬工作
+            progress?.Report(i);
+        }
+    }
+}</code></pre>
+                        </div>
+                        <div class="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-4">
+                            <h5 class="font-semibold text-blue-900 dark:text-blue-100 mb-2">💡 實作練習</h5>
+                            <p class="text-blue-800 dark:text-blue-200 text-sm">
+                                建立一個網路爬蟲程式，使用 async/await 並行下載多個網頁，並實作進度報告和錯誤處理！
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // 主題切換功能
+        const themeToggle = document.getElementById('theme-toggle');
+        const sunIcon = document.getElementById('sun-icon');
+        const moonIcon = document.getElementById('moon-icon');
+
+        // 檢查本地儲存的主題設定
+        const currentTheme = localStorage.getItem('theme') || 'light';
+        if (currentTheme === 'dark') {
+            document.documentElement.classList.add('dark');
+            sunIcon.classList.remove('hidden');
+            moonIcon.classList.add('hidden');
+        }
+
+        themeToggle.addEventListener('click', () => {
+            document.documentElement.classList.toggle('dark');
+            
+            if (document.documentElement.classList.contains('dark')) {
+                localStorage.setItem('theme', 'dark');
+                sunIcon.classList.remove('hidden');
+                moonIcon.classList.add('hidden');
+            } else {
+                localStorage.setItem('theme', 'light');
+                sunIcon.classList.add('hidden');
+                moonIcon.classList.remove('hidden');
+            }
+        });
+
+        // 課程展開/收起功能
+        function toggleLesson(button) {
+            const content = button.parentElement.nextElementSibling;
+            const icon = button.querySelector('svg');
+
+            if (content.classList.contains('hidden')) {
+                content.classList.remove('hidden');
+                icon.style.transform = 'rotate(180deg)';
+            } else {
+                content.classList.add('hidden');
+                icon.style.transform = 'rotate(0deg)';
+            }
+        }
+
+        // 複製程式碼功能
+        function copyCode(button) {
+            const codeBlock = button.nextElementSibling;
+            const text = codeBlock.textContent;
+            
+            navigator.clipboard.writeText(text).then(() => {
+                // 顯示複製成功的視覺回饋
+                const originalHTML = button.innerHTML;
+                button.innerHTML = '<svg class="w-4 h-4 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>';
+                
+                setTimeout(() => {
+                    button.innerHTML = originalHTML;
+                }, 1000);
+            }).catch(err => {
+                console.error('複製失敗:', err);
+            });
+        }
+    </script>
+</body>
+</html>
