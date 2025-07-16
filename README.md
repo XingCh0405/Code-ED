@@ -192,7 +192,7 @@ Code-ED/
 - 📧 Email: [點擊傳送](d20090405@gmail.com)
 - 🐙 GitHub Issues: [錯誤回報](https://github.com/xingch0405/Code-ED/issues)
 - 💬 討論區: [GitHub Discussions](https://github.com/xingch0405/Code-ED/discussions)
-- 💬 Discord: [立即加入](https://discord.gg/dBVqmCNVhb)
+- 💬 Discord: [立即加入](https://discord.gg/xyjCQs7vz6)
 - 💬 QQ群: Coming soon...
 - 💬 微信群: Coming soon...
 
